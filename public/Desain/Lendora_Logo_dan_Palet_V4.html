@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lendora — Logo &amp; Palet Warna (V4 — logo tanpa huruf L)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ld-orange-50:#FFF7ED; --ld-orange-100:#FFEDD5; --ld-orange-200:#FED7AA; --ld-orange-300:#FDBA74;
+  --ld-orange-400:#FB923C; --ld-orange-500:#F97316; --ld-orange-600:#EA580C; --ld-orange-700:#C2410C;
+  --ld-orange-800:#9A3412; --ld-orange-900:#7C2D12;
+  --ld-white:#FFFFFF; --ld-surface:#F5F5F5; --ld-border:#E5E7EB;
+  --ld-text:#262626; --ld-text-2:#525252; --ld-text-3:#737373; --ld-ink:#1C1917;
+  --ld-success:#16A34A; --ld-warning:#D97706; --ld-danger:#DC2626; --ld-info:#0284C7;
+  --radius:20px; --radius-sm:12px;
+  --font-ui:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mark:'PJS','Plus Jakarta Sans',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-ui);color:var(--ld-text);background:var(--ld-white);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:var(--ld-orange-700)}
+h1,h2,h3{line-height:1.2;letter-spacing:-0.02em}
+
+/* ===== Topnav ===== */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ld-border)}
+.topnav .wrap{display:flex;align-items:center;gap:10px;height:60px}
+.brandline{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:-0.01em}
+.topnav nav{margin-left:auto;display:flex;gap:4px}
+.topnav nav a{text-decoration:none;color:var(--ld-text-2);font-size:14px;font-weight:600;padding:8px 12px;border-radius:10px}
+.topnav nav a:hover{background:var(--ld-orange-50);color:var(--ld-orange-700)}
+@media(max-width:720px){.topnav nav a:not(.keep){display:none}}
+
+/* ===== Hero ===== */
+.hero{padding:56px 0 8px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+@media(max-width:880px){.hero .wrap{grid-template-columns:1fr}}
+.kicker{display:inline-flex;align-items:center;gap:8px;background:var(--ld-orange-50);border:1px solid var(--ld-orange-200);color:var(--ld-orange-700);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--ld-orange-500)}
+.hero h1{font-size:clamp(30px,4.6vw,46px);font-weight:800;margin:16px 0 14px}
+.hero p.lead{color:var(--ld-text-2);font-size:16.5px;max-width:52ch;margin-bottom:24px}
+.hero p.lead b{color:var(--ld-text)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:11px 18px;font-family:var(--font-ui);font-size:14.5px;font-weight:700;cursor:pointer;border:1px solid transparent;text-decoration:none;transition:transform .06s ease,background .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--ld-orange-600);color:#fff}
+.btn-primary:hover{background:var(--ld-orange-700)}
+.btn-ghost{background:#fff;color:var(--ld-text);border-color:var(--ld-border)}
+.btn-ghost:hover{background:var(--ld-surface)}
+.btn-sm{padding:8px 13px;font-size:13px;border-radius:10px}
+.btn[disabled]{opacity:.55;cursor:wait}
+.hero-preview{background:var(--ld-orange-50);border:1px solid var(--ld-orange-100);border-radius:28px;padding:44px 36px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.hero-preview .cap{font-size:12.5px;color:var(--ld-text-3);font-weight:600;letter-spacing:.02em}
+
+/* ===== Sections ===== */
+.sec{padding-top:72px}
+.sec-head{margin-bottom:26px}
+.sec-kicker{font-size:12.5px;font-weight:800;letter-spacing:.12em;color:var(--ld-orange-600);text-transform:uppercase}
+.sec-head h2{font-size:clamp(23px,3vw,30px);font-weight:800;margin:6px 0 8px}
+.sec-head p{color:var(--ld-text-2);max-width:70ch}
+.card{background:#fff;border:1px solid var(--ld-border);border-radius:var(--radius)}
+
+/* ===== Pemilih konsep ===== */
+.grid-konsep{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:6px 0 22px}
+@media(max-width:880px){.grid-konsep{grid-template-columns:1fr}}
+.konsep-opt{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;border:2px solid var(--ld-border);border-radius:16px;background:#fff;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease;text-align:left;font-family:var(--font-ui)}
+.konsep-opt:hover{border-color:var(--ld-orange-300)}
+.konsep-opt.active{border-color:var(--ld-orange-600);background:var(--ld-orange-50);box-shadow:0 0 0 3px var(--ld-orange-100)}
+.konsep-opt .kic{flex:none;width:56px;height:56px;display:flex}
+.konsep-opt .knm{font-size:14.5px;font-weight:800;display:block;color:var(--ld-text)}
+.konsep-opt .ktag{font-size:12px;color:var(--ld-text-2);display:block;line-height:1.4}
+.konsep-opt .chk{margin-left:auto;flex:none;color:var(--ld-orange-600);opacity:0;transition:opacity .15s}
+.konsep-opt.active .chk{opacity:1}
+
+/* ===== Konsep logo ===== */
+.concept{display:grid;grid-template-columns:300px 1fr;gap:0;overflow:hidden}
+@media(max-width:880px){.concept{grid-template-columns:1fr}}
+.concept .visual{background:var(--ld-orange-50);display:flex;align-items:center;justify-content:center;padding:36px;border-right:1px solid var(--ld-border)}
+@media(max-width:880px){.concept .visual{border-right:0;border-bottom:1px solid var(--ld-border)}}
+.concept .body{padding:28px 32px}
+.concept h3{font-size:19px;font-weight:800;margin-bottom:10px}
+.concept p{color:var(--ld-text-2);font-size:14.5px;margin-bottom:10px}
+.concept ul{margin:10px 0 0;padding-left:0;list-style:none;display:grid;gap:8px}
+.concept li{display:flex;gap:10px;font-size:14.5px;color:var(--ld-text-2)}
+.concept li svg{flex:none;margin-top:3px}
+
+/* ===== Grid varian logo ===== */
+.grid-logo{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:20px}
+@media(max-width:880px){.grid-logo{grid-template-columns:1fr}}
+.logo-card{overflow:hidden;display:flex;flex-direction:column}
+.logo-stage{height:210px;display:flex;align-items:center;justify-content:center;padding:28px;border-bottom:1px solid var(--ld-border)}
+.logo-stage svg{max-width:78%;height:auto}
+.logo-meta{padding:18px 22px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.logo-meta h3{font-size:16.5px;font-weight:800}
+.logo-meta p{font-size:13.5px;color:var(--ld-text-2)}
+.logo-meta .row{margin-top:auto;padding-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mini-links{font-size:12.5px;color:var(--ld-text-3);margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini-links a{color:var(--ld-orange-700);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.stage-white{background:#fff}
+.stage-tint{background:var(--ld-orange-50)}
+.stage-orange{background:var(--ld-orange-500)}
+.stage-dark{background:var(--ld-ink)}
+.stage-gray{background:var(--ld-surface)}
+
+/* Ikon aplikasi */
+.icon-flex{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
+.icon-flex .cell{display:flex;flex-direction:column;align-items:center;gap:8px}
+.icon-flex .cap{font-size:11.5px;color:var(--ld-text-3);font-weight:600}
+
+/* ===== Palet ===== */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:14px}
+.swatch{border:1px solid var(--ld-border);border-radius:16px;overflow:hidden;cursor:pointer;background:#fff;transition:box-shadow .15s ease,transform .06s ease;text-align:left;padding:0;font-family:var(--font-ui)}
+.swatch:hover{box-shadow:0 6px 18px rgba(38,38,38,.08)}
+.swatch:active{transform:translateY(1px)}
+.swatch .chip{display:block;height:76px;position:relative;border-radius:2px}
+.swatch .chip .tag{position:absolute;top:8px;left:8px;background:rgba(255,255,255,.92);color:#262626;font-size:10px;font-weight:800;letter-spacing:.05em;padding:3px 7px;border-radius:999px;text-transform:uppercase}
+.swatch .chip .tag.dark{background:rgba(28,25,23,.85);color:#fff}
+.swatch .info{display:block;padding:10px 12px 12px}
+.swatch .nm{font-size:13px;font-weight:700;line-height:1.25}
+.swatch .hex{font-size:12px;color:var(--ld-text-2);font-weight:600;letter-spacing:.03em}
+.swatch .rgb{font-size:10.5px;color:var(--ld-text-3)}
+.swatch .ctr{font-size:10.5px;margin-top:5px;display:inline-flex;align-items:center;gap:4px;font-weight:700;padding:2px 7px;border-radius:999px}
+.ctr.pass{background:#F0FDF4;color:#15803D}
+.ctr.part{background:#FFFBEB;color:#B45309}
+.ctr.fail{background:#FEF2F2;color:#B91C1C}
+.subhead{display:flex;align-items:baseline;gap:10px;margin:34px 0 14px;flex-wrap:wrap}
+.subhead h3{font-size:17px;font-weight:800}
+.subhead span{font-size:13px;color:var(--ld-text-3)}
+.legend{display:flex;gap:14px;margin-top:2px}
+.pill{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.pill.acuan{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0}
+.pill.usulan{background:var(--ld-orange-50);color:var(--ld-orange-700);border:1px solid var(--ld-orange-200)}
+
+/* Status */
+.grid-status{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.status-card{padding:18px 18px 16px}
+.status-card h4{font-size:14.5px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.status-card h4 .dot{width:12px;height:12px;border-radius:4px}
+.status-card p{font-size:12.5px;color:var(--ld-text-2);margin-bottom:12px}
+.chipbar{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--ld-border);border-radius:10px;padding:7px 10px;margin-bottom:6px;font-size:12px;font-weight:600;cursor:pointer}
+.chipbar small{font-size:10.5px;color:var(--ld-text-3);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.chipbar .swb{width:22px;height:22px;border-radius:6px;border:1px solid rgba(0,0,0,.06)}
+.chipbar .lft{display:flex;align-items:center;gap:8px}
+.chipbar .hexv{color:var(--ld-text-2);font-weight:600}
+.status-note{font-size:11px;color:var(--ld-text-3);margin-top:8px}
+
+/* ===== Unduhan token ===== */
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.dl-card{padding:20px;display:flex;flex-direction:column;gap:6px}
+.dl-card .ic{width:38px;height:38px;border-radius:11px;background:var(--ld-orange-50);border:1px solid var(--ld-orange-100);display:flex;align-items:center;justify-content:center;color:var(--ld-orange-600)}
+.dl-card h3{font-size:15.5px;font-weight:800;margin-top:4px}
+.dl-card p{font-size:13px;color:var(--ld-text-2);flex:1}
+.dl-card .row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+
+/* ===== Aturan ===== */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:880px){.rules{grid-template-columns:1fr}}
+.rule-card{padding:24px 26px}
+.rule-card h3{font-size:17px;font-weight:800;margin-bottom:14px}
+.rule-card ul{list-style:none;display:grid;gap:10px}
+.rule-card li{display:flex;gap:10px;font-size:14px;color:var(--ld-text-2)}
+.rule-card li svg{flex:none;margin-top:4px}
+.rule-card li b{color:var(--ld-text)}
+.clearspace{margin-top:18px;border:1px dashed var(--ld-orange-300);border-radius:14px;background:var(--ld-orange-50);padding:26px;display:flex;align-items:center;justify-content:center;position:relative}
+.clearspace .lbl{position:absolute;font-size:10.5px;font-weight:700;color:var(--ld-orange-700)}
+
+/* ===== Footer & toast ===== */
+footer{margin-top:80px;border-top:1px solid var(--ld-border);background:var(--ld-surface)}
+footer .wrap{padding:28px 24px;display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;align-items:center;font-size:13px;color:var(--ld-text-2)}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ld-ink);color:#fff;font-size:13.5px;font-weight:600;padding:11px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:all .25s ease;z-index:99;display:flex;gap:8px;align-items:center;max-width:88vw}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast svg{color:#4ADE80}
+</style>
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <span class="brandline"><span id="navIcon" style="display:flex"></span>Lendora</span>
+    <nav>
+      <a href="#logo">Logo</a>
+      <a href="#palet">Palet Warna</a>
+      <a href="#aturan">Aturan</a>
+      <a href="#palet" class="keep" style="color:#EA580C">Unduh aset ↓</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker"><span class="dot"></span>Draft Usahan · V4 — logo tanpa huruf L</span>
+      <h1>Logo &amp; Palet Warna<br>Lendora V4</h1>
+      <p class="lead">Identitas visual untuk platform <b>peminjaman &amp; pengelolaan peralatan</b> — fokus awal peralatan kamera. Pada V4 logo <b>bukan lagi huruf L</b>: tersedia <b>3 opsi bentuk geometris</b> (Siklus, Tukar, Kotak) — pilih salah satu, lalu semua varian &amp; unduhan mengikuti. Gaya <b>Clean Professional</b>: putih dominan, aksen <b>Vibrant Orange #F97316</b>, tanpa gradasi. Semua aset bisa diunduh sebagai SVG/PNG, dan warna bisa disalin atau diunduh sebagai file token.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#logo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Pilih Logo
+        </a>
+        <a class="btn btn-ghost" href="#palet">Lihat Palet Warna</a>
+      </div>
+    </div>
+    <div class="hero-preview">
+      <div id="heroLockup" style="width:100%;max-width:520px;display:flex;justify-content:center"></div>
+      <span class="cap">Logo utama — ikon oranye + wordmark Lendora</span>
+    </div>
+  </div>
+</section>
+
+<main>
+<!-- ============ 01 LOGO ============ -->
+<section class="sec" id="logo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">01 — Logo</div>
+      <h2>Sistem Logo Lendora — 3 Opsi Bentuk</h2>
+      <p>Semua bentuk di bawah <b>bukan huruf</b> — murni geometri yang mewakili siklus peminjaman. Klik salah satu konsep: ikon aplikasi, favicon, lockup horizontal, dan lockup bertumpuk akan langsung mengikuti, lalu unduh asetnya.</p>
+    </div>
+
+    <div class="grid-konsep" id="konsepGrid"></div>
+
+    <div class="card concept">
+      <div class="visual"><div id="conceptIcon"></div></div>
+      <div class="body">
+        <h3 id="konsepTitle"></h3>
+        <p id="konsepBody"></p>
+        <ul id="konsepList"></ul>
+      </div>
+    </div>
+
+    <div class="subhead" style="margin-top:30px">
+      <h3>Variasi logo</h3>
+      <span>Berlaku untuk konsep yang sedang dipilih. Ukuran PNG mengikuti pilihan di bawah.</span>
+      <label style="margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ld-text-2)">Ukuran PNG
+        <select id="pngSize" style="font-family:var(--font-ui);font-weight:700;font-size:13.5px;padding:7px 10px;border:1px solid var(--ld-border);border-radius:10px;background:#fff;color:var(--ld-text);cursor:pointer">
+          <option value="512">512 px</option>
+          <option value="1024" selected>1024 px</option>
+          <option value="2048">2048 px</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="grid-logo">
+      <div class="card logo-card">
+        <div class="logo-stage stage-white"><div data-lockup="primary"></div></div>
+        <div class="logo-meta">
+          <h3>Logo utama <span class="pill acuan" style="vertical-align:2px">Acuan</span></h3>
+          <p>Ikon oranye + teks gelap #262626. Gunakan pada latar putih / #FFF7ED — halaman login, header borrower, dokumen.</p>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" data-dl-svg="primary">Unduh SVG</button>
+            <button class="btn btn-ghost btn-sm" data-dl-png="primary">Unduh PNG</button>
+          </div>
+        </div>
+      </div>
+      <div class="card logo-card">
+        <div class="logo-stage stage-dark"><div data-lockup="dark"></div></div>
+        <div class="logo-meta">
+          <h3>Logo di latar gelap</h3>
+          <p>Ikon oranye tetap, teks menjadi putih. Untuk header gelap, footer, atau banner di atas #1C1917.</p>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" data-dl-svg="dark">Unduh SVG</button>
+            <button class="btn btn-ghost btn-sm" data-dl-png="dark">Unduh PNG</button>
+          </div>
+        </div>
+      </div>
+      <div class="card logo-card">
+        <div class="logo-stage stage-orange"><div data-lockup="white"></div></div>
+        <div class="logo-meta">
+          <h3>Logo negatif (putih + oranye)</h3>
+          <p>Versi terbalik untuk ditempatkan di atas blok oranye brand, mis. sampul modul atau stiker peralatan.</p>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" data-dl-svg="white">Unduh SVG</button>
+            <button class="btn btn-ghost btn-sm" data-dl-png="white">Unduh PNG</button>
+          </div>
+        </div>
+      </div>
+      <div class="card logo-card">
+        <div class="logo-stage stage-gray"><div data-lockup="mono"></div></div>
+        <div class="logo-meta">
+          <h3>Logo monokrom</h3>
+          <p>Satu warna #262626 untuk cetak satu tinta (fotokopi, stempel, faktur) atau media yang tidak mendukung warna.</p>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" data-dl-svg="mono">Unduh SVG</button>
+            <button class="btn btn-ghost btn-sm" data-dl-png="mono">Unduh PNG</button>
+          </div>
+        </div>
+      </div>
+      <div class="card logo-card">
+        <div class="logo-stage stage-white"><div data-lockup="stack"></div></div>
+        <div class="logo-meta">
+          <h3>Logo bertumpuk (stack)</h3>
+          <p>Ikon di atas, nama di bawah — proporsi lebih persegi, pas untuk splash screen aplikasi dan avatar.</p>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" data-dl-svg="stack">Unduh SVG</button>
+            <button class="btn btn-ghost btn-sm" data-dl-png="stack">Unduh PNG</button>
+          </div>
+        </div>
+      </div>
+      <div class="card logo-card">
+        <div class="logo-stage stage-tint">
+          <div class="icon-flex">
+            <div class="cell"><span data-icon="orange" data-size="112"></span><span class="cap">96 px</span></div>
+            <div class="cell"><span data-icon="orange" data-size="56"></span><span class="cap">48 px</span></div>
+            <div class="cell"><span data-icon="orange" data-size="28"></span><span class="cap">24 px</span></div>
+          </div>
+        </div>
+        <div class="logo-meta">
+          <h3>Ikon aplikasi</h3>
+          <p>Kotak rounded penuh — dipakai untuk favicon, PWA, dan ikon shortcut. Tetap terbaca sampai 24 px.</p>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" data-dl-icon="orange">Unduh SVG</button>
+            <button class="btn btn-ghost btn-sm" data-dl-iconpng="orange">Unduh PNG</button>
+          </div>
+          <div class="mini-links">Juga tersedia:
+            <a data-dl-icon="dark">ikon-gelap.svg</a>·<a data-dl-icon="white">ikon-putih.svg</a>·
+            <a data-dl-fav="32">favicon 32</a>·<a data-dl-fav="48">48</a>·<a data-dl-fav="180">180</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 PALET ============ -->
+<section class="sec" id="palet">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">02 — Palet Warna</div>
+      <h2>Palet Warna Lendora</h2>
+      <p>Token berlabel <span class="pill acuan">Acuan</span> berasal dari Panduan Arahan AI; <span class="pill usulan">Usulan</span> adalah pelengkap yang umum dibutuhkan aplikasi dan perlu disetujui pemilik proyek. <b>Klik swatch apa pun untuk menyalin kode HEX.</b></p>
+    </div>
+
+    <div class="subhead"><h3>Keluarga Orange — skala brand</h3><span>Intensitas aksen dari tint lembut hingga deep.</span></div>
+    <div class="swatches" id="rampGrid"></div>
+
+    <div class="subhead"><h3>Warna netral</h3><span>Putih &amp; netral mendominasi halaman; orange hanya aksen.</span></div>
+    <div class="swatches" id="neutralGrid"></div>
+
+    <div class="subhead"><h3>Warna status</h3><span>Dibedakan dari warna brand — dipakai untuk badge, banner, dan status transaksi/aset.</span></div>
+    <div class="grid-status" id="statusGrid"></div>
+
+    <div class="subhead"><h3>Unduh palet</h3><span>Gambar palet untuk dokumentasi, atau file token untuk langsung dipakai di kode.</span></div>
+    <div class="dl-grid">
+      <div class="card dl-card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <h3>Gambar palet (PNG)</h3>
+        <p>Brand board resolusi tinggi berisi logo + seluruh token warna. Cocok ditempel di dokumen desain atau folder public/Desain/.</p>
+        <div class="row"><button class="btn btn-primary btn-sm" id="btnPaletPng">Unduh palet PNG</button></div>
+      </div>
+      <div class="card dl-card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3>Token CSS Variables</h3>
+        <p>Semua warna sebagai <code style="font-size:11.5px">--ld-*</code> di <code style="font-size:11.5px">:root</code> — siap ditempel ke stylesheet Laravel/Blade.</p>
+        <div class="row"><button class="btn btn-primary btn-sm" data-dl-token="css">Unduh lendora-tokens.css</button></div>
+      </div>
+      <div class="card dl-card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
+        <h3>Token JSON &amp; Tailwind</h3>
+        <p>lendora-tokens.json (untuk tooling/design pipeline) dan tailwind.colors.js (extend theme Tailwind).</p>
+        <div class="row">
+          <button class="btn btn-ghost btn-sm" data-dl-token="json">JSON</button>
+          <button class="btn btn-ghost btn-sm" data-dl-token="tailwind">Tailwind</button>
+        </div>
+      </div>
+      <div class="card dl-card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+        <h3>Salin cepat</h3>
+        <p>Butuh beberapa warna sekaligus? Salin daftar HEX lengkap ke clipboard dalam satu klik.</p>
+        <div class="row"><button class="btn btn-ghost btn-sm" id="btnCopyAll">Salin semua HEX</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 ATURAN ============ -->
+<section class="sec" id="aturan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">03 — Aturan Pakai</div>
+      <h2>Aturan Warna &amp; Logo</h2>
+      <p>Ringkasan aturan dari Panduan Arahan AI + tambahan teknis hasil pengukuran kontras WCAG.</p>
+    </div>
+    <div class="rules">
+      <div class="card rule-card">
+        <h3>Aturan warna</h3>
+        <ul id="ruleColor"></ul>
+      </div>
+      <div class="card rule-card">
+        <h3>Aturan logo</h3>
+        <ul id="ruleLogo"></ul>
+        <div class="clearspace">
+          <span class="lbl" style="top:6px;left:12px">Ruang aman = ¼ tinggi ikon</span>
+          <span id="clearspaceIcon"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Lendora V4</b> — Draft logo tanpa huruf L (3 konsep bentuk) &amp; palet untuk folder <code>public/Desain/</code>. Menunggu pemilihan konsep &amp; persetujuan pemilik proyek sebelum menjadi acuan resmi.</span>
+    <span style="white-space:nowrap">Clean Professional · Vibrant Orange #F97316 · <span id="footDate"></span></span>
+  </div>
+</footer>
+
+<div id="toast"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="toastMsg">Disalin</span></div>
+<script>
+/* ================= Lendora Brand Page V4 — JS ================= */
+const FONT_B64='d09GMgABAAAAAARwABAAAAAACNAAAAQTAAISLQAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbgTQcKgZgP1NUQVREAFQRCAqEeIQVATYCJAMgCxIABCAFhHoHIAwHG0MHIxEmfHIHxD8TbGPbBm2Cope2fCw4J9Lkn56MwfPfe32/T6Wa6Qs4PRLYGOjrYf3DCYBDvR7TkvGNCVTY+gomoMD3wDl1o09vu+X2n+x6ww6v4KjysINerKwSqAookuxAettJGjZj+Xxy1fF+K0EAHwCgEAQXggBe8imHatCoRQciR/SdMIpINMCVETR84LhRuOHBoVG0ghtFnSsKbRiAE425C04EdT1xiWkccF+p0a7USRo0pMZiLMTCJEdZe62aGNk4QC1TXYDmbj3SC0uaIPTCH9ahdfPW3KEF43SknQuOaBkACIDKVb9CNgaC4EYB8SggHzV58JAJYsDQCX1HiImgiUYAxGtkAwaCEh8AAoACDCAeAwHi0dQBfLhRaFrQl4GMZpxtAy3oywBGMc627Yv2Xnu3vdneiAAAACCIbRMFgBuAaMADPAaJAAA0ACAI6izXWTIh2kqOjo4yHaaOIHbHZaGQzA2HO3fmfOAKrprLn58XmfvKu+xFeqfd4bC5PBgkr1Q+8SLQF88MNy5pGab2SsqJQKflr8MyN5SjCwQwonHMZH9b4n0S0WF3qCY+kLMj+FL3PK3jDrib6TBJPd9CZ8w9dQ1Uc+UElShHYIAvmMJKBcIKk+DmBajer9v7VV/MZvWOBSUblS3lb9SpdB3PodRRy5N/S09L6Z5eMPunnFVZnmLW8/eTq/zXcNA3r1rDoWWrdak+ZEWXhPG7GidS2Wwzs3mTua3bNJ3jDt2qRo8SR0ZW3/TbigHfLve2Chb5g7n1S5TIrR/0++sU5tXbF5FXv04BNc3Os1s0nNu6XZPZ05u2qtvfatA0r0/V6FLVto5q0Kj8toR6g6yiiWlN82tmNAyVsFb/M7nzR4N+z2wq564YMTm7Q6mqtXqUL9+jlmTvTbWzVz7NzPi4Mrs2Dc22C5q2mtOufavZArdtO78p3L5dqznGNov8D3lA9R4JQofNiFXtwOavi2nQrkzV7HmlK9evV7MQAARQsSWTPyxc2zuqxm9uw/gF+Hq2RDLAj8Pre9jt7Wi9V0cBThQAAn+DQl8GQP+9rYJgjdxqDjVUHvVUY3LU3g32t3WmslruQjLvSQjgpiMOGqJL+BsIYLJMQ7QHeAALESrxAFFE8jdi0ETc2RqGOKgmbchOyskyFzHwyQ1BvMTKE8TEJ58m8+GVn+rvACt2FEn2UK3y0qFzEOS0e913O11iDTseRidsurDOHVA59dDA92RwIOJMg4ae5fbKZUnRhX1SomCUPdDAiy1eJhA7+bP0LMHfZBJ5Dh6Czo5c8nXs1EqVdrV/3q12fSlULAxcmSGsq1SaSB0l4QH4e7uvSqlbqlc+7YAb78MlAogXdIU6yJEewSD+5DSAzTMJzP6K2AvP6JUAAAA=';
+
+/* ---- Token warna ---- */
+const C={orange:'#F97316',orangeDark:'#EA580C',tint:'#FFF7ED',white:'#FFFFFF',surface:'#F5F5F5',
+  border:'#E5E7EB',text:'#262626',text2:'#525252',text3:'#737373',ink:'#1C1917'};
+const RAMP=[
+  ['50','#FFF7ED','Tint lembut','acuan','Tint (acuan)'],
+  ['100','#FFEDD5','','',''],['200','#FED7AA','','',''],['300','#FDBA74','','',''],['400','#FB923C','','',''],
+  ['500','#F97316','Primary','acuan','Primary (acuan)'],
+  ['600','#EA580C','Primary Dark','acuan','Primary Dark (acuan)'],
+  ['700','#C2410C','Teks brand',''],['800','#9A3412','',''],['900','#7C2D12','','']];
+const NEUTRAL=[
+  ['Putih','#FFFFFF','Latar utama','acuan'],['Surface','#F5F5F5','Latar sekunder','acuan'],
+  ['Border','#E5E7EB','Garis & batas','acuan'],['Teks Redup','#737373','Caption / meta','usulan'],
+  ['Teks Sekunder','#525252','Teks pendukung','usulan'],['Teks Utama','#262626','Teks utama','acuan'],
+  ['Gelap','#1C1917','Latar gelap','usulan']];
+const STATUS=[
+  ['Success','#16A34A','#15803D','#F0FDF4','Pinjaman aktif · aset tersedia & siap dipinjam'],
+  ['Warning','#D97706','#B45309','#FFFBEB','Menunggu persetujuan · jatuh tempo terdekat'],
+  ['Danger','#DC2626','#B91C1C','#FEF2F2','Terlambat · ditolak · aset rusak'],
+  ['Info','#0284C7','#0369A1','#F0F9FF','Notifikasi & pesan sistem']];
+
+/* ---- Kontras WCAG ---- */
+const lum=h=>{h=h.replace('#','');const[r,g,b]=[0,2,4].map(i=>parseInt(h.slice(i,i+2),16)/255)
+  .map(c=>c<=.03928?c/12.92:((c+.055)/1.055)**2.4);return .2126*r+.7152*g+.0722*b;};
+const ratio=(a,b)=>{const x=lum(a),y=lum(b),[hi,lo]=x>y?[x,y]:[y,x];return (hi+.05)/(lo+.05);};
+const grade=r=>r>=4.5?'AA':r>=3?'AA besar':'grafis';
+
+/* ---- Konsep glyph (viewBox 512, stroke 56, murni geometri — bukan huruf) ---- */
+const GLYPHS={
+  siklus:{nm:'Siklus',tag:'Dua panah melingkar — pinjam & kembali',
+    strokes:['M322 121 A150 150 0 0 1 322 391','M190 391 A150 150 0 0 1 190 121'],
+    fills:['M275 414 L305 357 L339 425 Z','M237 98 L207 155 L173 87 Z']},
+  tukar:{nm:'Tukar',tag:'Dua panah berhadapan — serah terima dua arah',
+    strokes:['M118 190 H350','M394 322 H162'],
+    fills:['M424 190 L348 140 L348 240 Z','M88 322 L176 272 L176 372 Z']},
+  kotak:{nm:'Kotak',tag:'Wadah terbuka + panah — keluar-masuk penyimpanan',
+    strokes:['M120 258 V382 a44 44 0 0 0 44 44 h184 a44 44 0 0 0 44 -44 V258','M256 342 V134'],
+    fills:['M256 58 L306 130 L206 130 Z']}
+};
+let CUR='siklus';
+const glyphGroup=(color,gid=CUR)=>{const g=GLYPHS[gid];
+  return `<g fill="none" stroke="${color}" stroke-width="56" stroke-linecap="round" stroke-linejoin="round">${g.strokes.map(d=>`<path d="${d}"/>`).join('')}</g>`+
+    `<g fill="${color}">${g.fills.map(d=>`<path d="${d}"/>`).join('')}</g>`;};
+
+const KONSEP_INFO={
+  siklus:{t:'Konsep: Panah Siklus — “pinjam & kembali”',
+    b:'Dua panah melingkar yang saling mengejar membentuk lingkaran — menggambarkan siklus peminjaman Lendora: <i>Request → Pickup → Return → Available</i>. Murni bentuk geometris, <b>bukan huruf</b>, sehingga netral untuk semua jenis aset.',
+    li:['<b>Bold &amp; sederhana</b> — tetap terbaca pada favicon 16&nbsp;px maupun spanduk besar.',
+        '<b>Cerita bisnis yang kuat</b> — lingkaran = siklus berulang: barang dipinjam, dikembalikan, lalu tersedia lagi.',
+        '<b>Flat tanpa gradasi</b> — satu warna brand #F97316 + putih, sesuai arah Clean Professional.']},
+  tukar:{t:'Konsep: Panah Tukar — “serah terima dua arah”',
+    b:'Dua panah horizontal yang berhadapan — barang berpindah dari pemilik ke penyewa, lalu kembali lagi setelah selesai. Bentuk <b>bukan huruf</b> dan sangat tegas: dua garis tebal yang mudah dikenali bahkan pada 16&nbsp;px.',
+    li:['<b>Paling tegas di ukuran kecil</b> — dua garis horizontal tebal, ideal untuk favicon &amp; ikon notifikasi.',
+        '<b>Menggambarkan transaksi</b> — pertukaran dua arah antara pemilik dan penyewa peralatan.',
+        '<b>Flat tanpa gradasi</b> — satu warna brand #F97316 + putih, sesuai arah Clean Professional.']},
+  kotak:{t:'Konsep: Kotak &amp; Panah — “keluar-masuk penyimpanan”',
+    b:'Wadah terbuka dengan panah ke atas — peralatan keluar saat dipinjam dan masuk kembali saat dikembalikan (<i>checkout / check-in</i>). Bentuk <b>bukan huruf</b>, merujuk langsung pada barang yang dikelola platform.',
+    li:['<b>Kontekstual</b> — menggambarkan aset fisik yang disimpan dan dipinjamkan.',
+        '<b>Tetap netral</b> — kotak generik, bukan ikon kamera, sehingga relevan untuk semua kategori aset.',
+        '<b>Flat tanpa gradasi</b> — satu warna brand #F97316 + putih, sesuai arah Clean Professional.']}
+};
+
+/* ---- Geometri ikon & lockup ---- */
+const ICON_C={orange:{bg:'#F97316',glyph:'#FFFFFF'},dark:{bg:'#262626',glyph:'#FFFFFF'},white:{bg:'#FFFFFF',glyph:'#F97316'}};
+const LOCKUP_C={primary:{iconBg:'#F97316',glyph:'#FFFFFF',text:'#262626'},
+  dark:{iconBg:'#F97316',glyph:'#FFFFFF',text:'#FFFFFF'},
+  white:{iconBg:'#FFFFFF',glyph:'#F97316',text:'#FFFFFF'},
+  mono:{iconBg:'#262626',glyph:'#FFFFFF',text:'#262626'},
+  stack:{iconBg:'#F97316',glyph:'#FFFFFF',text:'#262626'}};
+const NAMES={lockup:{primary:'lendora-logo-utama',dark:'lendora-logo-gelap',white:'lendora-logo-putih',
+  mono:'lendora-logo-monokrom',stack:'lendora-logo-stack'},
+  icon:{orange:'lendora-ikon',dark:'lendora-ikon-gelap',white:'lendora-ikon-putih'}};
+
+function iconSVG(kind,{size=512,rx=118,gid=CUR}={}){
+  const c=ICON_C[kind];
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}"><rect width="512" height="512" rx="${rx}" fill="${c.bg}"/>${glyphGroup(c.glyph,gid)}</svg>`;
+}
+function lockupSVG(variant,{embed=false}={}){
+  const c=LOCKUP_C[variant], stacked=variant==='stack';
+  const ff=embed?'LendoraMark':'PJS';
+  const fallback=`, 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif`;
+  const face=embed?`<defs><style>@font-face{font-family:'LendoraMark';src:url(data:font/woff2;base64,${FONT_B64}) format('woff2');}</style></defs>`:'';
+  if(stacked){
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 392" width="448" height="392">${face}<g transform="translate(112,16) scale(0.4375)"><rect width="512" height="512" rx="118" fill="${c.iconBg}"/>${glyphGroup(c.glyph)}</g><text x="224" y="358" text-anchor="middle" font-family="${ff}${fallback}" font-weight="800" font-size="96" fill="${c.text}" textLength="410" lengthAdjust="spacingAndGlyphs">Lendora</text></svg>`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 796 224" width="796" height="224">${face}<g transform="scale(0.4375)"><rect width="512" height="512" rx="118" fill="${c.iconBg}"/>${glyphGroup(c.glyph)}</g><text x="252" y="154" font-family="${ff}${fallback}" font-weight="800" font-size="118" fill="${c.text}" textLength="520" lengthAdjust="spacingAndGlyphs">Lendora</text></svg>`;
+}
+
+/* ---- PNG via canvas ---- */
+function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function drawIconCanvas(ctx,x,y,size,bg,glyph,gid=CUR){
+  const g=GLYPHS[gid];
+  ctx.save();ctx.translate(x,y);ctx.scale(size/512,size/512);
+  rr(ctx,0,0,512,512,118);ctx.fillStyle=bg;ctx.fill();
+  ctx.strokeStyle=glyph;ctx.lineWidth=56;ctx.lineCap='round';ctx.lineJoin='round';
+  g.strokes.forEach(d=>ctx.stroke(new Path2D(d)));
+  ctx.fillStyle=glyph;
+  g.fills.forEach(d=>ctx.fill(new Path2D(d)));
+  ctx.restore();
+}
+function drawWord(ctx,color,text,x,y,fs,targetW){
+  ctx.save();ctx.fillStyle=color;ctx.textBaseline='alphabetic';
+  ctx.font=`800 ${fs}px PJS,'Plus Jakarta Sans',system-ui,sans-serif`;
+  const w0=ctx.measureText(text).width||1;
+  ctx.translate(x,y);ctx.scale(targetW/w0,1);ctx.fillText(text,0,0);ctx.restore();
+}
+async function makePNG(spec,targetW){
+  const c=document.createElement('canvas'),ctx=c.getContext('2d');
+  if(spec.type==='icon'){
+    c.width=c.height=targetW;
+    const cc=ICON_C[spec.kind];
+    drawIconCanvas(ctx,0,0,targetW,cc.bg,cc.glyph);
+  }else{
+    const cc=LOCKUP_C[spec.variant],stacked=spec.variant==='stack';
+    const VW=stacked?448:796,VH=stacked?392:224;
+    c.width=targetW;c.height=Math.round(targetW*VH/VW);
+    const s=targetW/VW;
+    try{await document.fonts.load(`800 ${Math.round(120*s)}px PJS`);}catch(e){}
+    if(stacked){drawIconCanvas(ctx,112*s,16*s,224*s,cc.iconBg,cc.glyph);
+      drawWord(ctx,cc.text,'Lendora',(448*s)/2,358*s,96*s,410*s);}
+    else{drawIconCanvas(ctx,0,0,224*s,cc.iconBg,cc.glyph);
+      drawWord(ctx,cc.text,'Lendora',252*s,154*s,118*s,520*s);}
+  }
+  return c;
+}
+
+/* ---- Palet PNG (brand board) ---- */
+const dateStr=new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+function makePalettePNG(){
+  const W=1600,H=1120,c=document.createElement('canvas');
+  c.width=W*2;c.height=H*2;
+  const ctx=c.getContext('2d');ctx.scale(2,2);
+  const F=`'Plus Jakarta Sans',PJS,system-ui,sans-serif`;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+  drawIconCanvas(ctx,56,46,76,'#F97316','#FFFFFF');
+  ctx.fillStyle='#262626';ctx.font=`800 40px ${F}`;ctx.fillText('Lendora',152,98);
+  ctx.fillStyle='#737373';ctx.font=`600 16px ${F}`;
+  ctx.fillText('Palet Warna \u00b7 Draft usahan untuk folder public/Desain/',152,126);
+  ctx.textAlign='right';
+  ctx.fillStyle='#C2410C';ctx.font=`700 15px ${F}`;
+  ctx.fillText('Clean Professional \u00b7 Vibrant Orange #F97316',W-56,92);
+  ctx.fillStyle='#737373';ctx.font=`500 13px ${F}`;ctx.fillText('Lendora V4 \u00b7 '+GLYPHS[CUR].nm+' \u00b7 '+dateStr,W-56,114);
+  ctx.textAlign='left';
+  const sec=(y,t)=>{ctx.fillStyle='#737373';ctx.font=`700 12.5px ${F}`;ctx.fillText(t.toUpperCase(),56,y);};
+  const swRow=(y,items)=>{
+    const n=items.length,gap=12,w=(W-112-(n-1)*gap)/n,h=108;
+    items.forEach((it,i)=>{
+      const x=56+i*(w+gap);
+      rr(ctx,x,y,w,h,14);ctx.fillStyle=it.hex;ctx.fill();
+      ctx.strokeStyle='rgba(38,38,38,.08)';ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle='#262626';ctx.font=`700 12.5px ${F}`;ctx.fillText(it.nm,x,y+h+20);
+      ctx.fillStyle='#525252';ctx.font=`600 12px ${F}`;ctx.fillText(it.hex,x,y+h+38);
+      if(it.badge){ctx.fillStyle='#C2410C';ctx.font=`700 10.5px ${F}`;ctx.fillText(it.badge,x,y+h+55);}
+    });
+  };
+  sec(196,'Brand \u2014 Keluarga Orange (500 = Primary \u00b7 600 = Primary Dark)');
+  swRow(210,RAMP.map(r=>({nm:'Orange '+r[0],hex:r[1],badge:r[4]||''})));
+  sec(428,'Netral');
+  swRow(442,NEUTRAL.map(n=>({nm:n[0],hex:n[1],badge:n[3]==='acuan'?'Acuan':''})));
+  sec(660,'Warna Status');
+  const cw=(W-112-3*16)/4,ch=216;
+  STATUS.forEach((s,i)=>{
+    const x=56+i*(cw+16),y=674;
+    rr(ctx,x,y,cw,ch,16);ctx.strokeStyle='#E5E7EB';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='#262626';ctx.font=`800 15px ${F}`;ctx.fillText(s[0],x+16,y+30);
+    [['Dasar',s[1]],['Teks',s[2]],['Latar',s[3]]].forEach((row,j)=>{
+      const yy=y+46+j*42;
+      rr(ctx,x+14,yy,cw-28,34,8);ctx.fillStyle=row[1];ctx.fill();
+      ctx.fillStyle=lum(row[1])>.5?'#262626':'#FFFFFF';ctx.font=`700 11px ${F}`;
+      ctx.fillText(row[0].toUpperCase(),x+26,yy+21);
+      ctx.textAlign='right';ctx.fillText(row[1],x+cw-24,yy+21);ctx.textAlign='left';
+    });
+  });
+  ctx.strokeStyle='#E5E7EB';ctx.beginPath();ctx.moveTo(56,972);ctx.lineTo(W-56,972);ctx.stroke();
+  ctx.fillStyle='#737373';ctx.font=`600 13px ${F}`;
+  ctx.fillText('Lendora \u2014 platform peminjaman & pengelolaan peralatan \u00b7 Siklus: Request \u2192 Pickup \u2192 Return \u2192 Available',56,1002);
+  ctx.textAlign='right';
+  ctx.fillText('Draft \u00b7 menunggu persetujuan pemilik proyek sebelum jadi palet resmi',W-56,1002);
+  ctx.textAlign='left';
+  return c;
+}
+
+/* ---- Unduh & salin ---- */
+function dlBlob(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+const dlText=(name,text,mime='text/plain')=>dlBlob(name,new Blob([text],{type:mime}));
+const dlSVG=(name,svg)=>dlText(name,'<?xml version="1.0" encoding="UTF-8"?>\n'+svg,'image/svg+xml');
+async function dlPNG(name,spec,w){const c=await makePNG(spec,w);
+  c.toBlob(b=>b&&dlBlob(name,b),'image/png');}
+let toastT;function toast(msg){const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200);}
+function copyText(txt,msg){navigator.clipboard?.writeText(txt).then(()=>toast(msg||('Disalin: '+txt)))
+  .catch(()=>{const i=document.createElement('textarea');i.value=txt;document.body.appendChild(i);
+    i.select();document.execCommand('copy');i.remove();toast(msg||('Disalin: '+txt));});}
+
+/* ---- Token files ---- */
+const cssBlock=(pairs,indent='  ')=>pairs.map(p=>`${indent}--ld-${p[0]}: ${p[1]};`).join('\n');
+function tokensCSS(){
+  const ramp=RAMP.map(r=>[`orange-${r[0]}`,r[1]]);
+  const neu=[['white','#FFFFFF'],['surface','#F5F5F5'],['border','#E5E7EB'],['text-muted','#737373'],
+    ['text-secondary','#525252'],['text','#262626'],['ink','#1C1917']];
+  const st=STATUS.flatMap(s=>[[s[0].toLowerCase(),s[1]],[s[0].toLowerCase()+'-text',s[2]],[s[0].toLowerCase()+'-bg',s[3]]]);
+  return `/* ============================================
+   Lendora V4 \u2014 Design Tokens: Warna
+   Status: draft usahan (menunggu persetujuan)
+   Acuan: Panduan Arahan AI \u2014 Clean Professional,
+   Vibrant Orange #F97316 + putih
+   ============================================ */
+:root {
+/* Brand \u2014 Vibrant Orange */
+${cssBlock(ramp)}
+
+/* Semantik */
+  --ld-primary: #F97316;      /* aksi utama, elemen aktif, identitas */
+  --ld-primary-dark: #EA580C; /* hover/active, penekanan */
+
+/* Netral */
+${cssBlock(neu)}
+
+/* Status */
+${cssBlock(st)}
+}
+`;
+}
+function tokensJSON(){
+  const hex2rgb=h=>{h=h.replace('#','');return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16)).join(', ');};
+  const obj=p=>Object.fromEntries(p.map(x=>[x[0],{hex:x[1],rgb:hex2rgb(x[1])}]));
+  return JSON.stringify({
+    meta:{proyek:'Lendora V4',dokumen:'Design tokens warna',status:'draft-usahan',
+      dibuat:new Date().toISOString().slice(0,10),
+      sumber:'Panduan Arahan AI Lendora \u2014 Clean Professional, Vibrant Orange #F97316'},
+    brand:Object.fromEntries(RAMP.map(r=>[r[0],{hex:r[1],rgb:hex2rgb(r[1]),
+      ...(r[2]?{peran:r[2]}:{})}])),
+    semantik:{primary:'#F97316',primaryDark:'#EA580C'},
+    netral:obj(NEUTRAL.map(n=>[n[0].toLowerCase().replace(/\s/g,'-'),n[1]])),
+    status:Object.fromEntries(STATUS.map(s=>[s[0].toLowerCase(),
+      {dasar:{hex:s[1],rgb:hex2rgb(s[1])},teks:{hex:s[2],rgb:hex2rgb(s[2])},
+       latar:{hex:s[3],rgb:hex2rgb(s[3])},penggunaan:s[4]}])),
+    logo:{konsep:GLYPHS[CUR].nm,catatan:'V4 \u2014 bentuk tanpa huruf L'},
+    tipografi:{wordmark:'Plus Jakarta Sans ExtraBold (800)',ui:'Plus Jakarta Sans 400\u2013800'}
+  },null,2);
+}
+function tailwindColors(){
+  const tw={
+    primary:{DEFAULT:'#F97316',dark:'#EA580C'},
+    white:'#FFFFFF',surface:'#F5F5F5',border:'#E5E7EB',
+    text:{DEFAULT:'#262626',secondary:'#525252',muted:'#737373'},ink:'#1C1917',
+    success:{DEFAULT:'#16A34A',text:'#15803D',bg:'#F0FDF4'},
+    warning:{DEFAULT:'#D97706',text:'#B45309',bg:'#FFFBEB'},
+    danger:{DEFAULT:'#DC2626',text:'#B91C1C',bg:'#FEF2F2'},
+    info:{DEFAULT:'#0284C7',text:'#0369A1',bg:'#F0F9FF'},
+    ...Object.fromEntries(RAMP.map(r=>['orange-'+r[0],r[1]]))
+  };
+  return `// Lendora V4 \u2014 extend warna untuk tailwind.config.js (Tailwind v3)
+// Untuk Tailwind v4, salin nilai ke blok @theme (mis. --color-primary: #F97316;)
+// Status: draft usahan \u2014 menunggu persetujuan pemilik proyek.
+module.exports = ${JSON.stringify(tw,null,2)};
+`;
+}
+
+/* ---- Render UI ---- */
+function renderAll(){
+  document.getElementById('navIcon').innerHTML=iconSVG('orange',{size:30,rx:84});
+  const hl=document.getElementById('heroLockup');hl.innerHTML=lockupSVG('primary');
+  hl.querySelector('svg').setAttribute('style','width:100%;height:auto');
+  document.getElementById('conceptIcon').innerHTML=iconSVG('orange',{size:190});
+  document.getElementById('clearspaceIcon').innerHTML=iconSVG('orange',{size:118});
+  document.querySelectorAll('[data-lockup]').forEach(el=>{
+    const v=el.dataset.lockup;el.innerHTML=lockupSVG(v);
+    const s=el.querySelector('svg');
+    if(v==='stack'){s.setAttribute('style','height:158px;width:auto');}
+    else{s.setAttribute('style','max-width:82%;height:auto');}
+  });
+  document.querySelectorAll('[data-icon]').forEach(el=>{
+    el.innerHTML=iconSVG(el.dataset.icon,{size:+el.dataset.size});
+  });
+}
+function setKonsepInfo(){
+  const i=KONSEP_INFO[CUR];
+  document.getElementById('konsepTitle').innerHTML=i.t;
+  document.getElementById('konsepBody').innerHTML=i.b;
+  document.getElementById('konsepList').innerHTML=i.li.map(x=>`
+    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>${x}</span></li>`).join('');
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  /* font subset utk wordmark */
+  const st=document.createElement('style');
+  st.textContent=`@font-face{font-family:'PJS';src:url(data:font/woff2;base64,${FONT_B64}) format('woff2');font-weight:800;font-style:normal;font-display:block}`;
+  document.head.appendChild(st);
+
+  /* pemilih konsep */
+  const kg=document.getElementById('konsepGrid');
+  Object.entries(GLYPHS).forEach(([id,g])=>{
+    const b=document.createElement('button');b.type='button';
+    b.className='konsep-opt'+(id===CUR?' active':'');b.dataset.g=id;
+    b.innerHTML=`<span class="kic">${iconSVG('orange',{size:56,gid:id})}</span>
+      <span><span class="knm">${g.nm}</span><span class="ktag">${g.tag}</span></span>
+      <span class="chk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>`;
+    b.onclick=()=>{if(CUR===id)return;CUR=id;
+      kg.querySelectorAll('.konsep-opt').forEach(o=>o.classList.toggle('active',o.dataset.g===id));
+      setKonsepInfo();renderAll();
+      toast('Konsep '+g.nm+' dipilih \u2014 semua varian & unduhan diperbarui');};
+    kg.appendChild(b);
+  });
+  setKonsepInfo();
+  renderAll();
+  document.getElementById('footDate').textContent=dateStr;
+
+  /* swatch */
+  const hex2rgb=h=>{h=h.replace('#','');return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16)).join(', ');};
+  const swatchEl=(nm,hex,badge)=>{
+    const L=lum(hex),r=L>.55?ratio('#262626',hex):ratio('#FFFFFF',hex);
+    const cls=r>=4.5?'pass':r>=3?'part':'fail';
+    const b=document.createElement('button');b.className='swatch';b.type='button';
+    b.innerHTML=`<span class="chip" style="background:${hex};${lum(hex)>.82?'box-shadow:inset 0 0 0 1px rgba(38,38,38,.08);':''}">
+      ${badge?`<span class="tag ${lum(hex)>.6?'':'dark'}">${badge}</span>`:''}</span>
+      <span class="info"><span class="nm">${nm}</span><br><span class="hex">${hex}</span><br>
+      <span class="rgb">rgb(${hex2rgb(hex)})</span><br>
+      <span class="ctr ${cls}">${r.toFixed(1)}:1 \u00b7 ${grade(r)}</span></span>`;
+    b.onclick=()=>copyText(hex,'Disalin: '+hex+' \u2014 '+nm);
+    return b;
+  };
+  RAMP.forEach(r=>document.getElementById('rampGrid')
+    .appendChild(swatchEl('Orange '+r[0]+(r[2]?' \u00b7 '+r[2]:''),r[1],r[3]==='acuan'?(r[0]==='500'?'Primary':'Acuan'):'')));
+  NEUTRAL.forEach(n=>document.getElementById('neutralGrid')
+    .appendChild(swatchEl(n[0]+(n[2]?' \u00b7 '+n[2]:''),n[1],n[3]==='acuan'?'Acuan':'Usulan')));
+
+  /* status cards */
+  const sg=document.getElementById('statusGrid');
+  STATUS.forEach(s=>{
+    const rt=ratio(s[2],s[3]);
+    const d=document.createElement('div');d.className='card status-card';
+    d.innerHTML=`<h4><span class="dot" style="background:${s[1]}"></span>${s[0]}</h4><p>${s[4]}</p>
+      ${[['Dasar',s[1]],['Teks',s[2]],['Latar',s[3]]].map(x=>`
+        <div class="chipbar" data-hex="${x[1]}"><span class="lft">
+        <span class="swb" style="background:${x[1]}"></span>${x[0]}</span>
+        <span class="hexv">${x[1]}</span></div>`).join('')}
+      <div class="status-note">Teks ${s[2]} di atas ${s[3]} = ${rt.toFixed(1)}:1 ${rt>=4.5?'(AA \u2713)':''}</div>`;
+    d.querySelectorAll('.chipbar').forEach(cb=>cb.onclick=()=>copyText(cb.dataset.hex));
+    sg.appendChild(d);
+  });
+
+  /* rules */
+  const RULE_C=[
+    ['Putih & netral mendominasi halaman.','Orange #F97316 hanya untuk aksen, aksi utama, dan identitas \u2014 jangan mewarnai seluruh halaman.'],
+    ['Tanpa gradasi, glow, atau glassmorphism.','Permukaan flat sesuai arah Clean Professional.'],
+    ['Hati-hati teks putih di atas oranye.','Kontras putih di atas #F97316 hanya 2,8:1 \u2014 cukup untuk ikon/grafis, bukan teks kecil. Untuk tombol solid pakai latar #EA580C (3,6:1 teks besar) atau teks gelap #262626 di atas oranye (5,4:1).'],
+    ['Orange sebagai teks di atas putih.','Gunakan #C2410C untuk teks kecil (5,2:1 AA); #EA580C hanya untuk teks besar/tebal (3,6:1).'],
+    ['Warna status dipisah dari warna brand.','Success/warning/danger/info punya pasangan dasar + teks + latar masing-masing (semua lolos AA).']];
+  const RULE_L=[
+    ['Pilih satu bentuk, gunakan konsisten.','Tiga konsep di halaman ini adalah opsi \u2014 setelah satu disetujui, pakai bentuk itu di semua titik sentuh dan jangan mencampurnya.'],
+    ['Jaga ruang aman.','Minimal \u00bc tinggi ikon di sekeliling logo; jangan menempelkan elemen lain terlalu rapat.'],
+    ['Hormati ukuran minimum.','Ikon 24 px, lockup horizontal 120 px lebar. Di bawah itu gunakan ikon saja.'],
+    ['Jangan memodifikasi.','Tanpa gradasi, bayangan tebal, rotasi, distorsi, atau penggantian warna di luar varian resmi.'],
+    ['Pilih varian sesuai latar.','Utama di latar terang; varian gelap di #1C1917; varian negatif di blok oranye; monokrom untuk cetak satu tinta.'],
+    ['Ikon untuk ruang kecil.','Favicon, PWA, dan avatar memakai ikon saja \u2014 bukan lockup.']];
+  const li=([t,d])=>`<li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span><b>${t}</b> ${d}</span></li>`;
+  document.getElementById('ruleColor').innerHTML=RULE_C.map(li).join('');
+  document.getElementById('ruleLogo').innerHTML=RULE_L.map(li).join('');
+
+  /* wiring unduhan — nama file menyertakan konsep aktif */
+  const pngW=()=>+document.getElementById('pngSize').value;
+  document.querySelectorAll('[data-dl-svg]').forEach(b=>b.onclick=()=>{
+    const v=b.dataset.dlSvg,nm=NAMES.lockup[v]+'-'+CUR;
+    dlSVG(nm+'.svg',lockupSVG(v,{embed:true}));
+    toast('SVG diunduh \u2014 '+nm+'.svg');});
+  document.querySelectorAll('[data-dl-png]').forEach(b=>b.onclick=async()=>{
+    const v=b.dataset.dlPng,w=pngW(),nm=NAMES.lockup[v]+'-'+CUR;
+    b.disabled=true;await dlPNG(nm+`-${w}px.png`,{type:'lockup',variant:v},w);
+    b.disabled=false;toast(`PNG ${w}px diunduh \u2014 ${nm}`);});
+  document.querySelectorAll('[data-dl-icon]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.dlIcon,nm=NAMES.icon[k]+'-'+CUR;
+    dlSVG(nm+'.svg',iconSVG(k));
+    toast('SVG diunduh \u2014 '+nm+'.svg');});
+  document.querySelectorAll('[data-dl-iconpng]').forEach(b=>b.onclick=async()=>{
+    const k=b.dataset.dlIconpng,w=pngW(),nm=NAMES.icon[k]+'-'+CUR;
+    b.disabled=true;await dlPNG(nm+`-${w}px.png`,{type:'icon',kind:k},w);
+    b.disabled=false;toast(`PNG ${w}px diunduh \u2014 ${nm}`);});
+  document.querySelectorAll('[data-dl-fav]').forEach(a=>a.onclick=async()=>{
+    const s=+a.dataset.dlFav;
+    await dlPNG(`lendora-favicon-${s}-${CUR}.png`,{type:'icon',kind:'orange'},s);
+    toast(`Favicon ${s}px diunduh`);});
+  document.querySelectorAll('[data-dl-token]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.dlToken;
+    if(k==='css')dlText('lendora-tokens.css',tokensCSS(),'text/css');
+    if(k==='json')dlText('lendora-tokens.json',tokensJSON(),'application/json');
+    if(k==='tailwind')dlText('tailwind.colors.js',tailwindColors(),'text/javascript');
+    toast('File token diunduh');});
+  document.getElementById('btnPaletPng').onclick=()=>{
+    makePalettePNG().toBlob(b=>{b&&dlBlob('lendora-palet-'+CUR+'.png',b);toast('Palet PNG diunduh');},'image/png');};
+  document.getElementById('btnCopyAll').onclick=()=>{
+    const lines=['# Lendora V4 \u2014 Palet Warna (draft)','# Brand \u2014 Vibrant Orange',
+      ...RAMP.map(r=>`Orange ${r[0]}  ${r[1]}`),'','# Netral',...NEUTRAL.map(n=>`${n[0]}  ${n[1]}`),
+      '','# Status',...STATUS.map(s=>`${s[0]}  dasar ${s[1]} \u00b7 teks ${s[2]} \u00b7 latar ${s[3]}`)];
+    copyText(lines.join('\n'),'Semua HEX disalin ke clipboard');};
+});
+
+/* ---- Hook ekspor terprogram (untuk pengujian/otomasi) ---- */
+window.__ld={
+  get glyph(){return CUR;},
+  setGlyph:id=>{if(GLYPHS[id])CUR=id;},
+  lockupSVG,iconSVG,makePNG,makePalettePNG,tokensCSS,tokensJSON,tailwindColors,
+  png:async(spec,w)=>(await makePNG(spec,w)).toDataURL('image/png'),
+  palette:async()=>makePalettePNG().toDataURL('image/png'),
+};
+</script>
+</body>
+</html>

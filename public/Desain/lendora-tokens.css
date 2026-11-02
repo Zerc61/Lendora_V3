@@ -1,0 +1,46 @@
+/* ============================================
+   Lendora V4 — Design Tokens: Warna
+   Status: draft usahan (menunggu persetujuan)
+   Acuan: Panduan Arahan AI — Clean Professional,
+   Vibrant Orange #F97316 + putih
+   ============================================ */
+:root {
+/* Brand — Vibrant Orange */
+  --ld-orange-50: #FFF7ED;
+  --ld-orange-100: #FFEDD5;
+  --ld-orange-200: #FED7AA;
+  --ld-orange-300: #FDBA74;
+  --ld-orange-400: #FB923C;
+  --ld-orange-500: #F97316;
+  --ld-orange-600: #EA580C;
+  --ld-orange-700: #C2410C;
+  --ld-orange-800: #9A3412;
+  --ld-orange-900: #7C2D12;
+
+/* Semantik */
+  --ld-primary: #F97316;      /* aksi utama, elemen aktif, identitas */
+  --ld-primary-dark: #EA580C; /* hover/active, penekanan */
+
+/* Netral */
+  --ld-white: #FFFFFF;
+  --ld-surface: #F5F5F5;
+  --ld-border: #E5E7EB;
+  --ld-text-muted: #737373;
+  --ld-text-secondary: #525252;
+  --ld-text: #262626;
+  --ld-ink: #1C1917;
+
+/* Status */
+  --ld-success: #16A34A;
+  --ld-success-text: #15803D;
+  --ld-success-bg: #F0FDF4;
+  --ld-warning: #D97706;
+  --ld-warning-text: #B45309;
+  --ld-warning-bg: #FFFBEB;
+  --ld-danger: #DC2626;
+  --ld-danger-text: #B91C1C;
+  --ld-danger-bg: #FEF2F2;
+  --ld-info: #0284C7;
+  --ld-info-text: #0369A1;
+  --ld-info-bg: #F0F9FF;
+}
