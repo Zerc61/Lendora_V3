@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Notifications;
+
+use App\Models\Booking;
+use Illuminate\Notifications\Notification;
+
+class LoanDueReminderNotification extends Notification
+{
+    public function __construct(public readonly Booking $booking) {}
+
+    public function via(object $notifiable): array
+    {
+        return ['database'];
+    }
+
+    public function toArray(object $notifiable): array
+    {
+        return [
+            'booking_id' => $this->booking->id,
+            'code' => $this->booking->code,
+            'due_at' => $this->booking->due_at?->toIso8601String(),
+            'message' => __('messages.booking.notification_due', [
+                'code' => $this->booking->code,
+                'due' => $this->booking->due_at?->locale('id')->translatedFormat('d M Y H:i') ?? '-',
+            ]),
+        ];
+    }
+}
