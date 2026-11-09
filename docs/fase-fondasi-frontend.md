@@ -1,0 +1,27 @@
+# Laporan Fase Fondasi — FRONTEND
+
+- **Yang dibangun:** design token & CSS global (`lendora.css`), CSS area borrower/admin, shell borrower (app bar + bottom nav 5 item + safe area), shell admin (sidebar 256px collapsible + topbar + konten scroll independen), komponen Blade (`icon`, `status-badge`, `condition-badge`, `empty-state`), restyle seluruh halaman auth Breeze ke Bahasa Indonesia, halaman error 403/404/500, JS vanilla sidebar borrower/admin, placeholder view Phase 1/2.
+- **File penting:**
+  - Create: `public/css/{lendora,borrower,admin}.css`, `public/js/{borrower,admin}.js`, `lang/id/ui.php`, `resources/views/components/{icon,status-badge,condition-badge,empty-state}.blade.php`, `resources/views/borrower/{catalog/index,bookings/index,notifications/index,profile/edit}.blade.php`, `resources/views/errors/{404,500}.blade.php`, `tests/Feature/Borrower/ShellTest.php`, `tests/Feature/Admin/ShellTest.php`, `docs/fase-fondasi-frontend.md`.
+  - Modify: `resources/views/layouts/{borrower,admin,guest}.blade.php`, `resources/views/auth/{login,register,forgot-password,reset-password,confirm-password,verify-email}.blade.php`, `resources/views/borrower/home.blade.php`, `resources/views/admin/dashboard.blade.php`, `resources/views/errors/403.blade.php`, `app/View/Components/GuestLayout.php` (prop `title`), `tests/Feature/Auth/CrossRoleAccessTest.php` (sesuaikan teks judul 403).
+  - Delete: komponen Breeze yang tidak dipakai — `application-logo`, `auth-session-status`, `danger-button`, `dropdown`, `dropdown-link`, `input-error`, `input-label`, `modal`, `nav-link`, `primary-button`, `responsive-nav-link`, `secondary-button`, `text-input`.
+- **Migration/seed dijalankan:** tidak (trek frontend; schema tidak disentuh).
+- **Test:** `php artisan test` → **40 passed (101 assertions)**, durasi 2.41s. Tidak ada test backend yang berubah selain penyesuaian teks judul 403.
+- **Acceptance criteria fase:**
+  - [x] Shell borrower sesuai Design.md: konten maks 480px, bottom nav tepat 5 item (Beranda, Katalog, Peminjaman Saya, Notifikasi, Profil), ikon Lucide, active state, tap target ≥44px, safe-area iOS.
+  - [x] Shell admin sesuai Design.md: sidebar 256px (68px collapsed, state `localStorage`), grup Inventaris/Transaksi/Operasional/Administrasi, item difilter per role, topbar judul + nama user + role chip, konten scroll independen.
+  - [x] Auth pages branded, Bahasa Indonesia, field/route/validasi Breeze tidak berubah.
+  - [x] Halaman 403 ramah Bahasa Indonesia aktif; 404/500 bergaya sama.
+  - [x] Hanya token `--ldr-*`; tidak ada hex mentah di view; tidak ada class Tailwind di file yang disentuh.
+  - [x] JS vanilla, tanpa framework/package baru.
+  - [x] `php artisan test` lulus penuh.
+  - [ ] Visual QA browser 375/768/1280 px — **tidak dijalankan**: tidak ada browser (Chromium/Firefox/Playwright) di environment dan pemasangannya butuh persetujuan dependency baru. Verifikasi yang dilakukan: test struktur shell, cek sintaks JS (`node --check`), cek kontras WCAG, dan grep hex/Tailwind.
+- **View Contract:** tidak ada (trek frontend). Variabel yang dipakai: `$user` (layout admin, dashboard, home), `$unreadNotifications` opsional default `0` di layout borrower. Controller belum mengirim `$unreadNotifications`; wiring menyusul Phase 2 sesuai prompt.
+- **Catatan deviasi:**
+  - Tombol primary memakai `--ldr-primary-strong: #C2410C` untuk teks putih (kontras 5.18:1, lolos AA). `--ldr-primary: #F97316` tetap jadi aksen/indikator. Alasan: putih di `#F97316` hanya 2.8:1.
+  - Teks badge memakai token ink lebih gelap; pasangan diuji 5.91:1–7.09:1.
+  - Item sidebar/topbar yang route-nya belum ada memakai `href="#"` + label "Menyusul".
+  - Field telepon pada register tidak dibuat karena `RegisteredUserController` belum menerima `phone` (tidak boleh mengubah backend).
+  - `welcome.blade.php` tetap bawaan Laravel (Tailwind/Vite) dan tidak termasuk halaman Lendora.
+- **Kontras terverifikasi:** `#FFFFFF`/`#C2410C` 5.18:1, `#FFFFFF`/`#B91C1C` 6.47:1, `#9A3412`/`#FFFFFF` 7.31:1, `#4B5563`/`#F5F5F5` 6.93:1, `#92400E`/`#FFFBEB` 6.84:1 — semua PASS AA.
+- **Yang belum selesai / catatan:** visual QA browser, wiring `$unreadNotifications`, route nyata untuk menu admin/katalog/bookmark (fase berikutnya), modul fitur Phase 1–3.
