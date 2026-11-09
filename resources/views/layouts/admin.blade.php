@@ -36,7 +36,7 @@
         $role = $user->role->slug;
         $groups = [
             __('ui.sections.inventory') => [
-                ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['operator', 'organization_admin', 'admin_prodi']],
+                ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['operator', 'organization_admin', 'admin_prodi', 'technician']],
                 ['label' => __('ui.nav.categories'), 'icon' => 'layers', 'href' => route('admin.categories.index'), 'match' => 'admin.categories.*', 'roles' => ['organization_admin', 'admin_prodi']],
             ],
             __('ui.sections.transactions') => [

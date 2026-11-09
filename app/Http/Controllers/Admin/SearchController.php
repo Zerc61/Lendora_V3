@@ -43,7 +43,7 @@ class SearchController extends Controller
         $like = "%{$term}%";
         $results = collect();
 
-        if (in_array($role, ['operator', 'organization_admin', 'admin_prodi'], true)) {
+        if (in_array($role, ['operator', 'organization_admin', 'admin_prodi', 'technician'], true)) {
             $results->put('assets', Asset::query()
                 ->where('organization_id', $organizationId)
                 ->where(fn (Builder $query) => $query
@@ -52,7 +52,9 @@ class SearchController extends Controller
                 ->orderBy('code')
                 ->limit(5)
                 ->get());
+        }
 
+        if (in_array($role, ['operator', 'organization_admin', 'admin_prodi'], true)) {
             $results->put('bookings', Booking::query()
                 ->where('organization_id', $organizationId)
                 ->where(fn (Builder $query) => $query

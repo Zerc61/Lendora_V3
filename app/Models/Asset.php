@@ -22,6 +22,7 @@ class Asset extends Model
         'model',
         'serial_number',
         'description',
+        'specifications',
         'status',
         'condition_status',
         'purchase_date',
@@ -37,6 +38,7 @@ class Asset extends Model
             'condition_status' => AssetCondition::class,
             'purchase_date' => 'date',
             'purchase_price' => 'integer',
+            'specifications' => 'array',
         ];
     }
 

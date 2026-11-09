@@ -99,6 +99,34 @@ class MaintenanceTest extends TestCase
         $this->assertSame(MaintenanceStatus::Cancelled, $maintenance->fresh()->status);
     }
 
+    public function test_index_renders_summary_and_task(): void
+    {
+        $maintenance = $this->maintenance(MaintenanceStatus::InProgress);
+
+        $this->actingAs($this->admin)
+            ->get(route('admin.maintenances.index'))
+            ->assertOk()
+            ->assertSee($maintenance->asset->code)
+            ->assertSee('Kamera Uji');
+    }
+
+    public function test_technician_dashboard_and_finish_form_render_work_order(): void
+    {
+        $maintenance = $this->maintenance(MaintenanceStatus::InProgress);
+
+        $this->actingAs($this->technician)
+            ->get(route('admin.dashboard'))
+            ->assertOk()
+            ->assertSee('Tugas saya')
+            ->assertSee('Perbaikan lensa.');
+
+        $this->actingAs($this->technician)
+            ->get(route('admin.maintenances.finish', $maintenance))
+            ->assertOk()
+            ->assertSee('Lembar kerja')
+            ->assertSee('Perbaikan lensa.');
+    }
+
     private function maintenance(MaintenanceStatus $status = MaintenanceStatus::Scheduled, bool $assigned = true): Maintenance
     {
         $asset = Asset::create([

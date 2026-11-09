@@ -32,7 +32,8 @@
 
         <x-conflict-banner :message="$errors->first('assets')" />
 
-        <section class="ldr-card">
+        <div class="ldr-booking-create__grid">
+            <section class="ldr-card">
             <h2>{{ __('ui.booking.items_summary') }}</h2>
 
             <ul class="ldr-booking-items">
@@ -115,5 +116,6 @@
                 <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.booking.submit') }}</button>
             </div>
         </form>
+        </div>
     @endif
 @endsection

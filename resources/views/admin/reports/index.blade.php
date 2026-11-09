@@ -59,24 +59,44 @@
 
     <div class="ldr-kpi-grid">
         <div class="ldr-kpi">
-            <span class="ldr-kpi__label">{{ __('ui.report.total_loans') }}</span>
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.report.total_loans') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="arrow-left-right" :size="18" /></span>
+            </div>
             <span class="ldr-kpi__value">{{ $kpis['total_loans'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.report.hint_total_loans') }}</span>
         </div>
         <div class="ldr-kpi">
-            <span class="ldr-kpi__label">{{ __('ui.report.borrowed_days') }}</span>
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.report.borrowed_days') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="calendar" :size="18" /></span>
+            </div>
             <span class="ldr-kpi__value">{{ $kpis['borrowed_days'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.report.hint_borrowed_days') }}</span>
         </div>
-        <div class="ldr-kpi">
-            <span class="ldr-kpi__label">{{ __('ui.report.utilization') }}</span>
+        <div class="ldr-kpi ldr-kpi--success">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.report.utilization') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="activity" :size="18" /></span>
+            </div>
             <span class="ldr-kpi__value">{{ number_format((float) $kpis['utilization'], 1, ',', '.') }}%</span>
+            <span class="ldr-kpi__hint">{{ __('ui.report.hint_utilization') }}</span>
         </div>
-        <div class="ldr-kpi">
-            <span class="ldr-kpi__label">{{ __('ui.report.damages') }}</span>
+        <div class="ldr-kpi ldr-kpi--warning">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.report.damages') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="alert-circle" :size="18" /></span>
+            </div>
             <span class="ldr-kpi__value">{{ $kpis['damages'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.report.hint_damages') }}</span>
         </div>
-        <div class="ldr-kpi">
-            <span class="ldr-kpi__label">{{ __('ui.report.late_returns') }}</span>
+        <div class="ldr-kpi ldr-kpi--danger">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.report.late_returns') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="alert-circle" :size="18" /></span>
+            </div>
             <span class="ldr-kpi__value">{{ $kpis['late_returns'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.report.hint_late_returns') }}</span>
         </div>
     </div>
 
@@ -115,9 +135,9 @@
         </div>
     @endif
 
-    <div class="ldr-form-grid" style="margin-top: var(--ldr-space-5);">
+    <div class="ldr-form-grid ldr-form-grid--spaced">
         <section class="ldr-card">
-            <h2 class="ldr-section-title" style="margin-top: 0;">{{ __('ui.report.monthly_trend') }}</h2>
+            <h2 class="ldr-section-title ldr-section-title--flush">{{ __('ui.report.monthly_trend') }}</h2>
 
             @if ($monthlyTrend->isEmpty())
                 <p class="ldr-muted">{{ __('ui.report.no_data') }}</p>
@@ -146,7 +166,7 @@
         </section>
 
         <section class="ldr-card">
-            <h2 class="ldr-section-title" style="margin-top: 0;">{{ __('ui.report.top_assets') }}</h2>
+            <h2 class="ldr-section-title ldr-section-title--flush">{{ __('ui.report.top_assets') }}</h2>
 
             @if ($topAssets->isEmpty())
                 <p class="ldr-muted">{{ __('ui.report.no_data') }}</p>
@@ -176,7 +196,7 @@
         </section>
 
         <section class="ldr-card">
-            <h2 class="ldr-section-title" style="margin-top: 0;">{{ __('ui.report.top_borrowers') }}</h2>
+            <h2 class="ldr-section-title ldr-section-title--flush">{{ __('ui.report.top_borrowers') }}</h2>
 
             @if ($topBorrowers->isEmpty())
                 <p class="ldr-muted">{{ __('ui.report.no_data') }}</p>
@@ -203,7 +223,7 @@
         </section>
 
         <section class="ldr-card">
-            <h2 class="ldr-section-title" style="margin-top: 0;">{{ __('ui.report.recent_damages') }}</h2>
+            <h2 class="ldr-section-title ldr-section-title--flush">{{ __('ui.report.recent_damages') }}</h2>
 
             @if ($damages->isEmpty())
                 <p class="ldr-muted">{{ __('ui.report.no_data') }}</p>

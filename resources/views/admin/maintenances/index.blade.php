@@ -6,7 +6,7 @@
     <div class="ldr-page-head">
         <div>
             <h1>{{ __('ui.nav.maintenances') }}</h1>
-            <p class="ldr-muted">{{ __('ui.maintenance.index_description') }}</p>
+            <p class="ldr-muted">{{ $role === 'technician' ? __('ui.maintenance.technician_description') : __('ui.maintenance.index_description') }}</p>
         </div>
 
         @if (in_array($role, ['operator', 'organization_admin'], true))
@@ -17,6 +17,44 @@
                 </a>
             </div>
         @endif
+    </div>
+
+    <div class="ldr-kpi-grid">
+        <div class="ldr-kpi ldr-kpi--warning">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.maintenance_status.scheduled') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="calendar" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['scheduled'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.maintenance.kpi_scheduled_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--info">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.maintenance_status.in_progress') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="wrench" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['in_progress'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.maintenance.kpi_progress_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--success">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.maintenance_status.done') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="check-circle" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['done'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.maintenance.kpi_done_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.maintenance.cost') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="bar-chart" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">Rp {{ number_format($summary['cost'], 0, ',', '.') }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.maintenance.kpi_cost_hint') }}</span>
+        </div>
     </div>
 
     <form method="GET" action="{{ route('admin.maintenances.index') }}" class="ldr-filter-bar" role="search">
@@ -75,8 +113,25 @@
                         @foreach ($maintenances as $maintenance)
                             <tr>
                                 <td>
-                                    <span class="ldr-table__name">{{ $maintenance->asset?->name }}</span>
-                                    <span class="ldr-table__sub ldr-table__code">{{ $maintenance->asset?->code }}</span>
+                                    <div class="ldr-table__media">
+                                        <span class="ldr-thumb ldr-thumb--sm">
+                                            @php $photo = $maintenance->asset?->photos->first(); @endphp
+                                            @if ($photo)
+                                                <img src="{{ Illuminate\Support\Facades\Storage::url($photo->path) }}"
+                                                     alt="{{ $maintenance->asset->name }}"
+                                                     loading="lazy"
+                                                     width="40"
+                                                     height="40">
+                                            @else
+                                                <x-icon name="camera" :size="16" />
+                                            @endif
+                                        </span>
+                                        <span>
+                                            <span class="ldr-table__name">{{ $maintenance->asset?->name }}</span>
+                                            <span class="ldr-table__sub ldr-table__code">{{ $maintenance->asset?->code }}</span>
+                                            <span class="ldr-table__sub">{{ \Illuminate\Support\Str::limit($maintenance->description, 64) }}</span>
+                                        </span>
+                                    </div>
                                 </td>
                                 <td><x-status-badge type="maintenance" :status="$maintenance->status->value" /></td>
                                 <td>{{ $maintenance->assignedTo?->name ?? __('ui.maintenance.unassigned') }}</td>

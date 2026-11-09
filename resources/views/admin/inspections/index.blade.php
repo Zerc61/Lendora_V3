@@ -17,6 +17,44 @@
         </div>
     </div>
 
+    <div class="ldr-kpi-grid">
+        <div class="ldr-kpi">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.inspection.kpi_total') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="clipboard-check" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['total'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.inspection.kpi_total_hint', ['today' => $summary['today']]) }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--success">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.inspection_result.ok') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="check-circle" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['ok'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.inspection.kpi_ok_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--warning">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.inspection_result.needs_repair') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="wrench" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['needs_repair'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.inspection.kpi_repair_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--danger">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.inspection_result.damaged') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="alert-circle" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['damaged'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.inspection.kpi_damaged_hint') }}</span>
+        </div>
+    </div>
+
     <form method="GET" action="{{ route('admin.inspections.index') }}" class="ldr-filter-bar" role="search">
         <div class="ldr-filter-bar__search">
             <label class="ldr-sr-only" for="inspection-search">{{ __('ui.inspection.filter_search') }}</label>

@@ -28,7 +28,17 @@
             <a href="{{ $href }}">{{ $asset->name }}</a>
         </h3>
 
+        @if ($asset->brand || $asset->model)
+            <p class="ldr-asset-card__brand">
+                {{ collect([$asset->brand, $asset->model])->filter()->join(' · ') }}
+            </p>
+        @endif
+
         <p class="ldr-asset-card__code">{{ $asset->code }}</p>
+
+        @if ($asset->description)
+            <p class="ldr-asset-card__desc">{{ Str::limit($asset->description, 96) }}</p>
+        @endif
 
         <p class="ldr-asset-card__meta">
             {{ __('ui.condition.'.$asset->condition_status->value) }}

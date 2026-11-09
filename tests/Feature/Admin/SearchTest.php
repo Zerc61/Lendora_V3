@@ -48,9 +48,19 @@ class SearchTest extends TestCase
             ->assertSee('operator@lendora.test');
     }
 
-    public function test_operator_does_not_get_user_results(): void
+    public function test_admin_prodi_gets_read_only_asset_links(): void
     {
-        $operator = User::where('email', 'operator@lendora.test')->firstOrFail();
+        $prodi = User::where('email', 'adminprodi@lendora.test')->firstOrFail();
+
+        $this->actingAs($prodi)
+            ->get(route('admin.search', ['q' => 'LDR-CAM-0001']))
+            ->assertOk()
+            ->assertSee('search=LDR-CAM-0001')
+            ->assertDontSee('/assets/1/edit');
+    }
+
+    public function test_operator_does_not_get_user_results(): void
+    {        $operator = User::where('email', 'operator@lendora.test')->firstOrFail();
 
         $response = $this->actingAs($operator)
             ->get(route('admin.search', ['q' => 'operator']))

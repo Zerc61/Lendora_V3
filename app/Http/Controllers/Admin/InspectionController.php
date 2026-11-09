@@ -38,7 +38,23 @@ class InspectionController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('admin.inspections.index', compact('inspections', 'filters'));
+        $summaryBase = Inspection::query()
+            ->whereHas('asset', fn ($query) => $query->where('organization_id', $request->user()->organization_id));
+
+        $counts = (clone $summaryBase)
+            ->selectRaw('result, count(*) as aggregate')
+            ->groupBy('result')
+            ->pluck('aggregate', 'result');
+
+        $summary = [
+            'total' => (int) $counts->sum(),
+            'ok' => (int) ($counts[InspectionResult::Ok->value] ?? 0),
+            'needs_repair' => (int) ($counts[InspectionResult::NeedsRepair->value] ?? 0),
+            'damaged' => (int) ($counts[InspectionResult::Damaged->value] ?? 0),
+            'today' => (clone $summaryBase)->whereDate('checked_at', now()->toDateString())->count(),
+        ];
+
+        return view('admin.inspections.index', compact('inspections', 'filters', 'summary'));
     }
 
     public function create(Request $request): View

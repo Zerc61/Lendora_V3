@@ -2,6 +2,10 @@
 
 @section('title', __('ui.nav.categories'))
 
+@php
+    $canManage = auth()->user()->hasRole('organization_admin');
+@endphp
+
 @section('content')
     <div class="ldr-page-head">
         <div>
@@ -9,10 +13,41 @@
             <p class="ldr-muted">{{ __('ui.category.assets_count', ['count' => $categories->sum('assets_count')]) }}</p>
         </div>
 
-        <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.categories.create') }}">
-            <x-icon name="layers" :size="18" />
-            {{ __('ui.category.add') }}
-        </a>
+        @if ($canManage)
+            <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.categories.create') }}">
+                <x-icon name="layers" :size="18" />
+                {{ __('ui.category.add') }}
+            </a>
+        @endif
+    </div>
+
+    <div class="ldr-kpi-grid">
+        <div class="ldr-kpi">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.category.kpi_parents') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="layers" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['parents'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.category.kpi_parents_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--info">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.category.kpi_children') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="class" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['children'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.category.kpi_children_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--success">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.category.kpi_assets') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="package" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['assets'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.category.kpi_assets_hint') }}</span>
+        </div>
     </div>
 
     @if ($categories->isEmpty())
@@ -21,9 +56,11 @@
             :title="__('ui.category.empty_title')"
             :description="__('ui.category.empty_description')"
         >
-            <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.categories.create') }}">
-                {{ __('ui.category.add') }}
-            </a>
+            @if ($canManage)
+                <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.categories.create') }}">
+                    {{ __('ui.category.add') }}
+                </a>
+            @endif
         </x-empty-state>
     @else
         <div class="ldr-card ldr-tree-card">
@@ -50,28 +87,30 @@
                             </span>
 
                             <div class="ldr-tree__actions">
-                                <a class="ldr-icon-btn"
-                                   href="{{ route('admin.categories.edit', $category) }}"
-                                   title="{{ __('ui.common.edit') }}"
-                                   aria-label="{{ __('ui.common.edit') }} {{ $category->name }}">
-                                    <x-icon name="clipboard-list" :size="18" />
-                                </a>
+                                @if ($canManage)
+                                    <a class="ldr-icon-btn"
+                                       href="{{ route('admin.categories.edit', $category) }}"
+                                       title="{{ __('ui.common.edit') }}"
+                                       aria-label="{{ __('ui.common.edit') }} {{ $category->name }}">
+                                        <x-icon name="clipboard-list" :size="18" />
+                                    </a>
 
-                                @if ($canDelete[$category->id] ?? false)
-                                    <button type="button"
-                                            class="ldr-icon-btn ldr-icon-btn--danger"
-                                            data-confirm-open="delete-category-{{ $category->id }}"
-                                            title="{{ __('ui.common.delete') }}"
-                                            aria-label="{{ __('ui.common.delete') }} {{ $category->name }}">
-                                        <x-icon name="x" :size="18" />
-                                    </button>
-                                @else
-                                    <button type="button"
-                                            class="ldr-icon-btn"
-                                            disabled
-                                            title="{{ __('messages.category.delete_blocked') }}">
-                                        <x-icon name="x" :size="18" />
-                                    </button>
+                                    @if ($canDelete[$category->id] ?? false)
+                                        <button type="button"
+                                                class="ldr-icon-btn ldr-icon-btn--danger"
+                                                data-confirm-open="delete-category-{{ $category->id }}"
+                                                title="{{ __('ui.common.delete') }}"
+                                                aria-label="{{ __('ui.common.delete') }} {{ $category->name }}">
+                                            <x-icon name="x" :size="18" />
+                                        </button>
+                                    @else
+                                        <button type="button"
+                                                class="ldr-icon-btn"
+                                                disabled
+                                                title="{{ __('messages.category.delete_blocked') }}">
+                                            <x-icon name="x" :size="18" />
+                                        </button>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -89,28 +128,30 @@
                                             </span>
 
                                             <div class="ldr-tree__actions">
-                                                <a class="ldr-icon-btn"
-                                                   href="{{ route('admin.categories.edit', $child) }}"
-                                                   title="{{ __('ui.common.edit') }}"
-                                                   aria-label="{{ __('ui.common.edit') }} {{ $child->name }}">
-                                                    <x-icon name="clipboard-list" :size="18" />
-                                                </a>
+                                                @if ($canManage)
+                                                    <a class="ldr-icon-btn"
+                                                       href="{{ route('admin.categories.edit', $child) }}"
+                                                       title="{{ __('ui.common.edit') }}"
+                                                       aria-label="{{ __('ui.common.edit') }} {{ $child->name }}">
+                                                        <x-icon name="clipboard-list" :size="18" />
+                                                    </a>
 
-                                                @if ($canDelete[$child->id] ?? false)
-                                                    <button type="button"
-                                                            class="ldr-icon-btn ldr-icon-btn--danger"
-                                                            data-confirm-open="delete-category-{{ $child->id }}"
-                                                            title="{{ __('ui.common.delete') }}"
-                                                            aria-label="{{ __('ui.common.delete') }} {{ $child->name }}">
-                                                        <x-icon name="x" :size="18" />
-                                                    </button>
-                                                @else
-                                                    <button type="button"
-                                                            class="ldr-icon-btn"
-                                                            disabled
-                                                            title="{{ __('messages.category.delete_blocked') }}">
-                                                        <x-icon name="x" :size="18" />
-                                                    </button>
+                                                    @if ($canDelete[$child->id] ?? false)
+                                                        <button type="button"
+                                                                class="ldr-icon-btn ldr-icon-btn--danger"
+                                                                data-confirm-open="delete-category-{{ $child->id }}"
+                                                                title="{{ __('ui.common.delete') }}"
+                                                                aria-label="{{ __('ui.common.delete') }} {{ $child->name }}">
+                                                            <x-icon name="x" :size="18" />
+                                                        </button>
+                                                    @else
+                                                        <button type="button"
+                                                                class="ldr-icon-btn"
+                                                                disabled
+                                                                title="{{ __('messages.category.delete_blocked') }}">
+                                                            <x-icon name="x" :size="18" />
+                                                        </button>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -123,8 +164,9 @@
             </ul>
         </div>
 
-        @foreach ($categories as $category)
-            @if ($canDelete[$category->id] ?? false)
+        @if ($canManage)
+            @foreach ($categories as $category)
+                @if ($canDelete[$category->id] ?? false)
                 <x-confirm-modal
                     :id="'delete-category-'.$category->id"
                     :title="__('ui.category.delete_title')"
@@ -148,5 +190,6 @@
                 @endif
             @endforeach
         @endforeach
+        @endif
     @endif
 @endsection

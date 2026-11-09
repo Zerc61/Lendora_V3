@@ -13,6 +13,8 @@
     $formatRange = $booking->requested_start_date->format('M Y') === $booking->requested_end_date->format('M Y')
         ? $booking->requested_start_date->copy()->locale('id')->translatedFormat('d').'–'.$booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y')
         : $booking->requested_start_date->copy()->locale('id')->translatedFormat('d M Y').'–'.$booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y');
+
+    $borrower = $booking->borrower;
 @endphp
 
 @section('content')
@@ -21,15 +23,73 @@
         {{ __('ui.booking.back_to_queue') }}
     </a>
 
-    <div class="ldr-page-head">
-        <div>
-            <div class="ldr-booking-card__head">
-                <span class="ldr-mono ldr-booking-detail__code">{{ $booking->code }}</span>
+    <section class="ldr-booking-hero">
+        <div class="ldr-booking-hero__main">
+            <div class="ldr-booking-hero__tags">
+                <span class="ldr-mono ldr-booking-hero__code">{{ $booking->code }}</span>
                 <x-status-badge type="booking" :status="$booking->status->value" />
             </div>
-            <p class="ldr-muted">{{ $formatRange }} · {{ $booking->purpose }}</p>
+
+            <h1>{{ $borrower->name }}</h1>
+
+            <p class="ldr-booking-hero__meta">
+                @if ($borrower->nim)
+                    NIM {{ $borrower->nim }}
+                @endif
+                @if ($borrower->study_program)
+                    · {{ $borrower->study_program }}
+                @endif
+                @if ($borrower->semester)
+                    · Semester {{ $borrower->semester }}
+                @endif
+            </p>
+
+            <div class="ldr-booking-hero__facts">
+                <span>
+                    <x-icon name="calendar" :size="15" />
+                    {{ $formatRange }}
+                </span>
+                <span>
+                    <x-icon name="package" :size="15" />
+                    {{ __('ui.booking.items_count', ['count' => $booking->items->count()]) }}
+                </span>
+                <span>
+                    <x-icon name="clipboard-list" :size="15" />
+                    {{ $booking->purpose }}
+                </span>
+            </div>
         </div>
-    </div>
+
+        @if ($isPending || $canHandover)
+            <div class="ldr-booking-hero__actions">
+                @if ($isPending)
+                    <form method="POST" action="{{ route('admin.bookings.approve', $booking) }}">
+                        @csrf
+                        <button type="submit" class="ldr-btn ldr-btn--primary" @disabled(! $canDecide)>
+                            <x-icon name="check-circle" :size="18" />
+                            {{ __('ui.booking.approve') }}
+                        </button>
+                    </form>
+
+                    <button type="button"
+                            class="ldr-btn ldr-btn--secondary"
+                            data-modal-open="reject-booking-{{ $booking->id }}"
+                            @disabled(! $canReject)>
+                        <x-icon name="x" :size="18" />
+                        {{ __('ui.booking.reject') }}
+                    </button>
+                @endif
+
+                @if ($canHandover)
+                    <a class="ldr-btn ldr-btn--primary"
+                       href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => $isPickup ? 'pickup' : 'return']) }}">
+                        <x-icon name="arrow-left-right" :size="18" />
+                        {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
+                    </a>
+                @endif
+            </div>
+        @endif
+    </section>
 
     @if ($booking->status === App\Enums\BookingStatus::Rejected && $booking->rejection_reason)
         <div class="ldr-alert ldr-alert--danger" role="alert">
@@ -49,15 +109,27 @@
             <section class="ldr-card">
                 <h2>{{ __('ui.booking.borrower') }}</h2>
 
-                <dl class="ldr-spec-list">
+                <dl class="ldr-spec-list ldr-spec-list--two">
                     <div>
                         <dt>{{ __('ui.booking.borrower') }}</dt>
-                        <dd>{{ $booking->borrower->name }}</dd>
+                        <dd>{{ $borrower->name }}</dd>
                     </div>
                     <div>
                         <dt>{{ __('ui.auth.email') }}</dt>
-                        <dd>{{ $booking->borrower->email }}</dd>
+                        <dd>{{ $borrower->email }}</dd>
                     </div>
+                    @if ($borrower->nim)
+                        <div>
+                            <dt>{{ __('ui.profile.nim') }}</dt>
+                            <dd>{{ $borrower->nim }}</dd>
+                        </div>
+                    @endif
+                    @if ($borrower->study_program)
+                        <div>
+                            <dt>{{ __('ui.profile.study_program') }}</dt>
+                            <dd>{{ $borrower->study_program }}</dd>
+                        </div>
+                    @endif
                     <div>
                         <dt>{{ __('ui.booking.purpose') }}</dt>
                         <dd>{{ $booking->purpose }}</dd>
@@ -76,44 +148,79 @@
             </section>
 
             <section class="ldr-card">
-                <h2>{{ __('ui.booking.assets') }}</h2>
-
-                <div class="ldr-table-wrap">
-                    <table class="ldr-table">
-                        <thead>
-                            <tr>
-                                <th>{{ __('ui.booking.assets') }}</th>
-                                <th>{{ __('ui.booking.item_condition_out') }}</th>
-                                <th>{{ __('ui.booking.item_condition_in') }}</th>
-                                <th>{{ __('ui.booking.filter_status') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($booking->items as $item)
-                                <tr>
-                                    <td>
-                                        <span class="ldr-table__name">{{ $item->asset->name }}</span>
-                                        <span class="ldr-table__sub ldr-mono">{{ $item->asset->code }}</span>
-                                    </td>
-                                    <td class="ldr-muted">{{ $item->condition_out ?: '—' }}</td>
-                                    <td class="ldr-muted">{{ $item->condition_in ?: '—' }}</td>
-                                    <td><x-status-badge type="item" :status="$item->status->value" /></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="ldr-card-head ldr-card-head--flush">
+                    <div>
+                        <h2>{{ __('ui.booking.assets') }}</h2>
+                        <p>{{ __('ui.booking.items_readonly') }}</p>
+                    </div>
+                    <span class="ldr-queue-card__count">{{ __('ui.booking.items_count', ['count' => $booking->items->count()]) }}</span>
                 </div>
 
-                <dl class="ldr-spec-list ldr-spec-list--inline">
+                <div class="ldr-unit-list">
+                    @forelse ($booking->items as $item)
+                        @php
+                            $asset = $item->asset;
+                            $photo = $asset?->photos->first();
+                        @endphp
+                        <article class="ldr-unit">
+                            <span class="ldr-unit__media">
+                                @if ($photo)
+                                    <img src="{{ Illuminate\Support\Facades\Storage::url($photo->path) }}"
+                                         alt="{{ $asset->name }}"
+                                         loading="lazy"
+                                         width="72"
+                                         height="72">
+                                @else
+                                    <x-icon name="camera" :size="24" />
+                                @endif
+                            </span>
+
+                            <div class="ldr-unit__body">
+                                <span class="ldr-mono">{{ $asset?->code }}</span>
+                                <strong>{{ $asset?->name ?? '—' }}</strong>
+                                <span class="ldr-muted">
+                                    {{ collect([$asset?->brand, $asset?->model])->filter()->join(' · ') ?: '—' }}
+                                </span>
+                            </div>
+
+                            <dl class="ldr-unit__facts">
+                                <div>
+                                    <dt>{{ __('ui.booking.item_condition_out') }}</dt>
+                                    <dd>{{ $item->condition_out ? __('ui.condition.'.$item->condition_out) : '—' }}</dd>
+                                </div>
+                                <div>
+                                    <dt>{{ __('ui.booking.item_condition_in') }}</dt>
+                                    <dd>{{ $item->condition_in ? __('ui.condition.'.$item->condition_in) : '—' }}</dd>
+                                </div>
+                                <div>
+                                    <dt>{{ __('ui.booking.filter_status') }}</dt>
+                                    <dd><x-status-badge type="item" :status="$item->status->value" /></dd>
+                                </div>
+                            </dl>
+
+                            <span class="ldr-unit__value">
+                                Rp {{ number_format($asset?->purchase_price ?? 0, 0, ',', '.') }}
+                            </span>
+                        </article>
+                    @empty
+                        <p class="ldr-muted">{{ __('ui.booking.no_items') }}</p>
+                    @endforelse
+                </div>
+
+                <div class="ldr-booking-totals">
                     <div>
-                        <dt>{{ __('ui.booking.period') }}</dt>
-                        <dd>{{ $formatRange }}</dd>
+                        <span class="ldr-muted">{{ __('ui.booking.period') }}</span>
+                        <strong>{{ $formatRange }}</strong>
                     </div>
                     <div>
-                        <dt>{{ __('ui.booking.due_at') }}</dt>
-                        <dd>{{ $booking->due_at?->copy()->locale('id')->translatedFormat('d M Y H:i') ?? '—' }}</dd>
+                        <span class="ldr-muted">{{ __('ui.booking.due_at') }}</span>
+                        <strong>{{ $booking->due_at?->copy()->locale('id')->translatedFormat('d M Y H:i') ?? '—' }}</strong>
                     </div>
-                </dl>
+                    <div>
+                        <span class="ldr-muted">{{ __('ui.queue.total_value') }}</span>
+                        <strong>Rp {{ number_format($booking->totalAssetValue(), 0, ',', '.') }}</strong>
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -148,17 +255,6 @@
                 @endforelse
             </section>
 
-            @if ($canHandover)
-                <section class="ldr-card">
-                    <h2>{{ __('ui.nav.handovers') }}</h2>
-
-                    <a class="ldr-btn ldr-btn--primary ldr-btn--block"
-                       href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => $isPickup ? 'pickup' : 'return']) }}">
-                        {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
-                    </a>
-                </section>
-            @endif
-
             @if ($isPending)
                 <section class="ldr-card ldr-decision-card">
                     <h2>{{ __('ui.booking.decision') }}</h2>
@@ -187,7 +283,7 @@
 
     @if ($isPending && $canReject)
         <x-modal :id="'reject-booking-'.$booking->id" :title="__('ui.booking.reject_title')">
-            <p class="ldr-modal__message">{{ $booking->code }} · {{ $booking->borrower->name }}</p>
+            <p class="ldr-modal__message">{{ $booking->code }} · {{ $borrower->name }}</p>
 
             <form method="POST" action="{{ route('admin.bookings.reject', $booking) }}" class="ldr-reject-form">
                 @csrf

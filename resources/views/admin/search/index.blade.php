@@ -73,8 +73,8 @@
                                             <td><x-status-badge :status="$item->status->value" /></td>
                                             <td class="ldr-table__actions">
                                                 <a class="ldr-btn ldr-btn--secondary ldr-btn--sm"
-                                                   href="{{ route('admin.assets.edit', $item) }}">
-                                                    {{ __('ui.common.edit') }}
+                                                   href="{{ route('admin.assets.index', ['search' => $item->code]) }}">
+                                                    {{ __('ui.search.open') }}
                                                 </a>
                                             </td>
                                             @break
@@ -113,8 +113,8 @@
                                             </td>
                                             <td class="ldr-table__actions">
                                                 <a class="ldr-btn ldr-btn--secondary ldr-btn--sm"
-                                                   href="{{ route('admin.categories.edit', $item) }}">
-                                                    {{ __('ui.common.edit') }}
+                                                   href="{{ route('admin.categories.index') }}">
+                                                    {{ __('ui.search.open') }}
                                                 </a>
                                             </td>
                                             @break

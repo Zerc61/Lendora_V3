@@ -56,11 +56,11 @@ class AssetPolicyTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_technician_cannot_access_asset_management(): void
+    public function test_technician_can_view_assets_but_cannot_manage_them(): void
     {
         $this->actingAs($this->user('technician@lendora.test'))
             ->get(route('admin.assets.index'))
-            ->assertForbidden();
+            ->assertOk();
 
         $this->actingAs($this->user('technician@lendora.test'))
             ->post(route('admin.assets.store'), $this->payload())

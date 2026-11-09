@@ -4,6 +4,24 @@
 @section('nav', 'catalog')
 
 @section('content')
+    <div class="ldr-page-head">
+        <div>
+            <h1>{{ __('ui.nav.catalog') }}</h1>
+            <p class="ldr-muted">{{ __('ui.catalog.subtitle') }}</p>
+        </div>
+
+        <div class="ldr-catalog-summary" aria-label="{{ __('ui.catalog.availability') }}">
+            <span class="ldr-catalog-summary__item is-available">
+                <strong>{{ $statusCounts['available'] }}</strong>
+                {{ __('ui.catalog.ready_now') }}
+            </span>
+            <span class="ldr-catalog-summary__item">
+                <strong>{{ $statusCounts['borrowed'] + $statusCounts['reserved'] }}</strong>
+                {{ __('ui.catalog.in_use') }}
+            </span>
+        </div>
+    </div>
+
     <div class="ldr-catalog-search">
         <form method="GET" action="{{ route('borrower.catalog.index') }}" role="search">
             <label class="ldr-sr-only" for="catalog-search">{{ __('ui.catalog.search_placeholder') }}</label>

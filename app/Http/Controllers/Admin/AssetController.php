@@ -50,7 +50,20 @@ class AssetController extends Controller
 
         $categories = Category::selectOptions($organizationId);
 
-        return view('admin.assets.index', compact('assets', 'categories', 'filters'));
+        $statusCounts = Asset::query()
+            ->where('organization_id', $organizationId)
+            ->selectRaw('status, count(*) as aggregate')
+            ->groupBy('status')
+            ->pluck('aggregate', 'status');
+
+        $summary = [
+            'total' => (int) $statusCounts->sum(),
+            'available' => (int) ($statusCounts[AssetStatus::Available->value] ?? 0),
+            'borrowed' => (int) ($statusCounts[AssetStatus::Borrowed->value] ?? 0),
+            'maintenance' => (int) ($statusCounts[AssetStatus::Maintenance->value] ?? 0),
+        ];
+
+        return view('admin.assets.index', compact('assets', 'categories', 'filters', 'summary'));
     }
 
     public function create(Request $request): View

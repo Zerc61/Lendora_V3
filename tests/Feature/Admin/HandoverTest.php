@@ -94,6 +94,18 @@ class HandoverTest extends TestCase
             ->assertDontSee($pending->code);
     }
 
+    public function test_handover_form_renders_items_and_conditions(): void
+    {
+        $booking = $this->booking(BookingStatus::Approved, AssetStatus::Reserved, BookingItemStatus::Approved);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.bookings.handover', ['booking' => $booking, 'type' => 'pickup']))
+            ->assertOk()
+            ->assertSee($booking->code)
+            ->assertSee('Kamera Uji')
+            ->assertSee('Kondisi unit');
+    }
+
     public function test_borrower_cannot_open_handover_index(): void
     {
         $this->actingAs($this->borrower)

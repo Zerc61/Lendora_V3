@@ -30,7 +30,7 @@ class HandoverController extends Controller
         };
 
         $bookings = Booking::query()
-            ->with(['borrower', 'items.asset'])
+            ->with(['borrower', 'items.asset.photos'])
             ->where('organization_id', $request->user()->organization_id)
             ->whereIn('status', $statuses)
             ->when($filters['search'], function ($query, string $search): void {
@@ -53,7 +53,7 @@ class HandoverController extends Controller
         $type = HandoverType::tryFrom((string) $request->query('type'))
             ?? ($booking->status->value === 'active' ? HandoverType::Return : HandoverType::Pickup);
 
-        $items = $booking->items()->with('asset')->get();
+        $items = $booking->items()->with('asset.photos')->get();
 
         return view('admin.bookings.handover', [
             'booking' => $booking->load('borrower'),

@@ -17,6 +17,44 @@
         </div>
     </div>
 
+    <div class="ldr-kpi-grid">
+        <div class="ldr-kpi">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.user.kpi_total') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="users" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['total'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.user.kpi_total_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--success">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.user.active') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="check-circle" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['active'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.user.kpi_active_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--danger">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.user.suspended') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="alert-circle" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['suspended'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.user.kpi_suspended_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--info">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.user.kpi_borrowers') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="book-open" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['borrowers'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.user.kpi_borrowers_hint') }}</span>
+        </div>
+    </div>
+
     <form method="GET" action="{{ route('admin.users.index') }}" class="ldr-filter-bar" role="search">
         <div class="ldr-filter-bar__search">
             <label class="ldr-sr-only" for="user-search">{{ __('ui.user.filter_search') }}</label>
@@ -71,10 +109,15 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>
-                                    <span class="ldr-table__name">{{ $user->name }}</span>
-                                    @if ($user->id === auth()->id())
-                                        <span class="ldr-table__sub">{{ __('ui.user.you') }}</span>
-                                    @endif
+                                    <div class="ldr-user-cell">
+                                        <span class="ldr-avatar" aria-hidden="true">{{ mb_substr($user->name, 0, 1) }}</span>
+                                        <span>
+                                            <span class="ldr-table__name">{{ $user->name }}</span>
+                                            @if ($user->id === auth()->id())
+                                                <span class="ldr-table__sub">{{ __('ui.user.you') }}</span>
+                                            @endif
+                                        </span>
+                                    </div>
                                 </td>
                                 <td>{{ $user->email }}</td>
                                 <td><span class="ldr-badge ldr-badge--primary">{{ $user->role?->name }}</span></td>

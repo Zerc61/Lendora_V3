@@ -43,6 +43,7 @@ class NotificationTest extends TestCase
         $this->actingAs($operator)
             ->get(route('admin.notifications.index'))
             ->assertOk()
+            ->assertSee('ldr-notice--unread', false)
             ->assertSee('Unit kamera perlu diperiksa.')
             ->assertDontSee('Notifikasi milik admin.');
 

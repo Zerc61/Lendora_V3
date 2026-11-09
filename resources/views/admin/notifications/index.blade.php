@@ -34,48 +34,32 @@
                 :description="__('ui.notification.empty_description')"
             />
         @else
-            <div class="ldr-table-card">
-                <div class="ldr-table-wrap">
-                    <table class="ldr-table">
-                        <thead>
-                            <tr>
-                                <th>{{ __('ui.notification.message') }}</th>
-                                <th>{{ __('ui.notification.time') }}</th>
-                                <th>{{ __('ui.booking.filter_status') }}</th>
-                                <th class="ldr-table__actions-head">{{ __('ui.common.action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($groups[$key] as $notification)
-                                <tr>
-                                    <td>{{ $notification->data['message'] ?? __('ui.notification.fallback') }}</td>
-                                    <td class="ldr-table__num">
-                                        {{ $notification->created_at?->copy()->locale('id')->translatedFormat('d M Y H:i') ?? '—' }}
-                                    </td>
-                                    <td>
-                                        @if ($notification->read_at === null)
-                                            <span class="ldr-badge ldr-badge--warning">{{ __('ui.notification.unread_badge') }}</span>
-                                        @else
-                                            <span class="ldr-badge ldr-badge--neutral">{{ __('ui.notification.read_badge') }}</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($notification->read_at === null)
-                                            <form method="POST" action="{{ route('admin.notifications.read', $notification->id) }}">
-                                                @csrf
-                                                <button type="submit" class="ldr-btn ldr-btn--secondary ldr-btn--sm">
-                                                    {{ __('ui.notification.mark_read') }}
-                                                </button>
-                                            </form>
-                                        @else
-                                            <span class="ldr-muted">—</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+            <div class="ldr-notice-list">
+                @foreach ($groups[$key] as $notification)
+                    <article class="ldr-notice {{ $notification->read_at === null ? 'ldr-notice--unread' : '' }}">
+                        <span class="ldr-notice__icon" aria-hidden="true">
+                            <x-icon name="bell" :size="18" />
+                        </span>
+
+                        <div class="ldr-notice__body">
+                            <p>{{ $notification->data['message'] ?? __('ui.notification.fallback') }}</p>
+                            <span class="ldr-notice__time">
+                                {{ $notification->created_at?->copy()->locale('id')->translatedFormat('d M Y H:i') ?? '—' }}
+                            </span>
+                        </div>
+
+                        @if ($notification->read_at === null)
+                            <form method="POST" action="{{ route('admin.notifications.read', $notification->id) }}">
+                                @csrf
+                                <button type="submit" class="ldr-btn ldr-btn--ghost ldr-btn--sm">
+                                    {{ __('ui.notification.mark_read') }}
+                                </button>
+                            </form>
+                        @else
+                            <span class="ldr-badge ldr-badge--neutral">{{ __('ui.notification.read_badge') }}</span>
+                        @endif
+                    </article>
+                @endforeach
             </div>
         @endif
     @endforeach

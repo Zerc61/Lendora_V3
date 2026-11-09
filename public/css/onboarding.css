@@ -90,6 +90,11 @@
     margin-top: var(--ldr-space-2);
 }
 
+.ldr-onboarding__slides {
+    display: grid;
+    gap: var(--ldr-space-3);
+}
+
 /* ---------- Hero ---------- */
 .ldr-onboarding__hero-frame {
     position: relative;
@@ -123,9 +128,7 @@
     position: absolute;
     inset: 14px;
     pointer-events: none;
-    background:
-        linear-gradient(to top, rgba(28, 25, 23, .68) 0%, rgba(28, 25, 23, .06) 44%, transparent 70%),
-        linear-gradient(145deg, rgba(249, 115, 22, .20), transparent 58%);
+    background: rgba(28, 25, 23, .30);
     border-radius: 14px;
 }
 
@@ -151,10 +154,9 @@
     font-weight: 600;
     line-height: 1.3;
     color: var(--ldr-text);
-    background: rgba(255, 255, 255, .95);
+    background: var(--ldr-white);
     border-radius: 999px;
     box-shadow: var(--ldr-shadow-sm);
-    backdrop-filter: blur(6px);
 }
 
 .ldr-onboarding__pill .ldr-icon {
@@ -186,9 +188,9 @@
     font-weight: 500;
     line-height: 1.3;
     color: var(--ldr-text);
-    background: rgba(255, 255, 255, .92);
+    background: var(--ldr-white);
     border-radius: 999px;
-    backdrop-filter: blur(6px);
+    box-shadow: var(--ldr-shadow-sm);
 }
 
 .ldr-onboarding__dot-live {
@@ -206,9 +208,9 @@
     line-height: 1.4;
     color: var(--ldr-text-muted);
     text-align: center;
-    background: rgba(255, 255, 255, .86);
+    background: var(--ldr-white);
     border-radius: 999px;
-    backdrop-filter: blur(6px);
+    box-shadow: var(--ldr-shadow-sm);
 }
 
 /* ---------- Indikator slide ---------- */

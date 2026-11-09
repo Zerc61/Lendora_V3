@@ -17,23 +17,48 @@
         return $start->copy()->locale('id')->translatedFormat('d M Y').'–'.$end->copy()->locale('id')->translatedFormat('d M Y');
     };
 
-    $showAll = ($filters['status'] ?? null) === null;
-    $activeTab = $showAll ? null : $filters['status'];
+    $activeTab = $filters['status'] ?? null;
+
+    $queueKpis = [
+        ['key' => 'pending', 'icon' => 'clipboard-list', 'tone' => 'warning', 'label' => __('ui.booking_status.pending'), 'hint' => __('ui.queue.kpi_pending_hint')],
+        ['key' => 'approved', 'icon' => 'check-circle', 'tone' => 'info', 'label' => __('ui.booking_status.approved'), 'hint' => __('ui.queue.kpi_approved_hint')],
+        ['key' => 'active', 'icon' => 'layers', 'tone' => 'success', 'label' => __('ui.booking_status.active'), 'hint' => __('ui.queue.kpi_active_hint')],
+        ['key' => 'returned', 'icon' => 'arrow-left-right', 'tone' => 'neutral', 'label' => __('ui.booking_status.returned'), 'hint' => __('ui.queue.kpi_returned_hint')],
+    ];
 @endphp
 
 @section('content')
     <div class="ldr-page-head">
         <div>
             <h1>{{ __('ui.booking.queue') }}</h1>
-            <p class="ldr-muted">{{ $bookings->total() }} pengajuan ditemukan</p>
+            <p class="ldr-muted">{{ __('ui.queue.subtitle') }}</p>
         </div>
 
         <div class="ldr-page-head__actions">
-            <a class="ldr-btn ldr-btn--secondary" href="{{ route('admin.bookings.calendar') }}">
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.bookings.calendar') }}">
                 <x-icon name="calendar" :size="18" />
                 {{ __('ui.booking.calendar') }}
             </a>
+            <a class="ldr-btn ldr-btn--ghost ldr-btn--sm" href="{{ route('admin.bookings.index', ['status' => 'all']) }}">
+                {{ __('ui.queue.history') }}
+                <x-icon name="arrow-right" :size="16" />
+            </a>
         </div>
+    </div>
+
+    <div class="ldr-kpi-grid">
+        @foreach ($queueKpis as $kpi)
+            <div class="ldr-kpi ldr-kpi--{{ $kpi['tone'] }}">
+                <div class="ldr-kpi__head">
+                    <span class="ldr-kpi__label">{{ $kpi['label'] }}</span>
+                    <span class="ldr-kpi__icon">
+                        <x-icon :name="$kpi['icon']" :size="18" />
+                    </span>
+                </div>
+                <span class="ldr-kpi__value">{{ $queueStats[$kpi['key']] }}</span>
+                <span class="ldr-kpi__hint">{{ $kpi['hint'] }}</span>
+            </div>
+        @endforeach
     </div>
 
     <x-status-tabs
@@ -104,88 +129,132 @@
             :description="__('ui.booking.empty_tab')"
         />
     @else
-        <div class="ldr-table-card">
-            <div class="ldr-table-wrap">
-                <table class="ldr-table ldr-table--bookings">
-                    <thead>
-                        <tr>
-                            <th>{{ __('ui.booking.code') }}</th>
-                            <th>{{ __('ui.booking.borrower') }}</th>
-                            <th class="ldr-table__num">{{ __('ui.booking.assets') }}</th>
-                            <th>{{ __('ui.booking.period') }}</th>
-                            <th class="ldr-table__num">{{ __('ui.booking.duration') }}</th>
-                            <th class="ldr-table__num">{{ __('ui.booking.value') }}</th>
-                            <th>{{ __('ui.booking.filter_status') }}</th>
-                            <th class="ldr-table__actions-head">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($bookings as $booking)
-                            @php
-                                $conflict = $conflicts[$booking->id] ?? null;
-                                $decidable = $canDecide[$booking->id] ?? false;
-                                $blockReason = $limitExceeded[$booking->id] ?? null;
-                                $rejectable = $decidable && $canRejectRole && $booking->status === App\Enums\BookingStatus::Pending;
-                            @endphp
-                            <tr>
-                                <td class="ldr-table__code">
-                                    <a href="{{ route('admin.bookings.show', $booking) }}">{{ $booking->code }}</a>
-                                </td>
-                                <td>
-                                    <span class="ldr-table__name">{{ $booking->borrower->name }}</span>
-                                    <span class="ldr-table__sub">{{ $booking->purpose }}</span>
-                                </td>
-                                <td class="ldr-table__num">{{ $booking->items->count() }}</td>
-                                <td class="ldr-table__num">{{ $formatRange($booking) }}</td>
-                                <td class="ldr-table__num">{{ __('ui.booking.duration_days', ['count' => $booking->durationInDays()]) }}</td>
-                                <td class="ldr-table__num">Rp {{ number_format($booking->totalAssetValue(), 0, ',', '.') }}</td>
-                                <td><x-status-badge type="booking" :status="$booking->status->value" /></td>
-                                <td>
-                                    <div class="ldr-table__actions ldr-table__actions--text">
-                                        <a class="ldr-btn ldr-btn--secondary ldr-btn--sm"
-                                           href="{{ route('admin.bookings.show', $booking) }}">
-                                            {{ __('ui.booking.detail_action') }}
-                                        </a>
+        <div class="ldr-queue">
+            @foreach ($bookings as $booking)
+                @php
+                    $conflict = $conflicts[$booking->id] ?? null;
+                    $decidable = $canDecide[$booking->id] ?? false;
+                    $blockReason = $limitExceeded[$booking->id] ?? null;
+                    $rejectable = $decidable && $canRejectRole && $booking->status === App\Enums\BookingStatus::Pending;
+                    $itemCount = $booking->items->count();
+                @endphp
 
-                                        @if ($booking->status === App\Enums\BookingStatus::Pending)
-                                            <form method="POST" action="{{ route('admin.bookings.approve', $booking) }}">
-                                                @csrf
-                                                <button type="submit"
-                                                        class="ldr-btn ldr-btn--primary ldr-btn--sm"
-                                                        @disabled(! $decidable)>
-                                                    {{ __('ui.booking.approve') }}
-                                                </button>
-                                            </form>
+                <article class="ldr-queue-card">
+                    <header class="ldr-queue-card__head">
+                        <div class="ldr-queue-card__id">
+                            <a class="ldr-mono" href="{{ route('admin.bookings.show', $booking) }}">{{ $booking->code }}</a>
+                            <x-status-badge type="booking" :status="$booking->status->value" />
+                        </div>
 
-                                            <button type="button"
-                                                    class="ldr-btn ldr-btn--danger ldr-btn--sm"
-                                                    data-modal-open="reject-booking-{{ $booking->id }}"
-                                                    @disabled(! $rejectable)>
-                                                {{ __('ui.booking.reject') }}
-                                            </button>
-                                        @endif
-                                    </div>
+                        <span class="ldr-queue-card__submitted">
+                            <x-icon name="calendar" :size="14" />
+                            {{ $booking->created_at->copy()->locale('id')->translatedFormat('d M Y H:i') }}
+                        </span>
+                    </header>
 
-                                    @if ($booking->status === App\Enums\BookingStatus::Pending && ! $decidable && $blockReason)
-                                        <p class="ldr-table__note">{{ $blockReason }}</p>
+                    <div class="ldr-queue-card__body">
+                        <div class="ldr-queue-person">
+                            <span class="ldr-queue-person__avatar" aria-hidden="true">
+                                {{ mb_substr($booking->borrower->name, 0, 1) }}
+                            </span>
+                            <div>
+                                <strong>{{ $booking->borrower->name }}</strong>
+                                <span class="ldr-queue-person__meta">
+                                    @if ($booking->borrower->nim)
+                                        {{ $booking->borrower->nim }}
                                     @endif
-                                </td>
-                            </tr>
+                                    @if ($booking->borrower->study_program)
+                                        · {{ $booking->borrower->study_program }}
+                                    @endif
+                                </span>
+                                <p class="ldr-queue-person__purpose">{{ $booking->purpose }}</p>
+                            </div>
+                        </div>
 
-                            @if ($conflict)
-                                <tr class="ldr-table__banner-row">
-                                    <td colspan="8">
-                                        <x-conflict-banner :message="$conflict" />
-                                    </td>
-                                </tr>
-                            @endif
+                        <div class="ldr-queue-period">
+                            <span class="ldr-queue-period__label">{{ __('ui.booking.period') }}</span>
+                            <strong>{{ $formatRange($booking) }}</strong>
+                            <span class="ldr-muted">{{ __('ui.booking.duration_days', ['count' => $booking->durationInDays()]) }}</span>
+                        </div>
+                    </div>
+
+                    <div class="ldr-queue-items">
+                        @foreach ($booking->items as $item)
+                            @php
+                                $photo = $item->asset?->photos->first();
+                            @endphp
+                            <a class="ldr-queue-item" href="{{ route('admin.bookings.show', $booking) }}">
+                                <span class="ldr-queue-item__media">
+                                    @if ($photo)
+                                        <img src="{{ Illuminate\Support\Facades\Storage::url($photo->path) }}"
+                                             alt="{{ $item->asset->name }}"
+                                             loading="lazy"
+                                             width="44"
+                                             height="44">
+                                    @else
+                                        <x-icon name="camera" :size="18" />
+                                    @endif
+                                </span>
+                                <span class="ldr-queue-item__body">
+                                    <strong>{{ $item->asset?->name ?? '—' }}</strong>
+                                    <span class="ldr-mono">{{ $item->asset?->code }}</span>
+                                </span>
+                                <span class="ldr-queue-item__value">
+                                    Rp {{ number_format($item->asset?->purchase_price ?? 0, 0, ',', '.') }}
+                                </span>
+                            </a>
                         @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    </div>
 
-            <x-pagination :paginator="$bookings" />
+                    @if ($conflict)
+                        <div class="ldr-queue-card__alert">
+                            <x-conflict-banner :message="$conflict" />
+                        </div>
+                    @endif
+
+                    <footer class="ldr-queue-card__foot">
+                        <div class="ldr-queue-card__total">
+                            <span class="ldr-muted">{{ __('ui.queue.total_value') }}</span>
+                            <strong>Rp {{ number_format($booking->totalAssetValue(), 0, ',', '.') }}</strong>
+                            <span class="ldr-queue-card__count">{{ __('ui.booking.items_count', ['count' => $itemCount]) }}</span>
+                        </div>
+
+                        <div class="ldr-queue-card__actions">
+                            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.bookings.show', $booking) }}">
+                                {{ __('ui.booking.detail_action') }}
+                            </a>
+
+                            @if ($booking->status === App\Enums\BookingStatus::Pending)
+                                <form method="POST" action="{{ route('admin.bookings.approve', $booking) }}">
+                                    @csrf
+                                    <button type="submit"
+                                            class="ldr-btn ldr-btn--primary ldr-btn--sm"
+                                            @disabled(! $decidable)>
+                                        {{ __('ui.booking.approve') }}
+                                    </button>
+                                </form>
+
+                                <button type="button"
+                                        class="ldr-btn ldr-btn--danger ldr-btn--sm"
+                                        data-modal-open="reject-booking-{{ $booking->id }}"
+                                        @disabled(! $rejectable)>
+                                    {{ __('ui.booking.reject') }}
+                                </button>
+                            @endif
+                        </div>
+                    </footer>
+
+                    @if ($booking->status === App\Enums\BookingStatus::Pending && ! $decidable && $blockReason)
+                        <p class="ldr-queue-card__note">
+                            <x-icon name="alert-circle" :size="15" />
+                            {{ $blockReason }}
+                        </p>
+                    @endif
+                </article>
+            @endforeach
         </div>
+
+        <x-pagination :paginator="$bookings" />
     @endif
 
     @foreach ($bookings as $booking)

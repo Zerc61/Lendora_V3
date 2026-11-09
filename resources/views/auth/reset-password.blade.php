@@ -2,7 +2,7 @@
     <h1 class="ldr-auth__title">{{ __('ui.auth.reset_title') }}</h1>
     <p class="ldr-auth__subtitle">{{ __('ui.auth.reset_description') }}</p>
 
-    <form method="POST" action="{{ route('password.store') }}">
+    <form method="POST" action="{{ route('password.store') }}" class="ldr-auth__form">
         @csrf
 
         <input type="hidden" name="token" value="{{ $request->route('token') }}">

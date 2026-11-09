@@ -46,49 +46,76 @@
             :description="__('ui.handover.empty_description')"
         />
     @else
-        <div class="ldr-table-card">
-            <div class="ldr-table-wrap">
-                <table class="ldr-table">
-                    <thead>
-                        <tr>
-                            <th>{{ __('ui.booking.code') }}</th>
-                            <th>{{ __('ui.booking.borrower') }}</th>
-                            <th>{{ __('ui.booking.assets') }}</th>
-                            <th>{{ __('ui.booking.period') }}</th>
-                            <th>{{ __('ui.booking.filter_status') }}</th>
-                            <th class="ldr-table__actions-head">{{ __('ui.common.action') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($bookings as $booking)
-                            @php
-                                $isPickup = $booking->status === App\Enums\BookingStatus::Approved;
-                            @endphp
-                            <tr>
-                                <td class="ldr-table__code">
-                                    <a href="{{ route('admin.bookings.show', $booking) }}">{{ $booking->code }}</a>
-                                </td>
-                                <td>{{ $booking->borrower->name }}</td>
-                                <td class="ldr-table__num">{{ $booking->items->count() }}</td>
-                                <td class="ldr-table__num">
-                                    {{ $booking->requested_start_date->copy()->locale('id')->translatedFormat('d M Y') }}
-                                    –
-                                    {{ $booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y') }}
-                                </td>
-                                <td><x-status-badge type="booking" :status="$booking->status->value" /></td>
-                                <td>
-                                    <a class="ldr-btn ldr-btn--primary ldr-btn--sm"
-                                       href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => $isPickup ? 'pickup' : 'return']) }}">
-                                        {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div class="ldr-handover-list">
+            @foreach ($bookings as $booking)
+                @php
+                    $isPickup = $booking->status === App\Enums\BookingStatus::Approved;
+                @endphp
 
-            <x-pagination :paginator="$bookings" />
+                <article class="ldr-handover-card">
+                    <div class="ldr-handover-card__head">
+                        <div>
+                            <a class="ldr-mono ldr-handover-card__code" href="{{ route('admin.bookings.show', $booking) }}">{{ $booking->code }}</a>
+                            <strong>{{ $booking->borrower->name }}</strong>
+                        </div>
+
+                        <span class="ldr-badge {{ $isPickup ? 'ldr-badge--info' : 'ldr-badge--warning' }}">
+                            {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
+                        </span>
+                    </div>
+
+                    <div class="ldr-handover-card__facts">
+                        <span>
+                            <x-icon name="calendar" :size="15" />
+                            {{ $booking->requested_start_date->copy()->locale('id')->translatedFormat('d M Y') }}
+                            –
+                            {{ $booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y') }}
+                        </span>
+                        <span>
+                            <x-icon name="package" :size="15" />
+                            {{ __('ui.booking.items_count', ['count' => $booking->items->count()]) }}
+                        </span>
+                    </div>
+
+                    <div class="ldr-handover-card__items">
+                        @foreach ($booking->items as $item)
+                            @php
+                                $photo = $item->asset?->photos->first();
+                            @endphp
+                            <span class="ldr-handover-card__item">
+                                <span class="ldr-queue-item__media">
+                                    @if ($photo)
+                                        <img src="{{ Illuminate\Support\Facades\Storage::url($photo->path) }}"
+                                             alt="{{ $item->asset->name }}"
+                                             loading="lazy"
+                                             width="40"
+                                             height="40">
+                                    @else
+                                        <x-icon name="camera" :size="16" />
+                                    @endif
+                                </span>
+                                <span>
+                                    <strong>{{ $item->asset?->name ?? '—' }}</strong>
+                                    <span class="ldr-mono">{{ $item->asset?->code }}</span>
+                                </span>
+                            </span>
+                        @endforeach
+                    </div>
+
+                    <div class="ldr-handover-card__actions">
+                        <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.bookings.show', $booking) }}">
+                            {{ __('ui.booking.detail_action') }}
+                        </a>
+                        <a class="ldr-btn ldr-btn--primary ldr-btn--sm"
+                           href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => $isPickup ? 'pickup' : 'return']) }}">
+                            <x-icon name="arrow-left-right" :size="16" />
+                            {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
+                        </a>
+                    </div>
+                </article>
+            @endforeach
         </div>
+
+        <x-pagination :paginator="$bookings" />
     @endif
 @endsection

@@ -79,6 +79,14 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::get('reports/export', [AdminReportController::class, 'export'])->name('reports.export');
         });
 
+        Route::middleware('role:operator,organization_admin,admin_prodi,technician')->group(function () {
+            Route::get('assets', [AdminAssetController::class, 'index'])->name('assets.index');
+        });
+
+        Route::middleware('role:operator,organization_admin,admin_prodi')->group(function () {
+            Route::get('categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+        });
+
         Route::middleware('role:operator,organization_admin')->group(function () {
             Route::post('bookings/{booking}/reject', [AdminBookingController::class, 'reject'])->name('bookings.reject');
 
@@ -87,11 +95,11 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::post('bookings/{booking}/handover', [AdminHandoverController::class, 'store'])->name('bookings.handover.store');
 
             Route::post('assets/{asset}/retire', [AdminAssetController::class, 'retire'])->name('assets.retire');
-            Route::resource('assets', AdminAssetController::class)->except('show');
+            Route::resource('assets', AdminAssetController::class)->except(['show', 'index']);
         });
 
         Route::middleware('role:organization_admin')->group(function () {
-            Route::resource('categories', AdminCategoryController::class)->except('show');
+            Route::resource('categories', AdminCategoryController::class)->except(['show', 'index']);
             Route::resource('users', AdminUserController::class)->except('show', 'destroy');
             Route::post('users/{user}/suspend', [AdminUserController::class, 'suspend'])->name('users.suspend');
             Route::post('users/{user}/activate', [AdminUserController::class, 'activate'])->name('users.activate');

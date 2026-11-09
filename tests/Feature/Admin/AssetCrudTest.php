@@ -63,6 +63,54 @@ class AssetCrudTest extends TestCase
         Storage::disk('public')->assertExists($asset->photos()->firstOrFail()->path);
     }
 
+    public function test_admin_prodi_can_view_assets_and_categories_read_only(): void
+    {
+        $asset = $this->createAsset();
+        $prodi = User::where('email', 'adminprodi@lendora.test')->firstOrFail();
+
+        $this->actingAs($prodi)
+            ->get(route('admin.assets.index'))
+            ->assertOk()
+            ->assertSee($asset->code)
+            ->assertDontSee(route('admin.assets.create'));
+
+        $this->actingAs($prodi)
+            ->get(route('admin.categories.index'))
+            ->assertOk()
+            ->assertDontSee(route('admin.categories.create'));
+
+        $this->actingAs($prodi)
+            ->get(route('admin.assets.edit', $asset))
+            ->assertForbidden();
+    }
+
+    public function test_technician_can_view_assets_read_only(): void
+    {
+        $asset = $this->createAsset();
+        $technician = User::where('email', 'technician@lendora.test')->firstOrFail();
+
+        $this->actingAs($technician)
+            ->get(route('admin.assets.index'))
+            ->assertOk()
+            ->assertSee($asset->code)
+            ->assertDontSee(route('admin.assets.create'));
+
+        $this->actingAs($technician)
+            ->get(route('admin.assets.edit', $asset))
+            ->assertForbidden();
+    }
+
+    public function test_asset_index_renders_summary_and_assets(): void
+    {
+        $asset = $this->createAsset();
+
+        $this->actingAs($this->admin)
+            ->get(route('admin.assets.index'))
+            ->assertOk()
+            ->assertSee('Total unit aset')
+            ->assertSee($asset->code);
+    }
+
     public function test_org_admin_updates_and_soft_deletes_asset(): void
     {
         $asset = $this->createAsset();

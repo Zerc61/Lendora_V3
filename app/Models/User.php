@@ -16,6 +16,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'nim',
+        'study_program',
+        'semester',
+        'lab_tier',
+        'lab_member_id',
+        'academic_verified_at',
         'password',
         'phone',
         'role_id',
@@ -53,6 +59,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'academic_verified_at' => 'datetime',
             'password' => 'hashed',
             'notification_preferences' => 'array',
         ];

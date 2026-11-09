@@ -45,7 +45,27 @@ class CatalogController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('borrower.catalog.index', compact('assets', 'categories', 'filters'));
+        $statusCounts = Asset::query()
+            ->where('organization_id', $organizationId)
+            ->whereIn('status', [
+                AssetStatus::Available,
+                AssetStatus::Reserved,
+                AssetStatus::Borrowed,
+            ])
+            ->selectRaw('status, count(*) as aggregate')
+            ->groupBy('status')
+            ->pluck('aggregate', 'status');
+
+        return view('borrower.catalog.index', [
+            'assets' => $assets,
+            'categories' => $categories,
+            'filters' => $filters,
+            'statusCounts' => [
+                'available' => (int) ($statusCounts[AssetStatus::Available->value] ?? 0),
+                'reserved' => (int) ($statusCounts[AssetStatus::Reserved->value] ?? 0),
+                'borrowed' => (int) ($statusCounts[AssetStatus::Borrowed->value] ?? 0),
+            ],
+        ]);
     }
 
     public function show(Request $request, Asset $asset): View

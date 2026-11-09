@@ -56,14 +56,44 @@ class DashboardController extends Controller
 
         $tasks = $role === 'technician'
             ? Maintenance::query()
-                ->with('asset')
+                ->with(['asset.photos', 'reportedBy'])
                 ->where('assigned_to', $user->id)
                 ->whereIn('status', [MaintenanceStatus::Scheduled->value, MaintenanceStatus::InProgress->value])
                 ->latest()
                 ->get()
             : collect();
 
-        return view('admin.dashboard', compact('user', 'role', 'kpis', 'recentActivity', 'specialQueue', 'tasks'));
+        $operatorQueue = $role === 'operator'
+            ? Booking::query()
+                ->with(['borrower', 'items.asset'])
+                ->where('organization_id', $organizationId)
+                ->where('status', BookingStatus::Pending->value)
+                ->orderBy('requested_start_date')
+                ->limit(6)
+                ->get()
+            : collect();
+
+        $operatorDueToday = $role === 'operator'
+            ? Booking::query()
+                ->with(['borrower', 'items.asset'])
+                ->where('organization_id', $organizationId)
+                ->where('status', BookingStatus::Active->value)
+                ->whereDate('due_at', now()->toDateString())
+                ->orderBy('due_at')
+                ->limit(6)
+                ->get()
+            : collect();
+
+        return view('admin.dashboard', compact(
+            'user',
+            'role',
+            'kpis',
+            'recentActivity',
+            'specialQueue',
+            'tasks',
+            'operatorQueue',
+            'operatorDueToday',
+        ));
     }
 
     /**

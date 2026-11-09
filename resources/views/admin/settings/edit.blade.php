@@ -15,6 +15,16 @@
             @csrf
             @method('PUT')
 
+            <div class="ldr-settings-banner">
+                <span class="ldr-settings-banner__icon">
+                    <x-icon name="check-circle" :size="20" />
+                </span>
+                <div>
+                    <strong>{{ __('ui.setting.active_title') }}</strong>
+                    <p>{{ __('ui.setting.active_hint') }}</p>
+                </div>
+            </div>
+
             <div class="ldr-form-grid">
                 <section class="ldr-card ldr-form-section">
                     <h2>{{ __('ui.setting.organization_section') }}</h2>

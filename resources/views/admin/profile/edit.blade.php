@@ -20,6 +20,31 @@
             </div>
         </section>
 
+        <section class="ldr-card">
+            <h2>{{ __('ui.profile.account') }}</h2>
+
+            <dl class="ldr-spec-list ldr-spec-list--inline">
+                <div>
+                    <dt>{{ __('ui.setting.organization_section') }}</dt>
+                    <dd>{{ $user->organization?->name ?? '—' }}</dd>
+                </div>
+                <div>
+                    <dt>{{ __('ui.user.phone') }}</dt>
+                    <dd>{{ $user->phone ?: '—' }}</dd>
+                </div>
+                <div>
+                    <dt>{{ __('ui.booking.filter_status') }}</dt>
+                    <dd>
+                        @if ($user->status === 'suspended')
+                            <span class="ldr-badge ldr-badge--danger">{{ __('ui.user.suspended') }}</span>
+                        @else
+                            <span class="ldr-badge ldr-badge--success">{{ __('ui.user.active') }}</span>
+                        @endif
+                    </dd>
+                </div>
+            </dl>
+        </section>
+
         <form method="POST" action="{{ route('admin.profile.update') }}" class="ldr-profile-form">
             @csrf
             @method('PUT')

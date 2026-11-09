@@ -29,7 +29,8 @@ class ProfileTest extends TestCase
         $this->actingAs($operator)
             ->get(route('admin.profile.edit'))
             ->assertOk()
-            ->assertSee('Preferensi notifikasi');
+            ->assertSee('Preferensi notifikasi')
+            ->assertSee('Informasi akun');
 
         $this->actingAs($operator)
             ->put(route('admin.profile.update'), [

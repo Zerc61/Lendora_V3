@@ -37,7 +37,7 @@
     <div class="ldr-page-head">
         <div>
             <h1>{{ __('ui.nav.assets') }}</h1>
-            <p class="ldr-muted">{{ $assets->total() }} unit terdaftar</p>
+            <p class="ldr-muted">{{ __('ui.asset.index_description') }}</p>
         </div>
 
         @if ($canManage)
@@ -46,6 +46,44 @@
                 {{ __('ui.asset.add') }}
             </a>
         @endif
+    </div>
+
+    <div class="ldr-kpi-grid">
+        <div class="ldr-kpi">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.asset.kpi_total') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="package" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['total'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.asset.kpi_total_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--success">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.status.available') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="check-circle" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['available'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.asset.kpi_available_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--info">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.status.borrowed') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="layers" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['borrowed'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.asset.kpi_borrowed_hint') }}</span>
+        </div>
+
+        <div class="ldr-kpi ldr-kpi--warning">
+            <div class="ldr-kpi__head">
+                <span class="ldr-kpi__label">{{ __('ui.status.maintenance') }}</span>
+                <span class="ldr-kpi__icon"><x-icon name="wrench" :size="18" /></span>
+            </div>
+            <span class="ldr-kpi__value">{{ $summary['maintenance'] }}</span>
+            <span class="ldr-kpi__hint">{{ __('ui.asset.kpi_maintenance_hint') }}</span>
+        </div>
     </div>
 
     <x-filter-bar

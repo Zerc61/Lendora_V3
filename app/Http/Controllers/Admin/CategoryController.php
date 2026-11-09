@@ -35,7 +35,13 @@ class CategoryController extends Controller
             ])
             ->all();
 
-        return view('admin.categories.index', compact('categories', 'canDelete'));
+        $summary = [
+            'parents' => $categories->count(),
+            'children' => $categories->sum(fn (Category $category) => $category->children->count()),
+            'assets' => $categories->sum(fn (Category $category) => $category->assets_count),
+        ];
+
+        return view('admin.categories.index', compact('categories', 'canDelete', 'summary'));
     }
 
     public function create(Request $request): View
