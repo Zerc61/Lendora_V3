@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Lendora Campus Gear</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-highest":"#e4e2e1","violet":"#7C3AED","inverse-surface":"#303030","on-background":"#1b1c1c","on-tertiary-fixed":"#1e1b15","on-tertiary-fixed-variant":"#4a463f","surface-dim":"#dcd9d9","surface-container":"#f0eded","info-bg":"#F0F9FF","on-primary-fixed":"#341100","on-primary":"#ffffff","info":"#0284C7","surface-container-lowest":"#ffffff","on-secondary-fixed-variant":"#7f2b00","tertiary-fixed-dim":"#ccc5bc","success-bg":"#F0FDF4","violet-bg":"#F5F3FF","background":"#fcf9f8","on-primary-fixed-variant":"#783200","primary-container":"#f97316","on-error":"#ffffff","secondary-container":"#fd651e","border":"#E5E7EB","inverse-on-surface":"#f3f0ef","on-tertiary":"#ffffff","primary-fixed-dim":"#ffb690","primary":"#9d4300","surface-container-high":"#eae7e7","on-tertiary-container":"#36322c","error":"#ba1a1a","on-primary-container":"#582200","on-surface":"#1b1c1c","surface-variant":"#e4e2e1","surface":"#F5F5F5","warning-bg":"#FFFBEB","tertiary":"#625e56","tertiary-container":"#a09a91","surface-container-low":"#f6f3f2","on-error-container":"#93000a","surface-tint":"#9d4300","warning":"#D97706","on-secondary-container":"#571a00","error-container":"#ffdad6","tertiary-fixed":"#e9e1d8","on-surface-variant":"#584237","outline":"#8c7164","secondary":"#a73a00","text-muted":"#6B7280","secondary-fixed-dim":"#ffb599","outline-variant":"#e0c0b1","surface-bright":"#fcf9f8","danger":"#DC2626","danger-bg":"#FEF2F2","primary-fixed":"#ffdbca","secondary-fixed":"#ffdbce","on-secondary-fixed":"#370e00","surface-white":"#FFFFFF","inverse-primary":"#ffb690","success":"#16A34A","on-secondary":"#ffffff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-lg":"1.5rem","space-md":"1rem","margin":"1rem","space-sm":"0.5rem","space-xs":"0.25rem","gutter":"1rem","space-xl":"2rem"},fontFamily:{"headline-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-md":["Inter"],"label-md":["Inter"],"headline-md":["Plus Jakarta Sans"],"display":["Plus Jakarta Sans"],"body-sm":["Inter"],"code-sm":["JetBrains Mono"],"caption":["Inter"]},fontSize:{"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["13px",{"lineHeight":"20px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"display":["28px",{"lineHeight":"36px","fontWeight":"800"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"code-sm":["13px",{"lineHeight":"18px","fontWeight":"500"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-white border-b border-border shadow-[0_1px_2px_rgba(0,0,0,0.06)]"><div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><img alt="lendora-favicon-180-siklus.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"/><span class="font-headline-md text-headline-md text-on-surface tracking-tight">Lendora</span></div><span class="hidden lg:inline-flex items-center px-space-sm py-0.5 rounded-full bg-surface text-on-surface-variant font-caption text-caption border border-border">Portal Mahasiswa</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-primary font-label-md"><a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="beranda" href="#">Beranda</a><a aria-current="page" class="px-space-sm py-space-xs rounded-lg transition-colors bg-surface-container text-primary font-label-md" data-path="katalog-peralatan" href="#">Katalog Peralatan</a><a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="peminjaman-saya" href="#">Peminjaman Saya</a><a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="notifikasi" href="#">Notifikasi</a><a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="bantuan-dan-regulasi" href="#">Bantuan &amp; Regulasi</a></nav><div class="flex items-center gap-space-sm shrink-0"><div class="relative hidden md:flex items-center w-52"><span class="material-symbols-outlined absolute left-2.5 text-text-muted text-[18px] pointer-events-none">search</span><input class="w-full h-9 pl-8 pr-9 rounded-lg bg-surface border border-border font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" placeholder="Cari alat..." type="text"/><kbd class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-white border border-border font-code-sm text-code-sm text-text-muted text-[11px]">⌘K</kbd></div><a class="h-10 px-space-md rounded-lg bg-primary-container hover:bg-secondary text-surface-white font-label-md text-label-md flex items-center gap-space-xs shadow-[0_1px_2px_rgba(0,0,0,0.06)] transition-colors" data-path="pengajuan-baru" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span class="hidden sm:inline">Ajukan Peminjaman</span></a><div class="flex items-center gap-space-sm pl-space-xs border-l border-border"><div class="hidden md:flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface leading-tight">Ani Rahmawati</span><span class="font-caption text-caption text-text-muted">DKV 2022 • <strong class="text-success font-caption">Tier A+</strong></span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full">
+<div class="max-w-7xl mx-auto w-full px-margin py-space-md">
+<!-- Breadcrumb Utility Bar -->
+<nav class="flex items-center gap-space-xs text-caption font-caption text-text-muted mb-space-md overflow-x-auto whitespace-nowrap py-space-xs">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">home</span>
+        Beranda
+      </a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Katalog Peralatan</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Kamera Cinema</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-label-md">Sony Cinema FX3</span>
+</nav>
+<!-- Main Layout: 2 Kolom Asimetris (65% / 35%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- KOLOM KIRI (Spesifikasi, Galeri, Kelengkapan, Kalender) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg min-w-0">
+<!-- Galeri Utama 16:9 & Selector Thumbnail -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-md flex flex-col gap-space-sm">
+<div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-surface flex items-center justify-center">
+<img class="w-full h-full object-cover transition-opacity duration-300" data-alt="Close up professional studio shot of Sony FX3 full frame cinema line camera with top audio handle mounted on modern carbon baseplate in a minimalist university media gear vault with clean orange ambient lighting." id="main-gallery-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSJXEVliZIAzQM3wOwuhhFNkco1H5lfziTVMmNbrVhXbxna5LIYLGV9QBgwM_Zi2TjeXerMrexmXTwb2J9oX78mnaL2EQcmA1Q999dBqkpkGZk9I344W29Bc42V0XEpFrPga2JJboiUAj0_gv_0V8ROYTLdxf7a_l-C9jy8Zejhf6bXlKMnLsoR2BCv6i07rUYA7eIj5CM9aAS9NPdRl-h3kfMwscjNcOrqwhfCrCK"/>
+<div class="absolute top-3 left-3 flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full bg-surface-white/95 backdrop-blur-sm text-on-surface font-caption text-caption shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container">verified</span> Unit Fisik Terverifikasi
+              </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest/90 text-on-surface-variant font-code-sm text-code-sm">
+                SN: 4409182-FX3
+              </span>
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface font-code-sm text-code-sm text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">photo_camera</span> 4 Foto Presisi QC
+            </div>
+</div>
+<!-- Thumbnail Strip -->
+<div class="grid grid-cols-4 gap-space-sm pt-space-xs">
+<button class="gallery-thumb group relative aspect-[16/9] rounded-lg overflow-hidden bg-surface-container transition-all ring-2 ring-primary-container" onclick="selectImage(0)" type="button">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" data-alt="Front view angle of Sony Cinema FX3 body displaying full frame sensor and cooling fan vent with neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWqXr2N2AUHTpn6yTym7g__VQrmYPBBm9SV35bSgUJr4B2PWXIYOirukbxHQSp6a2cIW1cyR09OOGjsHTCcVcFhQ1O6XcDT4L8eTARc8sVAY1GzoETmJAdnMukG8ZqkxgSbeaMuOZUG-NAk_t-zIcNVGT_SNqH3KAqGCOjAHpL7wRgQbEvaqygRleCY_A2GluDPv5uv0P2YTjqzveh4Q7ynUBMgchmXGhygth7vWp1"/>
+<span class="absolute bottom-1 left-1.5 px-1 rounded bg-inverse-surface/80 text-inverse-on-surface font-caption text-[10px]">Body &amp; Fan</span>
+</button>
+<button class="gallery-thumb group relative aspect-[16/9] rounded-lg overflow-hidden bg-surface-container transition-all opacity-70 hover:opacity-100" onclick="selectImage(1)" type="button">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" data-alt="Macro detail of pristine clean full frame BSI CMOS sensor inside E-mount throat of Sony FX3 without dust or micro scratches." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2nomS7AJdVcp-KAEMbpQhDpzlmT-eAW5x5jpLOa3GgdSFEnPPXJfqPC47pmueL8kfE27epl3f0_uiSNrschVMIda6YDlXi745t3Um50jMV0On71ZmhIxMwDau2nUHuQxM26w666XTNzHp3D7OYTy9VI_IRQIGy7bMjU0W22-TEp4oJryVC-gOX7Elm10sVAsMS1xa0G9BuLkh5dP994ZtRjRLSrymZX5T8t2RoXte"/>
+<span class="absolute bottom-1 left-1.5 px-1 rounded bg-inverse-surface/80 text-inverse-on-surface font-caption text-[10px]">Sensor Clean</span>
+</button>
+<button class="gallery-thumb group relative aspect-[16/9] rounded-lg overflow-hidden bg-surface-container transition-all opacity-70 hover:opacity-100" onclick="selectImage(2)" type="button">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" data-alt="Detachable Sony FX3 XLR audio handle unit with dual XLR inputs and volume potentiometer controls." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL6vIN6PSMg26sIYJ0RHiJ0MXsfWI3-dQ4rGuou-gRqwxJJlanGJJxgKzMJ699q2-rSUDivVKqj4_wR_3nFeL8ziFAinEJtFTGIF6KMrrnZblezIvEmc_A36YDW0uB6egvrW5vBbTEaoA-khwau1xPRDboJynBEgZbUZeD938fooa5BApHJN5lN4KXtalvI7pytpZNtyOmxzZtat2pk6dCY8dRkxDJXRO3zFUMEaKE"/>
+<span class="absolute bottom-1 left-1.5 px-1 rounded bg-inverse-surface/80 text-inverse-on-surface font-caption text-[10px]">XLR Handle</span>
+</button>
+<button class="gallery-thumb group relative aspect-[16/9] rounded-lg overflow-hidden bg-surface-container transition-all opacity-70 hover:opacity-100" onclick="selectImage(3)" type="button">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" data-alt="Side profile showing HDMI type A port USB-C PD and dual CFexpress Type A card slots on Sony FX3 cinema body." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjJKHumGrxD5W6gaB0undzh9JtG-7P8t_0MjckG1mSl0uRGO78Ku3oTDdhQ2_Ros9xwUae_Mapiy2sT6qb-NgUOKH-x8ylNfM-RUCOYKAF2vKb135CSiXhyqVX3ZJOjsPVnPK1yqEWfNCQ--qmudNdc7dA6_AWg2EI8sZZph60I8UJfdGngCIfziaFfaqrcQTy_nU97iyjuX-uG5v6Ax379pGRLrlzMYfuF5OWwGRX"/>
+<span class="absolute bottom-1 left-1.5 px-1 rounded bg-inverse-surface/80 text-inverse-on-surface font-caption text-[10px]">I/O Ports</span>
+</button>
+</div>
+</div>
+<!-- Technical Specification Tabs -->
+<div class="bg-surface-white rounded-xl shadow-sm overflow-hidden">
+<!-- Tab Headers -->
+<div class="flex items-center gap-space-xs px-space-md pt-space-md bg-surface-container-low overflow-x-auto">
+<button class="tab-trigger pb-3 px-space-sm font-label-md text-label-md text-primary-container border-b-2 border-primary-container whitespace-nowrap transition-colors flex items-center gap-1.5" id="tab-btn-spec" onclick="switchTab('spec')">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+              Spesifikasi &amp; Fitur
+            </button>
+<button class="tab-trigger pb-3 px-space-sm font-label-md text-label-md text-text-muted hover:text-on-surface border-b-2 border-transparent whitespace-nowrap transition-colors flex items-center gap-1.5" id="tab-btn-kelengkapan" onclick="switchTab('kelengkapan')">
+<span class="material-symbols-outlined text-[18px]">checklist</span>
+              Paket Kelengkapan (6 Item)
+            </button>
+<button class="tab-trigger pb-3 px-space-sm font-label-md text-label-md text-text-muted hover:text-on-surface border-b-2 border-transparent whitespace-nowrap transition-colors flex items-center gap-1.5" id="tab-btn-qc" onclick="switchTab('qc')">
+<span class="material-symbols-outlined text-[18px]">health_and_safety</span>
+              Riwayat Kalibrasi &amp; QC
+            </button>
+<button class="tab-trigger pb-3 px-space-sm font-label-md text-label-md text-text-muted hover:text-on-surface border-b-2 border-transparent whitespace-nowrap transition-colors flex items-center gap-1.5" id="tab-btn-syarat" onclick="switchTab('syarat')">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+              Regulasi Grade A
+            </button>
+</div>
+<!-- Tab Content Containers -->
+<div class="p-space-lg">
+<!-- PANEL 1: Spesifikasi & Fitur -->
+<div class="tab-panel flex flex-col gap-space-md" id="tab-panel-spec">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="bg-surface rounded-lg p-space-md flex flex-col gap-space-xs">
+<span class="text-caption font-caption text-text-muted uppercase tracking-wider">Sensor &amp; Resolusi</span>
+<p class="font-headline-sm text-headline-sm text-on-surface">12.1 MP Full-Frame Exmor R</p>
+<p class="text-body-sm font-body-sm text-text-muted">Back-illuminated CMOS dengan rentang dinamis 15+ stops untuk profil gambar S-Log3.</p>
+</div>
+<div class="bg-surface rounded-lg p-space-md flex flex-col gap-space-xs">
+<span class="text-caption font-caption text-text-muted uppercase tracking-wider">Perekaman Video Internal</span>
+<p class="font-headline-sm text-headline-sm text-on-surface">4K UHD hingga 120 fps</p>
+<p class="text-body-sm font-body-sm text-text-muted">10-bit 4:2:2 All-Intra internal, output RAW 16-bit lewat port full-size HDMI.</p>
+</div>
+<div class="bg-surface rounded-lg p-space-md flex flex-col gap-space-xs">
+<span class="text-caption font-caption text-text-muted uppercase tracking-wider">Sensitivitas &amp; ISO</span>
+<p class="font-headline-sm text-headline-sm text-on-surface">Dual Base ISO 800 &amp; 12800</p>
+<p class="text-body-sm font-body-sm text-text-muted">Clean low-light recording untuk produksi dokumenter malam atau studio minim cahaya.</p>
+</div>
+<div class="bg-surface rounded-lg p-space-md flex flex-col gap-space-xs">
+<span class="text-caption font-caption text-text-muted uppercase tracking-wider">Manajemen Termal &amp; Daya</span>
+<p class="font-headline-sm text-headline-sm text-on-surface">Kipas Pendingin Aktif</p>
+<p class="text-body-sm font-body-sm text-text-muted">Perekaman kontinu tanpa batas waktu overheating dengan konsumsi baterai seri NP-FZ100.</p>
+</div>
+</div>
+<!-- Feature Bullets -->
+<div class="pt-space-sm flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface">Highlight Fitur Produksi Kampus:</span>
+<div class="flex flex-wrap gap-space-xs">
+<span class="px-space-sm py-1 rounded bg-surface-container font-caption text-caption text-on-surface-variant">S-Cinetone Colour Profile</span>
+<span class="px-space-sm py-1 rounded bg-surface-container font-caption text-caption text-on-surface-variant">Fast Hybrid AF Real-time Eye AF</span>
+<span class="px-space-sm py-1 rounded bg-surface-container font-caption text-caption text-on-surface-variant">5-Axis In-Body Image Stabilization (Active Mode)</span>
+<span class="px-space-sm py-1 rounded bg-surface-container font-caption text-caption text-on-surface-variant">Mount Sony E-Mount Original</span>
+</div>
+</div>
+</div>
+<!-- PANEL 2: Kelengkapan Bawaan Standar -->
+<div class="tab-panel hidden flex flex-col gap-space-md" id="tab-panel-kelengkapan">
+<div class="flex items-center justify-between pb-space-xs">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Standard Checkout Bundle</h4>
+<p class="font-body-sm text-body-sm text-text-muted">Seluruh item di bawah wajib diperiksa bersama asisten lab saat serah terima barang.</p>
+</div>
+<span class="px-space-sm py-1 rounded bg-success-bg text-success font-label-md text-label-md">6 Komponen Lengkap</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="p-space-md rounded-lg bg-surface flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-success text-[22px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">2x Baterai Sony NP-FZ100 Original</span>
+<span class="font-body-sm text-body-sm text-text-muted">Health Battery 98% &amp; 95% (Kapasitas Penuh 2280mAh)</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant mt-1">SN: BAT-FZ-081 / BAT-FZ-082</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-success text-[22px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">XLR Audio Top Handle Unit</span>
+<span class="font-body-sm text-body-sm text-text-muted">Termasuk 2 port combo audio XLR/TRS &amp; mic clamp</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant mt-1">SN: XLR-HND-004</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-success text-[22px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Sony CFexpress Type A Tough 160GB</span>
+<span class="font-body-sm text-body-sm text-text-muted">Kecepatan baca 800MB/s, tulis 700MB/s (Sudah diformat ExFAT)</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant mt-1">SN: CFX-160-019</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-success text-[22px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Dual USB-C Fast Charger + Kabel AC</span>
+<span class="font-body-sm text-body-sm text-text-muted">Dukungan dual-bay simultaneous charge PD 45W</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant mt-1">SN: CHG-FZ-014</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-success text-[22px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Tilta Full Camera Cage for FX3 Black</span>
+<span class="font-body-sm text-body-sm text-text-muted">Dilengkapi Arca Swiss plate, cable clamp &amp; kunci Allen L</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant mt-1">SN: TLT-CGE-004</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-success text-[22px] shrink-0">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Hardcase Vanguard Supreme 40D Foam</span>
+<span class="font-body-sm text-body-sm text-text-muted">Waterproof IP67, custom laser-cut foam, pressure valve</span>
+<span class="font-code-sm text-[11px] text-on-surface-variant mt-1">SN: CS-VNG-004</span>
+</div>
+</div>
+</div>
+</div>
+<!-- PANEL 3: Riwayat Kalibrasi & QC -->
+<div class="tab-panel hidden flex flex-col gap-space-md" id="tab-panel-qc">
+<div class="bg-success-bg rounded-lg p-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-success text-[28px]">verified_user</span>
+<div>
+<h5 class="font-headline-sm text-headline-sm text-on-surface">Status QC Unit: Prima (Grade 100/100)</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Terakhir dikalibrasi 18 Oktober 2026 oleh Teknisi Lab: M. Aditya, S.T.</p>
+</div>
+</div>
+<span class="px-space-md py-1 rounded-full bg-surface-white text-success font-code-sm text-code-sm shadow-sm">PASS QC-LAB-891</span>
+</div>
+<!-- Log Detail Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<div class="p-space-md rounded-lg bg-surface flex flex-col">
+<span class="font-caption text-caption text-text-muted uppercase">Kebersihan Sensor</span>
+<span class="font-headline-md text-headline-md text-success mt-1">100% Bersih</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-1">Wet clean sensor swab chamber, zero dust particle at f/22.</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface flex flex-col">
+<span class="font-caption text-caption text-text-muted uppercase">Akurasi Shutter &amp; IBIS</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-1">Toleransi 0.02%</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-1">5-axis gimbal gyro drift normal, mechanical rolling sync oke.</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface flex flex-col">
+<span class="font-caption text-caption text-text-muted uppercase">Firmware &amp; Port I/O</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-1">v.5.00 Official</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-1">HDMI Type A lock rigid, phantom power 48V XLR tested.</span>
+</div>
+</div>
+</div>
+<!-- PANEL 4: Persyaratan & Ketentuan Peminjaman -->
+<div class="tab-panel hidden flex flex-col gap-space-md" id="tab-panel-syarat">
+<div class="p-space-md rounded-lg bg-warning-bg flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-warning text-[24px] shrink-0">warning</span>
+<div class="flex flex-col">
+<h5 class="font-headline-sm text-headline-sm text-on-surface">Peralatan Kategori Tier A (High-End Production)</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Unit ini bernilai investasi tinggi dan dialokasikan untuk mata kuliah lanjutan atau produksi institusional kampus.</p>
+</div>
+</div>
+<div class="space-y-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-caption text-caption text-on-surface shrink-0">1</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Otorisasi Resmi Dosen / Kaprodi</span>
+<span class="font-body-sm text-body-sm text-text-muted">Peminjam wajib melampirkan file scan formulir pengantar yang ditandatangani Dosen Pengampu Sinematografi II atau Dosen Pembimbing Tugas Akhir (TA/Skripsi).</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-caption text-caption text-on-surface shrink-0">2</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Status Kelayakan Akun Mahasiswa</span>
+<span class="font-body-sm text-body-sm text-text-muted">Skor reputasi akun minimal Tier A- tanpa riwayat keterlambatan pengembalian aktif dalam 30 hari terakhir.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-caption text-caption text-on-surface shrink-0">3</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Asuransi Kerusakan &amp; Tanggung Jawab</span>
+<span class="font-body-sm text-body-sm text-text-muted">Mahasiswa peminjam bertanggung jawab penuh atas kelalaian fisik atau kehilangan komponen aksesori sesuai SOP Lab Multimedia Bab IV Pasal 8.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Kalender Interaktif Ketersediaan 30 Hari -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[22px]">calendar_month</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Kalender Ketersediaan Unit</h3>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Jadwal real-time slot reservasi 30 hari ke depan (November 2026)</p>
+</div>
+<!-- Legenda -->
+<div class="flex items-center gap-space-sm flex-wrap text-caption font-caption">
+<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-success"></span> Tersedia</span>
+<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-surface-container-highest"></span> Praktikum</span>
+<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-warning"></span> Kalibrasi / QC</span>
+</div>
+</div>
+<!-- Calendar Month Header -->
+<div class="flex items-center justify-between pt-space-xs pb-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">November 2026</span>
+<div class="flex items-center gap-space-xs">
+<button class="w-8 h-8 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Grid Kalender Hari -->
+<div class="grid grid-cols-7 gap-1 text-center font-caption text-caption text-text-muted">
+<div class="py-1">SEN</div>
+<div class="py-1">SEL</div>
+<div class="py-1">RAB</div>
+<div class="py-1">KAM</div>
+<div class="py-1">JUM</div>
+<div class="py-1 text-danger">SAB</div>
+<div class="py-1 text-danger">MIN</div>
+</div>
+<!-- Grid Tanggal -->
+<div class="grid grid-cols-7 gap-1.5 font-code-sm text-code-sm">
+<!-- 1 - 7 Nov -->
+<div class="p-2 rounded-lg bg-surface-container-highest text-text-muted flex flex-col items-center justify-center min-h-[46px]">
+<span>01</span>
+<span class="text-[9px] font-caption text-text-muted">Praktikum</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-highest text-text-muted flex flex-col items-center justify-center min-h-[46px]">
+<span>02</span>
+<span class="text-[9px] font-caption text-text-muted">Praktikum</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-highest text-text-muted flex flex-col items-center justify-center min-h-[46px]">
+<span>03</span>
+<span class="text-[9px] font-caption text-text-muted">Praktikum</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>04</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>05</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container text-text-muted flex flex-col items-center justify-center min-h-[46px] opacity-60">
+<span>06</span>
+<span class="text-[9px] font-caption">Tutup</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container text-text-muted flex flex-col items-center justify-center min-h-[46px] opacity-60">
+<span>07</span>
+<span class="text-[9px] font-caption">Tutup</span>
+</div>
+<!-- 8 - 14 Nov -->
+<div class="p-2 rounded-lg bg-warning-bg text-warning flex flex-col items-center justify-center min-h-[46px]">
+<span>08</span>
+<span class="text-[9px] font-caption text-warning">QC Lab</span>
+</div>
+<div class="p-2 rounded-lg bg-warning-bg text-warning flex flex-col items-center justify-center min-h-[46px]">
+<span>09</span>
+<span class="text-[9px] font-caption text-warning">QC Lab</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>10</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>11</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>12</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container text-text-muted flex flex-col items-center justify-center min-h-[46px] opacity-60">
+<span>13</span>
+<span class="text-[9px] font-caption">Tutup</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container text-text-muted flex flex-col items-center justify-center min-h-[46px] opacity-60">
+<span>14</span>
+<span class="text-[9px] font-caption">Tutup</span>
+</div>
+<!-- 15 - 21 Nov (Selected slot preview) -->
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>15</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>16</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>17</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-primary-container text-surface-white font-label-md flex flex-col items-center justify-center min-h-[46px] shadow-sm">
+<span>18</span>
+<span class="text-[9px] font-caption text-white">Mulai</span>
+</div>
+<div class="p-2 rounded-lg bg-primary-container text-surface-white font-label-md flex flex-col items-center justify-center min-h-[46px] shadow-sm">
+<span>19</span>
+<span class="text-[9px] font-caption text-white">Sewa</span>
+</div>
+<div class="p-2 rounded-lg bg-primary-container text-surface-white font-label-md flex flex-col items-center justify-center min-h-[46px] shadow-sm">
+<span>20</span>
+<span class="text-[9px] font-caption text-white">Selesai</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container text-text-muted flex flex-col items-center justify-center min-h-[46px] opacity-60">
+<span>21</span>
+<span class="text-[9px] font-caption">Tutup</span>
+</div>
+<!-- 22 - 28 Nov -->
+<div class="p-2 rounded-lg bg-surface-container-highest text-text-muted flex flex-col items-center justify-center min-h-[46px]">
+<span>22</span>
+<span class="text-[9px] font-caption text-text-muted">Praktikum</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-highest text-text-muted flex flex-col items-center justify-center min-h-[46px]">
+<span>23</span>
+<span class="text-[9px] font-caption text-text-muted">Praktikum</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>24</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>25</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>26</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container text-text-muted flex flex-col items-center justify-center min-h-[46px] opacity-60">
+<span>27</span>
+<span class="text-[9px] font-caption">Tutup</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container text-text-muted flex flex-col items-center justify-center min-h-[46px] opacity-60">
+<span>28</span>
+<span class="text-[9px] font-caption">Tutup</span>
+</div>
+<!-- 29 - 30 Nov -->
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>29</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-success-bg text-success flex flex-col items-center justify-center min-h-[46px] hover:bg-success/20 cursor-pointer transition-colors">
+<span>30</span>
+<span class="text-[9px] font-caption text-success">Bebas</span>
+</div>
+<div class="p-2 rounded-lg bg-surface text-transparent opacity-20">31</div>
+<div class="p-2 rounded-lg bg-surface text-transparent opacity-20">01</div>
+<div class="p-2 rounded-lg bg-surface text-transparent opacity-20">02</div>
+<div class="p-2 rounded-lg bg-surface text-transparent opacity-20">03</div>
+<div class="p-2 rounded-lg bg-surface text-transparent opacity-20">04</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-text-muted">Slot terpilih saat ini: <strong class="text-on-surface">18 Nov s.d. 20 Nov 2026 (3 Hari Kalender)</strong></span>
+<span class="text-caption font-caption text-primary font-semibold">Tersedia untuk Pengajuan</span>
+</div>
+</div>
+</div>
+<!-- KOLOM KANAN: STICKY BOOKING CARD (35%) -->
+<div class="lg:col-span-4 sticky top-20 flex flex-col gap-space-md">
+<div class="bg-surface-white rounded-xl shadow-md p-space-lg flex flex-col gap-space-md">
+<!-- Unit Header Meta -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-primary font-semibold px-2 py-0.5 rounded bg-primary-fixed">LDR-CAM-0004</span>
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Tersedia di Vault Room
+              </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mt-1 leading-snug">Sony Cinema FX3 Full-Frame</h1>
+<p class="font-body-sm text-body-sm text-text-muted">Cinema Line Compact Body • 4K 120p • E-Mount</p>
+<div class="flex items-center gap-space-sm mt-1">
+<span class="px-2.5 py-0.5 rounded-full bg-warning-bg text-warning font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">shield</span> Grade A: Izin Khusus Kaprodi
+              </span>
+<span class="px-2 py-0.5 rounded bg-surface font-caption text-caption text-on-surface-variant">Lab DKV / FSRD</span>
+</div>
+</div>
+<!-- Rating & Utilisasi -->
+<div class="p-space-sm rounded-lg bg-surface flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-warning text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.9 / 5.0</span>
+<span class="font-body-sm text-body-sm text-text-muted">(38 Sesi Sukses)</span>
+</div>
+<span class="font-code-sm text-code-sm text-text-muted">Utilisasi: 84%</span>
+</div>
+<!-- Rak Penyimpanan Fisik -->
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary-container text-[20px] shrink-0 mt-0.5">warehouse</span>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">Lokasi Penyimpanan Fisik</span>
+<span class="font-label-md text-label-md text-on-surface">Lemari Khusus A2 • Vault Room</span>
+<span class="font-body-sm text-body-sm text-text-muted">Gedung C, Lantai 2, Kampus Utama</span>
+</div>
+</div>
+<!-- Form Seleksi Cepat -->
+<form class="flex flex-col gap-space-sm pt-space-xs" onsubmit="event.preventDefault();">
+<!-- Tanggal Pinjam -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface">Rentang Jadwal Peminjaman</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-muted text-[18px] pointer-events-none">date_range</span>
+<input class="w-full h-11 pl-10 pr-3 rounded-lg bg-surface-white font-body-sm text-body-sm text-on-surface focus:outline-none cursor-pointer" readonly="" type="text" value="18 Nov 2026 - 20 Nov 2026"/>
+<span class="absolute right-3 px-2 py-0.5 rounded bg-surface font-caption text-caption text-on-surface">2 Hari Praktikum</span>
+</div>
+</div>
+<!-- Jam Pengambilan & Pengembalian -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-caption text-caption text-text-muted">Jam Ambil</label>
+<div class="h-10 px-3 rounded-lg bg-surface flex items-center justify-between text-body-sm font-body-sm">
+<span>08:30 WIB</span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">schedule</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-caption text-caption text-text-muted">Jam Kembali</label>
+<div class="h-10 px-3 rounded-lg bg-surface flex items-center justify-between text-body-sm font-body-sm">
+<span>16:00 WIB</span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">schedule</span>
+</div>
+</div>
+</div>
+<!-- Add-on Lensa Pendukung -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface">Pilihan Add-on Lensa Kompatibel</label>
+<span class="font-caption text-caption text-text-muted">Opsional</span>
+</div>
+<!-- Lensa Option 1 -->
+<label class="p-space-sm rounded-lg bg-surface hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors">
+<div class="flex items-center gap-space-sm">
+<input checked="" class="w-4 h-4 rounded text-primary-container accent-primary-container" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Sony FE 24-70mm GM II</span>
+<span class="font-caption text-caption text-text-muted">Kode: LDR-LNS-0012 • F2.8 Zoom</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption">Tersedia</span>
+</label>
+<!-- Lensa Option 2 -->
+<label class="p-space-sm rounded-lg bg-surface hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors">
+<div class="flex items-center gap-space-sm">
+<input class="w-4 h-4 rounded text-primary-container accent-primary-container" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Sony FE 50mm f/1.2 GM</span>
+<span class="font-caption text-caption text-text-muted">Kode: LDR-LNS-0018 • Low Light Prime</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption">Tersedia</span>
+</label>
+</div>
+<!-- CTA Utama & Tombol Tambahan -->
+<div class="flex flex-col gap-space-xs pt-space-sm">
+<a class="w-full h-11 rounded-lg bg-primary-container hover:bg-secondary text-surface-white font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-colors text-center" data-path="pengajuan-baru" href="#">
+<span class="material-symbols-outlined text-[20px]">assignment_add</span>
+                Ajukan Peminjaman Unit Ini
+              </a>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="h-10 px-2 rounded-lg bg-surface-white hover:bg-surface text-on-surface font-label-md text-caption flex items-center justify-center gap-1 transition-colors" onclick="alert('Membuka tautan chat operator loket Lab Multimedia WhatsApp (+62 812-3456-7890)')" type="button">
+<span class="material-symbols-outlined text-[16px] text-text-muted">support_agent</span>
+                  Tanya Operator
+                </button>
+<button class="h-10 px-2 rounded-lg bg-surface-white hover:bg-surface text-on-surface font-label-md text-caption flex items-center justify-center gap-1 transition-colors" id="btn-fav" onclick="toggleFavorite()" type="button">
+<span class="material-symbols-outlined text-[16px] text-text-muted" id="fav-icon">bookmark_border</span>
+<span id="fav-text">Simpan Favorit</span>
+</button>
+</div>
+</div>
+</form>
+<!-- SOP & Catatan Pengambilan Loket -->
+<div class="p-space-sm rounded-lg bg-surface flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-warning text-[20px] shrink-0 mt-0.5">info</span>
+<div class="flex flex-col text-caption font-caption text-text-muted">
+<span class="font-label-md text-on-surface">Syarat Pengambilan di Loket:</span>
+<p class="mt-0.5">1. Wajib menunjukkan KTM Asli yang masih berlaku.</p>
+<p>2. Membawa Form Rekomendasi Dosen basah bertanda tangan.</p>
+<p>3. Pengecekan sensor &amp; baterai bersama petugas sebelum dibawa.</p>
+</div>
+</div>
+</div>
+<!-- Quick Help Pill -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[24px]">menu_book</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Panduan Operasional FX3</span>
+<span class="font-caption text-caption text-text-muted">PDF Manual &amp; Setting Profil S-Log3</span>
+</div>
+</div>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-white hover:bg-surface text-on-surface font-label-md text-caption transition-colors">
+            Unduh
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Tab & Gallery Interaction Script -->
+<script>
+    // Tab Switcher
+    function switchTab(tabId) {
+      const tabs = ['spec', 'kelengkapan', 'qc', 'syarat'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-btn-' + t);
+        const panel = document.getElementById('tab-panel-' + t);
+        if (t === tabId) {
+          btn.className = "tab-trigger pb-3 px-space-sm font-label-md text-label-md text-primary-container border-b-2 border-primary-container whitespace-nowrap transition-colors flex items-center gap-1.5";
+          panel.classList.remove('hidden');
+        } else {
+          btn.className = "tab-trigger pb-3 px-space-sm font-label-md text-label-md text-text-muted hover:text-on-surface border-b-2 border-transparent whitespace-nowrap transition-colors flex items-center gap-1.5";
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    // Gallery Selector
+    function selectImage(index) {
+      const thumbs = document.querySelectorAll('.gallery-thumb');
+      thumbs.forEach((th, i) => {
+        if (i === index) {
+          th.className = "gallery-thumb group relative aspect-[16/9] rounded-lg overflow-hidden bg-surface-container transition-all ring-2 ring-primary-container";
+        } else {
+          th.className = "gallery-thumb group relative aspect-[16/9] rounded-lg overflow-hidden bg-surface-container transition-all opacity-70 hover:opacity-100";
+        }
+      });
+      // Visual feedback swap simulation
+      const mainImg = document.getElementById('main-gallery-image');
+      mainImg.style.opacity = '0.5';
+      setTimeout(() => {
+        mainImg.style.opacity = '1';
+      }, 150);
+    }
+
+    // Toggle Favorite Button
+    let isFav = false;
+    function toggleFavorite() {
+      isFav = !isFav;
+      const favIcon = document.getElementById('fav-icon');
+      const favText = document.getElementById('fav-text');
+      if (isFav) {
+        favIcon.innerText = 'bookmark';
+        favIcon.classList.add('text-primary-container');
+        favIcon.classList.remove('text-text-muted');
+        favText.innerText = 'Tersimpan';
+      } else {
+        favIcon.innerText = 'bookmark_border';
+        favIcon.classList.remove('text-primary-container');
+        favIcon.classList.add('text-text-muted');
+        favText.innerText = 'Simpan Favorit';
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-white border-t border-border mt-space-xl"><div class="max-w-7xl mx-auto px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-lg"><div class="space-y-space-sm md:col-span-1"><div class="flex items-center gap-space-sm"><img alt="lendora-favicon-180-siklus.png" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"/><span class="font-headline-sm text-headline-sm text-on-surface">Lendora</span></div><p class="font-body-sm text-body-sm text-text-muted">Sistem peminjaman peralatan produksi multimedia resmi untuk mahasiswa dan unit kegiatan kreatif kampus.</p></div><div class="space-y-space-xs"><span class="font-label-md text-label-md text-on-surface block">Jam Operasional Lab</span><p class="font-body-sm text-body-sm text-text-muted">Senin - Jumat: 08.00 - 17.00 WIB</p><p class="font-body-sm text-body-sm text-text-muted">Sabtu (Sesi Khusus): 09.00 - 14.00 WIB</p><p class="font-caption text-caption text-warning font-label-md">Minggu &amp; Libur Nasional: Tutup</p></div><div class="space-y-space-xs"><span class="font-label-md text-label-md text-on-surface block">Afiliasi Kampus</span><p class="font-body-sm text-body-sm text-text-muted">UPT Laboratorium Multimedia</p><p class="font-body-sm text-body-sm text-text-muted">Fakultas Seni Rupa &amp; Desain (FSRD)</p><p class="font-body-sm text-body-sm text-text-muted">Gedung C, Lantai 2, Kampus Utama</p></div><div class="space-y-space-xs"><span class="font-label-md text-label-md text-on-surface block">Kontak &amp; Bantuan</span><p class="font-body-sm text-body-sm text-text-muted">Hotline WA: +62 812-3456-7890</p><p class="font-body-sm text-body-sm text-text-muted">Email: labmedia@campus.ac.id</p><p class="font-body-sm text-body-sm text-text-muted">Ruang Pengembalian Unit 204</p></div></div><div class="pt-space-md border-t border-border flex flex-col sm:flex-row items-center justify-between gap-space-sm"><p class="font-caption text-caption text-text-muted">© 2025 Lendora Campus Gear. Hak Cipta Dilindungi Undang-Undang.</p><div class="flex items-center gap-space-md"><a class="font-caption text-caption text-text-muted hover:text-on-surface transition-colors" data-path="sop-peminjaman" href="#">SOP &amp; Sanksi</a><a class="font-caption text-caption text-text-muted hover:text-on-surface transition-colors" data-path="panduan-peralatan" href="#">Panduan Perawatan Alat</a><a class="font-caption text-caption text-text-muted hover:text-on-surface transition-colors" data-path="kebijakan-privasi" href="#">Kebijakan Privasi</a></div></div></div></footer></body></html>

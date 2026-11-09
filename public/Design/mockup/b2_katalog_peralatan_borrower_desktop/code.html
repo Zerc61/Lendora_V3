@@ -1,0 +1,728 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Lendora - Portal Peminjaman Alat Kampus</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "surface-tint": "#9d4300",
+        "surface-variant": "#e4e2e1",
+        "success-bg": "#F0FDF4",
+        "error-container": "#ffdad6",
+        "on-secondary-container": "#571a00",
+        "error": "#ba1a1a",
+        "warning-bg": "#FFFBEB",
+        "secondary-fixed-dim": "#ffb599",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "surface-white": "#FFFFFF",
+        "on-primary-fixed": "#341100",
+        "primary-container": "#f97316",
+        "surface-bright": "#fcf9f8",
+        "on-primary-container": "#582200",
+        "surface-container-high": "#eae7e7",
+        "background": "#fcf9f8",
+        "on-tertiary": "#ffffff",
+        "on-tertiary-container": "#36322c",
+        "inverse-primary": "#ffb690",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#fd651e",
+        "surface-dim": "#dcd9d9",
+        "danger": "#DC2626",
+        "violet": "#7C3AED",
+        "tertiary-fixed": "#e9e1d8",
+        "on-error": "#ffffff",
+        "outline": "#8c7164",
+        "info": "#0284C7",
+        "inverse-on-surface": "#f3f0ef",
+        "secondary-fixed": "#ffdbce",
+        "success": "#16A34A",
+        "violet-bg": "#F5F3FF",
+        "on-tertiary-fixed": "#1e1b15",
+        "tertiary-container": "#a09a91",
+        "primary-fixed": "#ffdbca",
+        "surface": "#F5F5F5",
+        "tertiary-fixed-dim": "#ccc5bc",
+        "on-primary": "#ffffff",
+        "warning": "#D97706",
+        "on-primary-fixed-variant": "#783200",
+        "inverse-surface": "#303030",
+        "tertiary": "#625e56",
+        "surface-container": "#f0eded",
+        "border": "#E5E7EB",
+        "secondary": "#a73a00",
+        "surface-container-highest": "#e4e2e1",
+        "surface-container-lowest": "#ffffff",
+        "danger-bg": "#FEF2F2",
+        "primary-fixed-dim": "#ffb690",
+        "on-surface-variant": "#584237",
+        "surface-container-low": "#f6f3f2",
+        "on-secondary-fixed": "#370e00",
+        "on-tertiary-fixed-variant": "#4a463f",
+        "on-background": "#1b1c1c",
+        "info-bg": "#F0F9FF",
+        "primary": "#9d4300",
+        "on-error-container": "#93000a",
+        "outline-variant": "#e0c0b1",
+        "on-surface": "#1b1c1c",
+        "text-muted": "#6B7280"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "margin": "1rem",
+        "space-xl": "2rem",
+        "gutter": "1rem",
+        "space-xs": "0.25rem",
+        "space-md": "1rem",
+        "space-lg": "1.5rem",
+        "space-sm": "0.5rem"
+      },
+      "fontFamily": {
+        "headline-md": ["Plus Jakarta Sans"],
+        "headline-lg": ["Plus Jakarta Sans"],
+        "body-sm": ["Inter"],
+        "headline-sm": ["Plus Jakarta Sans"],
+        "label-md": ["Inter"],
+        "code-sm": ["JetBrains Mono"],
+        "caption": ["Inter"],
+        "display": ["Plus Jakarta Sans"],
+        "body-md": ["Inter"]
+      },
+      "fontSize": {
+        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-sm": ["17px", {"lineHeight": "24px", "fontWeight": "600"}],
+        "label-md": ["13px", {"lineHeight": "20px", "fontWeight": "600"}],
+        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+        "caption": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+        "display": ["28px", {"lineHeight": "36px", "fontWeight": "800"}],
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+      }
+    }
+  }
+}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-white border-b border-border shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"><div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-6"><div class="flex items-center gap-7"><a href="#" class="flex items-center gap-3 shrink-0"><img alt="Lendora Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"><div class="flex items-center gap-2"><span class="font-headline-lg text-[22px] font-bold text-primary-container tracking-tight leading-none">Lendora</span><span class="px-2 py-0.5 rounded-full bg-surface text-text-muted font-caption text-caption border border-border leading-tight">Portal Mahasiswa</span></div></a><nav class="hidden xl:flex items-center gap-6"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="beranda" href="#">Beranda</a><a aria-current="page" class="transition-colors py-1 text-primary-container font-headline-sm font-semibold border-b-2 border-primary-container pb-0.5" data-path="katalog-peralatan" href="#">Katalog Peralatan</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="peminjaman-saya" href="#">Peminjaman Saya</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="notifikasi" href="#">Notifikasi</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="bantuan-dan-regulasi" href="#">Bantuan &amp; Regulasi</a></nav></div><div class="flex items-center gap-3.5"><div class="hidden md:flex items-center justify-between w-64 h-10 px-3 rounded-lg border border-border bg-surface text-text-muted font-body-sm text-body-sm cursor-pointer hover:border-outline-variant transition-colors"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-text-muted">search</span><span class="">Cari kamera, audio...</span></div><kbd class="px-1.5 py-0.5 text-[11px] font-code-sm bg-surface-white border border-border rounded text-text-muted">⌘K</kbd></div><a class="hidden sm:inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md shadow-[0_1px_2px_0_rgba(0,0,0,0.06)] transition-all" data-path="ajukan-peminjaman" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span class="">Ajukan Peminjaman</span></a><button class="relative flex items-center justify-center w-10 h-10 rounded-lg border border-border bg-surface-white text-on-surface-variant hover:bg-surface transition-colors cursor-pointer" type="button" aria-label="Notifikasi"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary-container ring-2 ring-surface-white"></span></button><div class="flex items-center gap-3 pl-3 border-l border-border"><div class="flex flex-col text-right hidden lg:flex"><div class="flex items-center justify-end gap-1.5"><span class="font-headline-sm text-body-sm font-semibold text-on-surface leading-tight">Ani Rahmawati</span><span class="px-1.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption leading-none">Bebas Sanksi</span></div><span class="font-caption text-caption text-text-muted leading-tight mt-0.5">2207412089 • DKV '22</span></div><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-sm shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full bg-surface min-h-[calc(100vh-140px)] pt-16"><div class="max-w-7xl mx-auto px-6 py-8"><div class="flex flex-col w-full">
+<!-- Top Headline & Dynamic Quick Bar -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-caption text-caption uppercase tracking-wider">Inventaris Terbuka</span>
+<span class="text-text-muted font-caption text-caption">• Semester Ganjil 2026/2027</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Katalog Peralatan Laboratorium AV</h1>
+<p class="font-body-md text-body-md text-text-muted max-w-3xl">Eksplorasi 48 unit kamera, lensa, audio, dan tata cahaya yang tersedia untuk perkuliahan dan tugas karya mahasiswa.</p>
+</div>
+<!-- Quick Metrics Summary -->
+<div class="flex items-center gap-3 self-start md:self-auto bg-surface-white px-4 py-2.5 rounded-xl shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-success"></span>
+<span class="font-label-md text-label-md text-on-surface">32 Siap Pakai</span>
+</div>
+<span class="text-surface-variant font-code-sm text-code-sm">/</span>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-info"></span>
+<span class="font-label-md text-label-md text-text-muted">16 Sedang Dipinjam</span>
+</div>
+</div>
+</div>
+<!-- Search & Date Filter Bar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-3 p-3 bg-surface-white rounded-xl shadow-sm">
+<div class="lg:col-span-6 relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-[20px] text-text-muted pointer-events-none">search</span>
+<input class="w-full h-11 pl-10 pr-4 rounded-lg bg-surface font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Cari berdasarkan nama merek, tipe model, atau kode unit... (cth: FX3, Manfrotto)" type="text">
+</div>
+<div class="lg:col-span-4 relative">
+<button class="w-full h-11 px-3.5 rounded-lg bg-surface hover:bg-surface-container transition-colors flex items-center justify-between font-label-md text-label-md text-on-surface text-left" type="button">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[18px] text-primary-container">calendar_today</span>
+<span class="truncate">Pinjam: 14 Nov – 16 Nov 2026</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-white text-primary font-caption text-caption shadow-sm shrink-0">2 Hari</span>
+</button>
+</div>
+<div class="lg:col-span-2 relative">
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-8 rounded-lg bg-surface font-label-md text-label-md text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-primary-container cursor-pointer transition-all">
+<option>Ketersediaan Terbanyak</option>
+<option>Abjad (A - Z)</option>
+<option>Terpopuler (Sering Dipinjam)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-text-muted pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Horizontal Category Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 text-nowrap">
+<button class="h-9 px-4 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-1.5" type="button">
+<span class="">Semua Kategori</span>
+<span class="px-1.5 py-0.2 rounded-full bg-on-primary-container/20 font-caption text-caption">48</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white hover:bg-surface-container-low text-text-muted hover:text-on-surface font-label-md text-label-md shadow-sm transition-all flex items-center gap-1.5" type="button">
+<span class="">Kamera Mirrorless</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface text-text-muted font-caption text-caption">14</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white hover:bg-surface-container-low text-text-muted hover:text-on-surface font-label-md text-label-md shadow-sm transition-all flex items-center gap-1.5" type="button">
+<span class="">Kamera Cinema</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface text-text-muted font-caption text-caption">6</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white hover:bg-surface-container-low text-text-muted hover:text-on-surface font-label-md text-label-md shadow-sm transition-all flex items-center gap-1.5" type="button">
+<span class="">Lensa Prime &amp; Zoom</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface text-text-muted font-caption text-caption">16</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white hover:bg-surface-container-low text-text-muted hover:text-on-surface font-label-md text-label-md shadow-sm transition-all flex items-center gap-1.5" type="button">
+<span class="">Lighting &amp; Grip</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface text-text-muted font-caption text-caption">8</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white hover:bg-surface-container-low text-text-muted hover:text-on-surface font-label-md text-label-md shadow-sm transition-all flex items-center gap-1.5" type="button">
+<span class="">Audio &amp; Mic</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface text-text-muted font-caption text-caption">4</span>
+</button>
+</div>
+</div>
+<!-- Main Content Layout (Sidebar 280px + Grid 3-Columns) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Filter Sidebar (280px equivalent on 12-col layout) -->
+<aside class="lg:col-span-3 flex flex-col gap-4">
+<div class="bg-surface-white rounded-xl shadow-sm p-4 flex flex-col gap-5">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary-container">tune</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Filter Lanjutan</span>
+</div>
+<button class="font-caption text-caption text-primary hover:underline" type="button">Reset Semua</button>
+</div>
+<!-- Accordion 1: Ketersediaan -->
+<div class="flex flex-col gap-2.5">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider text-[11px] text-text-muted">Ketersediaan</span>
+<div class="flex flex-col gap-2">
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Siap Dipinjam Sekarang</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-success-bg text-success">32</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-text-muted group-hover:text-on-surface transition-colors">Terjadwal Minggu Depan</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface text-text-muted">16</span>
+</label>
+</div>
+</div>
+<div class="w-full h-px bg-surface-container"></div>
+<!-- Accordion 2: Grade Akses & Otorisasi -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider text-[11px] text-text-muted">Grade Akses &amp; Otorisasi</span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">help</span>
+</div>
+<div class="flex flex-col gap-2">
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Bebas Mandiri (Semua Smt)</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface text-text-muted">38</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Izin Khusus Kaprodi</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-warning-bg text-warning">10</span>
+</label>
+</div>
+</div>
+<div class="w-full h-px bg-surface-container"></div>
+<!-- Accordion 3: Merek / Brand -->
+<div class="flex flex-col gap-2.5">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider text-[11px] text-text-muted">Merek / Brand</span>
+<div class="flex flex-col gap-2">
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Sony</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface text-text-muted">18</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Canon</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface text-text-muted">10</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Blackmagic Design</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface text-text-muted">4</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Aputure</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface text-text-muted">8</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Røde Microphones</span>
+</div>
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface text-text-muted">4</span>
+</label>
+</div>
+</div>
+<div class="w-full h-px bg-surface-container"></div>
+<!-- Accordion 4: Lokasi Penyimpanan -->
+<div class="flex flex-col gap-2.5">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider text-[11px] text-text-muted">Lokasi Penyimpanan</span>
+<div class="flex flex-col gap-2">
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Rak Lemari A (Kamera)</span>
+</div>
+<span class="font-code-sm text-caption text-text-muted">Ged. C</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Lemari B (Lensa)</span>
+</div>
+<span class="font-code-sm text-caption text-text-muted">Ged. C</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0 cursor-pointer accent-primary-container" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Studio Lighting Dry Box</span>
+</div>
+<span class="font-code-sm text-caption text-text-muted">Lab AV</span>
+</label>
+</div>
+</div>
+<!-- Direct Operational Notice -->
+<div class="p-3 bg-info-bg rounded-lg flex items-start gap-2.5 mt-2">
+<span class="material-symbols-outlined text-[18px] text-info shrink-0 mt-0.5">info</span>
+<p class="font-caption text-caption text-on-surface leading-snug">
+            Pengambilan unit maksimal 30 menit sebelum sesi dimulai. Bawa Kartu Tanda Mahasiswa (KTM) aktif.
+          </p>
+</div>
+</div>
+</aside>
+<!-- Right Content: Asset Cards Grid (3 Columns) -->
+<section class="lg:col-span-9 flex flex-col gap-6">
+<!-- Active Filter Pill Tags -->
+<div class="flex items-center justify-between bg-surface-white px-4 py-2.5 rounded-xl shadow-sm">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-caption text-caption text-text-muted">Filter Aktif:</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface text-on-surface font-body-sm text-body-sm">
+<span class="">Siap Dipinjam</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer text-text-muted hover:text-on-surface">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface text-on-surface font-body-sm text-body-sm">
+<span class="">Merek: Sony</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer text-text-muted hover:text-on-surface">close</span>
+</span>
+</div>
+<span class="font-caption text-caption text-text-muted">Hasil: <strong class="text-on-surface font-label-md">6 Unit</strong></span>
+</div>
+<!-- 3-Column Asset Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+<!-- CARD 1: Sony Alpha A7 III -->
+<div class="flex flex-col bg-surface-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all group">
+<div class="relative aspect-[4/3] w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Professional Sony Alpha A7 III mirrorless digital camera placed on a clean matte studio workbench with soft diffuse laboratory lighting and technical gear aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYiDat7i90snAqvrD3gEUtpFrTX57WC_U51tFn0UR8sr7iugx4XO19wpBd5LFWOuuoSVPZVRvunGtNJgG4Yp-Wt-pI_hyWudY6Lh7NhIxaEXYqzr4YhCYIAcRJYVEKyWmB5Fj379SmGvXwqZYzc5q0rwmkWAqus23EsV_CKUYR8_sknDLX6mhF6HyXlJds5lNZInymsmFOi-dvamMvmP1VfecbiPY1UV29-_-OmaYq">
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-white/90 backdrop-blur font-caption text-caption text-on-surface shadow-sm">Mirrorless</span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Tersedia
+              </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-text-muted">LDR-CAM-0001</span>
+<span class="font-caption text-caption text-success font-medium">Sangat Baik</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">Sony Alpha A7 III</h3>
+<p class="font-body-sm text-body-sm text-text-muted line-clamp-1">Full-Frame Mirrorless 24.2 MP • 4K HDR</p>
+</div>
+<!-- 14-Day Strip Visualizer -->
+<div class="flex flex-col gap-1.5 p-2.5 rounded-lg bg-surface">
+<div class="flex items-center justify-between text-[11px] font-caption text-caption text-text-muted">
+<span class="">Ketersediaan 14 Hari</span>
+<span class="text-success font-semibold">100% Ready</span>
+</div>
+<div class="grid grid-cols-14 gap-1 w-full" style="grid-template-columns: repeat(14, minmax(0, 1fr));">
+<div class="h-3 rounded-sm bg-success" title="14 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="15 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="16 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="17 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="18 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="19 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="20 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="21 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="22 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="23 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="24 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="25 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="26 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="27 Nov: Ready"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-text-muted text-[12px] pt-1">
+<span class="flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+                Lemari A1 — Loket Sirkulasi
+              </span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Ajukan Peminjaman</span>
+</button>
+</div>
+</div>
+<!-- CARD 2: Sony Cinema FX3 -->
+<div class="flex flex-col bg-surface-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all group">
+<div class="relative aspect-[4/3] w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Sony Cinema Line FX3 cinema production camera rigged with top audio handle and monitor in university studio production setting with crisp focal clarity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-RHOzoHLojPJ-RZWWGuAgcpiOTcA1xrRlAeglJvrHGf9Hu2wBhkq8tHUOXOmqGhlcfo3rcph_x51jxiEv7B-38RhZF45LErlRAumx_qNSEHjPAkyejwnheqFrxXK0g20WcHU6I_f2-GbJuSOn6nFZUXVpjOX437qYH1YocGEv-qDt-riIIjKXAVq-u93sNvFklVK-Yy-7Jt-vV4p0j_u9q5OYXDE1zB3jl7GjfMsv">
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-white/90 backdrop-blur font-caption text-caption text-on-surface shadow-sm">Cinema Line</span>
+<span class="px-2 py-0.5 rounded-full bg-warning-bg text-warning font-caption text-caption shadow-sm">Izin Kaprodi</span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Tersedia
+              </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-text-muted">LDR-CAM-0004</span>
+<span class="font-caption text-caption text-primary font-medium">Kalibrasi Okt 2026</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">Sony Cinema FX3</h3>
+<p class="font-body-sm text-body-sm text-text-muted line-clamp-1">Full-Frame Cinema Line • S-Cinetone 4K 120p</p>
+</div>
+<!-- 14-Day Strip Visualizer -->
+<div class="flex flex-col gap-1.5 p-2.5 rounded-lg bg-surface">
+<div class="flex items-center justify-between text-[11px] font-caption text-caption text-text-muted">
+<span class="">Ketersediaan 14 Hari</span>
+<span class="text-success font-semibold">Tersedia Saat Ini</span>
+</div>
+<div class="grid grid-cols-14 gap-1 w-full" style="grid-template-columns: repeat(14, minmax(0, 1fr));">
+<div class="h-3 rounded-sm bg-success" title="14 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="15 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="16 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-warning" title="17 Nov: Sesi Kuliah"></div>
+<div class="h-3 rounded-sm bg-warning" title="18 Nov: Sesi Kuliah"></div>
+<div class="h-3 rounded-sm bg-success" title="19 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="20 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="21 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="22 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="23 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="24 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="25 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="26 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="27 Nov: Ready"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-text-muted text-[12px] pt-1">
+<span class="flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+                Lemari Khusus A2 — Vault Room
+              </span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="">Ajukan Pinjam (Grade A)</span>
+</button>
+</div>
+</div>
+<!-- CARD 3: Canon EOS R6 Mark II -->
+<div class="flex flex-col bg-surface-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all group">
+<div class="relative aspect-[4/3] w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Canon EOS R6 Mark II camera with RF lens mount resting on an equipment case inside a campus production storage facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLR6FRs-0SM2aGYe06Epw6-ZNvacP-AfzYYN3dYviRF004KJ6mqbvP6P0sGU_t0jpC_dG--VRraz0VR8aX33DVVV15XwGJoF3QBKhxuNd4cNX2YiZR_jL95yqdvEPJJ7qFLchCI4u3W-nM5YJIop187wZSOGHPS325RNIPvFvIrT2jtyAviEMl-eNgVJg1S_VQl9YdfkETrGCRO9qy-JfrOeqr6ynXReG0UsTE5yni">
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-white/90 backdrop-blur font-caption text-caption text-on-surface shadow-sm">Mirrorless</span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-info-bg text-info font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-info"></span> Dipinjam s/d 15 Nov
+              </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-text-muted">LDR-CAM-0003</span>
+<span class="font-caption text-caption text-info font-medium">Tugas Akhir</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">Canon EOS R6 Mark II</h3>
+<p class="font-body-sm text-body-sm text-text-muted line-clamp-1">Mirrorless 24.2 MP • 6K Oversampling RAW</p>
+</div>
+<!-- 14-Day Strip Visualizer (Busy) -->
+<div class="flex flex-col gap-1.5 p-2.5 rounded-lg bg-surface">
+<div class="flex items-center justify-between text-[11px] font-caption text-caption text-text-muted">
+<span class="">Ketersediaan 14 Hari</span>
+<span class="text-info font-semibold">Tersedia 16 Nov</span>
+</div>
+<div class="grid grid-cols-14 gap-1 w-full" style="grid-template-columns: repeat(14, minmax(0, 1fr));">
+<div class="h-3 rounded-sm bg-info" title="14 Nov: Dipinjam"></div>
+<div class="h-3 rounded-sm bg-info" title="15 Nov: Dipinjam"></div>
+<div class="h-3 rounded-sm bg-success" title="16 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="17 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="18 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="19 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="20 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="21 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="22 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="23 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="24 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="25 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="26 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="27 Nov: Ready"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-text-muted text-[12px] pt-1">
+<span class="flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+                Lemari A3 — Sirkulasi
+              </span>
+</div>
+<button class="w-full h-11 rounded-lg bg-surface-container hover:bg-surface-variant text-text-muted font-label-md text-label-md transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">event_repeat</span>
+<span class="">Booking Jadwal Mendatang</span>
+</button>
+</div>
+</div>
+<!-- CARD 4: Sony FE 24-70mm f/2.8 GM II -->
+<div class="flex flex-col bg-surface-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all group">
+<div class="relative aspect-[4/3] w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Sony FE 24-70mm f 2.8 GM II professional camera zoom lens displayed with lens hood on pristine dark photography equipment display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDay0tVlKmXW3CjDqwF3UH_XZowh0udaYZjfaGVakn-WYoYmIPxjHdc7X5N9-c88gJMzdXAmtGwhXtlipZZRuXFUVQAMAfOE_mTafDVeB7ZCJs4YHY1cZF-m_wAh9FHxxLp_FaBryZdJo1TgcXjOQog0CgR4N4VX5qhAB7lW1kKVnEJX2terD_hSOcMeo6sTb7qjGnUhEGtQzIsam3kKvkWW4lS-GKJUsxV_Uz9aolr">
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-white/90 backdrop-blur font-caption text-caption text-on-surface shadow-sm">Lensa G Master</span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Tersedia
+              </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-text-muted">LDR-LNS-0012</span>
+<span class="font-caption text-caption text-success font-medium">Optik Bersih</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">Sony FE 24-70mm f/2.8 GM II</h3>
+<p class="font-body-sm text-body-sm text-text-muted line-clamp-1">Standard Zoom Lens • E-Mount</p>
+</div>
+<!-- 14-Day Strip Visualizer -->
+<div class="flex flex-col gap-1.5 p-2.5 rounded-lg bg-surface">
+<div class="flex items-center justify-between text-[11px] font-caption text-caption text-text-muted">
+<span class="">Ketersediaan 14 Hari</span>
+<span class="text-success font-semibold">100% Ready</span>
+</div>
+<div class="grid grid-cols-14 gap-1 w-full" style="grid-template-columns: repeat(14, minmax(0, 1fr));">
+<div class="h-3 rounded-sm bg-success" title="14 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="15 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="16 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="17 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="18 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="19 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="20 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="21 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="22 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="23 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="24 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="25 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="26 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="27 Nov: Ready"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-text-muted text-[12px] pt-1">
+<span class="flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+                Dry Box Lemari B2 — Lensa
+              </span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Ajukan Peminjaman</span>
+</button>
+</div>
+</div>
+<!-- CARD 5: Aputure LS 300d II + Softbox -->
+<div class="flex flex-col bg-surface-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all group">
+<div class="relative aspect-[4/3] w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Aputure LS 300d II studio continuous LED video light unit with heavy-duty C-stand and octagonal softbox in television soundstage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJWTwC7yMt7PbqcebWKYmfWbTazuQJlK69mxVCAumjXI1Nht47PHkbzj_3VjRqAvYmqf74n7g6D3lI9BCRnb1XaKiue1H6LGBcqXBYYGL3BLWmP9t5tKMMxGrQD6LNAcn1wWitPwKTE7-YSAZBvwJgbJOAeU7TwuGvp1P94cbH6ccGE0TwXqnAuHj6AfmlRdmsbsoJ5E-T6Mn0mkrZmlMUeUNNpseTfHCDvizNrXaN">
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-white/90 backdrop-blur font-caption text-caption text-on-surface shadow-sm">Studio Lighting</span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Tersedia
+              </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-text-muted">LDR-LGT-0005</span>
+<span class="font-caption text-caption text-success font-medium">Lengkap C-Stand</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">Aputure LS 300d II + Light Dome</h3>
+<p class="font-body-sm text-body-sm text-text-muted line-clamp-1">LED Daylight 5500K • Bowens Mount</p>
+</div>
+<!-- 14-Day Strip Visualizer -->
+<div class="flex flex-col gap-1.5 p-2.5 rounded-lg bg-surface">
+<div class="flex items-center justify-between text-[11px] font-caption text-caption text-text-muted">
+<span class="">Ketersediaan 14 Hari</span>
+<span class="text-success font-semibold">100% Ready</span>
+</div>
+<div class="grid grid-cols-14 gap-1 w-full" style="grid-template-columns: repeat(14, minmax(0, 1fr));">
+<div class="h-3 rounded-sm bg-success" title="14 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="15 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="16 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="17 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="18 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="19 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="20 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="21 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="22 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="23 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="24 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="25 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="26 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="27 Nov: Ready"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-text-muted text-[12px] pt-1">
+<span class="flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+                Gudang Grip — Rak Lighting 03
+              </span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Ajukan Peminjaman</span>
+</button>
+</div>
+</div>
+<!-- CARD 6: Sennheiser MKH 416 Boom Mic -->
+<div class="flex flex-col bg-surface-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all group">
+<div class="relative aspect-[4/3] w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Sennheiser MKH 416 shotgun interference tube microphone encased inside blimp windshield suspension rig with boom pole adapter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjiBFn9i9e-MsDIJU7k6Obkg45mX-XPa1tVVDYC6f83i1aZEe_HvaQiOzNk-dRG1vY67SUkMVsv1mNtoADUQ0oSI5Fll8DGbKUKEb9YedZQK63kT9qbm-wf2HZMwCo1oFEdzGyD9dWwRPOcbbA-gvO9Su2rXFU3ZYA7fN3RQ3HsF8iYNrF5R09PFqS_EaAEDt6NHeuM_aYSrY2PkPkGM38DQiSshZudmQMf_C8M9_d">
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-white/90 backdrop-blur font-caption text-caption text-on-surface shadow-sm">Audio &amp; Mic</span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Tersedia
+              </span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1 justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-text-muted">LDR-MIC-0002</span>
+<span class="font-caption text-caption text-success font-medium">Lengkap Blimp</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">Sennheiser MKH 416 Boom Kit</h3>
+<p class="font-body-sm text-body-sm text-text-muted line-clamp-1">Shotgun Condenser • Windshield + Boom Pole</p>
+</div>
+<!-- 14-Day Strip Visualizer -->
+<div class="flex flex-col gap-1.5 p-2.5 rounded-lg bg-surface">
+<div class="flex items-center justify-between text-[11px] font-caption text-caption text-text-muted">
+<span class="">Ketersediaan 14 Hari</span>
+<span class="text-success font-semibold">100% Ready</span>
+</div>
+<div class="grid grid-cols-14 gap-1 w-full" style="grid-template-columns: repeat(14, minmax(0, 1fr));">
+<div class="h-3 rounded-sm bg-success" title="14 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="15 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="16 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="17 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="18 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="19 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="20 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="21 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="22 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="23 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="24 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="25 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="26 Nov: Ready"></div>
+<div class="h-3 rounded-sm bg-success" title="27 Nov: Ready"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-text-muted text-[12px] pt-1">
+<span class="flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[15px]">inventory_2</span>
+                Audio Case A — Loket 02
+              </span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Ajukan Peminjaman</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination Section -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 pb-2 bg-surface-white p-4 rounded-xl shadow-sm">
+<span class="font-body-sm text-body-sm text-text-muted">
+          Menampilkan <strong class="text-on-surface font-label-md">1–6</strong> dari <strong class="text-on-surface font-label-md">48</strong> unit peralatan lab
+        </span>
+<div class="flex items-center gap-1.5">
+<button class="w-9 h-9 rounded-lg bg-surface text-text-muted flex items-center justify-center cursor-not-allowed opacity-50" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center shadow-sm" type="button">
+            1
+          </button>
+<button class="w-9 h-9 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors" type="button">
+            2
+          </button>
+<button class="w-9 h-9 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors" type="button">
+            3
+          </button>
+<button class="w-9 h-9 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors" type="button">
+            4
+          </button>
+<span class="px-1 text-text-muted font-label-md">...</span>
+<button class="w-9 h-9 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors" type="button">
+            8
+          </button>
+<button class="w-9 h-9 rounded-lg bg-surface hover:bg-surface-container text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // Simple client-side micro-interaction for category selection toggle
+  document.querySelectorAll('button:has(span)').forEach((btn) => {
+    btn.addEventListener('click', function(e) {
+      if (this.innerText.includes('Kamera') || this.innerText.includes('Semua') || this.innerText.includes('Lensa') || this.innerText.includes('Lighting') || this.innerText.includes('Audio')) {
+        // demo visual toggle state without disturbing design
+      }
+    });
+  });
+</script></div></main><footer class="w-full bg-surface-white border-t border-border py-6"><div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-body-sm text-body-sm text-text-muted"><div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4"><span class="">© 2026 Lendora Campus Gear. Universitas Multimedia Nusantara.</span><span class="hidden sm:inline text-border">|</span><span class="">Jam Operasional: Senin - Jumat (08:00 - 17:00 WIB)</span></div><div class="flex items-center gap-4"><span class="inline-flex items-center gap-1 text-on-surface font-label-md text-label-md"><span class="material-symbols-outlined text-[16px] text-primary-container">support_agent</span>Bantuan Loket: Ext. 402</span><span class="text-success font-caption text-caption px-2 py-0.5 rounded-full bg-success-bg">Loket Buka</span></div></div></footer>
+
+</body></html>
