@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('layouts.borrower', function ($view): void {
+        View::composer(['layouts.borrower', 'layouts.admin'], function ($view): void {
             $user = auth()->user();
             $count = 0;
 

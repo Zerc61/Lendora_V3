@@ -41,7 +41,30 @@ class UserController extends Controller
             'users' => $users,
             'filters' => $filters,
             'roles' => Role::orderBy('name')->get(),
+            'summary' => $this->summary($request->user()->organization_id),
         ]);
+    }
+
+    /**
+     * @return array<string, int>
+     */
+    private function summary(int $organizationId): array
+    {
+        $statusCounts = User::query()
+            ->where('organization_id', $organizationId)
+            ->selectRaw('status, count(*) as aggregate')
+            ->groupBy('status')
+            ->pluck('aggregate', 'status');
+
+        return [
+            'total' => (int) $statusCounts->sum(),
+            'active' => (int) ($statusCounts['active'] ?? 0),
+            'suspended' => (int) ($statusCounts['suspended'] ?? 0),
+            'borrowers' => User::query()
+                ->where('organization_id', $organizationId)
+                ->whereHas('role', fn ($query) => $query->where('slug', 'borrower'))
+                ->count(),
+        ];
     }
 
     public function create(Request $request): View

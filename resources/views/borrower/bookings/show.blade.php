@@ -4,6 +4,7 @@
 @section('nav', 'bookings')
 
 @section('content')
+    <div class="ldr-booking-detail">
     <a class="ldr-back-link" href="{{ route('borrower.bookings.index') }}">
         <x-icon name="chevron-left" :size="18" />
         {{ __('ui.booking.back_to_bookings') }}
@@ -31,7 +32,7 @@
         </div>
     @endif
 
-    <section class="ldr-card">
+    <section class="ldr-card ldr-booking-detail__schedule">
         <h2>{{ __('ui.booking.schedule') }}</h2>
 
         <dl class="ldr-spec-list">
@@ -56,13 +57,13 @@
         </dl>
     </section>
 
-    <section class="ldr-card">
+    <section class="ldr-card ldr-booking-detail__timeline">
         <h2>{{ __('ui.booking.timeline') }}</h2>
 
         <x-timeline :timeline="$timeline" :status="$booking->status->value" />
     </section>
 
-    <section class="ldr-card">
+    <section class="ldr-card ldr-booking-detail__assets">
         <h2>{{ __('ui.booking.assets') }}</h2>
 
         @if ($booking->items->isEmpty())
@@ -114,4 +115,5 @@
             variant="danger"
         />
     @endcan
+    </div>
 @endsection

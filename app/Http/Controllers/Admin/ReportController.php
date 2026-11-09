@@ -56,10 +56,22 @@ class ReportController extends Controller
                 ? round($borrowedAssetDays / ($assetsTotal * $periodDays) * 100, 1)
                 : 0,
             'damages' => $this->damagesQuery($organizationId, $from, $to, $categoryId)->count(),
+            'late_returns' => (clone $bookingQuery)
+                ->whereIn('status', [
+                    BookingStatus::Approved->value,
+                    BookingStatus::Active->value,
+                    BookingStatus::Returned->value,
+                ])
+                ->whereNotNull('returned_at')
+                ->whereNotNull('due_at')
+                ->whereColumn('returned_at', '>', 'due_at')
+                ->count(),
         ];
 
         $utilization = $this->utilizationRows($organizationId, $from, $to, $categoryId);
         $topBorrowers = $this->topBorrowers($bookingQuery);
+        $monthlyTrend = $this->monthlyTrend($loans);
+        $topAssets = $this->topAssets($organizationId, $from, $to, $categoryId);
         $damages = $this->damagesQuery($organizationId, $from, $to, $categoryId)
             ->with(['asset', 'inspector'])
             ->latest('checked_at')
@@ -77,7 +89,16 @@ class ReportController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
-        return view('admin.reports.index', compact('kpis', 'utilization', 'topBorrowers', 'damages', 'filters', 'categories'));
+        return view('admin.reports.index', compact(
+            'kpis',
+            'utilization',
+            'topBorrowers',
+            'monthlyTrend',
+            'topAssets',
+            'damages',
+            'filters',
+            'categories',
+        ));
     }
 
     public function export(Request $request): StreamedResponse
@@ -205,6 +226,52 @@ class ReportController extends Controller
                     : 0,
             ];
         });
+    }
+
+    /**
+     * @param  Collection<int, Booking>  $loans
+     * @return Collection<int, array{month: string, total: int, days: int}>
+     */
+    private function monthlyTrend(Collection $loans): Collection
+    {
+        return $loans
+            ->groupBy(fn (Booking $booking) => $booking->requested_start_date->format('Y-m'))
+            ->sortKeys()
+            ->map(fn (Collection $group, string $month) => [
+                'month' => $month,
+                'total' => $group->count(),
+                'days' => (int) $group->sum(fn (Booking $booking) => $booking->durationInDays()),
+            ])
+            ->values();
+    }
+
+    /**
+     * @return Collection<int, array{name: ?string, code: ?string, total: int}>
+     */
+    private function topAssets(int $organizationId, Carbon $from, Carbon $to, ?int $categoryId): Collection
+    {
+        return BookingItem::query()
+            ->whereHas('booking', fn (Builder $query) => $query
+                ->where('organization_id', $organizationId)
+                ->whereBetween('requested_start_date', [$from->toDateString(), $to->toDateString()])
+                ->whereIn('status', [
+                    BookingStatus::Approved->value,
+                    BookingStatus::Active->value,
+                    BookingStatus::Returned->value,
+                ]))
+            ->when($categoryId, fn (Builder $query, int $id) => $query
+                ->whereHas('asset', fn (Builder $query) => $query->where('category_id', $id)))
+            ->selectRaw('asset_id, count(*) as total')
+            ->groupBy('asset_id')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->with('asset')
+            ->get()
+            ->map(fn (BookingItem $item) => [
+                'name' => $item->asset?->name,
+                'code' => $item->asset?->code,
+                'total' => (int) $item->total,
+            ]);
     }
 
     private function topBorrowers(Builder $bookingQuery): Collection

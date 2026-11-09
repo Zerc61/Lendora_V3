@@ -23,18 +23,47 @@ class MaintenanceController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
+        $filters = [
+            'search' => trim((string) $request->query('search')) ?: null,
+            'status' => \App\Enums\MaintenanceStatus::tryFrom((string) $request->query('status'))?->value,
+        ];
 
         $maintenances = Maintenance::query()
-            ->with(['asset', 'assignedTo', 'reportedBy'])
+            ->with(['asset.photos', 'assignedTo', 'reportedBy'])
             ->whereHas('asset', fn ($query) => $query->where('organization_id', $user->organization_id))
             ->when($user->hasRole('technician'), fn ($query) => $query->where('assigned_to', $user->id))
+            ->when($filters['search'], function ($query, string $search): void {
+                $query->whereHas('asset', function ($query) use ($search): void {
+                    $query->where('code', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%");
+                });
+            })
+            ->when($filters['status'], fn ($query, string $status) => $query->where('status', $status))
             ->latest()
             ->paginate(15)
             ->withQueryString();
 
+        $summaryBase = Maintenance::query()
+            ->whereHas('asset', fn ($query) => $query->where('organization_id', $user->organization_id))
+            ->when($user->hasRole('technician'), fn ($query) => $query->where('assigned_to', $user->id));
+
+        $statusCounts = (clone $summaryBase)
+            ->selectRaw('status, count(*) as aggregate')
+            ->groupBy('status')
+            ->pluck('aggregate', 'status');
+
+        $summary = [
+            'scheduled' => (int) ($statusCounts[\App\Enums\MaintenanceStatus::Scheduled->value] ?? 0),
+            'in_progress' => (int) ($statusCounts[\App\Enums\MaintenanceStatus::InProgress->value] ?? 0),
+            'done' => (int) ($statusCounts[\App\Enums\MaintenanceStatus::Done->value] ?? 0),
+            'cost' => (int) (clone $summaryBase)->sum('cost'),
+        ];
+
         return view('admin.maintenances.index', [
             'maintenances' => $maintenances,
             'role' => $user->role->slug,
+            'filters' => $filters,
+            'summary' => $summary,
         ]);
     }
 
@@ -129,7 +158,7 @@ class MaintenanceController extends Controller
         $this->assertOrganization($request, $maintenance);
 
         return view('admin.maintenances.finish', [
-            'maintenance' => $maintenance->load(['asset', 'assignedTo', 'reportedBy']),
+            'maintenance' => $maintenance->load(['asset.photos', 'assignedTo', 'reportedBy']),
         ]);
     }
 

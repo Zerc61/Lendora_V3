@@ -11,7 +11,7 @@ class BookingReceivedNotification extends Notification
 
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return $notifiable->wantsNotification('booking_received') ? ['database'] : [];
     }
 
     public function toArray(object $notifiable): array

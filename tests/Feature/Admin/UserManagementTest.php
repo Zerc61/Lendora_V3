@@ -59,6 +59,15 @@ class UserManagementTest extends TestCase
         $this->assertAuthenticated();
     }
 
+    public function test_user_index_renders_summary_and_accounts(): void
+    {
+        $this->actingAs($this->admin)
+            ->get(route('admin.users.index'))
+            ->assertOk()
+            ->assertSee('Total terdaftar')
+            ->assertSee($this->operator->name);
+    }
+
     public function test_suspended_user_is_blocked_from_admin_area(): void
     {
         $this->actingAs($this->admin)

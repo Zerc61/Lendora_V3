@@ -82,14 +82,21 @@ class BookingController extends Controller
             }
         }
 
-        return view('admin.bookings.index', compact('bookings', 'filters', 'counts', 'canDecide', 'limitExceeded', 'conflicts'));
+        $queueStats = [
+            'pending' => (int) ($counts[BookingStatus::Pending->value] ?? 0),
+            'approved' => (int) ($counts[BookingStatus::Approved->value] ?? 0),
+            'active' => (int) ($counts[BookingStatus::Active->value] ?? 0),
+            'returned' => (int) ($counts[BookingStatus::Returned->value] ?? 0),
+        ];
+
+        return view('admin.bookings.index', compact('bookings', 'filters', 'counts', 'canDecide', 'limitExceeded', 'conflicts', 'queueStats'));
     }
 
     public function show(Request $request, Booking $booking): View
     {
         $this->authorize('view', $booking);
 
-        $booking->load(['items.asset.photos', 'borrower', 'approvedBy']);
+        $booking->load(['items.asset.photos', 'borrower', 'approvedBy', 'handovers.performedBy']);
 
         return view('admin.bookings.show', [
             'booking' => $booking,

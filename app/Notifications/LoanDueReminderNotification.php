@@ -11,7 +11,7 @@ class LoanDueReminderNotification extends Notification
 
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return $notifiable->wantsNotification('loan_due_reminder') ? ['database'] : [];
     }
 
     public function toArray(object $notifiable): array

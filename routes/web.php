@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityLogController as AdminActivityLogController;
 use App\Http\Controllers\Admin\AssetController as AdminAssetController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
@@ -7,7 +8,10 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HandoverController as AdminHandoverController;
 use App\Http\Controllers\Admin\InspectionController as AdminInspectionController;
 use App\Http\Controllers\Admin\MaintenanceController as AdminMaintenanceController;
+use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Admin\SearchController as AdminSearchController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Borrower\BookingController as BorrowerBookingController;
@@ -53,6 +57,15 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
     ->group(function () {
         Route::get('/', AdminDashboardController::class)->name('dashboard');
 
+        Route::get('search', [AdminSearchController::class, 'index'])->name('search');
+
+        Route::get('profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('profile', [AdminProfileController::class, 'update'])->name('profile.update');
+
+        Route::get('notifications', [AdminNotificationController::class, 'index'])->name('notifications.index');
+        Route::post('notifications/read-all', [AdminNotificationController::class, 'markAllRead'])->name('notifications.read-all');
+        Route::post('notifications/{notification}/read', [AdminNotificationController::class, 'markRead'])->name('notifications.read');
+
         Route::get('bookings/calendar', [AdminBookingController::class, 'calendar'])
             ->middleware('role:operator,organization_admin')
             ->name('bookings.calendar');
@@ -66,24 +79,36 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::get('reports/export', [AdminReportController::class, 'export'])->name('reports.export');
         });
 
+        Route::middleware('role:operator,organization_admin,admin_prodi,technician')->group(function () {
+            Route::get('assets', [AdminAssetController::class, 'index'])->name('assets.index');
+        });
+
+        Route::middleware('role:operator,organization_admin,admin_prodi')->group(function () {
+            Route::get('categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+        });
+
         Route::middleware('role:operator,organization_admin')->group(function () {
             Route::post('bookings/{booking}/reject', [AdminBookingController::class, 'reject'])->name('bookings.reject');
 
+            Route::get('handovers', [AdminHandoverController::class, 'index'])->name('handovers.index');
             Route::get('bookings/{booking}/handover', [AdminHandoverController::class, 'show'])->name('bookings.handover');
             Route::post('bookings/{booking}/handover', [AdminHandoverController::class, 'store'])->name('bookings.handover.store');
 
             Route::post('assets/{asset}/retire', [AdminAssetController::class, 'retire'])->name('assets.retire');
-            Route::resource('assets', AdminAssetController::class)->except('show');
+            Route::resource('assets', AdminAssetController::class)->except(['show', 'index']);
         });
 
         Route::middleware('role:organization_admin')->group(function () {
-            Route::resource('categories', AdminCategoryController::class)->except('show');
+            Route::resource('categories', AdminCategoryController::class)->except(['show', 'index']);
             Route::resource('users', AdminUserController::class)->except('show', 'destroy');
             Route::post('users/{user}/suspend', [AdminUserController::class, 'suspend'])->name('users.suspend');
             Route::post('users/{user}/activate', [AdminUserController::class, 'activate'])->name('users.activate');
 
             Route::get('settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
             Route::put('settings', [AdminSettingController::class, 'update'])->name('settings.update');
+
+            Route::get('activity-logs', [AdminActivityLogController::class, 'index'])->name('activity-logs.index');
+            Route::get('activity-logs/export', [AdminActivityLogController::class, 'export'])->name('activity-logs.export');
         });
 
         Route::middleware('role:operator,organization_admin,technician')->group(function () {

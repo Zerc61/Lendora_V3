@@ -6,7 +6,7 @@
         <div class="ldr-alert ldr-alert--success" role="status">{{ session('status') }}</div>
     @endif
 
-    <form method="POST" action="{{ route('password.email') }}">
+    <form method="POST" action="{{ route('password.email') }}" class="ldr-auth__form">
         @csrf
 
         <div class="ldr-field">

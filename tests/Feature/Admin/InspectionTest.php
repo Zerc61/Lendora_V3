@@ -101,6 +101,24 @@ class InspectionTest extends TestCase
         $this->assertSame('good', $asset->condition_status->value);
     }
 
+    public function test_index_renders_summary_and_record(): void
+    {
+        $asset = $this->borrowedAsset();
+
+        $this->actingAs($this->technician)
+            ->post(route('admin.inspections.store'), [
+                'asset_id' => $asset->id,
+                'result' => InspectionResult::NeedsRepair->value,
+                'notes' => 'Sensor berdebu.',
+            ]);
+
+        $this->actingAs($this->technician)
+            ->get(route('admin.inspections.index'))
+            ->assertOk()
+            ->assertSee($asset->code)
+            ->assertSee('Sensor berdebu.');
+    }
+
     private function borrowedAsset(): Asset
     {
         $asset = Asset::create([

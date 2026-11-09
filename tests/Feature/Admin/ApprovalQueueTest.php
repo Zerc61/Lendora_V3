@@ -150,6 +150,24 @@ class ApprovalQueueTest extends TestCase
             ->assertDontSee($approved->code);
     }
 
+    public function test_queue_and_detail_pages_render_booking_data(): void
+    {
+        $booking = $this->pendingBooking($this->asset());
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.bookings.index'))
+            ->assertOk()
+            ->assertSee($booking->code)
+            ->assertSee($booking->purpose);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.bookings.show', $booking))
+            ->assertOk()
+            ->assertSee($booking->code)
+            ->assertSee('Kamera Uji')
+            ->assertSee('Uji antrean');
+    }
+
     public function test_calendar_lists_booked_ranges_for_unit(): void
     {
         $asset = $this->asset();
@@ -161,6 +179,18 @@ class ApprovalQueueTest extends TestCase
             ->assertOk()
             ->assertSee($asset->code)
             ->assertSee($booking->code);
+    }
+
+    public function test_prodi_dashboard_renders_special_queue(): void
+    {
+        $long = $this->pendingBooking($this->asset(), duration: 10);
+
+        $this->actingAs($this->prodi)
+            ->get(route('admin.dashboard'))
+            ->assertOk()
+            ->assertSee('Pengajuan Khusus')
+            ->assertSee($long->code)
+            ->assertSee('Tinjau pengajuan');
     }
 
     private function asset(int $purchasePrice = 1_000_000): Asset

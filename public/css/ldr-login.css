@@ -1,402 +1,366 @@
 /* ============================================================
-   LDR LOGIN — Tata Letak Split (Desktop + Mobile)
-   Load SETELAH CSS utama. Tidak menimpa CSS lama.
+   LDR AUTH — sistem visual login, register, dan halaman akun
+   Orange + putih, tanpa gradient.
    ============================================================ */
 
-/* ---------- Latar belakang halaman ---------- */
-.ldr-login {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+.ldr-auth-body {
+    background: var(--ldr-surface);
+}
+
+.ldr-auth {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--ldr-space-8) var(--ldr-space-4);
+}
+
+.ldr-auth__shell {
+    display: grid;
+    gap: var(--ldr-space-5);
+    width: min(440px, 100%);
+}
+
+.ldr-auth__brand {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--ldr-space-5);
-    min-height: 100dvh;
-    padding: var(--ldr-space-8) var(--ldr-space-5) var(--ldr-space-10);
-    overflow: hidden;
-    background:
-        radial-gradient(1000px 620px at 8% -8%, rgba(255, 237, 213, .95), transparent 62%),
-        radial-gradient(900px 640px at 96% 10%, rgba(249, 115, 22, .18), transparent 64%),
-        radial-gradient(1100px 760px at 50% 112%, rgba(254, 215, 170, .55), transparent 62%),
-        linear-gradient(150deg, #FFF7ED 0%, #F5F5F5 52%, #FFEDD5 100%);
+    gap: 10px;
+    text-decoration: none;
 }
 
-/* ---------- Kartu utama ---------- */
-.ldr-login__card {
-    display: grid;
-    grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
-    width: min(960px, 100%);
-    overflow: hidden;
-    background: #1C1917;
-    border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 26px;
-    box-shadow:
-        0 36px 90px -28px rgba(12, 10, 9, .60),
-        0 10px 30px rgba(12, 10, 9, .28);
-}
-
-/* Pastikan atribut hidden benar-benar menyembunyikan elemen.
-   (svg { display:block } global bisa menimpa hidden bawaan browser
-   sehingga ikon "eye-off" ikut terlihat di samping "eye".) */
-.ldr-login [hidden] {
-    display: none !important;
-}
-
-/* ---------- Panel visual (foto + brand) ---------- */
-.ldr-login__visual {
-    position: relative;
-    min-height: 600px;
-    overflow: hidden;
-    background: #1C1917;
-}
-
-.ldr-login__photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Overlay gelap + rona brand agar foto menyatu dengan kartu */
-.ldr-login__visual::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(to top, rgba(12, 10, 9, .92) 0%, rgba(12, 10, 9, .28) 48%, rgba(12, 10, 9, .34) 100%),
-        linear-gradient(155deg, rgba(249, 115, 22, .22), transparent 62%);
-}
-
-.ldr-login__brand {
-    position: absolute;
-    z-index: 1;
-    right: var(--ldr-space-6);
-    bottom: var(--ldr-space-6);
-    left: var(--ldr-space-6);
-}
-
-.ldr-login__logo {
-    display: block;
-    width: min(190px, 72%);
-    height: auto;
-}
-
-.ldr-login__tagline {
-    margin-top: 6px;
-    font-size: 13px;
-    line-height: 1.45;
-    color: #E7E5E4;
-}
-
-/* ---------- Panel form (kanan) ---------- */
-.ldr-login__panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--ldr-space-5);
-    padding: var(--ldr-space-10) var(--ldr-space-8);
-    color: #E7E5E4;
-}
-
-.ldr-login__intro {
-    display: grid;
-    gap: 6px;
-}
-
-.ldr-login__heading {
-    font-family: var(--ldr-font-heading);
-    font-size: 27px;
-    font-weight: 800;
-    letter-spacing: -.02em;
+.ldr-auth__brand-mark {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
     color: var(--ldr-white);
+    background: var(--ldr-primary);
+    border-radius: 12px;
 }
 
-.ldr-login__lead {
+.ldr-auth__brand-text {
+    display: grid;
+    text-align: left;
+}
+
+.ldr-auth__brand-name {
+    font-family: var(--ldr-font-heading);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--ldr-text);
+    letter-spacing: -.02em;
+}
+
+.ldr-auth__brand-tagline {
+    font-size: 12px;
+    color: var(--ldr-text-muted);
+}
+
+.ldr-auth__panel {
+    width: 100%;
+    max-width: none;
+    padding: var(--ldr-space-6);
+    background: var(--ldr-white);
+    border: 1px solid var(--ldr-border);
+    border-radius: var(--ldr-radius-card);
+    box-shadow: var(--ldr-shadow-sm);
+}
+
+.ldr-auth__intro {
+    display: grid;
+    gap: 4px;
+    margin-bottom: var(--ldr-space-5);
+}
+
+.ldr-auth__title {
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--ldr-text);
+}
+
+.ldr-auth__subtitle {
+    margin: 0 0 var(--ldr-space-5);
     font-size: 14px;
     line-height: 1.55;
-    color: #A8A29E;
+    color: var(--ldr-text-muted);
 }
 
-/* ---------- Penyesuaian komponen lama agar tampil gelap ---------- */
-.ldr-login__form {
+.ldr-auth__intro .ldr-auth__subtitle {
+    margin-bottom: 0;
+}
+
+.ldr-auth__form {
     display: grid;
     gap: var(--ldr-space-4);
 }
 
-.ldr-login .ldr-label {
-    color: #D6D3D1;
+.ldr-auth__form .ldr-field {
+    display: grid;
+    gap: 6px;
 }
 
-.ldr-login .ldr-label__required {
-    color: #FB923C;
+.ldr-auth__form .ldr-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ldr-text);
 }
 
-.ldr-login .ldr-input {
+.ldr-auth .ldr-input {
     min-height: 48px;
-    color: var(--ldr-white);
-    background: #292524;
-    border-color: #44403C;
-    border-radius: 12px;
+    font-size: 16px;
+    color: var(--ldr-text);
+    background: var(--ldr-white);
+    border-color: var(--ldr-border);
+    border-radius: var(--ldr-radius-input);
 }
 
-.ldr-login .ldr-input::placeholder {
-    color: #78716C;
+.ldr-auth .ldr-input::placeholder {
+    color: #9CA3AF;
 }
 
-.ldr-login .ldr-input:focus-visible {
+.ldr-auth .ldr-input:focus-visible {
     border-color: var(--ldr-primary);
-    outline-color: var(--ldr-primary);
+    outline: 3px solid rgba(249, 115, 22, .18);
+    outline-offset: 0;
 }
 
-.ldr-login .ldr-input-group {
+.ldr-auth .ldr-input--error {
+    border-color: var(--ldr-danger);
+}
+
+.ldr-auth .ldr-field__error {
+    font-size: 12px;
+    color: var(--ldr-danger-ink);
+}
+
+.ldr-auth .ldr-input-group {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.ldr-login .ldr-input-group > .ldr-icon {
+.ldr-auth .ldr-input-group > .ldr-icon {
     position: absolute;
     left: 14px;
+    color: var(--ldr-text-muted);
     pointer-events: none;
 }
 
-.ldr-login .ldr-input-group .ldr-input {
+.ldr-auth .ldr-input-group .ldr-input {
     padding-left: 42px;
 }
 
-.ldr-login .ldr-input-group--action .ldr-input {
+.ldr-auth .ldr-input-group--action .ldr-input {
     padding-right: 48px;
 }
 
-.ldr-login .ldr-input-action {
+.ldr-auth .ldr-input-action {
     position: absolute;
     right: 6px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     padding: 0;
-    color: #A8A29E;
+    color: var(--ldr-text-muted);
     background: transparent;
     border: 0;
     border-radius: 8px;
     cursor: pointer;
 }
 
-.ldr-login .ldr-input--error {
-    border-color: #F87171;
+.ldr-auth .ldr-input-action:hover {
+    color: var(--ldr-text);
+    background: var(--ldr-surface);
 }
 
-.ldr-login .ldr-field__error {
-    color: #FCA5A5;
-}
-
-/* Perbaiki tampilan autofill browser di tema gelap */
-.ldr-login .ldr-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #292524 inset;
-    -webkit-text-fill-color: var(--ldr-white);
-    caret-color: var(--ldr-white);
-    transition: background-color 9999s ease-out;
-}
-
-.ldr-login .ldr-input-group > .ldr-icon {
-    color: #A8A29E;
-}
-
-.ldr-login .ldr-input-action:hover {
-    color: var(--ldr-white);
-    background: #44403C;
-}
-
-.ldr-login .ldr-input-action:focus-visible {
+.ldr-auth .ldr-input-action:focus-visible {
     outline: 2px solid var(--ldr-primary);
     outline-offset: 1px;
 }
 
-.ldr-login .ldr-checkbox {
-    color: #D6D3D1;
+.ldr-auth .ldr-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--ldr-white) inset;
+    -webkit-text-fill-color: var(--ldr-text);
+    caret-color: var(--ldr-text);
+    transition: background-color 9999s ease-out;
 }
 
-.ldr-login .ldr-checkbox input {
+.ldr-auth .ldr-btn--primary {
+    min-height: 48px;
+    font-size: 15px;
+    background: var(--ldr-primary);
+    border-radius: var(--ldr-radius-input);
+    box-shadow: none;
+}
+
+.ldr-auth .ldr-btn--primary:hover {
+    background: var(--ldr-primary-hover);
+}
+
+.ldr-auth .ldr-btn--primary:disabled {
+    background: var(--ldr-border);
+    color: var(--ldr-text-muted);
+}
+
+.ldr-auth .ldr-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--ldr-text);
+}
+
+.ldr-auth .ldr-checkbox input {
+    width: 18px;
+    height: 18px;
     accent-color: var(--ldr-primary);
 }
 
-.ldr-login .ldr-alert--success {
-    background: rgba(22, 163, 74, .14);
-    border-color: rgba(74, 222, 128, .35);
-    color: #BBF7D0;
-}
-
-/* Baris "ingat saya" + "lupa kata sandi" */
-.ldr-login__meta {
+.ldr-auth__meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: var(--ldr-space-2);
-    margin-top: -4px;
+    margin: 0;
     font-size: 13px;
 }
 
-.ldr-login__meta a {
-    font-weight: 700;
-    color: #FDBA74;
+.ldr-auth__meta a {
+    font-weight: 600;
+    color: var(--ldr-primary-ink);
 }
 
-.ldr-login__meta a:hover {
-    color: #FB923C;
+.ldr-auth__meta a:hover {
+    color: var(--ldr-primary-strong);
 }
 
-/* Tombol submit */
-.ldr-login .ldr-btn--primary {
-    min-height: 52px;
-    font-size: 16px;
-    background: linear-gradient(135deg, #FB923C, #EA580C);
-    border-radius: 12px;
-    box-shadow: 0 14px 30px -12px rgba(249, 115, 22, .60);
-}
-
-.ldr-login .ldr-btn--primary:hover {
-    background: linear-gradient(135deg, #F97316, #C2410C);
-}
-
-/* Baris "belum punya akun? daftar" */
-.ldr-login__register {
+.ldr-auth__switch {
+    margin-top: var(--ldr-space-5);
     font-size: 14px;
-    color: #A8A29E;
+    color: var(--ldr-text-muted);
     text-align: center;
 }
 
-.ldr-login__register a {
-    font-weight: 700;
-    color: #FDBA74;
+.ldr-auth__switch a {
+    font-weight: 600;
+    color: var(--ldr-primary-ink);
 }
 
-.ldr-login__register a:hover {
-    color: #FB923C;
-}
-
-/* Callout kepercayaan (terverifikasi) */
-.ldr-login__callout {
+.ldr-auth__callout {
     display: flex;
     align-items: flex-start;
     gap: var(--ldr-space-3);
-    padding: 13px 14px;
-    background: rgba(249, 115, 22, .09);
-    border: 1px solid rgba(249, 115, 22, .28);
-    border-radius: 14px;
+    margin-top: var(--ldr-space-5);
+    padding: 12px 14px;
+    background: var(--ldr-surface);
+    border: 1px solid var(--ldr-border);
+    border-radius: 12px;
 }
 
-.ldr-login__callout-icon {
+.ldr-auth__callout-icon {
     display: inline-flex;
     flex: none;
     align-items: center;
     justify-content: center;
     width: 34px;
     height: 34px;
-    color: #FDBA74;
-    background: rgba(249, 115, 22, .16);
+    color: var(--ldr-primary-ink);
+    background: var(--ldr-tint);
     border-radius: 999px;
 }
 
-.ldr-login__callout strong {
+.ldr-auth__callout strong {
     display: block;
     font-size: 13px;
     font-weight: 700;
-    color: #FFEDD5;
+    color: var(--ldr-text);
 }
 
-.ldr-login__callout p {
+.ldr-auth__callout p {
     margin-top: 2px;
     font-size: 12.5px;
     line-height: 1.5;
-    color: #A8A29E;
+    color: var(--ldr-text-muted);
 }
 
-/* ---------- Footer di bawah kartu (di atas gradient) ---------- */
-.ldr-login__below {
+.ldr-auth__below {
     display: grid;
-    gap: 6px;
+    gap: 8px;
     justify-items: center;
 }
 
-.ldr-login__links {
+.ldr-auth__links {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 10px;
     font-size: 12.5px;
-    color: #57534E;
+    color: var(--ldr-text-muted);
 }
 
-.ldr-login__links span {
+.ldr-auth__links span {
     display: inline-flex;
     align-items: center;
     gap: 5px;
 }
 
-.ldr-login__version {
+.ldr-auth__version {
+    margin: 0;
     font-size: 11.5px;
-    color: #78716C;
+    color: var(--ldr-text-muted);
     text-align: center;
 }
 
-/* ---------- Mobile: foto di atas, form di bawah ---------- */
-@media (max-width: 860px) {
-    .ldr-login {
-        gap: var(--ldr-space-4);
-        padding: var(--ldr-space-6) var(--ldr-space-4) var(--ldr-space-8);
+.ldr-auth__footer {
+    margin-top: var(--ldr-space-4);
+    margin-bottom: 0;
+    font-size: 14px;
+    color: var(--ldr-text-muted);
+    text-align: center;
+}
+
+.ldr-auth__footer a {
+    font-weight: 600;
+    color: var(--ldr-primary-ink);
+}
+
+.ldr-auth [hidden] {
+    display: none !important;
+}
+
+@media (max-width: 480px) {
+    .ldr-auth {
+        padding: var(--ldr-space-6) var(--ldr-space-4);
     }
 
-    .ldr-login__card {
-        grid-template-columns: 1fr;
-        width: min(440px, 100%);
-        border-radius: 22px;
+    .ldr-auth__panel {
+        padding: var(--ldr-space-5);
     }
 
-    .ldr-login__visual {
-        min-height: 252px;
+    .ldr-auth__brand-mark {
+        width: 40px;
+        height: 40px;
     }
 
-    .ldr-login__brand {
-        right: var(--ldr-space-5);
-        bottom: var(--ldr-space-5);
-        left: var(--ldr-space-5);
+    .ldr-auth__brand-name {
+        font-size: 21px;
     }
 
-    .ldr-login__logo {
-        width: min(168px, 70%);
-    }
-
-    .ldr-login__tagline {
-        font-size: 12px;
-    }
-
-    .ldr-login__panel {
-        gap: var(--ldr-space-4);
-        padding: var(--ldr-space-6) var(--ldr-space-5);
-    }
-
-    .ldr-login__heading {
-        font-size: 23px;
+    .ldr-auth__title {
+        font-size: 22px;
     }
 }
 
-@media (max-width: 380px) {
-    .ldr-login__visual {
-        min-height: 220px;
-    }
-}
-
-/* Hormati preferensi pengguna yang menonaktifkan animasi */
 @media (prefers-reduced-motion: reduce) {
-    .ldr-login *,
-    .ldr-login *::before,
-    .ldr-login *::after {
+    .ldr-auth *,
+    .ldr-auth *::before,
+    .ldr-auth *::after {
         transition: none !important;
     }
 }

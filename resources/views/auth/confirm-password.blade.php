@@ -2,7 +2,7 @@
     <h1 class="ldr-auth__title">{{ __('ui.auth.confirm_title') }}</h1>
     <p class="ldr-auth__subtitle">{{ __('ui.auth.confirm_description') }}</p>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
+    <form method="POST" action="{{ route('password.confirm') }}" class="ldr-auth__form">
         @csrf
 
         <div class="ldr-field">

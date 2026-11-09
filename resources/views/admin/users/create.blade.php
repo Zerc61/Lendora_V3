@@ -1,37 +1,72 @@
 @extends('layouts.admin')
 
-@section('title', __('ui.nav.users'))
+@section('title', __('ui.user.add'))
 
 @section('content')
-    <h1>Tambah pengguna</h1>
+    <div class="ldr-form-page ldr-form-narrow">
+        <div class="ldr-page-head">
+            <div>
+                <h1>{{ __('ui.user.add') }}</h1>
+                <p class="ldr-muted">{{ $organization?->name }}</p>
+            </div>
+        </div>
 
-    <p>Organisasi: {{ $organization?->name }}</p>
+        <form method="POST" action="{{ route('admin.users.store') }}" class="ldr-card">
+            @csrf
 
-    <form method="POST" action="{{ route('admin.users.store') }}">
-        @csrf
+            <div class="ldr-form-section">
+                <h2>{{ __('ui.user.identity') }}</h2>
 
-        <label for="name">Nama</label>
-        <input id="name" type="text" name="name" value="{{ old('name') }}" required>
+                <div class="ldr-field">
+                    <label class="ldr-label" for="name">{{ __('ui.user.name') }} <span class="ldr-label__required" aria-hidden="true">*</span></label>
+                    <input id="name" class="ldr-input" type="text" name="name" value="{{ old('name') }}" required>
+                    @error('name') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                </div>
 
-        <label for="email">Surel</label>
-        <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+                <div class="ldr-field">
+                    <label class="ldr-label" for="email">{{ __('ui.auth.email') }} <span class="ldr-label__required" aria-hidden="true">*</span></label>
+                    <input id="email" class="ldr-input" type="email" name="email" value="{{ old('email') }}" required>
+                    @error('email') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                </div>
 
-        <label for="phone">Telepon</label>
-        <input id="phone" type="text" name="phone" value="{{ old('phone') }}">
+                <div class="ldr-field">
+                    <label class="ldr-label" for="phone">{{ __('ui.user.phone') }}</label>
+                    <input id="phone" class="ldr-input" type="text" name="phone" value="{{ old('phone') }}">
+                    @error('phone') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                </div>
 
-        <label for="role_id">Peran</label>
-        <select id="role_id" name="role_id" required>
-            @foreach ($roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
-            @endforeach
-        </select>
+                <div class="ldr-field">
+                    <label class="ldr-label" for="role_id">{{ __('ui.user.role') }} <span class="ldr-label__required" aria-hidden="true">*</span></label>
+                    <select id="role_id" class="ldr-input" name="role_id" required>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}" @selected(old('role_id') == $role->id)>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('role_id') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                </div>
+            </div>
 
-        <label for="password">Kata sandi</label>
-        <input id="password" type="password" name="password" required>
+            <div class="ldr-form-section">
+                <h2>{{ __('ui.user.password_section') }}</h2>
 
-        <label for="password_confirmation">Ulangi kata sandi</label>
-        <input id="password_confirmation" type="password" name="password_confirmation" required>
+                <div class="ldr-field-row">
+                    <div class="ldr-field">
+                        <label class="ldr-label" for="password">{{ __('ui.user.password') }} <span class="ldr-label__required" aria-hidden="true">*</span></label>
+                        <input id="password" class="ldr-input" type="password" name="password" required>
+                        @error('password') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                    </div>
 
-        <button type="submit">Simpan</button>
-    </form>
+                    <div class="ldr-field">
+                        <label class="ldr-label" for="password_confirmation">{{ __('ui.user.password_confirmation') }} <span class="ldr-label__required" aria-hidden="true">*</span></label>
+                        <input id="password_confirmation" class="ldr-input" type="password" name="password_confirmation" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ldr-form-actions">
+                <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.common.save') }}</button>
+                <a class="ldr-btn ldr-btn--ghost" href="{{ route('admin.users.index') }}">{{ __('ui.common.cancel') }}</a>
+            </div>
+        </form>
+    </div>
 @endsection

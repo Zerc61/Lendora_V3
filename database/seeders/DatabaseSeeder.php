@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             OrganizationSeeder::class,
             AdminSeeder::class,
             CategoryAndAssetSeeder::class,
+            BorrowerShowcaseSeeder::class,
             SettingSeeder::class,
             DemoTransactionSeeder::class,
         ]);

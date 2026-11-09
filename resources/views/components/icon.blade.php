@@ -25,6 +25,7 @@
         'chevron-left' => '<path d="m15 18-6-6 6-6"/>',
         'chevron-right' => '<path d="m9 18 6-6-6-6"/>',
         'chevron-down' => '<path d="m6 9 6 6 6-6"/>',
+        'plus' => '<path d="M5 12h14"/><path d="M12 5v14"/>',
         'x' => '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
         'alert-circle' => '<circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/>',
         'check-circle' => '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>',

@@ -25,11 +25,18 @@
             'damaged' => 'danger',
             'lost' => 'danger',
         ],
+        'maintenance' => [
+            'scheduled' => 'warning',
+            'in_progress' => 'info',
+            'done' => 'success',
+            'cancelled' => 'neutral',
+        ],
     ];
 
     $prefix = match ($type) {
         'booking' => 'ui.booking_status.',
         'item' => 'ui.item_status.',
+        'maintenance' => 'ui.maintenance_status.',
         default => 'ui.status.',
     };
 

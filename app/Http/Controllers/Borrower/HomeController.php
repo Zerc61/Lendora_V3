@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Borrower;
 
 use App\Enums\BookingStatus;
+use App\Enums\AssetStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Booking;
@@ -62,6 +63,24 @@ class HomeController extends Controller
             ];
         }
 
+        $statusCounts = Booking::query()
+            ->where('borrower_id', $user->id)
+            ->selectRaw('status, count(*) as aggregate')
+            ->groupBy('status')
+            ->pluck('aggregate', 'status');
+
+        $summary = [
+            'active' => (int) ($statusCounts[BookingStatus::Active->value] ?? 0),
+            'pending' => (int) ($statusCounts[BookingStatus::Pending->value] ?? 0),
+            'approved' => (int) ($statusCounts[BookingStatus::Approved->value] ?? 0),
+            'returned' => (int) ($statusCounts[BookingStatus::Returned->value] ?? 0),
+        ];
+
+        $availableAssets = Asset::query()
+            ->where('organization_id', $user->organization_id)
+            ->where('status', AssetStatus::Available->value)
+            ->count();
+
         return view('borrower.home', [
             'user' => $user,
             'activeBooking' => $activeBooking,
@@ -69,6 +88,8 @@ class HomeController extends Controller
             'recommendations' => $recommendations,
             'announcement' => app(SettingService::class)->borrowerAnnouncement($user->organization_id),
             'unreadNotifications' => $user->unreadNotifications()->count(),
+            'summary' => $summary,
+            'availableAssets' => $availableAssets,
         ]);
     }
 }

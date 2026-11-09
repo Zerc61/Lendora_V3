@@ -18,6 +18,8 @@ class UpdateBorrowerProfileRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:20'],
             'current_password' => ['nullable', 'required_with:password', 'current_password'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'notifications' => ['nullable', 'array'],
+            'notifications.*' => ['boolean'],
         ];
     }
 }
