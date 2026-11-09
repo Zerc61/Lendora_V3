@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\Organization;
+use Database\Seeders\AdminSeeder;
+use Database\Seeders\OrganizationSeeder;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -14,7 +17,7 @@ class RegistrationTest extends TestCase
     {
         parent::setUp();
 
-        $this->seed(RoleSeeder::class);
+        $this->seed([RoleSeeder::class, OrganizationSeeder::class, AdminSeeder::class]);
     }
 
     public function test_registration_screen_can_be_rendered(): void
@@ -28,7 +31,13 @@ class RegistrationTest extends TestCase
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
+            'nim' => '2310010001',
             'email' => 'test@example.com',
+            'phone' => '081234567890',
+            'study_program' => 'Teknik Elektronika',
+            'organization_id' => 1,
+            'whatsapp_opt_in' => true,
+            'terms' => true,
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);

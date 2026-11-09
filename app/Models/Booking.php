@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BookingActivityType;
 use App\Enums\BookingStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +20,15 @@ class Booking extends Model
         'borrower_id',
         'status',
         'purpose',
+        'course_id',
+        'activity_type',
+        'pickup_location_id',
+        'usage_location',
+        'supervisor_name',
+        'supervisor_letter_path',
+        'sop_agreed_at',
+        'submitted_at',
+        'return_token',
         'requested_start_date',
         'requested_end_date',
         'approved_by',
@@ -34,6 +44,9 @@ class Booking extends Model
     {
         return [
             'status' => BookingStatus::class,
+            'activity_type' => BookingActivityType::class,
+            'sop_agreed_at' => 'datetime',
+            'submitted_at' => 'datetime',
             'requested_start_date' => 'date',
             'requested_end_date' => 'date',
             'approved_at' => 'datetime',
@@ -61,6 +74,31 @@ class Booking extends Model
     public function items(): HasMany
     {
         return $this->hasMany(BookingItem::class);
+    }
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function pickupLocation(): BelongsTo
+    {
+        return $this->belongsTo(PickupLocation::class);
+    }
+
+    public function extensions(): HasMany
+    {
+        return $this->hasMany(BookingExtension::class);
+    }
+
+    public function penalties(): HasMany
+    {
+        return $this->hasMany(Penalty::class);
+    }
+
+    public function scopeSubmitted($query)
+    {
+        return $query->whereNotNull('submitted_at');
     }
 
     public function assets(): BelongsToMany

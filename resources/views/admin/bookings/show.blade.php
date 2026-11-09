@@ -231,6 +231,46 @@
                 <x-timeline :timeline="$timeline" :status="$booking->status->value" />
             </section>
 
+            @php
+                $pendingExtensions = $booking->extensions->where('status', \App\Enums\BookingExtensionStatus::Pending);
+            @endphp
+
+            @if ($pendingExtensions->isNotEmpty())
+                <section class="ldr-card">
+                    <h2>{{ __('ui.booking.extension') }}</h2>
+
+                    @foreach ($pendingExtensions as $extension)
+                        <dl class="ldr-spec-list">
+                            <div>
+                                <dt>{{ __('ui.booking.due_at') }}</dt>
+                                <dd>{{ $extension->requested_due_at->translatedFormat('d M Y') }}</dd>
+                            </div>
+                            <div>
+                                <dt>{{ __('ui.booking.extension_reason') }}</dt>
+                                <dd>{{ $extension->reason }}</dd>
+                            </div>
+                        </dl>
+
+                        <form method="POST" action="{{ route('admin.bookings.extensions.approve', [$booking, $extension]) }}">
+                            @csrf
+                            <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--primary">
+                                {{ __('ui.booking.approve') }}
+                            </button>
+                        </form>
+
+                        <form method="POST" action="{{ route('admin.bookings.extensions.reject', [$booking, $extension]) }}" class="ldr-field">
+                            @csrf
+                            <label class="ldr-label" for="extension-reason-{{ $extension->id }}">{{ __('ui.booking.reason') }}</label>
+                            <input id="extension-reason-{{ $extension->id }}" name="rejection_reason" class="ldr-input" required minlength="5" maxlength="255">
+                            @error('rejection_reason') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                            <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--danger">
+                                {{ __('ui.booking.reject') }}
+                            </button>
+                        </form>
+                    @endforeach
+                </section>
+            @endif
+
             <section class="ldr-card">
                 <h2>{{ __('ui.booking.handover_history') }}</h2>
 

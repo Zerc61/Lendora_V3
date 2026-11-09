@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Enums\BookingStatus;
+use App\Models\Booking;
 use App\Services\ActivityLogger;
+use App\Services\SettingService;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
@@ -33,6 +36,31 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $view->with('unreadNotifications', $count);
+        });
+
+        View::composer('layouts.borrower', function ($view): void {
+            $user = auth()->user();
+
+            if ($user !== null && $user->role?->slug === 'borrower' && Schema::hasTable('bookings')) {
+                $activeBookingCount = Booking::query()
+                    ->where('borrower_id', $user->id)
+                    ->where('status', BookingStatus::Active->value)
+                    ->count();
+
+                $view->with('activeBookingCount', $activeBookingCount);
+                $view->with('borrowerCompliance', $user->compliance_score ?? 100);
+            } else {
+                $view->with('activeBookingCount', 0);
+                $view->with('borrowerCompliance', 100);
+            }
+        });
+
+        View::composer('layouts.borrower', function ($view): void {
+            $settings = app(SettingService::class);
+            $view->with('operationalHours', $settings->get('operational_hours', 'Senin–Jumat 08:00–17:00 WIB'));
+            $view->with('orgName', $settings->get('organization_name', 'Unit Kampus'));
+            $view->with('operatorPhone', $settings->get('operator_contact_phone', 'Ext. 402'));
+            $view->with('operatorWhatsApp', $settings->get('operator_contact_whatsapp', '+62 812-3456-7890'));
         });
 
         Event::listen(Login::class, function (Login $event): void {

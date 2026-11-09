@@ -5,115 +5,98 @@
 
 @section('content')
     <div class="ldr-booking-detail">
-    <a class="ldr-back-link" href="{{ route('borrower.bookings.index') }}">
-        <x-icon name="chevron-left" :size="18" />
-        {{ __('ui.booking.back_to_bookings') }}
-    </a>
+        <nav class="ldr-breadcrumbs" aria-label="{{ __('ui.breadcrumb') }}">
+            <ol class="ldr-breadcrumbs__list">
+                <li><a href="{{ route('borrower.home') }}">{{ __('ui.nav.home') }}</a></li>
+                <li><a href="{{ route('borrower.bookings.index') }}">{{ __('ui.nav.bookings') }}</a></li>
+                <li aria-current="page">{{ $booking->code }}</li>
+            </ol>
+        </nav>
 
-    <header class="ldr-booking-detail__head">
-        <div class="ldr-booking-card__head">
-            <span class="ldr-mono ldr-booking-detail__code">{{ $booking->code }}</span>
-            <x-status-badge type="booking" :status="$booking->status->value" />
-        </div>
-
-        <p class="ldr-muted">
-            {{ $booking->requested_start_date->copy()->locale('id')->translatedFormat('d M Y') }}
-            –
-            {{ $booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y') }}
-        </p>
-
-        <p class="ldr-booking-detail__purpose">{{ $booking->purpose }}</p>
-    </header>
-
-    @if ($booking->status === App\Enums\BookingStatus::Rejected && $booking->rejection_reason)
-        <div class="ldr-alert ldr-alert--danger" role="alert">
-            <strong>{{ __('ui.booking.reason') }}:</strong>
-            {{ $booking->rejection_reason }}
-        </div>
-    @endif
-
-    <section class="ldr-card ldr-booking-detail__schedule">
-        <h2>{{ __('ui.booking.schedule') }}</h2>
-
-        <dl class="ldr-spec-list">
-            <div>
-                <dt>{{ __('ui.booking.start') }}</dt>
-                <dd>{{ $booking->requested_start_date->copy()->locale('id')->translatedFormat('d M Y') }}</dd>
+        <header class="ldr-booking-detail__head">
+            <div class="ldr-booking-detail__meta">
+                <span class="ldr-booking-detail__code">{{ $booking->code }}</span>
+                <x-status-badge type="booking" :status="$booking->status->value" class="ldr-booking-detail__status" />
             </div>
-            <div>
-                <dt>{{ __('ui.booking.end') }}</dt>
-                <dd>{{ $booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y') }}</dd>
+
+            <h1 class="ldr-booking-detail__title">{{ __('ui.booking.detail') }}</h1>
+
+            <p class="ldr-booking-detail__purpose">{{ $booking->purpose }}</p>
+
+            <div class="ldr-booking-detail__info">
+                <span>
+                    <x-icon name="calendar" :size="15" />
+                    {{ $booking->requested_start_date->locale('id')->translatedFormat('d M Y') }} — {{ $booking->requested_end_date->locale('id')->translatedFormat('d M Y') }}
+                </span>
+                @if ($booking->due_at)
+                    <span>
+                        <x-icon name="clock" :size="15" />
+                        {{ __('ui.booking.due_at') }}: {{ $booking->due_at->locale('id')->translatedFormat('d M Y H:i') }}
+                    </span>
+                @endif
             </div>
-            @if ($booking->due_at)
+        </header>
+
+        @if ($booking->status === \App\Enums\BookingStatus::Rejected)
+            <div class="ldr-alert ldr-alert--danger">
+                <x-icon name="alert-circle" :size="18" />
                 <div>
-                    <dt>{{ __('ui.booking.due_at') }}</dt>
-                    <dd>{{ $booking->due_at->copy()->locale('id')->translatedFormat('d M Y H:i') }}</dd>
+                    <strong>{{ __('ui.booking.reject_title') }}</strong>
+                    <p>{{ $booking->rejection_reason ?? __('ui.booking.reject_help') }}</p>
                 </div>
-            @endif
-            <div>
-                <dt>{{ __('ui.booking.requested_at') }}</dt>
-                <dd>{{ $booking->created_at->copy()->locale('id')->translatedFormat('d M Y H:i') }}</dd>
             </div>
-        </dl>
-    </section>
+        @endif
 
-    <section class="ldr-card ldr-booking-detail__timeline">
-        <h2>{{ __('ui.booking.timeline') }}</h2>
-
-        <x-timeline :timeline="$timeline" :status="$booking->status->value" />
-    </section>
-
-    <section class="ldr-card ldr-booking-detail__assets">
-        <h2>{{ __('ui.booking.assets') }}</h2>
-
-        @if ($booking->items->isEmpty())
-            <p class="ldr-muted">{{ __('ui.booking.no_items') }}</p>
-        @else
+        <div class="ldr-booking-detail__assets">
+            <h3>{{ __('ui.booking.items_summary') }}</h3>
             <ul class="ldr-booking-items">
                 @foreach ($booking->items as $item)
-                    @php $photo = $item->asset->photos->first(); @endphp
                     <li class="ldr-booking-items__row">
-                        <span class="ldr-thumb">
-                            @if ($photo)
-                                <img src="{{ Illuminate\Support\Facades\Storage::url($photo->path) }}"
-                                     alt="{{ $item->asset->name }}"
-                                     loading="lazy"
-                                     width="48"
-                                     height="48">
-                            @else
-                                <x-icon name="camera" :size="20" />
-                            @endif
-                        </span>
-
-                        <span class="ldr-booking-items__main">
+                        <div class="ldr-booking-items__main">
                             <span class="ldr-booking-items__name">{{ $item->asset->name }}</span>
-                            <span class="ldr-mono ldr-muted">{{ $item->asset->code }}</span>
-                        </span>
-
-                        <x-status-badge type="item" :status="$item->status->value" />
+                            <p class="ldr-muted">{{ $item->asset->code }}</p>
+                        </div>
+                        <span class="ldr-badge">{{ __('ui.item_status.' . $item->status->value) }}</span>
                     </li>
                 @endforeach
             </ul>
-        @endif
-    </section>
-
-    @can('cancel', $booking)
-        <div class="ldr-detail-actions">
-            <button type="button"
-                    class="ldr-btn ldr-btn--danger ldr-btn--block"
-                    data-confirm-open="cancel-booking-{{ $booking->id }}">
-                {{ __('ui.booking.cancel_pending') }}
-            </button>
         </div>
 
-        <x-confirm-modal
-            :id="'cancel-booking-'.$booking->id"
-            :title="__('ui.booking.cancel_title')"
-            :message="__('ui.booking.cancel_message', ['code' => $booking->code])"
-            :action="route('borrower.bookings.cancel', $booking)"
-            :confirm-label="__('ui.booking.cancel_confirm')"
-            variant="danger"
-        />
-    @endcan
+        <div class="ldr-detail-actions">
+            @if ($booking->status === \App\Enums\BookingStatus::Active)
+                <a href="{{ route('borrower.bookings.document', ['booking' => $booking, 'type' => 'letter']) }}" class="ldr-btn ldr-btn--secondary">
+                    <x-icon name="download" :size="16" />
+                    {{ __('ui.booking.document_letter') }}
+                </a>
+                <a href="{{ route('borrower.bookings.extension.form', $booking) }}" class="ldr-btn ldr-btn--primary">
+                    <x-icon name="clock" :size="16" />
+                    {{ __('ui.booking.extension') }}
+                </a>
+            @endif
+
+            <a href="{{ route('borrower.bookings.index') }}" class="ldr-btn ldr-btn--ghost">
+                {{ __('ui.common.back') }}
+            </a>
+        </div>
+
+        @php
+            $pendingExtension = $booking->extensions->firstWhere('status', \App\Enums\BookingExtensionStatus::Pending);
+        @endphp
+
+        @if ($pendingExtension)
+            <div class="ldr-card">
+                <h2>{{ __('ui.booking.extension') }}</h2>
+                <p class="ldr-muted">
+                    {{ __('ui.booking.extension_pending', ['date' => $pendingExtension->requested_due_at->translatedFormat('d M Y')]) }}
+                </p>
+                @if ($pendingExtension->reason)
+                    <p>{{ $pendingExtension->reason }}</p>
+                @endif
+                <form method="POST" action="{{ route('borrower.bookings.extensions.cancel', [$booking, $pendingExtension]) }}">
+                    @csrf
+                    <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--danger">{{ __('ui.common.cancel') }}</button>
+                </form>
+            </div>
+        @endif
     </div>
 @endsection

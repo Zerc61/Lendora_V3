@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Enums\AssetStatus;
+use App\Enums\BookingExtensionStatus;
 use App\Enums\BookingItemStatus;
 use App\Enums\BookingStatus;
 use App\Exceptions\InvalidStatusTransitionException;
 use App\Models\Asset;
 use App\Models\Booking;
+use App\Models\BookingExtension;
 use App\Models\Organization;
 use App\Models\User;
 use App\Notifications\BookingDecisionNotification;
@@ -236,11 +238,162 @@ class BookingService
         });
     }
 
+    public function requestExtension(
+        Booking $booking,
+        User $requester,
+        CarbonInterface $newEnd,
+        ?string $reason = null,
+    ): BookingExtension {
+        if ($requester->id !== $booking->borrower_id) {
+            throw new AuthorizationException(__('messages.booking.extension_not_owner'));
+        }
+
+        if ($booking->status !== BookingStatus::Active) {
+            throw ValidationException::withMessages([
+                'new_end_date' => __('messages.booking.extension_only_active'),
+            ]);
+        }
+
+        $currentEnd = Carbon::parse($booking->due_at ?? $booking->requested_end_date)->startOfDay();
+        $newEnd = Carbon::parse($newEnd)->startOfDay();
+
+        if (! $newEnd->greaterThan($currentEnd)) {
+            throw ValidationException::withMessages([
+                'new_end_date' => __('messages.booking.extension_after_current', [
+                    'date' => $currentEnd->translatedFormat('d M Y'),
+                ]),
+            ]);
+        }
+
+        $hasPending = $booking->extensions()
+            ->where('status', BookingExtensionStatus::Pending->value)
+            ->exists();
+
+        if ($hasPending) {
+            throw ValidationException::withMessages([
+                'new_end_date' => __('messages.booking.extension_pending_exists'),
+            ]);
+        }
+
+        foreach ($booking->items()->with('asset')->get() as $item) {
+            $asset = $item->asset;
+
+            if ($asset !== null && $this->availability
+                ->conflictsFor($asset, $currentEnd, $newEnd, $booking->id)
+                ->exists()) {
+                throw ValidationException::withMessages([
+                    'new_end_date' => __('messages.booking.extension_conflict', [
+                        'asset' => $asset->name,
+                    ]),
+                ]);
+            }
+        }
+
+        return DB::transaction(function () use ($booking, $requester, $currentEnd, $newEnd, $reason): BookingExtension {
+            $extension = $booking->extensions()->create([
+                'requested_by' => $requester->id,
+                'requested_days' => max(1, (int) $currentEnd->diffInDays($newEnd)),
+                'requested_due_at' => $newEnd->copy()->endOfDay(),
+                'reason' => $reason ?: __('messages.booking.extension_default_reason'),
+                'status' => BookingExtensionStatus::Pending,
+            ]);
+
+            $this->logger->log(
+                'booking.extension_requested',
+                $booking,
+                "Pengajuan perpanjangan {$booking->code} sampai {$newEnd->translatedFormat('d M Y')}.",
+                $requester,
+            );
+
+            return $extension;
+        });
+    }
+
+    public function approveExtension(BookingExtension $extension, User $approver): BookingExtension
+    {
+        $this->assertExtensionDecidable($extension, $approver);
+
+        $booking = $extension->booking;
+        $start = Carbon::parse($booking->due_at ?? $booking->requested_end_date)->startOfDay();
+        $newEnd = Carbon::parse($extension->requested_due_at)->startOfDay();
+
+        foreach ($booking->items()->with('asset')->get() as $item) {
+            $asset = $item->asset;
+
+            if ($asset !== null && $this->availability
+                ->conflictsFor($asset, $start, $newEnd, $booking->id)
+                ->exists()) {
+                throw ValidationException::withMessages([
+                    'extension' => __('messages.booking.extension_conflict', ['asset' => $asset->name]),
+                ]);
+            }
+        }
+
+        return DB::transaction(function () use ($extension, $approver, $booking, $newEnd): BookingExtension {
+            $extension->update([
+                'status' => BookingExtensionStatus::Approved,
+                'decided_by' => $approver->id,
+                'decided_at' => now(),
+            ]);
+
+            $booking->update([
+                'requested_end_date' => $newEnd->toDateString(),
+                'due_at' => $newEnd->copy()->endOfDay(),
+            ]);
+
+            $this->logger->log(
+                'booking.extension_approved',
+                $booking,
+                "Perpanjangan {$booking->code} disetujui sampai {$newEnd->translatedFormat('d M Y')}.",
+                $approver,
+            );
+
+            return $extension->fresh();
+        });
+    }
+
+    public function rejectExtension(BookingExtension $extension, User $approver, string $reason): BookingExtension
+    {
+        $this->assertExtensionDecidable($extension, $approver);
+
+        $extension->update([
+            'status' => BookingExtensionStatus::Rejected,
+            'decided_by' => $approver->id,
+            'decided_at' => now(),
+            'rejection_reason' => $reason,
+        ]);
+
+        $this->logger->log(
+            'booking.extension_rejected',
+            $extension->booking,
+            "Perpanjangan {$extension->booking->code} ditolak: {$reason}.",
+            $approver,
+        );
+
+        return $extension->fresh();
+    }
+
+    private function assertExtensionDecidable(BookingExtension $extension, User $approver): void
+    {
+        if (! in_array($approver->role?->slug, ['operator', 'organization_admin'], true)) {
+            throw new AuthorizationException(__('messages.booking.extension_not_allowed'));
+        }
+
+        if ($extension->status !== BookingExtensionStatus::Pending) {
+            throw new InvalidStatusTransitionException(__('messages.booking.extension_not_pending'));
+        }
+
+        if ($extension->booking->status !== BookingStatus::Active) {
+            throw ValidationException::withMessages([
+                'extension' => __('messages.booking.extension_only_active'),
+            ]);
+        }
+    }
+
     /**
      * @return array<int, array{status: string, actor: string|null, time: \Illuminate\Support\Carbon|null, note: string|null}>
      */
-    public function timelineFor(Booking $booking): array
-    {
+    public function timelineFor(Booking $booking): array    {
         $events = [[
             'status' => BookingStatus::Pending->value,
             'actor' => $booking->borrower?->name,

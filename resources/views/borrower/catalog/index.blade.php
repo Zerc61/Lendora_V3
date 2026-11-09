@@ -38,6 +38,35 @@
             @if ($filters['category_id'])
                 <input type="hidden" name="category_id" value="{{ $filters['category_id'] }}">
             @endif
+
+            @if ($filters['start_date'])
+                <input type="hidden" name="start_date" value="{{ $filters['start_date']->format('Y-m-d') }}">
+                <input type="hidden" name="end_date" value="{{ $filters['end_date']->format('Y-m-d') }}">
+            @endif
+
+            @if ($filters['availability'])
+                <input type="hidden" name="availability" value="{{ $filters['availability'] }}">
+            @endif
+
+            @if ($filters['brand'])
+                <input type="hidden" name="brand" value="{{ $filters['brand'] }}">
+            @endif
+
+            @if ($filters['location'])
+                <input type="hidden" name="location" value="{{ $filters['location'] }}">
+            @endif
+
+            @if ($filters['grade'])
+                <input type="hidden" name="grade" value="{{ $filters['grade'] }}">
+            @endif
+
+            @if ($filters['access_level'])
+                <input type="hidden" name="access_level" value="{{ $filters['access_level'] }}">
+            @endif
+
+            @if ($filters['sort'])
+                <input type="hidden" name="sort" value="{{ $filters['sort'] }}">
+            @endif
         </form>
 
         <div class="ldr-chip-row" role="list" aria-label="{{ __('ui.asset.fields.category') }}">
@@ -52,12 +81,43 @@
                    href="{{ route('borrower.catalog.index', array_filter(['search' => $filters['search'], 'category_id' => $category->id])) }}"
                    role="listitem">
                     {{ $category->name }}
+                    @if (isset($facets['categories'][$category->id]))
+                        <span class="ldr-chip-toggle__count">{{ $facets['categories'][$category->id] }}</span>
+                    @endif
                 </a>
             @endforeach
         </div>
     </div>
 
-    <p class="ldr-catalog-count">{{ __('ui.catalog.result_count', ['count' => $assets->total()]) }}</p>
+    @if ($activeFilters = collect($activeFilters)->except('sort')->filter())
+        <div class="ldr-active-filters">
+            @foreach ($activeFilters as $key => $value)
+                <span class="ldr-filter-chip">
+                    {{ $value }}
+                    <a href="{{ route('borrower.catalog.index', collect($activeFilters)->except($key)->toArray()) }}" class="ldr-filter-chip__remove" aria-label="{{ __('ui.common.remove_filter', ['filter' => $value]) }}">
+                        <x-icon name="x" :size="12" />
+                    </a>
+                </span>
+            @endforeach
+            <a href="{{ route('borrower.catalog.index') }}" class="ldr-btn ldr-btn--ghost ldr-btn--sm">
+                {{ __('ui.common.reset') }}
+            </a>
+        </div>
+    @endif
+
+    <div class="ldr-catalog-toolbar">
+        <p class="ldr-catalog-count">{{ __('ui.catalog.result_count', ['count' => $assets->total()]) }}</p>
+
+        <div class="ldr-catalog-sort">
+            <label for="catalog-sort" class="ldr-sr-only">{{ __('ui.catalog.sort_label') }}</label>
+            <select id="catalog-sort" class="ldr-select" onchange="this.form.submit()">
+                <option value="availability" {{ $filters['sort'] === 'availability' ? 'selected' : '' }}>{{ __('ui.catalog.sort_availability') }}</option>
+                <option value="name" {{ $filters['sort'] === 'name' ? 'selected' : '' }}>{{ __('ui.catalog.sort_name') }}</option>
+                <option value="popular" {{ $filters['sort'] === 'popular' ? 'selected' : '' }}>{{ __('ui.catalog.sort_popular') }}</option>
+                <option value="newest" {{ $filters['sort'] === 'newest' ? 'selected' : '' }}>{{ __('ui.catalog.sort_newest') }}</option>
+            </select>
+        </div>
+    </div>
 
     @if ($assets->isEmpty())
         <x-empty-state
@@ -72,7 +132,12 @@
     @else
         <div class="ldr-asset-grid">
             @foreach ($assets as $asset)
-                <x-asset-card :asset="$asset" :href="route('borrower.catalog.show', $asset)" />
+                <x-asset-card
+                    :asset="$asset"
+                    :href="route('borrower.catalog.show', $asset)"
+                    :availabilityByAsset="$availabilityByAsset[$asset->id] ?? []"
+                    :favorite="$asset->favorites->contains('user_id', auth()->id())"
+                />
             @endforeach
         </div>
 

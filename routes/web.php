@@ -15,10 +15,16 @@ use App\Http\Controllers\Admin\SearchController as AdminSearchController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Borrower\BookingController as BorrowerBookingController;
+use App\Http\Controllers\Borrower\BookingExtensionController as BorrowerBookingExtensionController;
 use App\Http\Controllers\Borrower\CatalogController as BorrowerCatalogController;
+use App\Http\Controllers\Borrower\FavoriteController as BorrowerFavoriteController;
+use App\Http\Controllers\Borrower\HelpController as BorrowerHelpController;
 use App\Http\Controllers\Borrower\HomeController as BorrowerHomeController;
 use App\Http\Controllers\Borrower\NotificationController as BorrowerNotificationController;
+use App\Http\Controllers\Borrower\PenaltyController as BorrowerPenaltyController;
+use App\Http\Controllers\Borrower\PaymentController as BorrowerPaymentController;
 use App\Http\Controllers\Borrower\ProfileController as BorrowerProfileController;
+use App\Http\Controllers\Borrower\TwoFactorController as BorrowerTwoFactorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -42,13 +48,43 @@ Route::middleware(['auth', 'active', 'role:borrower'])
         Route::post('bookings', [BorrowerBookingController::class, 'store'])->name('bookings.store');
         Route::get('bookings/{booking}', [BorrowerBookingController::class, 'show'])->name('bookings.show');
         Route::post('bookings/{booking}/cancel', [BorrowerBookingController::class, 'cancel'])->name('bookings.cancel');
+        Route::get('bookings/{booking}/document/{type}', [BorrowerBookingController::class, 'document'])->whereIn('type', ['letter', 'bap'])->name('bookings.document');
+        Route::get('bookings/{booking}/return-pass', [BorrowerBookingController::class, 'returnPass'])->name('bookings.return-pass');
+        Route::post('bookings/{booking}/extensions', [BorrowerBookingExtensionController::class, 'store'])->name('bookings.extensions.store');
+        Route::post('bookings/{booking}/extensions/{extension}/cancel', [BorrowerBookingExtensionController::class, 'cancel'])->name('bookings.extensions.cancel');
+        Route::get('bookings/{booking}/extension-form', [BorrowerBookingExtensionController::class, 'form'])->name('bookings.extension.form');
+        Route::post('bookings/{booking}/extension-request', [BorrowerBookingExtensionController::class, 'store'])->name('bookings.extension.request');
+
+        Route::post('catalog/{asset}/favorite', [BorrowerFavoriteController::class, 'store'])->name('catalog.favorite');
+        Route::delete('catalog/{asset}/favorite', [BorrowerFavoriteController::class, 'destroy'])->name('catalog.unfavorite');
 
         Route::get('notifications', [BorrowerNotificationController::class, 'index'])->name('notifications.index');
         Route::post('notifications/{notification}/read', [BorrowerNotificationController::class, 'markRead'])->name('notifications.read');
         Route::post('notifications/read-all', [BorrowerNotificationController::class, 'markAllRead'])->name('notifications.read-all');
 
+        Route::get('help', [BorrowerHelpController::class, '__invoke'])->name('help');
+
+        Route::get('two-factor', [BorrowerTwoFactorController::class, 'edit'])->name('two-factor.edit');
+        Route::put('two-factor', [BorrowerTwoFactorController::class, 'update'])->name('two-factor.update');
+
         Route::get('profile', [BorrowerProfileController::class, 'edit'])->name('profile.edit');
         Route::put('profile', [BorrowerProfileController::class, 'update'])->name('profile.update');
+    });
+
+// Denda dan pembayaran tetap terbuka untuk borrower yang ditangguhkan agar
+// denda dapat dilunasi (lihat docs/rencana/2026-11-09-rencana-borrower-mockup.md §4.17).
+Route::middleware(['auth', 'role:borrower'])
+    ->prefix('borrower')
+    ->name('borrower.')
+    ->group(function () {
+        Route::get('penalties', [BorrowerPenaltyController::class, 'index'])->name('penalties.index');
+        Route::get('penalties/{penalty}', [BorrowerPenaltyController::class, 'show'])->name('penalties.show');
+        Route::get('penalties/{penalty}/document/{type}', [BorrowerPenaltyController::class, 'document'])->whereIn('type', ['bap', 'receipt'])->name('penalties.document');
+        Route::post('penalties/{penalty}/payments', [BorrowerPaymentController::class, 'store'])->name('penalties.payments.store');
+        Route::post('penalties/{penalty}/installment-request', [BorrowerPaymentController::class, 'installment'])->name('penalties.installment.request');
+
+        Route::get('payments/{payment}', [BorrowerPaymentController::class, 'show'])->name('payments.show');
+        Route::post('payments/{payment}/proof', [BorrowerPenaltyController::class, 'submitProof'])->name('payments.proof');
     });
 
 Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_prodi,technician'])
@@ -89,6 +125,8 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
 
         Route::middleware('role:operator,organization_admin')->group(function () {
             Route::post('bookings/{booking}/reject', [AdminBookingController::class, 'reject'])->name('bookings.reject');
+            Route::post('bookings/{booking}/extensions/{extension}/approve', [AdminBookingController::class, 'approveExtension'])->name('bookings.extensions.approve');
+            Route::post('bookings/{booking}/extensions/{extension}/reject', [AdminBookingController::class, 'rejectExtension'])->name('bookings.extensions.reject');
 
             Route::get('handovers', [AdminHandoverController::class, 'index'])->name('handovers.index');
             Route::get('bookings/{booking}/handover', [AdminHandoverController::class, 'show'])->name('bookings.handover');

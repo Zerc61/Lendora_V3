@@ -53,6 +53,18 @@ return [
         'notification_due' => 'Peminjaman :code jatuh tempo :due. Segera kembalikan unit.',
         'timeline_picked_up' => 'Unit diambil oleh peminjam.',
         'timeline_returned' => 'Unit dikembalikan oleh peminjam.',
+        'extension_requested' => 'Pengajuan perpanjangan berhasil dikirim.',
+        'extension_cancelled' => 'Pengajuan perpanjangan dibatalkan.',
+        'extension_not_owner' => 'Anda tidak dapat mengajukan perpanjangan untuk peminjaman orang lain.',
+        'extension_only_active' => 'Perpanjangan hanya dapat diajukan saat peminjaman sedang aktif.',
+        'extension_after_current' => 'Tanggal kembali baru harus setelah :date.',
+        'extension_pending_exists' => 'Masih ada pengajuan perpanjangan yang menunggu keputusan.',
+        'extension_conflict' => 'Unit :asset sudah dijadwalkan dipinjam pada rentang tanggal tersebut.',
+        'extension_default_reason' => 'Perpanjangan peminjaman.',
+        'extension_approved' => 'Perpanjangan peminjaman disetujui.',
+        'extension_rejected' => 'Perpanjangan peminjaman ditolak.',
+        'extension_not_allowed' => 'Anda tidak memiliki wewenang memutuskan perpanjangan.',
+        'extension_not_pending' => 'Pengajuan perpanjangan ini sudah diputuskan.',
     ],
     'handover' => [
         'pickup_status' => 'Serah terima ambil hanya untuk peminjaman berstatus disetujui.',
@@ -94,5 +106,24 @@ return [
     ],
     'notification' => [
         'all_read' => 'Semua notifikasi ditandai sudah dibaca.',
+    ],
+    'penalty' => [
+        'created' => 'Denda berhasil dibuat.',
+        'paid' => 'Denda telah lunas, akses dipulihkan.',
+    ],
+    'payment' => [
+        'created' => 'Pembayaran berhasil diajukan, menunggu verifikasi.',
+        'proof_submitted' => 'Bukti pembayaran berhasil diunggah.',
+        'installment_requested' => 'Pengajuan cicilan berhasil dikirim.',
+        'not_payable' => 'Denda ini tidak dapat dibayar lagi.',
+        'already_paid' => 'Denda ini sudah lunas.',
+        'installment_pending' => 'Pengajuan cicilan untuk denda ini masih menunggu keputusan.',
+    ],
+    'favorite' => [
+        'added' => 'Ditambahkan ke favorit.',
+        'removed' => 'Dihapus dari favorit.',
+    ],
+    'two_factor' => [
+        'updated' => 'Pengaturan keamanan diperbarui.',
     ],
 ];

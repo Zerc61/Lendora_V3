@@ -6,8 +6,12 @@ use App\Enums\BookingStatus;
 use App\Enums\AssetStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\Announcement;
 use App\Models\Booking;
 use App\Models\BookingItem;
+use App\Services\AnnouncementService;
+use App\Services\BorrowerScoreService;
+use App\Services\QuotaService;
 use App\Services\SettingService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -81,15 +85,34 @@ class HomeController extends Controller
             ->where('status', AssetStatus::Available->value)
             ->count();
 
+        $announcements = app(AnnouncementService::class)->forBorrower($user);
+
+        $quota = app(QuotaService::class)->summary($user);
+        $compliance = app(BorrowerScoreService::class)->summary($user);
+        $sanctions = app(\App\Services\PenaltyService::class)->summaryFor($user);
+
+        $stepperData = [
+            ['label' => __('ui.booking.timeline_steps.submitted'), 'time' => $activeBooking?->created_at?->translatedFormat('d M H:i')],
+            ['label' => __('ui.booking.timeline_steps.approved'), 'time' => $activeBooking?->approved_at?->translatedFormat('d M H:i')],
+            ['label' => __('ui.booking.timeline_steps.picked_up'), 'time' => $activeBooking?->pickup_at?->translatedFormat('d M H:i')],
+            ['label' => __('ui.booking.timeline_steps.returned'), 'scheduled' => $activeBooking?->due_at?->translatedFormat('d M H:i')],
+            ['label' => __('ui.booking.timeline_steps.done'), 'scheduled' => '—'],
+        ];
+
         return view('borrower.home', [
             'user' => $user,
             'activeBooking' => $activeBooking,
             'dueInfo' => $dueInfo,
             'recommendations' => $recommendations,
             'announcement' => app(SettingService::class)->borrowerAnnouncement($user->organization_id),
+            'announcements' => $announcements,
             'unreadNotifications' => $user->unreadNotifications()->count(),
             'summary' => $summary,
             'availableAssets' => $availableAssets,
+            'quota' => $quota,
+            'compliance' => $compliance,
+            'sanctions' => $sanctions,
+            'stepperData' => $stepperData,
         ]);
     }
 }

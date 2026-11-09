@@ -6,6 +6,9 @@ use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateBorrowerProfileRequest;
 use App\Models\Booking;
+use App\Services\BorrowerScoreService;
+use App\Services\PenaltyService;
+use App\Services\QuotaService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -29,6 +32,10 @@ class ProfileController extends Controller
             ->latest('pickup_at')
             ->first();
 
+        $compliance = app(BorrowerScoreService::class)->summary($user);
+        $quota = app(QuotaService::class)->summary($user);
+        $sanctions = app(PenaltyService::class)->summaryFor($user);
+
         return view('borrower.profile.edit', [
             'user' => $user,
             'notificationTypes' => $user->notificationAudience(),
@@ -39,6 +46,9 @@ class ProfileController extends Controller
                 'total' => (int) $counts->sum(),
             ],
             'activeBooking' => $activeBooking,
+            'compliance' => $compliance,
+            'quota' => $quota,
+            'sanctions' => $sanctions,
         ]);
     }
 

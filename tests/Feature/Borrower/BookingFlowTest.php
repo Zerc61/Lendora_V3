@@ -145,6 +145,101 @@ class BookingFlowTest extends TestCase
             ->assertDontSee($other->code);
     }
 
+    public function test_borrower_requests_an_extension_and_sees_it_pending(): void
+    {
+        $booking = $this->activeBooking($this->borrower, $this->asset());
+
+        $this->actingAs($this->borrower)
+            ->post(route('borrower.bookings.extension.request', $booking), [
+                'new_end_date' => '2026-12-10',
+                'reason' => 'Kegiatan tambahan',
+            ])
+            ->assertRedirect(route('borrower.bookings.show', $booking));
+
+        $this->assertDatabaseHas('booking_extensions', [
+            'booking_id' => $booking->id,
+            'requested_by' => $this->borrower->id,
+            'status' => 'pending',
+            'reason' => 'Kegiatan tambahan',
+        ]);
+
+        $this->actingAs($this->borrower)
+            ->get(route('borrower.bookings.show', $booking))
+            ->assertOk()
+            ->assertSee('Kegiatan tambahan')
+            ->assertSee(route('borrower.bookings.extensions.cancel', [$booking, $booking->extensions()->first()]), false);
+
+        $extension = $booking->extensions()->firstOrFail();
+
+        $this->actingAs($this->borrower)
+            ->post(route('borrower.bookings.extensions.cancel', [$booking, $extension]))
+            ->assertRedirect(route('borrower.bookings.show', $booking));
+
+        $this->assertSame('cancelled', $extension->fresh()->status->value);
+    }
+
+    public function test_extension_form_and_buttons_link_to_the_form_route(): void
+    {
+        $booking = $this->activeBooking($this->borrower, $this->asset());
+
+        $this->actingAs($this->borrower)
+            ->get(route('borrower.bookings.show', $booking))
+            ->assertOk()
+            ->assertSee(route('borrower.bookings.extension.form', $booking), false);
+
+        $this->actingAs($this->borrower)
+            ->get(route('borrower.bookings.extension.form', $booking))
+            ->assertOk()
+            ->assertSee(route('borrower.bookings.extension.request', $booking), false);
+    }
+
+    public function test_extension_is_rejected_when_the_asset_is_booked(): void
+    {
+        $asset = $this->asset();
+        $booking = $this->activeBooking($this->borrower, $asset);
+
+        $otherBooking = $this->pendingBooking($this->otherBorrower, $asset, '2026-12-06', '2026-12-09');
+        app(BookingService::class)->approve($otherBooking, $this->operator);
+
+        $this->actingAs($this->borrower)
+            ->post(route('borrower.bookings.extension.request', $booking), [
+                'new_end_date' => '2026-12-10',
+            ])
+            ->assertSessionHasErrors('new_end_date');
+
+        $this->assertDatabaseCount('booking_extensions', 0);
+    }
+
+    public function test_borrower_cannot_extend_another_borrowers_booking(): void
+    {
+        $booking = $this->activeBooking($this->otherBorrower, $this->asset());
+
+        $this->actingAs($this->borrower)
+            ->get(route('borrower.bookings.extension.form', $booking))
+            ->assertForbidden();
+
+        $this->actingAs($this->borrower)
+            ->post(route('borrower.bookings.extension.request', $booking), [
+                'new_end_date' => '2026-12-10',
+            ])
+            ->assertForbidden();
+    }
+
+    private function activeBooking(User $borrower, Asset $asset): Booking
+    {
+        $booking = $this->pendingBooking($borrower, $asset, '2026-12-01', '2026-12-04');
+
+        $booking->update([
+            'status' => BookingStatus::Active,
+            'pickup_at' => now(),
+            'due_at' => Carbon::parse('2026-12-04'),
+        ]);
+
+        $booking->items()->update(['status' => 'picked_up']);
+
+        return $booking;
+    }
+
     private function asset(): Asset
     {
         return Asset::create([

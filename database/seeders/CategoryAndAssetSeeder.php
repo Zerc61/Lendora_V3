@@ -57,6 +57,10 @@ class CategoryAndAssetSeeder extends Seeder
                     ...$data,
                     'organization_id' => $organization->id,
                     'category_id' => $categories[$categorySlug]->id,
+                    'grade' => 'A',
+                    'access_level' => 'open',
+                    'condition_score' => 96,
+                    'is_featured' => in_array($data['code'], ['LDR-CAM-0001', 'LDR-LEN-0001', 'LDR-TRI-0001', 'LDR-LMP-0001'], true),
                 ],
             );
 

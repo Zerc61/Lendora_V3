@@ -34,7 +34,12 @@ class BorrowerShowcaseSeeder extends Seeder
                 'nim' => '2207412089',
                 'study_program' => 'Desain Komunikasi Visual',
                 'semester' => 5,
-                'lab_tier' => 'A',
+                'cohort_year' => 2022,
+                'study_concentration' => 'Sinematografi',
+                'dpa_name' => 'Dr. Hendra Wijaya',
+                'dpa_nidn' => '0412088501',
+                'compliance_score' => 98,
+                'lab_tier' => 'A+',
                 'lab_member_id' => 'MP-2024-8842',
                 'academic_verified_at' => now(),
                 'email_verified_at' => now(),
@@ -50,7 +55,15 @@ class BorrowerShowcaseSeeder extends Seeder
 
             $asset = Asset::updateOrCreate(
                 ['code' => $data['code']],
-                [...$data, 'organization_id' => $organization->id, 'category_id' => $category->id],
+                [
+                    ...$data,
+                    'organization_id' => $organization->id,
+                    'category_id' => $category->id,
+                    'grade' => $data['purchase_price'] >= 30000000 ? 'A' : 'B',
+                    'access_level' => in_array($data['code'], ['LDR-CAM-0007', 'LDR-CAM-0008'], true) ? 'supervisor_letter' : 'open',
+                    'condition_score' => 96,
+                    'is_featured' => in_array($data['code'], ['LDR-CAM-0007', 'LDR-LEN-0005', 'LDR-TRI-0001', 'LDR-LMP-0004'], true),
+                ],
             );
 
             $this->attachPhoto($asset, $image);

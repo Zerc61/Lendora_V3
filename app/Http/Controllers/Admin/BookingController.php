@@ -8,6 +8,7 @@ use App\Http\Requests\ApproveBookingRequest;
 use App\Http\Requests\RejectBookingRequest;
 use App\Models\Asset;
 use App\Models\Booking;
+use App\Models\BookingExtension;
 use App\Models\Category;
 use App\Services\BookingService;
 use Carbon\Carbon;
@@ -96,7 +97,7 @@ class BookingController extends Controller
     {
         $this->authorize('view', $booking);
 
-        $booking->load(['items.asset.photos', 'borrower', 'approvedBy', 'handovers.performedBy']);
+        $booking->load(['items.asset.photos', 'borrower', 'approvedBy', 'handovers.performedBy', 'extensions']);
 
         return view('admin.bookings.show', [
             'booking' => $booking,
@@ -122,6 +123,36 @@ class BookingController extends Controller
         return redirect()
             ->route('admin.bookings.show', $booking)
             ->with('status', __('messages.booking.rejected'));
+    }
+
+    public function approveExtension(Request $request, Booking $booking, BookingExtension $extension): RedirectResponse
+    {
+        abort_unless($extension->booking_id === $booking->id, 404);
+
+        $this->bookings->approveExtension($extension, $request->user());
+
+        return redirect()
+            ->route('admin.bookings.show', $booking)
+            ->with('status', __('messages.booking.extension_approved'));
+    }
+
+    public function rejectExtension(Request $request, Booking $booking, BookingExtension $extension): RedirectResponse
+    {
+        abort_unless($extension->booking_id === $booking->id, 404);
+
+        $request->validate([
+            'rejection_reason' => ['required', 'string', 'min:5', 'max:255'],
+        ]);
+
+        $this->bookings->rejectExtension(
+            $extension,
+            $request->user(),
+            (string) $request->input('rejection_reason'),
+        );
+
+        return redirect()
+            ->route('admin.bookings.show', $booking)
+            ->with('status', __('messages.booking.extension_rejected'));
     }
 
     public function calendar(Request $request): View

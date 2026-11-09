@@ -4,11 +4,18 @@
 @section('nav', 'catalog')
 
 @section('content')
+    @php
+        use App\Enums\AssetStatus;
+    @endphp
     <div class="ldr-detail">
-        <a class="ldr-back-link" href="{{ route('borrower.catalog.index') }}">
-            <x-icon name="chevron-left" :size="18" />
-            {{ __('ui.catalog.back_to_catalog') }}
-        </a>
+        <nav class="ldr-breadcrumbs" aria-label="{{ __('ui.breadcrumb') }}">
+            <ol class="ldr-breadcrumbs__list">
+                <li><a href="{{ route('borrower.home') }}">{{ __('ui.nav.home') }}</a></li>
+                <li><a href="{{ route('borrower.catalog.index') }}">{{ __('ui.nav.catalog') }}</a></li>
+                <li><a href="{{ route('borrower.catalog.index', ['category_id' => $asset->category_id]) }}">{{ $asset->category->name }}</a></li>
+                <li aria-current="page">{{ $asset->name }}</li>
+            </ol>
+        </nav>
 
         <div class="ldr-detail__layout">
             <div class="ldr-detail__media">
@@ -40,6 +47,24 @@
                         </div>
                     @endif
                 </div>
+
+@php
+    $gradeValue = $asset->grade ? (is_string($asset->grade) ? strtolower($asset->grade) : strtolower($asset->grade->value)) : null;
+@endphp
+
+                @if ($gradeValue)
+                    <div class="ldr-grade-badge">
+                        <span class="ldr-badge ldr-badge--grade ldr-badge--grade-{{ $gradeValue }}">
+                            {{ __('ui.asset.grade.' . $gradeValue) }}
+                        </span>
+                    </div>
+                @endif
+
+                @if ($favorite === false)
+                    <button type="button" class="ldr-favorite-float" data-asset="{{ $asset->id }}" data-favorite-toggle aria-label="{{ __('ui.common.add_to_favorites') }}">
+                        <x-icon name="heart" :size="20" />
+                    </button>
+                @endif
             </div>
 
             <div class="ldr-detail__info">
@@ -56,6 +81,19 @@
                         <x-condition-badge :condition="$asset->condition_status->value" />
                     </div>
                 </header>
+
+                <div class="ldr-detail__actions">
+                    <a href="{{ route('borrower.bookings.create', ['assets' => [$asset->id]]) }}" class="ldr-btn ldr-btn--primary ldr-btn--block {{ $isAvailable ? '' : 'ldr-btn--disabled' }} {{ !$isAvailable ? 'disabled' : '' }}">
+                        <x-icon name="calendar" :size="16" />
+                        {{ $isAvailable ? __('ui.catalog.apply') : __('ui.catalog.apply_unavailable') }}
+                    </a>
+
+                    @if ($isAvailable)
+                        <a href="#availability-calendar" class="ldr-btn ldr-btn--secondary ldr-btn--block">
+                            {{ __('ui.catalog.check_availability') }}
+                        </a>
+                    @endif
+                </div>
 
                 @if ($asset->description)
                     <section class="ldr-card">
@@ -90,43 +128,50 @@
                     </dl>
                 </section>
 
-                <section class="ldr-card">
-                    <h2>{{ __('ui.catalog.availability') }}</h2>
+                @if ($asset->components->isNotEmpty())
+                    <section class="ldr-card">
+                        <h2>{{ __('ui.asset.bundle') }}</h2>
+                        <x-borrower.asset-bundle-list :components="$asset->components" />
+                    </section>
+                @endif
 
-                    <div class="ldr-availability" role="list">
+                @if ($asset->qcChecks->isNotEmpty())
+                    <section class="ldr-card">
+                        <h2>{{ __('ui.asset.qc_history') }}</h2>
+                        <x-borrower.asset-qc-card :checks="$asset->qcChecks" />
+                    </section>
+                @endif
+
+                <section class="ldr-card" id="availability-calendar">
+                    <h2>{{ __('ui.catalog.availability_30') }}</h2>
+
+                    <div class="ldr-availability">
                         @foreach ($availabilityDays as $day)
-                            <div class="ldr-availability__day {{ $day['available'] ? 'is-available' : 'is-unavailable' }}"
+                            <div class="ldr-availability__day {{ $day['status'] === 'available' ? 'is-available' : 'is-unavailable' }}"
                                  role="listitem"
-                                 title="{{ $day['date']->translatedFormat('d M Y') }}">
+                                 title="{{ $day['label'] ?? __('ui.catalog.availability_available') }}">
                                 <span class="ldr-availability__weekday">{{ $day['date']->translatedFormat('D') }}</span>
                                 <span class="ldr-availability__date">{{ $day['date']->format('j') }}</span>
                             </div>
                         @endforeach
                     </div>
-
-                    <div class="ldr-availability__legend">
-                        <span><i class="is-available"></i> {{ __('ui.catalog.availability_available') }}</span>
-                        <span><i class="is-unavailable"></i> {{ __('ui.catalog.availability_unavailable') }}</span>
-                    </div>
                 </section>
 
-                <div class="ldr-detail-cta">
-                    @if ($isAvailable)
-                        <a class="ldr-btn ldr-btn--primary ldr-btn--block"
-                           href="{{ route('borrower.bookings.create', ['assets' => [$asset->id]]) }}">
-                            {{ __('ui.catalog.apply') }}
-                        </a>
-                    @else
-                        <button type="button" class="ldr-btn ldr-btn--primary ldr-btn--block" disabled>
-                            {{ __('ui.catalog.apply') }}
-                        </button>
-                        <p class="ldr-detail-cta__reason">
-                            {{ $asset->status === App\Enums\AssetStatus::Reserved
-                                ? __('ui.catalog.apply_reserved')
-                                : __('ui.catalog.apply_unavailable') }}
-                        </p>
-                    @endif
-                </div>
+                @if ($compatibleAddons->isNotEmpty())
+                    <section class="ldr-card">
+                        <h2>{{ __('ui.asset.compatible_addons') }}</h2>
+                        <div class="ldr-addon-grid">
+                            @foreach ($compatibleAddons as $addon)
+                                <article class="ldr-addon-card">
+                                    <a href="{{ route('borrower.catalog.show', $addon) }}">
+                                        <span class="ldr-addon-card__name">{{ $addon->name }}</span>
+                                        <span class="ldr-addon-card__code">{{ $addon->code }}</span>
+                                    </a>
+                                </article>
+                            @endforeach
+                        </div>
+                    </section>
+                @endif
             </div>
         </div>
     </div>

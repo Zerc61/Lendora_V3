@@ -51,3 +51,19 @@ Status pekerjaan dicatat di `docs/rencana/README.md`.
 
 - [Notifikasi, profil, pencarian staf dan akses aset teknisi](2026-11-09-notifikasi-profil-pencarian.md)
 - [Perbaikan foto produk tidak muncul](2026-11-09-perbaikan-foto.md)
+
+## Perbaikan Bug UI — 2026-11-09
+
+- [Batch 1: enum, badge status, dan regresi UI](2026-11-09-bug-ui-batch-1.md)
+- [Batch 2: pembayaran, penalti, 2FA, dan route ganda](2026-11-09-bug-ui-batch-2.md)
+- [Batch 3: favorit, kalender, progres, terjemahan, kontak operator](2026-11-09-bug-ui-batch-3.md)
+- [Batch 4: alur perpanjangan peminjaman](2026-11-09-bug-ui-batch-4.md)
+- [Batch 5: pembayaran denda dan cicilan](2026-11-09-bug-ui-batch-5.md)
+
+- [Batch 6: kelengkapan CSS dan halaman pengajuan](2026-11-09-bug-ui-batch-6.md)
+
+## Redesign Notifikasi — 2026-11-09
+
+- [Panel samping notifikasi](2026-11-09-notifikasi-sidebar.md)
+
+- [Kartu aset katalog](2026-11-09-kartu-aset.md)

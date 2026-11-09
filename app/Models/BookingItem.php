@@ -39,4 +39,9 @@ class BookingItem extends Model
     {
         return $this->hasOne(Inspection::class)->latestOfMany();
     }
+
+    public function review(): HasOne
+    {
+        return $this->hasOne(AssetReview::class);
+    }
 }

@@ -54,8 +54,7 @@ class BookingPolicy
     }
 
     public function cancel(User $user, Booking $booking): bool
-    {
-        if ($user->organization_id !== $booking->organization_id) {
+    {        if ($user->organization_id !== $booking->organization_id) {
             return false;
         }
 
@@ -68,5 +67,12 @@ class BookingPolicy
         }
 
         return false;
+    }
+
+    public function requestExtension(User $user, Booking $booking): bool
+    {
+        return $user->organization_id === $booking->organization_id
+            && $booking->borrower_id === $user->id
+            && $booking->status === BookingStatus::Active;
     }
 }
