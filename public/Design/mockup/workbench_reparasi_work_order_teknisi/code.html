@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"violet-bg":"#F5F3FF","surface":"#F5F5F5","surface-container-lowest":"#ffffff","secondary-container":"#fd651e","success":"#16A34A","surface-bright":"#fcf9f8","on-secondary-fixed-variant":"#7f2b00","on-secondary-container":"#571a00","danger-bg":"#FEF2F2","outline":"#8c7164","on-background":"#1b1c1c","secondary-fixed-dim":"#ffb599","violet":"#7C3AED","on-primary-fixed-variant":"#783200","on-surface-variant":"#584237","warning":"#D97706","inverse-surface":"#303030","secondary":"#a73a00","danger":"#DC2626","success-bg":"#F0FDF4","on-error":"#ffffff","primary-fixed":"#ffdbca","on-secondary":"#ffffff","primary-container":"#f97316","inverse-on-surface":"#f3f0ef","text-muted":"#6B7280","tertiary-container":"#a09a91","surface-dim":"#dcd9d9","tertiary":"#625e56","surface-container":"#f0eded","border":"#E5E7EB","surface-white":"#FFFFFF","on-primary":"#ffffff","tertiary-fixed":"#e9e1d8","warning-bg":"#FFFBEB","info-bg":"#F0F9FF","error-container":"#ffdad6","surface-container-highest":"#e4e2e1","tertiary-fixed-dim":"#ccc5bc","on-tertiary-fixed":"#1e1b15","on-tertiary-container":"#36322c","surface-container-high":"#eae7e7","secondary-fixed":"#ffdbce","on-surface":"#1b1c1c","on-error-container":"#93000a","surface-tint":"#9d4300","on-tertiary-fixed-variant":"#4a463f","info":"#0284C7","on-primary-container":"#582200","outline-variant":"#e0c0b1","primary-fixed-dim":"#ffb690","inverse-primary":"#ffb690","error":"#ba1a1a","on-tertiary":"#ffffff","primary":"#9d4300","surface-variant":"#e4e2e1","background":"#fcf9f8","on-primary-fixed":"#341100","on-secondary-fixed":"#370e00","surface-container-low":"#f6f3f2"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-sm":"0.5rem",margin:"1rem","space-xs":"0.25rem","space-xl":"2rem",gutter:"1rem","space-lg":"1.5rem","space-md":"1rem"},fontFamily:{"headline-md":["Plus Jakarta Sans"],"body-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-md":["Inter"],"code-sm":["JetBrains Mono"],caption:["Inter"],"body-sm":["Inter"],display:["Plus Jakarta Sans"]},fontSize:{"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"headline-sm":["17px",{lineHeight:"24px",fontWeight:"600"}],"headline-lg":["24px",{lineHeight:"32px",fontWeight:"700"}],"label-md":["13px",{lineHeight:"20px",fontWeight:"600"}],"code-sm":["13px",{lineHeight:"18px",fontWeight:"500"}],caption:["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],display:["28px",{lineHeight:"36px",fontWeight:"800"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-white z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-space-md flex items-center gap-space-sm bg-surface-white"><img alt="lendora-favicon-180-siklus.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Lendora</span><span class="px-1.5 py-0.5 rounded bg-warning-bg text-primary-container font-caption text-caption uppercase">Teknisi Lab</span></div></div></div><div class="overflow-y-auto flex-1 px-space-md py-space-sm space-y-space-md"><div class="space-y-space-xs"><div class="px-space-sm py-1 font-caption text-caption text-text-muted uppercase tracking-wider">Utama</div><nav class="space-y-1" data-active-classes="bg-warning-bg text-primary-container font-headline-sm text-label-md rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-sm" data-path="dashboard-teknisi" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard Teknisi</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-caption text-caption text-text-muted uppercase tracking-wider">Tugas &amp; Servis</div><nav class="space-y-1" data-active-classes="bg-warning-bg text-primary-container font-headline-sm text-label-md rounded-lg"><a aria-current="page" class="flex items-center justify-between px-space-sm py-2.5 transition-colors bg-warning-bg text-primary-container font-headline-sm text-label-md rounded-lg" data-path="tugas-perbaikan-saya" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">build</span><span>Tugas Perbaikan Saya</span></div><span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-caption text-caption">4</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-sm" data-path="jadwal-kalibrasi-servis" href="#"><span class="material-symbols-outlined text-[20px]">calendar_today</span><span>Jadwal Kalibrasi &amp; Servis</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-sm" data-path="riwayat-selesai" href="#"><span class="material-symbols-outlined text-[20px]">check_circle</span><span>Riwayat Selesai</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-caption text-caption text-text-muted uppercase tracking-wider">Operasional Lab</div><nav class="space-y-1" data-active-classes="bg-warning-bg text-primary-container font-headline-sm text-label-md rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-sm" data-path="pemeriksaan-inspeksi" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span>Pemeriksaan (Inspeksi)</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-sm" data-path="katalog-suku-cadang-logistik" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Katalog Suku Cadang &amp; Logistik</span></a></nav></div></div></div><div class="p-space-md bg-surface-container-low"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-full bg-warning-bg text-primary-container font-headline-sm text-label-md flex items-center justify-center shrink-0 font-bold">AP</div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface truncate font-semibold">Andi Pratama</span><span class="font-caption text-caption text-text-muted truncate">Teknisi Lab AV</span></div></div><a class="w-8 h-8 flex items-center justify-center rounded-lg text-text-muted hover:text-danger hover:bg-danger-bg transition-colors shrink-0" data-path="login" href="#" title="Keluar"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-white/95 backdrop-blur-md z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md flex-1 max-w-2xl"><div class="flex items-center gap-space-xs font-body-sm text-body-sm text-text-muted shrink-0"><span>Utama</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-on-surface font-label-md text-label-md">Dashboard Teknisi</span></div><div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-success-bg text-success font-caption text-caption shrink-0"><span class="w-2 h-2 rounded-full bg-success"></span><span>Shift Siaga · Lab Lemari B3</span></div><div class="relative flex-1 max-w-md hidden xl:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-primary-container transition-all" placeholder="Cari nomor tiket, kode unit (LDR-CAM-...), serial number..." type="text"/></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-bg text-success font-caption text-caption"><span class="w-2 h-2 rounded-full bg-success animate-pulse"></span><span>Status: Aktif Bertugas</span></div><a class="h-10 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-1.5 hover:bg-secondary-container transition-colors shadow-sm" data-path="catat-servis-kilat" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span>Catat Servis Kilat</span></a><a class="relative w-10 h-10 rounded-lg flex items-center justify-center text-text-muted hover:text-on-surface hover:bg-surface-container-low transition-colors" data-path="notifikasi" href="#"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-danger text-on-error font-caption text-[10px] leading-none rounded-full flex items-center justify-center font-bold">3</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 bg-surface min-h-[calc(100vh-4rem)] flex-1"><div class="flex flex-col w-full pb-16">
+<!-- Top Command & Status Bar -->
+<div class="bg-surface-white px-space-lg py-space-md shadow-sm">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-space-md">
+<!-- Breadcrumb and Asset Identity -->
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-space-xs font-caption text-caption text-text-muted">
+<a class="hover:text-primary-container transition-colors" data-path="tugas-perbaikan-saya" href="#">Tugas Perbaikan Saya</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold">TKT-MT-2026-0031</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm mt-0.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[24px]">precision_manufacturing</span>
+<span class="font-code-sm text-headline-sm text-on-surface tracking-tight font-bold">LDR-CAM-0002</span>
+</div>
+<span class="font-headline-md text-headline-sm text-on-surface font-bold">Sony FX3 Cinema Line</span>
+<div class="flex items-center gap-1.5 ml-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-warning-bg text-warning font-caption text-caption">
+<span class="w-1.5 h-1.5 rounded-full bg-warning animate-pulse"></span>
+              Sedang Dikerjakan
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-danger-bg text-danger font-caption text-caption">
+<span class="material-symbols-outlined text-[13px]">priority_high</span>
+              Prioritas Tinggi (Peralatan Lab Inti)
+            </span>
+</div>
+</div>
+</div>
+<!-- Action Buttons Top-Right -->
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-11 px-4 rounded-xl bg-surface-white hover:bg-surface text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">pause_circle</span>
+<span>Tunda / Minta Suku Cadang</span>
+</button>
+<button class="h-11 px-5 rounded-xl bg-primary-container hover:bg-secondary-container text-on-primary font-label-md text-label-md flex items-center gap-2 transition-all shadow-md hover:shadow-lg active:scale-[0.99]" id="btn-complete-qc" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Selesaikan &amp; Terbitkan Lolos QC</span>
+<kbd class="ml-1 px-1.5 py-0.5 rounded bg-on-primary-container/20 text-on-primary font-code-sm text-[11px] leading-none">F2</kbd>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="max-w-[1440px] w-full mx-auto px-space-lg pt-space-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- ========================================== -->
+<!-- LEFT COLUMN: Work Order & Form (65% / 8 col) -->
+<!-- ========================================== -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- CARD 1: Initial Trouble Ticket & Damage Assessment -->
+<section class="bg-surface-white rounded-xl shadow-sm p-space-lg">
+<div class="flex items-start justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-danger-bg text-danger flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">report_problem</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Identitas Masalah &amp; Laporan Kerusakan Awal</h2>
+<p class="font-caption text-caption text-text-muted">Tiket terbit otomatis via modul inspeksi pasca-pengembalian peminjam</p>
+</div>
+</div>
+<span class="font-code-sm text-caption text-text-muted px-2 py-1 rounded bg-surface">LOG #902-INSP</span>
+</div>
+<!-- Metadata Pill Bar -->
+<div class="bg-surface-container-low rounded-lg p-space-md mb-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-text-muted text-[18px]">person</span>
+<span class="font-caption text-caption text-text-muted">Dilaporkan oleh:</span>
+<span class="font-label-md text-body-sm font-semibold text-on-surface">Operator Budi Santoso</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-muted font-body-sm text-body-sm">
+<span>via Inspeksi W9 pasca booking</span>
+<a class="font-code-sm text-code-sm text-primary-container font-semibold hover:underline" href="#">LDR-BK-2026-0007</a>
+<span class="font-caption text-caption text-text-muted">(Ani Rahmawati)</span>
+</div>
+</div>
+<!-- Gejala & Keluhan Description -->
+<div class="space-y-1.5 mb-space-md">
+<label class="font-caption text-caption text-text-muted uppercase tracking-wider block">Gejala &amp; Catatan Keluhan Lapangan</label>
+<div class="p-3.5 rounded-lg bg-surface font-body-md text-body-md text-on-surface leading-relaxed">
+              “Layar monitor LCD lipat kadang blackout saat diputar 180 derajat. Terdapat goresan halus di sisi bodi bawah dan baut tripod mount agak longgar.”
+            </div>
+</div>
+<!-- 3 Damaged Asset Photo Evidence Thumbnails -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Lampiran Bukti Visual Fisik (3 Foto)</span>
+<span class="font-caption text-caption text-danger flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-danger"></span> Lingkaran merah menandai fokus anomali
+              </span>
+</div>
+<div class="grid grid-cols-3 gap-space-md">
+<!-- Photo 1: LCD Ribbon Area -->
+<div class="relative group rounded-lg overflow-hidden bg-surface-container aspect-video">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-105" data-alt="Close-up macro shot of Sony FX3 articulated flip-out LCD screen hinge showing the internal delicate ribbon cable pin with subtle hairline pinching and a digital red diagnostic highlight ring around the worn flex section, warm workshop lab lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASAxCKo5KFRr_sDwMNLErPeCG1WpewEaFzqrXJrC83f7MjvM9pKAGvAoOw4Rqkh6WobW6yAT91RoQe07jDpjKcGJcWhem1M3HmbQ8m9PSjaQXZc6Z_8WIFqftvmdht2MWorDDHo-nK_DtiIHTkpOgv1Sz3-BXROsaYgX-_4Q7UZ7bentz0TooMSfxvq6M80PvAC0gutD04GoVp5BNZ6D3p6j0SWwwWeKMmegGAAxRH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-inverse-surface/75 text-inverse-on-surface font-code-sm text-[11px]">
+                  FOTO 01
+                </div>
+<div class="absolute bottom-2 left-2 right-2 text-inverse-on-surface font-caption text-[11px] leading-tight truncate">
+                  Engsel Swivel &amp; Flex Pin
+                </div>
+</div>
+<!-- Photo 2: Bottom Magnesium Body Scratches -->
+<div class="relative group rounded-lg overflow-hidden bg-surface-container aspect-video">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-105" data-alt="Underbelly magnesium alloy chassis of a Sony cinema camera highlighting micro-scratches near base plate and tripod socket, sharp industrial workbench background with an orange calibration tape marking the damage point." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJNZ7xevGeZOYa6F3WUmJzsdm_0WgOT9d8A7HW9KCTSSVAuwt8_0mDDBhtXaawvbNcIVruh1whUfHKaBBWqz85XukbCkflfel1VhSYnT4wFvxBA2dEIkwfCpzyE4UqyBOhkZus74YZWhzOwgb2E2ALmmAqw0XIIUO7WfqfgMVUwK4YbvXL8Y_L_BrV7PXmTs7yhpIVN0vgv7ep0ok2huri0UKGuvRFKVVuemUOwnhO"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-inverse-surface/75 text-inverse-on-surface font-code-sm text-[11px]">
+                  FOTO 02
+                </div>
+<div class="absolute bottom-2 left-2 right-2 text-inverse-on-surface font-caption text-[11px] leading-tight truncate">
+                  Goresan Pelat Dasar Sasis
+                </div>
+</div>
+<!-- Photo 3: Loose Tripod Mount Threads -->
+<div class="relative group rounded-lg overflow-hidden bg-surface-container aspect-video">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-105" data-alt="Detailed macro view of the quarter-inch tripod mount thread on camera bottom plate with red inspection ring noting slightly stripped screw collar, stainless steel precision tool resting nearby." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAfNk2OpBWJlxmOFCfUivpNO26s_4u30kNriVNwzpJHC1OHXya35W_SlXTEkf1gfk03i74u96hR2KU9lk1owHszmDoTF4zDWsIns90Dk4Eu5_iSIRLOAX0PV6XoBjAyaSeQ5vHH7ftSqlKMz-zpaX3i9Y6nZBSgo7GhBfnx62LX-YCsJ7ope5NwamAvY2USN9SejfwXF1AHc2R8v6sFhWkiGyuWfrn_iWveuMYTEat"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-inverse-surface/75 text-inverse-on-surface font-code-sm text-[11px]">
+                  FOTO 03
+                </div>
+<div class="absolute bottom-2 left-2 right-2 text-inverse-on-surface font-caption text-[11px] leading-tight truncate">
+                  Ulir Mount Tripod 1/4"
+                </div>
+</div>
+</div>
+</div>
+</section>
+<!-- CARD 2: Interactive Diagnostic & Repair Workbench Form -->
+<section class="bg-surface-white rounded-xl shadow-sm p-space-lg">
+<div class="flex items-center justify-between pb-space-md mb-space-md bg-surface-container-low -mx-space-lg -mt-space-lg p-space-lg rounded-t-xl">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[20px]">handyman</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Lembar Kerja Perbaikan &amp; Diagnostik Teknisi</h2>
+<p class="font-caption text-caption text-text-muted">Isi verifikasi perbaikan secara berurutan sebelum penandatanganan QC</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 font-caption text-caption text-success font-semibold">
+<span class="material-symbols-outlined text-[16px]">cloud_done</span> Autosave aktif
+              </span>
+</div>
+</div>
+<form class="space-y-space-lg" id="workbench-form" onsubmit="event.preventDefault();">
+<!-- Step 1: Diagnosis Akar Masalah -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary font-caption text-caption flex items-center justify-center font-bold">1</span>
+<label class="font-headline-sm text-headline-sm text-on-surface font-bold" for="root-cause">Diagnosis Akar Masalah (Root Cause)</label>
+</div>
+<span class="font-caption text-caption text-text-muted">Wajib diisi</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Deskripsikan temuan teknis mendalam mengenai penyebab komponen gagal fungsi.</p>
+<div class="relative">
+<textarea class="w-full p-3.5 rounded-lg bg-surface-container-low font-body-md text-body-md text-on-surface placeholder:text-text-muted focus:outline-none focus:bg-surface-white transition-all resize-none shadow-inner" id="root-cause" rows="2" style="box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);">Kabel pita fleksibel LCD (ribbon cable) terjepit engsel putar dan mengalami micro-tear akibat keletihan rotasi serta baut engsel longgar.</textarea>
+</div>
+</div>
+<!-- Step 2: Tindakan yang Diambil (Interactive Checklist) -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary font-caption text-caption flex items-center justify-center font-bold">2</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Tindakan Perbaikan yang Diambil (Checklist QC)</span>
+</div>
+<span class="font-code-sm text-code-sm text-primary-container font-semibold" id="checklist-progress">2 / 5 Selesai</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary-container transition-all duration-300" id="checklist-bar" style="width: 40%;"></div>
+</div>
+<div class="space-y-2 pt-1" id="repair-checklist-container">
+<!-- Checkbox 1 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface transition-colors cursor-pointer select-none">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" onchange="updateChecklistProgress()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface line-through opacity-80">Pembongkaran housing belakang &amp; bezel LCD</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption font-semibold">Selesai</span>
+</label>
+<!-- Checkbox 2 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface transition-colors cursor-pointer select-none">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" onchange="updateChecklistProgress()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface line-through opacity-80">Penggantian pita kabel fleksibel part OEM <span class="font-code-sm font-semibold text-primary">#FX3-FLEX-01</span></span>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption font-semibold">Selesai</span>
+</label>
+<!-- Checkbox 3 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-warning-bg/40 hover:bg-warning-bg/60 transition-colors cursor-pointer select-none">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" onchange="updateChecklistProgress()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface font-medium">Pengencangan baut rangka magnesium &amp; kalibrasi engsel swivel</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-warning-bg text-warning font-caption text-caption font-semibold animate-pulse">Sedang Berlangsung</span>
+</label>
+<!-- Checkbox 4 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface transition-colors cursor-pointer select-none">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" onchange="updateChecklistProgress()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface">Pembersihan sensor optik Full-Frame &amp; fan pendingin aktif</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface text-text-muted font-caption text-caption">Tertunda</span>
+</label>
+<!-- Checkbox 5 -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface transition-colors cursor-pointer select-none">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" onchange="updateChecklistProgress()" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface">Pengujian kestabilan rekaman 4K 120fps selama 30 menit (Stress Test)</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface text-text-muted font-caption text-caption">Menunggu</span>
+</label>
+</div>
+</div>
+<!-- Step 3: Biaya & Logistik Pemeliharaan -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary font-caption text-caption flex items-center justify-center font-bold">3</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Biaya &amp; Logistik Pemeliharaan</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="font-caption text-caption text-text-muted uppercase tracking-wider block" for="part-cost">Biaya Suku Cadang (Sparepart OEM)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 font-code-sm text-code-sm text-text-muted">Rp</span>
+<input class="w-full h-11 pl-10 pr-3 rounded-lg bg-surface-container-low font-code-sm text-body-md text-on-surface focus:outline-none focus:bg-surface-white focus:ring-2 focus:ring-primary-container" id="part-cost" oninput="calculateTotalCost()" type="number" value="650000"/>
+</div>
+<span class="font-caption text-caption text-text-muted block">Komponen: Ribbon Cable OEM Sony FX3 (#FX3-FLEX-01)</span>
+</div>
+<div class="space-y-1.5">
+<label class="font-caption text-caption text-text-muted uppercase tracking-wider block" for="labor-cost">Estimasi Biaya Jasa / Pihak Ketiga</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 font-code-sm text-code-sm text-text-muted">Rp</span>
+<input class="w-full h-11 pl-10 pr-3 rounded-lg bg-surface-container-low font-code-sm text-body-md text-on-surface focus:outline-none focus:bg-surface-white focus:ring-2 focus:ring-primary-container" id="labor-cost" oninput="calculateTotalCost()" type="number" value="200000"/>
+</div>
+<span class="font-caption text-caption text-text-muted block">Uji Kalibrasi Swivel Lab Precision</span>
+</div>
+</div>
+<!-- Total Accumulated Cost Banner -->
+<div class="p-3.5 rounded-lg bg-surface flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[20px]">receipt_long</span>
+<span class="font-label-md text-body-sm font-semibold text-on-surface">Total Akumulasi Biaya Perbaikan</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-code-sm text-caption text-text-muted">IDR</span>
+<span class="font-code-sm text-headline-sm text-primary-container font-bold" id="total-cost-display">850.000</span>
+</div>
+</div>
+</div>
+<!-- Step 4: Rekomendasi Kondisi Akhir Pasca Servis -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary font-caption text-caption flex items-center justify-center font-bold">4</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Rekomendasi Kondisi Akhir Pasca Servis</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Tentukan tingkat kesiapan operasional kamera sebelum audit pelepasan sistem.</p>
+<div class="space-y-2">
+<!-- Option A: Ready / Normal -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg bg-surface-container-low hover:bg-surface transition-colors cursor-pointer">
+<input checked="" class="mt-1 w-4 h-4 text-primary-container accent-primary-container" name="post_repair_condition" type="radio" value="ready"/>
+<div class="flex flex-col">
+<span class="font-label-md text-body-md font-semibold text-on-surface flex items-center gap-2">
+                      Baik / Normal Sempurna
+                      <span class="px-2 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption">Rekomendasi</span>
+</span>
+<span class="font-body-sm text-body-sm text-text-muted">Unit lolos seluruh uji fungsi, siap kembali berstatus ‘Available’ (Tersedia) ke peredaran sirkulasi mahasiswa.</span>
+</div>
+</label>
+<!-- Option B: Minor Cosmetic / Safe for Indoor -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg bg-surface-container-low hover:bg-surface transition-colors cursor-pointer">
+<input class="mt-1 w-4 h-4 text-primary-container accent-primary-container" name="post_repair_condition" type="radio" value="restricted"/>
+<div class="flex flex-col">
+<span class="font-label-md text-body-md font-semibold text-on-surface">Kerusakan Ringan Teratasi (Dengan Catatan Batasan)</span>
+<span class="font-body-sm text-body-sm text-text-muted">Fungsi normal, sasis bawah memiliki tanda aus. Layak pakai dengan anjuran prioritas produksi studio indoor.</span>
+</div>
+</label>
+<!-- Option C: Escalation Required -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg bg-surface-container-low hover:bg-surface transition-colors cursor-pointer">
+<input class="mt-1 w-4 h-4 text-primary-container accent-primary-container" name="post_repair_condition" type="radio" value="escalate"/>
+<div class="flex flex-col">
+<span class="font-label-md text-body-md font-semibold text-on-surface text-danger">Masih Butuh Kalibrasi Lanjutan / Kirim Service Center Resmi</span>
+<span class="font-body-sm text-body-sm text-text-muted">Komponen internal lain memerlukan penggantian sensor mount Sony Authorized Service.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Form Submit & Auxiliary Actions Footer -->
+<div class="pt-space-md flex items-center justify-between">
+<button class="h-10 px-4 rounded-lg bg-surface hover:bg-surface-container text-on-surface-variant font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Cetak Lembar Kerja Fisik</span>
+</button>
+<div class="flex items-center gap-space-sm">
+<button class="h-10 px-4 rounded-lg bg-surface-container-low hover:bg-surface text-on-surface font-label-md text-label-md transition-colors" type="button">
+                  Simpan Draft Sementara
+                </button>
+<button class="h-10 px-5 rounded-lg bg-primary-container hover:bg-secondary-container text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors shadow-sm" onclick="document.getElementById('btn-complete-qc').click()" type="button">
+<span>Simpan &amp; Lolos QC</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+</section>
+</div>
+<!-- ========================================== -->
+<!-- RIGHT COLUMN: History & Spec (35% / 4 col) -->
+<!-- ========================================== -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- CARD 1: Equipment Specs & Asset Identification -->
+<section class="bg-surface-white rounded-xl shadow-sm p-space-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Spesifikasi &amp; Kartu Aset</h3>
+<span class="px-2 py-0.5 rounded bg-warning-bg text-primary-container font-code-sm text-caption uppercase font-semibold">Cinema AV</span>
+</div>
+<!-- Unit Media Photo 4:3 Ratio -->
+<div class="relative rounded-lg overflow-hidden bg-surface-container aspect-video mb-space-md">
+<img class="w-full h-full object-cover" data-alt="High resolution studio photography of a Sony FX3 full frame cinema line camera with top handle attached on clean dark slate bench, studio lighting casting soft reflections on its rugged magnesium body, professional laboratory setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHSDUHHvbJ9WrstWSQvDISwb2phDhqtTR7z4dgAEjie4fzaADpSmI3_r5EuJc7iosbzRXnYyWgONk-20CWZtpbg2XCk0jyg_Zk0HYFcAgdOVFx1q_Lescy8QD_i5oflD1onK8qjyO-fDPQC6YsN_4muJpDlWRBY8LN7Q5FxsTk-a7Mx6gny-fRl9c0BOBO82t9-CTSObbfVNdrlRIuXtdqotG-81Lhvm0qa6tyNziG"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface font-code-sm text-caption">
+              LDR-CAM-0002
+            </div>
+</div>
+<!-- Key Metadata Grid -->
+<div class="space-y-space-sm text-body-sm">
+<div class="flex items-center justify-between py-1.5 bg-surface-container-low px-3 rounded-md">
+<span class="font-caption text-caption text-text-muted">Serial Number</span>
+<span class="font-code-sm text-code-sm text-on-surface font-bold tracking-wider">SN-9082341-FX3</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-3">
+<span class="font-caption text-caption text-text-muted">Tanggal Perolehan</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">14 Feb 2024</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-3 bg-surface-container-low rounded-md">
+<span class="font-caption text-caption text-text-muted">Nilai Perolehan Aset</span>
+<span class="font-code-sm text-body-sm text-on-surface font-semibold">Rp 58.000.000</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-3">
+<span class="font-caption text-caption text-text-muted">Akumulasi Jam Terbang</span>
+<div class="text-right">
+<span class="font-label-md text-body-sm text-on-surface font-bold">48 kali</span>
+<span class="font-caption text-caption text-text-muted block">(210 jam rekaman)</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-1.5 px-3 bg-surface-container-low rounded-md">
+<span class="font-caption text-caption text-text-muted">Lokasi Penyimpanan</span>
+<span class="font-label-md text-body-sm text-primary font-semibold text-right">Lemari A1 · Rak Cinema Utama</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between">
+<a class="font-caption text-caption text-primary-container font-semibold hover:underline flex items-center gap-1" href="#">
+<span>Buka Kartu Induk Inventaris</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<span class="font-code-sm text-caption text-text-muted">Kondisi: Grade B+</span>
+</div>
+</section>
+<!-- CARD 2: Maintenance History Timeline -->
+<section class="bg-surface-white rounded-xl shadow-sm p-space-lg">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Riwayat Pemeliharaan Unit</h3>
+<span class="font-caption text-caption text-text-muted">3 Log Terakhir</span>
+</div>
+<div class="relative pl-6 space-y-space-md">
+<!-- Timeline track line -->
+<div class="absolute left-2.5 top-2 bottom-2 w-0.5 bg-surface-container"></div>
+<!-- Item 1: Recent -->
+<div class="relative flex flex-col gap-1">
+<div class="absolute -left-6 top-1 w-3 h-3 rounded-full bg-success ring-4 ring-surface-white"></div>
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-caption text-text-muted">10 Agt 2026</span>
+<span class="px-2 py-0.5 rounded bg-surface font-code-sm text-[11px] text-text-muted">Rp 0 (Rutin)</span>
+</div>
+<h4 class="font-label-md text-body-sm text-on-surface font-semibold">Pembersihan Sensor &amp; Update Firmware v4.0</h4>
+<p class="font-caption text-caption text-text-muted">Ditangani Teknisi Andi Pratama · Lab Servis</p>
+</div>
+<!-- Item 2 -->
+<div class="relative flex flex-col gap-1">
+<div class="absolute -left-6 top-1 w-3 h-3 rounded-full bg-primary-container ring-4 ring-surface-white"></div>
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-caption text-text-muted">02 Jun 2026</span>
+<span class="px-2 py-0.5 rounded bg-surface font-code-sm text-[11px] text-on-surface">Rp 150.000</span>
+</div>
+<h4 class="font-label-md text-body-sm text-on-surface font-semibold">Penggantian Karet Grip Handgrip</h4>
+<p class="font-caption text-caption text-text-muted">Ditangani Teknisi Andi Pratama · Karet aus pemakaian intensif</p>
+</div>
+<!-- Item 3: Initial asset -->
+<div class="relative flex flex-col gap-1">
+<div class="absolute -left-6 top-1 w-3 h-3 rounded-full bg-text-muted ring-4 ring-surface-white"></div>
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-caption text-text-muted">14 Feb 2024</span>
+<span class="px-2 py-0.5 rounded bg-info-bg text-info font-caption text-[11px] font-semibold">Inisialisasi</span>
+</div>
+<h4 class="font-label-md text-body-sm text-on-surface font-semibold">Penerimaan Aset Baru &amp; Kalibrasi Awal</h4>
+<p class="font-caption text-caption text-text-muted">Pengadaan Tahun Anggaran Lab 2024</p>
+</div>
+</div>
+</section>
+<!-- CARD 3: System Automation Notice (Design.md 7.9 Rule) -->
+<section class="bg-info-bg rounded-xl shadow-sm p-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-info text-[22px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+<div class="space-y-1.5">
+<h4 class="font-label-md text-body-sm font-bold text-on-surface">Pemberitahuan Otomatisasi Sistem (Aturan 7.9)</h4>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+                Menekan tombol <strong>Selesaikan Perbaikan</strong> akan mengeksekusi otomatisasi backend secara instan:
+              </p>
+<ol class="list-decimal list-inside space-y-1 font-caption text-caption text-on-surface-variant font-medium">
+<li>Mengubah status tiket pemeliharaan menjadi <strong>Done (Selesai)</strong>.</li>
+<li>Mengembalikan status unit <strong class="font-code-sm">LDR-CAM-0002</strong> dari <em>Maintenance</em> menjadi <strong>Available (Tersedia)</strong> di katalog peminjaman mahasiswa.</li>
+<li>Mencatat riwayat inspeksi &amp; memperbarui audit trail log aset digital.</li>
+</ol>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Confirmation Modal Dialog for QC Completion -->
+<div class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" id="qc-modal">
+<div class="bg-surface-white rounded-xl shadow-2xl max-w-lg w-full p-space-lg flex flex-col gap-space-md animate-in fade-in zoom-in-95 duration-150">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-success-bg text-success flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Terbitkan Sertifikasi Lolos QC?</h3>
+<p class="font-caption text-caption text-text-muted">Verifikasi pengembalian unit ke katalog operasional</p>
+</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low space-y-2">
+<div class="flex justify-between text-body-sm font-medium">
+<span class="text-text-muted">Unit Target:</span>
+<span class="font-code-sm font-bold text-on-surface">LDR-CAM-0002 (Sony FX3)</span>
+</div>
+<div class="flex justify-between text-body-sm font-medium">
+<span class="text-text-muted">Total Biaya Servis:</span>
+<span class="font-code-sm font-bold text-primary-container" id="modal-cost">Rp 850.000</span>
+</div>
+<div class="flex justify-between text-body-sm font-medium">
+<span class="text-text-muted">Status Pasca Servis:</span>
+<span class="font-label-md text-success font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Available (Tersedia)
+          </span>
+</div>
+</div>
+<p class="font-caption text-caption text-text-muted leading-relaxed">
+        Tindakan ini akan mengakhiri tiket perbaikan <span class="font-code-sm font-semibold">TKT-MT-2026-0031</span> dan membuka peminjaman untuk slot reservasi mahasiswa berikutnya.
+      </p>
+<div class="flex items-center justify-end gap-space-sm pt-2">
+<button class="h-10 px-4 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" id="modal-cancel-btn" type="button">
+          Batal &amp; Cek Kembali
+        </button>
+<button class="h-10 px-5 rounded-lg bg-success hover:bg-success/90 text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors shadow-sm" id="modal-confirm-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span>Ya, Selesaikan &amp; Rilis Unit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Notification Toast (Shown upon completion) -->
+<div class="fixed bottom-6 right-6 z-50 hidden max-w-md bg-surface-white rounded-xl shadow-xl p-4 flex items-center gap-3 transition-all transform translate-y-2" id="qc-toast">
+<div class="w-2 self-stretch rounded-full bg-success shrink-0"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-success text-[24px]">task_alt</span>
+<div>
+<h4 class="font-label-md text-body-sm font-bold text-on-surface">Unit Lolos QC &amp; Berstatus Available</h4>
+<p class="font-caption text-caption text-text-muted">Tiket TKT-MT-2026-0031 berhasil diarsipkan ke riwayat selesai.</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic Checklist Progress Calculator
+  function updateChecklistProgress() {
+    const container = document.getElementById('repair-checklist-container');
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    const total = checkboxes.length;
+    let checkedCount = 0;
+
+    checkboxes.forEach((cb) => {
+      const textSpan = cb.parentElement.querySelector('span');
+      if (cb.checked) {
+        checkedCount++;
+        textSpan.classList.add('line-through', 'opacity-80');
+      } else {
+        textSpan.classList.remove('line-through', 'opacity-80');
+      }
+    });
+
+    const percent = Math.round((checkedCount / total) * 100);
+    const progressLabel = document.getElementById('checklist-progress');
+    const progressBar = document.getElementById('checklist-bar');
+    
+    if (progressLabel) progressLabel.textContent = `${checkedCount} / ${total} Selesai`;
+    if (progressBar) progressBar.style.width = `${percent}%`;
+  }
+
+  // Cost Aggregator
+  function calculateTotalCost() {
+    const partCostInput = document.getElementById('part-cost');
+    const laborCostInput = document.getElementById('labor-cost');
+    const display = document.getElementById('total-cost-display');
+    const modalCostDisplay = document.getElementById('modal-cost');
+
+    const part = parseFloat(partCostInput.value) || 0;
+    const labor = parseFloat(laborCostInput.value) || 0;
+    const total = part + labor;
+
+    const formatted = new Intl.NumberFormat('id-ID').format(total);
+    if (display) display.textContent = formatted;
+    if (modalCostDisplay) modalCostDisplay.textContent = 'Rp ' + formatted;
+  }
+
+  // Hotkey F2 listener for Quick QC Completion
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F2') {
+      e.preventDefault();
+      document.getElementById('btn-complete-qc').click();
+    }
+  });
+
+  // Modal Handlers
+  const completeBtn = document.getElementById('btn-complete-qc');
+  const qcModal = document.getElementById('qc-modal');
+  const cancelBtn = document.getElementById('modal-cancel-btn');
+  const confirmBtn = document.getElementById('modal-confirm-btn');
+  const toast = document.getElementById('qc-toast');
+
+  if (completeBtn && qcModal) {
+    completeBtn.addEventListener('click', () => {
+      calculateTotalCost();
+      qcModal.classList.remove('hidden');
+    });
+  }
+
+  if (cancelBtn && qcModal) {
+    cancelBtn.addEventListener('click', () => {
+      qcModal.classList.add('hidden');
+    });
+  }
+
+  if (confirmBtn && qcModal) {
+    confirmBtn.addEventListener('click', () => {
+      qcModal.classList.add('hidden');
+      if (toast) {
+        toast.classList.remove('hidden');
+        toast.classList.remove('translate-y-2');
+        setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 4000);
+      }
+    });
+  }
+</script></main></div></body></html>

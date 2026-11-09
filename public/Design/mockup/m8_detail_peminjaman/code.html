@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>Lendora</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "outline": "#8c7164",
+        "surface-container-low": "#f6f3f2",
+        "surface-bright": "#fcf9f8",
+        "inverse-surface": "#303030",
+        "text-muted": "#6B7280",
+        "surface-white": "#FFFFFF",
+        "on-primary": "#ffffff",
+        "primary-fixed-dim": "#ffb690",
+        "info": "#0284C7",
+        "on-surface-variant": "#584237",
+        "border": "#E5E7EB",
+        "on-primary-container": "#582200",
+        "violet-bg": "#F5F3FF",
+        "on-error-container": "#93000a",
+        "success": "#16A34A",
+        "background": "#fcf9f8",
+        "warning-bg": "#FFFBEB",
+        "inverse-primary": "#ffb690",
+        "surface-container-high": "#eae7e7",
+        "on-primary-fixed-variant": "#783200",
+        "secondary-container": "#fd651e",
+        "secondary": "#a73a00",
+        "error-container": "#ffdad6",
+        "danger": "#DC2626",
+        "tertiary": "#625e56",
+        "tertiary-container": "#a09a91",
+        "on-secondary-container": "#571a00",
+        "surface-variant": "#e4e2e1",
+        "tertiary-fixed": "#e9e1d8",
+        "surface-dim": "#dcd9d9",
+        "on-background": "#1b1c1c",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "on-primary-fixed": "#341100",
+        "error": "#ba1a1a",
+        "info-bg": "#F0F9FF",
+        "on-error": "#ffffff",
+        "surface-container-highest": "#e4e2e1",
+        "warning": "#D97706",
+        "danger-bg": "#FEF2F2",
+        "inverse-on-surface": "#f3f0ef",
+        "on-tertiary-fixed": "#1e1b15",
+        "on-tertiary-fixed-variant": "#4a463f",
+        "surface-tint": "#9d4300",
+        "on-secondary-fixed": "#370e00",
+        "success-bg": "#F0FDF4",
+        "primary-container": "#f97316",
+        "surface": "#F5F5F5",
+        "secondary-fixed": "#ffdbce",
+        "violet": "#7C3AED",
+        "surface-container": "#f0eded",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#e0c0b1",
+        "on-tertiary-container": "#36322c",
+        "on-secondary": "#ffffff",
+        "primary-fixed": "#ffdbca",
+        "tertiary-fixed-dim": "#ccc5bc",
+        "on-surface": "#1b1c1c",
+        "secondary-fixed-dim": "#ffb599",
+        "primary": "#9d4300",
+        "on-tertiary": "#ffffff"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.5rem",
+        "space-xl": "2rem",
+        "margin": "1rem",
+        "space-lg": "1.5rem",
+        "space-md": "1rem",
+        "space-xs": "0.25rem",
+        "gutter": "1rem"
+      },
+      "fontFamily": {
+        "headline-md": ["Plus Jakarta Sans"],
+        "caption": ["Inter"],
+        "display": ["Plus Jakarta Sans"],
+        "label-md": ["Inter"],
+        "headline-lg": ["Plus Jakarta Sans"],
+        "body-md": ["Inter"],
+        "code-sm": ["JetBrains Mono"],
+        "headline-sm": ["Plus Jakarta Sans"],
+        "body-sm": ["Inter"]
+      },
+      "fontSize": {
+        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+        "caption": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+        "display": ["28px", {"lineHeight": "36px", "fontWeight": "800"}],
+        "label-md": ["13px", {"lineHeight": "20px", "fontWeight": "600"}],
+        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+        "headline-sm": ["17px", {"lineHeight": "24px", "fontWeight": "600"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+      }
+    }
+  }
+}</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-on-surface min-h-screen flex flex-col antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface-white/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Kembali" class="w-11 h-11 -ml-space-xs flex items-center justify-center text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Lendora Wordmark Logo" class="h-7 w-auto object-contain hidden xs:block" src="https://lh3.googleusercontent.com/aida/ALJJyrA_vOBwBwW9VPZmiYXmyO85fAH_v-vxXzEeE7I3IpSzb5Hi5bWfEDj_TiobaA8Mpsm7-CJOph_PugY1s0LBsTXufwNPdnF45vUYsgJUsqqfiSdhRZqJehb7_HEyEiMfoAf2HO6NqpxbusJQqkzJej3Ot8xCUac3ZhtK7B_y6ngmPX0O7f-e7JbofjVQJiuRy0pTmDBP6hIdEXSk6O7rVIPtKrTm6H9kbu9cOnP0PKaiHw"/><h1 class="text-headline-sm font-headline-sm text-on-surface tracking-tight truncate">Detail Aset</h1></div><div class="flex items-center"><div class="w-10 h-10 flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPOP30q4siQAUb5jQtas83LmH7aKCzLmc_wH0If8-I9BAL5g1364rTGK8La-GyGgDPwVoXl35_LRN3ecXT_ebidWQvBgeCBDVUDUH8JRlBLS7bJHYjakQeBpHVjymeCVydOozDQ3k9nD-ljEFaWs4w20nB8LqhpO3aRQCdDtDibVHgnJzIGVwdws1VxI5RxhfdlWHsqRUl7aSdp8W1lK9cGpRUlOXp03IlETfkK6r9"/></div></div></div></header><main class="flex-1 w-full bg-background pt-16 pb-safe"><div class="flex flex-col w-full">
+<div class="max-w-[480px] mx-auto w-full px-margin pb-24 space-y-space-md">
+<!-- Top Header Card -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="font-code-sm text-code-sm text-text-muted">Kode:</span>
+<span class="font-code-sm text-headline-sm font-bold text-on-surface tracking-tight truncate">LDR-BK-2026-0007</span>
+</div>
+<div class="inline-flex items-center gap-1 bg-success-bg px-2.5 py-1 rounded-full shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+<span class="font-caption text-caption text-success font-semibold">Dipinjam</span>
+</div>
+</div>
+<!-- Quick Warning Reminder Pill -->
+<div class="bg-warning-bg rounded-lg p-space-sm flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-warning text-[20px] shrink-0 mt-0.5">schedule</span>
+<div class="flex-1 min-w-0">
+<p class="font-caption text-caption text-warning font-semibold">Batas Pengembalian</p>
+<p class="font-body-sm text-body-sm text-on-surface">Besok, 14 Nov 2026 pukul 16:00 WIB</p>
+</div>
+</div>
+</div>
+<!-- 5-Step Status Timeline Card -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Status Alur Peminjaman</h2>
+<span class="font-caption text-caption text-primary-container bg-primary-fixed/30 px-2 py-0.5 rounded-full">Langkah 3 dari 5</span>
+</div>
+<div class="relative pl-1">
+<!-- Connecting Line Background -->
+<div class="absolute left-[15px] top-4 bottom-4 w-0.5 bg-surface-container"></div>
+<div class="space-y-space-md relative">
+<!-- Step 1: Diajukan (Completed) -->
+<div class="flex items-start gap-space-md relative group">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 z-10 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1 min-w-0 pt-0.5">
+<div class="flex items-baseline justify-between gap-space-xs">
+<p class="font-label-md text-label-md text-on-surface">Pengajuan Terkirim</p>
+<span class="font-caption text-caption text-text-muted shrink-0 tabular-nums">11 Nov, 14:20</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Diajukan oleh Ani Rahmawati</p>
+</div>
+</div>
+<!-- Step 2: Disetujui (Completed) -->
+<div class="flex items-start gap-space-md relative group">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 z-10 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1 min-w-0 pt-0.5">
+<div class="flex items-baseline justify-between gap-space-xs">
+<p class="font-label-md text-label-md text-on-surface">Disetujui Operator</p>
+<span class="font-caption text-caption text-text-muted shrink-0 tabular-nums">11 Nov, 16:45</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Disetujui oleh Budi (Operator Lab)</p>
+</div>
+</div>
+<!-- Step 3: Diambil / Serah Terima (Active / Current) -->
+<div class="flex items-start gap-space-md relative group">
+<div class="relative shrink-0 z-10 flex items-center justify-center">
+<span class="absolute w-9 h-9 rounded-full bg-primary-container/20 animate-ping"></span>
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</div>
+</div>
+<div class="flex-1 min-w-0 pt-0.5 bg-surface-container-low p-space-sm rounded-lg -mt-1">
+<div class="flex items-baseline justify-between gap-space-xs">
+<p class="font-label-md text-label-md text-primary font-bold">Unit Telah Diambil (Aktif)</p>
+<span class="font-caption text-caption text-primary font-semibold shrink-0 tabular-nums">12 Nov, 09:15</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Diambil di Lemari A1 — Ruang Operator Lantai 2</p>
+</div>
+</div>
+<!-- Step 4: Pengembalian (Upcoming) -->
+<div class="flex items-start gap-space-md relative opacity-60">
+<div class="w-7 h-7 rounded-full bg-surface-container text-text-muted flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</div>
+<div class="flex-1 min-w-0 pt-0.5">
+<div class="flex items-baseline justify-between gap-space-xs">
+<p class="font-label-md text-label-md text-on-surface">Pemeriksaan &amp; Pengembalian</p>
+<span class="font-caption text-caption text-text-muted shrink-0 tabular-nums">14 Nov, 16:00</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Jatuh tempo pemeriksaan fisik unit</p>
+</div>
+</div>
+<!-- Step 5: Selesai (Upcoming) -->
+<div class="flex items-start gap-space-md relative opacity-40">
+<div class="w-7 h-7 rounded-full bg-surface-container text-text-muted flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-[16px]">task_alt</span>
+</div>
+<div class="flex-1 min-w-0 pt-0.5">
+<p class="font-label-md text-label-md text-on-surface">Peminjaman Selesai</p>
+<p class="font-body-sm text-body-sm text-text-muted">Deposit/tutup tiket setelah inspeksi</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Jadwal & Lokasi Serah Terima Card -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm space-y-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_month</span>
+<h3 class="font-headline-sm text-headline-sm">Jadwal &amp; Lokasi Serah Terima</h3>
+</div>
+<div class="grid grid-cols-2 gap-space-sm bg-surface-container-low p-space-sm rounded-lg">
+<div>
+<span class="font-caption text-caption text-text-muted block">Tanggal Mulai</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface tabular-nums">12 Nov 2026, 09:00</span>
+</div>
+<div>
+<span class="font-caption text-caption text-text-muted block">Tanggal Selesai</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface tabular-nums">14 Nov 2026, 16:00</span>
+</div>
+<div class="col-span-2 pt-1 border-t-0">
+<span class="font-caption text-caption text-text-muted block">Durasi Penggunaan</span>
+<span class="font-body-sm text-body-sm font-semibold text-primary">3 Hari Kalender</span>
+</div>
+</div>
+<div class="flex items-start gap-space-xs pt-1">
+<span class="material-symbols-outlined text-text-muted text-[18px] shrink-0 mt-0.5">pin_drop</span>
+<div class="min-w-0">
+<span class="font-caption text-caption text-text-muted block">Lokasi Pengambilan &amp; Pengembalian</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Lemari A1 — Ruang Operator Lantai 2, Gedung Multimedia</p>
+</div>
+</div>
+</div>
+<!-- Daftar Item Dipinjam Card -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+<h3 class="font-headline-sm text-headline-sm">Daftar Item Dipinjam</h3>
+</div>
+<span class="font-caption text-caption bg-surface-container px-2 py-0.5 rounded-full text-text-muted font-semibold">1 Unit</span>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 bg-surface-container" data-alt="A clean front-angle studio product shot of a black Sony A7 III mirrorless full-frame camera mounted with 28-70mm lens on an off-white warm surface, soft professional cinematic lighting, warm studio shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-k2C0gj9SPgvf7iDNU7dXaBiWfxDV337XJw4AowVKfqb8Ka7Zdqc31xPDWqql7ZOBfhVSEWhNkEHSrqkRtYGn00nc9OXSjUkO0WWyvJV32DgnU9vB3tUzt39IDNcbxfD9DNnM9UVZ0Zk6mXJVjWtgigzLTUBMJhw0gp7FaS-HmHxqi6SE2WCmBIct9onTvCDAYQrFQDdUb3XmrFub6Nm5aWSTsRWeJ2FATFFkm_Sj"/>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface truncate">Sony A7 III Body + Kit 28–70mm</h4>
+<div class="flex items-center gap-2 mt-0.5 flex-wrap">
+<span class="font-code-sm text-caption text-primary bg-primary-fixed/40 px-1.5 py-0.5 rounded">LDR-CAM-0001</span>
+<span class="font-code-sm text-caption text-text-muted tabular-nums">SN-84920412</span>
+</div>
+<p class="font-caption text-caption text-success font-medium mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+            Kondisi: Baik &amp; Normal (Sensor bersih, body 98%)
+          </p>
+</div>
+</div>
+<!-- Kelengkapan Terverifikasi -->
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-caption text-caption text-text-muted block font-semibold uppercase tracking-wider">Kelengkapan Terverifikasi:</span>
+<ul class="grid grid-cols-2 gap-x-2 gap-y-1 text-on-surface font-body-sm text-body-sm">
+<li class="flex items-center gap-1 text-[12px] truncate">
+<span class="material-symbols-outlined text-success text-[14px]">check_circle</span>
+            2x Bat. NP-FZ100
+          </li>
+<li class="flex items-center gap-1 text-[12px] truncate">
+<span class="material-symbols-outlined text-success text-[14px]">check_circle</span>
+            1x Charger Dual
+          </li>
+<li class="flex items-center gap-1 text-[12px] truncate">
+<span class="material-symbols-outlined text-success text-[14px]">check_circle</span>
+            1x SD 64GB Extreme
+          </li>
+<li class="flex items-center gap-1 text-[12px] truncate">
+<span class="material-symbols-outlined text-success text-[14px]">check_circle</span>
+            Strap &amp; Tas Kamera
+          </li>
+</ul>
+</div>
+</div>
+<!-- Catatan Serah Terima (Handover Log) -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm space-y-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment</span>
+<h3 class="font-headline-sm text-headline-sm">Catatan Serah Terima</h3>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">Operator Penyerah</span>
+<span class="font-caption text-caption font-semibold text-on-surface">Budi Santoso</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">Nomor Induk Petugas</span>
+<span class="font-code-sm text-caption text-text-muted">19880412-OP</span>
+</div>
+</div>
+<div class="bg-info-bg/60 p-space-sm rounded-lg flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-info text-[18px] shrink-0 mt-0.5">info</span>
+<p class="font-body-sm text-body-sm text-on-surface italic">
+          "Unit diperiksa bersama peminjam saat serah terima. Baterai terisi 100%, sensor bersih tanpa debu. Harap simpan di dry cabinet bila tidak digunakan di luar ruangan."
+        </p>
+</div>
+</div>
+<!-- Tujuan Peminjaman Card -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm space-y-space-xs">
+<span class="font-caption text-caption text-text-muted block font-semibold uppercase tracking-wider">Tujuan Peminjaman</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium leading-relaxed">
+        Tugas dokumentasi pameran seni rupa kampus semester 5 di Aula Gedung B
+      </p>
+</div>
+<!-- QR Code Modal Backdrop & Sheet (Hidden initially) -->
+<div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden items-end justify-center transition-opacity" id="qrModal" onclick="toggleQrModal(false)">
+<div class="bg-surface-white rounded-t-2xl p-space-lg w-full max-w-[480px] space-y-space-md text-center shadow-xl" onclick="event.stopPropagation()">
+<div class="w-10 h-1 bg-surface-container-highest rounded-full mx-auto mb-1"></div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">QR Bukti Pengembalian</h3>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-text-muted" onclick="toggleQrModal(false)" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Tunjukkan QR code ini kepada operator lab saat mengembalikan unit di Lemari A1.</p>
+<div class="p-space-md bg-surface-white rounded-xl shadow-inner inline-block mx-auto border-0">
+<!-- Inline Simulated QR SVG -->
+<svg class="w-48 h-48 mx-auto" fill="none" viewbox="0 0 100 100">
+<rect fill="#FFFFFF" height="100" width="100"></rect>
+<path d="M10 10h24v24H10zm4 4v16h16V14zm2 2h12v12H16zm50-6h24v24H66zm4 4v16h16V14zm2 2h12v12H72zm-62 52h24v24H10zm4 4v16h16V70zm2 2h12v12H16zm30-60h6v12h-6zm12 0h6v6h-6zm-12 18h18v6H46zm18-6h6v6h-6zm-24 12h6v6h-6zm12 6h6v12h-6zm12-6h12v6H64zm12 12h6v12h-6zm6-6h6v6h-6zm-36 12h12v6H46zm18 6h12v6H64zm12 6h6v6h-6zm-30 6h6v6h-6zm6 6h12v6H52zm18 0h6v6h-6zm12-12h6v18h-6z" fill="#1b1c1c"></path>
+<rect fill="#f97316" height="16" rx="4" width="16" x="42" y="42"></rect>
+<path d="M46 50l3 3 5-5" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<p class="font-code-sm text-caption text-text-muted tabular-nums">TOKEN-VERIF: 9942-8812-LDR</p>
+<button class="w-full h-11 bg-surface-container text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container-high transition-colors" onclick="toggleQrModal(false)" type="button">
+          Tutup Layar
+        </button>
+</div>
+</div>
+</div>
+<!-- Bottom Sticky Action Bar -->
+<div class="fixed bottom-0 inset-x-0 bg-surface-white/95 backdrop-blur-md shadow-[0_-2px_10px_rgba(0,0,0,0.06)] z-40 pb-safe">
+<div class="max-w-[480px] mx-auto px-margin py-space-sm flex items-center gap-space-sm">
+<a class="h-11 px-3.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md inline-flex items-center justify-center gap-1.5 shrink-0 hover:bg-surface-container-high transition-colors" href="tel:08123456789">
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span>Operator</span>
+</a>
+<button class="flex-1 h-11 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md inline-flex items-center justify-center gap-2 hover:bg-secondary-container transition-colors shadow-sm" onclick="toggleQrModal(true)" type="button">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+<span>QR Pengembalian</span>
+</button>
+<button aria-label="Bantuan atau Laporkan Kendala" class="w-11 h-11 rounded-lg bg-surface-container text-danger flex items-center justify-center shrink-0 hover:bg-danger-bg transition-colors" onclick="reportIssue()" type="button">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  function toggleQrModal(show) {
+    const modal = document.getElementById('qrModal');
+    if (!modal) return;
+    if (show) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    } else {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  function reportIssue() {
+    alert("Hubungi Helpdesk Lab Multimedia di ekstensi 401 atau kunjungi Ruang Operator Lantai 2.");
+  }
+</script></main></body></html>

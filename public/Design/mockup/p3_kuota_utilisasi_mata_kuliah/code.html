@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary-container":"#582200","violet":"#7C3AED","on-tertiary-fixed-variant":"#4a463f","outline":"#8c7164","on-primary-fixed":"#341100","inverse-primary":"#ffb690","violet-bg":"#F5F3FF","secondary":"#a73a00","surface-container":"#f0eded","warning":"#D97706","background":"#fcf9f8","info":"#0284C7","text-muted":"#6B7280","secondary-container":"#fd651e","success-bg":"#F0FDF4","inverse-surface":"#303030","tertiary-fixed-dim":"#ccc5bc","danger-bg":"#FEF2F2","tertiary-fixed":"#e9e1d8","secondary-fixed-dim":"#ffb599","surface-container-highest":"#e4e2e1","outline-variant":"#e0c0b1","border":"#E5E7EB","primary-fixed":"#ffdbca","on-background":"#1b1c1c","surface-container-lowest":"#ffffff","on-error":"#ffffff","on-secondary":"#ffffff","primary-fixed-dim":"#ffb690","surface-bright":"#fcf9f8","warning-bg":"#FFFBEB","success":"#16A34A","surface-container-high":"#eae7e7","tertiary-container":"#a09a91","danger":"#DC2626","surface-tint":"#9d4300","on-error-container":"#93000a","inverse-on-surface":"#f3f0ef","on-tertiary":"#ffffff","error-container":"#ffdad6","surface-white":"#FFFFFF","info-bg":"#F0F9FF","on-secondary-fixed-variant":"#7f2b00","on-tertiary-fixed":"#1e1b15","primary-container":"#f97316","surface-variant":"#e4e2e1","surface-dim":"#dcd9d9","primary":"#9d4300","on-surface":"#1b1c1c","surface-container-low":"#f6f3f2","on-primary":"#ffffff","on-surface-variant":"#584237","tertiary":"#625e56","on-primary-fixed-variant":"#783200","error":"#ba1a1a","secondary-fixed":"#ffdbce","on-secondary-container":"#571a00","surface":"#F5F5F5","on-tertiary-container":"#36322c","on-secondary-fixed":"#370e00"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-lg":"1.5rem","gutter":"1rem","space-sm":"0.5rem","margin":"1rem","space-xl":"2rem","space-xs":"0.25rem"},"fontFamily":{"body-sm":["Inter"],"display":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"code-sm":["JetBrains Mono"],"caption":["Inter"],"label-md":["Inter"],"headline-lg":["Plus Jakarta Sans"],"body-md":["Inter"]},"fontSize":{"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"display":["28px",{"lineHeight":"36px","fontWeight":"800"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"code-sm":["13px",{"lineHeight":"18px","fontWeight":"500"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-white border-r border-border z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-md border-b border-border flex items-center justify-between shrink-0"><div class="flex items-center gap-space-sm"><img alt="lendora-favicon-180-siklus.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"/><div class="flex flex-col"><span class="font-headline-md text-headline-sm text-on-surface font-bold tracking-tight leading-none">Lendora</span><span class="font-caption text-caption text-text-muted mt-0.5">Siklus AV Studio</span></div></div><span class="inline-flex items-center px-space-xs py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-caption text-caption uppercase tracking-wider font-semibold">PRODI</span></div><nav class="flex flex-col px-space-sm py-space-md gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-semibold shadow-sm border-l-4 border-secondary"><div class="px-space-sm pb-space-xs text-text-muted font-caption text-caption tracking-wider uppercase font-semibold">Utama</div><a class="group flex items-center justify-between px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard-prodi" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard Prodi</span></div></a><a class="group flex items-center justify-between px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="antrean-otorisasi-khusus" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">verified_user</span><span>Otorisasi Khusus</span></div><span class="px-2 py-0.5 rounded-full bg-danger-bg text-danger font-caption text-caption">3 Baru</span></a><div class="px-space-sm pt-space-md pb-space-xs text-text-muted font-caption text-caption tracking-wider uppercase font-semibold">Monitoring Prodi</div><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="kuota-dan-utilisasi-alat" href="#"><span class="material-symbols-outlined text-[20px]">pie_chart</span><span>Kuota &amp; Utilisasi Alat</span></a><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="kalender-jadwal-praktikum" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span>Jadwal Praktikum</span></a><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="mahasiswa-dan-reputasi" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Mahasiswa &amp; Reputasi</span></a><div class="px-space-sm pt-space-md pb-space-xs text-text-muted font-caption text-caption tracking-wider uppercase font-semibold">Laporan &amp; Dokumen</div><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="laporan-semester-prodi" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Laporan Semester</span></a><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="rekomendasi-pengadaan-av" href="#"><span class="material-symbols-outlined text-[20px]">lightbulb</span><span>Rekomendasi AV</span></a></nav></div><div class="p-space-sm border-t border-border"><div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md text-on-surface truncate font-semibold">Dr. Irwan Setiawan</span><span class="font-caption text-caption text-text-muted truncate">Kaprodi DKV &amp; Film</span></div><span class="material-symbols-outlined text-text-muted text-[18px]">unfold_more</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-white border-b border-border z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-xs font-body-sm text-body-sm text-text-muted shrink-0"><span class="font-label-md text-label-md text-on-surface font-semibold">Prodi DKV &amp; Film</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-primary font-medium">Dashboard Admin Prodi</span></div><div class="h-4 w-px bg-border hidden lg:block"></div><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-low border border-border text-text-muted font-caption text-caption"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-semibold text-on-surface">Semester Ganjil 2026/2027</span><span class="text-text-muted">· Aktif</span></div></div><div class="flex items-center gap-space-md"><div class="relative hidden md:block w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-9 pl-9 pr-space-sm bg-surface-container-low border border-border rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Cari mahasiswa, matkul, unit..." type="text"/></div><button class="relative p-2 rounded-lg text-text-muted hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-danger ring-2 ring-surface-white"></span></button><button class="p-2 rounded-lg text-text-muted hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="h-6 w-px bg-border"></div><div class="flex items-center gap-space-sm cursor-pointer"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden xl:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight font-semibold">Dr. Irwan Setiawan, M.Sn.</span><span class="font-caption text-caption text-text-muted">Kaprodi DKV</span></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Dynamic Notification Banner / Top Notice -->
+<div class="px-space-lg pt-space-lg pb-0">
+<div class="flex flex-wrap items-center justify-between gap-space-md p-space-md bg-surface-white rounded-xl border border-border shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center gap-space-md">
+<div class="flex items-center gap-space-xs text-caption font-caption text-text-muted">
+<span class="hover:text-primary cursor-pointer transition-colors">Panel Akademik</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="hover:text-primary cursor-pointer transition-colors">Monitoring &amp; Evaluasi</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Kuota &amp; Utilisasi Mata Kuliah</span>
+</div>
+<div class="hidden sm:block h-3.5 w-px bg-border"></div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-warning-bg text-warning font-caption text-caption border border-warning/20">
+<span class="w-1.5 h-1.5 rounded-full bg-warning animate-pulse"></span>
+<span>Semester Ganjil 2026/2027 · Pekan ke-11 dari 16</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-white border border-border text-on-surface font-label-md text-label-md hover:bg-surface transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">file_download</span>
+<span>Ekspor Rekap (XLS)</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-white border border-border text-on-surface font-label-md text-label-md hover:bg-surface transition-all shadow-sm" onclick="document.getElementById('quick-transfer-card').scrollIntoView({behavior: 'smooth'})" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">swap_horiz</span>
+<span>Transfer Antar-Matkul</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-secondary transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Alokasi Tambahan (Dispensasi Dekan)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Content Space -->
+<div class="p-space-lg space-y-space-lg">
+<!-- KPI Metric Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-white p-space-md rounded-xl border border-border shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption text-caption text-text-muted tracking-wider uppercase">Total Kuota Semester</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-display text-display text-on-surface font-code-sm">1.200</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Jam</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">timer</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-border/60">
+<div class="flex items-center justify-between text-caption font-caption mb-1.5">
+<span class="text-text-muted">Terpakai 884 Jam</span>
+<span class="font-semibold text-primary">73.7%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden">
+<div class="h-full bg-primary-container rounded-full transition-all duration-500" style="width: 73.7%"></div>
+</div>
+<span class="block mt-2 font-caption text-caption text-text-muted">Alokasi resmi untuk 6 Matkul Praktikum</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-white p-space-md rounded-xl border border-border shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-success/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption text-caption text-text-muted tracking-wider uppercase">Sisa Kuota Tersedia</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-display text-display text-success font-code-sm">316</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Jam</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-success-bg flex items-center justify-center text-success shrink-0">
+<span class="material-symbols-outlined text-[22px]">hourglass_bottom</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-border/60 flex flex-col justify-end">
+<div class="inline-flex items-center gap-1.5 text-caption font-caption text-success font-semibold">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Buffer Kapasitas Aman</span>
+</div>
+<span class="mt-1 font-caption text-caption text-text-muted">Proyeksi cukup untuk 5 pekan sisa perkuliahan</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-white p-space-md rounded-xl border border-border shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-warning/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption text-caption text-text-muted tracking-wider uppercase">Mata Kuliah Kritis</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-display text-display text-warning font-code-sm">2</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Matkul</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-warning-bg flex items-center justify-center text-warning shrink-0">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-border/60 flex flex-col justify-end">
+<div class="inline-flex items-center gap-1.5 text-caption font-caption text-warning font-semibold">
+<span class="w-2 h-2 rounded-full bg-warning"></span>
+<span>Konsumsi &gt; 85% Sebelum UAS</span>
+</div>
+<span class="mt-1 font-caption text-caption text-text-muted truncate">Sinematografi II &amp; Iklan TV Web</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-white p-space-md rounded-xl border border-border shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-info/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-caption text-caption text-text-muted tracking-wider uppercase">Efisiensi Utilisasi Alat</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-display text-display text-info font-code-sm">91.4%</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-info-bg flex items-center justify-center text-info shrink-0">
+<span class="material-symbols-outlined text-[22px]">insights</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-border/60 flex flex-col justify-end">
+<div class="inline-flex items-center gap-1.5 text-caption font-caption text-info font-semibold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>Tingkat Keterpakaian Tinggi</span>
+</div>
+<span class="mt-1 font-caption text-caption text-text-muted">Hanya 8.6% alokasi terbuang (batal / idle)</span>
+</div>
+</div>
+</div>
+<!-- Analytics & Recommendations Row -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Visual Bar / Breakdown (70% = 8 cols) -->
+<div class="lg:col-span-8 bg-surface-white rounded-xl border border-border shadow-sm p-space-lg flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md border-b border-border gap-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2">
+<span>Distribusi Konsumsi Kuota Jam per Mata Kuliah</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-surface-container-low text-text-muted border border-border">Pekan 1 — 11</span>
+</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Pemantauan laju penyerapan alokasi studio dan perangkat AV</p>
+</div>
+<!-- Unit Display Toggle -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg border border-border self-start sm:self-auto" id="viewToggle">
+<button class="px-2.5 py-1 text-caption font-caption rounded font-semibold bg-surface-white text-on-surface shadow-xs transition-all" id="btn-hours" onclick="setChartMode('hours')" type="button">
+              Tampilan Jam
+            </button>
+<button class="px-2.5 py-1 text-caption font-caption rounded font-semibold text-text-muted hover:text-on-surface transition-all" id="btn-percent" onclick="setChartMode('percent')" type="button">
+              Persentase (%)
+            </button>
+</div>
+</div>
+<!-- Visual Stacked / Progress Bars -->
+<div class="space-y-space-md mt-space-md" id="courseBarContainer">
+<!-- Course 1: Sinematografi II (Amber) -->
+<div class="space-y-1.5 p-space-sm rounded-lg hover:bg-surface-container-low/60 transition-colors">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">DKV-304</span>
+<span class="font-semibold text-on-surface truncate">Sinematografi II</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-warning-bg text-warning">
+                  KRITIS 91.5%
+                </span>
+</div>
+<div class="text-right shrink-0 font-code-sm">
+<span class="text-warning font-bold metric-value" data-hours="238" data-percent="91.5%">238 Jam</span>
+<span class="text-text-muted text-caption">/ 260 Jam (Sisa 22 Jam)</span>
+</div>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden flex">
+<div class="h-full bg-warning rounded-full transition-all duration-500" style="width: 91.5%"></div>
+</div>
+</div>
+<!-- Course 2: Tata Kamera & Tata Cahaya (Green) -->
+<div class="space-y-1.5 p-space-sm rounded-lg hover:bg-surface-container-low/60 transition-colors">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">DKV-208</span>
+<span class="font-semibold text-on-surface truncate">Tata Kamera &amp; Tata Cahaya</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-success-bg text-success">
+                  NORMAL 79.1%
+                </span>
+</div>
+<div class="text-right shrink-0 font-code-sm">
+<span class="text-on-surface font-bold metric-value" data-hours="174" data-percent="79.1%">174 Jam</span>
+<span class="text-text-muted text-caption">/ 220 Jam (Sisa 46 Jam)</span>
+</div>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden flex">
+<div class="h-full bg-success rounded-full transition-all duration-500" style="width: 79.1%"></div>
+</div>
+</div>
+<!-- Course 3: Produksi Iklan TV & Web (Amber) -->
+<div class="space-y-1.5 p-space-sm rounded-lg hover:bg-surface-container-low/60 transition-colors">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">DKV-312</span>
+<span class="font-semibold text-on-surface truncate">Produksi Iklan TV &amp; Web</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-warning-bg text-warning">
+                  KRITIS 86.7%
+                </span>
+</div>
+<div class="text-right shrink-0 font-code-sm">
+<span class="text-warning font-bold metric-value" data-hours="156" data-percent="86.7%">156 Jam</span>
+<span class="text-text-muted text-caption">/ 180 Jam (Sisa 24 Jam)</span>
+</div>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden flex">
+<div class="h-full bg-warning rounded-full transition-all duration-500" style="width: 86.7%"></div>
+</div>
+</div>
+<!-- Course 4: Sinematografi Dokumenter (Green) -->
+<div class="space-y-1.5 p-space-sm rounded-lg hover:bg-surface-container-low/60 transition-colors">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">DKV-402</span>
+<span class="font-semibold text-on-surface truncate">Sinematografi Dokumenter</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-success-bg text-success">
+                  NORMAL 66.0%
+                </span>
+</div>
+<div class="text-right shrink-0 font-code-sm">
+<span class="text-on-surface font-bold metric-value" data-hours="132" data-percent="66.0%">132 Jam</span>
+<span class="text-text-muted text-caption">/ 200 Jam (Sisa 68 Jam)</span>
+</div>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden flex">
+<div class="h-full bg-success rounded-full transition-all duration-500" style="width: 66.0%"></div>
+</div>
+</div>
+<!-- Course 5: Studio Audio Visual Terpadu (Green Surplus) -->
+<div class="space-y-1.5 p-space-sm rounded-lg hover:bg-surface-container-low/60 transition-colors bg-success-bg/20">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">DKV-316</span>
+<span class="font-semibold text-on-surface truncate">Studio Audio Visual Terpadu</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-success-bg text-success">
+                  SURPLUS 57.0%
+                </span>
+</div>
+<div class="text-right shrink-0 font-code-sm">
+<span class="text-success font-bold metric-value" data-hours="114" data-percent="57.0%">114 Jam</span>
+<span class="text-text-muted text-caption">/ 200 Jam (Sisa 86 Jam)</span>
+</div>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden flex">
+<div class="h-full bg-success rounded-full transition-all duration-500" style="width: 57.0%"></div>
+</div>
+</div>
+<!-- Course 6: Tugas Akhir Film Mandiri (Blue Reserved) -->
+<div class="space-y-1.5 p-space-sm rounded-lg hover:bg-surface-container-low/60 transition-colors">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-code-sm text-caption px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">DKV-499</span>
+<span class="font-semibold text-on-surface truncate">Tugas Akhir &amp; Produksi Film Mandiri</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-info-bg text-info">
+                  TERJADWAL 50.0%
+                </span>
+</div>
+<div class="text-right shrink-0 font-code-sm">
+<span class="text-info font-bold metric-value" data-hours="70" data-percent="50.0%">70 Jam</span>
+<span class="text-text-muted text-caption">/ 140 Jam (Sisa 70 Jam)</span>
+</div>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden flex">
+<div class="h-full bg-info rounded-full transition-all duration-500" style="width: 50.0%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-md border-t border-border mt-space-md font-caption text-caption text-text-muted">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-success"></span> Normal (&lt;80%)</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-warning"></span> Kritis (&gt;85%)</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-info"></span> Reservasi Mandiri</span>
+</div>
+<span class="font-code-sm">Diperbarui: Hari ini, 09:15 WIB</span>
+</div>
+</div>
+<!-- Right Column: Actionable Insights / Alerts (30% = 4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<div class="bg-surface-white rounded-xl border border-border shadow-sm p-space-md flex-1 flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications_active</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Peringatan &amp; Solusi</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-danger-bg text-danger">2 Aksi Perlu</span>
+</div>
+<!-- Insight 1: Amber Alert -->
+<div class="p-space-sm rounded-lg bg-warning-bg/40 border border-warning/30 space-y-2">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-warning text-[20px] shrink-0 mt-0.5">report_problem</span>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-on-surface">Sinematografi II Menipis</h4>
+<p class="font-body-sm text-body-sm text-text-muted mt-1 leading-snug">
+                    Sisa tinggal <strong>22 jam</strong>, sementara 3 kelompok praktikum belum melaksanakan syuting modul <em>low-light exterior</em> pekan 12.
+                  </p>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">Rekomendasi:</span>
+<button class="text-caption font-caption font-semibold px-2.5 py-1.5 rounded-lg bg-warning text-surface-white hover:bg-warning/90 transition-colors shadow-xs" onclick="fillQuickTransfer('DKV-316', 'DKV-304', 30)" type="button">
+                  Transfer 30 Jam dari Studio Terpadu
+                </button>
+</div>
+</div>
+<!-- Insight 2: Blue Alert UAS Spike -->
+<div class="p-space-sm rounded-lg bg-info-bg/50 border border-info/30 space-y-2">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-info text-[20px] shrink-0 mt-0.5">event_upcoming</span>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-on-surface">Puncak Booking UAS (Pekan 14-15)</h4>
+<p class="font-body-sm text-body-sm text-text-muted mt-1 leading-snug">
+                    Proyeksi permintaan <strong>45 unit kamera Sony FX3 &amp; A7 III</strong> bentrok antara Matkul Sinema Dokumenter dan Tugas Akhir.
+                  </p>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">Prioritas:</span>
+<button class="text-caption font-caption font-semibold px-2.5 py-1.5 rounded-lg bg-surface-white border border-border text-on-surface hover:bg-surface-container-low transition-colors shadow-xs" type="button">
+                  Kunci Slot Khusus UAS
+                </button>
+</div>
+</div>
+</div>
+<!-- Small Summary footer -->
+<div class="mt-space-md pt-space-sm border-t border-border flex items-center justify-between text-caption font-caption text-text-muted">
+<span>Kebijakan Alokasi Lab 2026/2027</span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>Pedoman SK</span>
+<span class="material-symbols-outlined text-[14px]">launch</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Table Card: Detail per Dosen Pengampu & Rombel -->
+<div class="bg-surface-white rounded-xl border border-border shadow-sm overflow-hidden">
+<!-- Table Filter and Header -->
+<div class="p-space-md border-b border-border space-y-space-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Rincian Alokasi Kuota per Dosen Pengampu</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Pengawasan distribusi jam operasional laboratorium per rombongan belajar</p>
+</div>
+<!-- Search & Filter Controls -->
+<div class="flex flex-wrap items-center gap-2">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full h-9 pl-8 pr-3 bg-surface-container-low border border-border rounded-lg text-body-sm font-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary-container" id="tableFilterInput" onkeyup="filterTable()" placeholder="Cari matkul, kode, dosen..." type="text"/>
+</div>
+<select class="h-9 px-3 bg-surface-container-low border border-border rounded-lg text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container" id="statusFilter" onchange="filterTable()">
+<option value="ALL">Semua Status</option>
+<option value="KRITIS">Kritis (&gt;85%)</option>
+<option value="NORMAL">Normal / Aman</option>
+<option value="TERJADWAL">Reservasi Khusus</option>
+</select>
+<select class="h-9 px-3 bg-surface-container-low border border-border rounded-lg text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container" id="semesterFilter" onchange="filterTable()">
+<option value="ALL">Semua Tingkat</option>
+<option value="3">Semester 3</option>
+<option value="5">Semester 5</option>
+<option value="7">Semester 7</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Responsive Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="quotaTable">
+<thead>
+<tr class="bg-surface-container-low/70 border-b border-border text-caption font-caption text-text-muted tracking-wider uppercase">
+<th class="py-3 px-space-md font-semibold">Kode &amp; Mata Kuliah</th>
+<th class="py-3 px-space-md font-semibold">Dosen Pengampu</th>
+<th class="py-3 px-space-md font-semibold">Beban Mhs</th>
+<th class="py-3 px-space-md font-semibold">Paket Alat Utama</th>
+<th class="py-3 px-space-md font-semibold text-right">Alokasi</th>
+<th class="py-3 px-space-md font-semibold" style="width: 170px;">Realisasi Kuota</th>
+<th class="py-3 px-space-md font-semibold text-center">Status</th>
+<th class="py-3 px-space-md font-semibold text-right">Tindakan</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border font-body-sm text-body-sm text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-semester="5" data-status="KRITIS">
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-caption text-primary font-bold">DKV-304</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-surface-container text-text-muted">Sem 5</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">Sinematografi II</span>
+<span class="font-caption text-caption text-text-muted">Teori &amp; Praktikum Outdoor</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-surface-white flex items-center justify-center font-bold text-[11px] shrink-0">
+                    BM
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-on-surface truncate">Bambang M., M.Sn.</span>
+<span class="font-caption text-caption text-text-muted font-code-sm">NIDN 0418097901</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col font-caption text-caption">
+<span class="font-semibold text-on-surface">3 SKS (1-2)</span>
+<span class="text-text-muted">48 Mhs / 12 Kelompok</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[210px]">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Cinema Rig Sony FX3</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Cine Lens Prime</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Aputure 300d</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-right font-code-sm font-semibold text-on-surface">
+                260 Jam
+              </td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-caption font-caption font-code-sm">
+<span class="font-bold text-warning">238 Jam</span>
+<span class="text-text-muted">91.5%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-warning rounded-full" style="width: 91.5%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption font-semibold bg-warning-bg text-warning border border-warning/30">
+                  Kritis (Sisa 22h)
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" onclick="fillQuickTransfer('DKV-316', 'DKV-304', 25)" title="Transfer Kuota" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-container transition-colors" title="Detail Riwayat" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-semester="3" data-status="NORMAL">
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-caption text-primary font-bold">DKV-208</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-surface-container text-text-muted">Sem 3</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">Tata Kamera &amp; Tata Cahaya</span>
+<span class="font-caption text-caption text-text-muted">Dasar Studio Lighting &amp; Grip</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-container text-surface-white flex items-center justify-center font-bold text-[11px] shrink-0">
+                    AD
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-on-surface truncate">Agung Dwi, M.Sn.</span>
+<span class="font-caption text-caption text-text-muted font-code-sm">NIDN 0405128302</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col font-caption text-caption">
+<span class="font-semibold text-on-surface">3 SKS (1-2)</span>
+<span class="text-text-muted">54 Mhs / 14 Kelompok</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[210px]">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Kit Sony A7 IV</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Amaran 200x</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">C-Stand Grip Set</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-right font-code-sm font-semibold text-on-surface">
+                220 Jam
+              </td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-caption font-caption font-code-sm">
+<span class="font-bold text-success">174 Jam</span>
+<span class="text-text-muted">79.1%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-success rounded-full" style="width: 79.1%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption font-semibold bg-success-bg text-success border border-success/30">
+                  Normal (Sisa 46h)
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" onclick="fillQuickTransfer('DKV-208', 'DKV-304', 15)" title="Transfer Kuota" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-container transition-colors" title="Detail Riwayat" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-semester="5" data-status="KRITIS">
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-caption text-primary font-bold">DKV-312</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-surface-container text-text-muted">Sem 5</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">Produksi Iklan TV &amp; Web</span>
+<span class="font-caption text-caption text-text-muted">Commercial Video Production</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-tint text-surface-white flex items-center justify-center font-bold text-[11px] shrink-0">
+                    RN
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-on-surface truncate">Rina Nurhaliza, M.Ds.</span>
+<span class="font-caption text-caption text-text-muted font-code-sm">NIDN 0422038703</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col font-caption text-caption">
+<span class="font-semibold text-on-surface">3 SKS (1-2)</span>
+<span class="text-text-muted">36 Mhs / 9 Kelompok</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[210px]">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Blackmagic 6K Pro</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Gimbal RS3 Pro</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Wireless Mic DJI</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-right font-code-sm font-semibold text-on-surface">
+                180 Jam
+              </td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-caption font-caption font-code-sm">
+<span class="font-bold text-warning">156 Jam</span>
+<span class="text-text-muted">86.7%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-warning rounded-full" style="width: 86.7%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption font-semibold bg-warning-bg text-warning border border-warning/30">
+                  Kritis (Sisa 24h)
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" onclick="fillQuickTransfer('DKV-316', 'DKV-312', 20)" title="Transfer Kuota" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-container transition-colors" title="Detail Riwayat" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-semester="7" data-status="NORMAL">
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-caption text-primary font-bold">DKV-402</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-surface-container text-text-muted">Sem 7</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">Sinematografi Dokumenter</span>
+<span class="font-caption text-caption text-text-muted">Observational &amp; Field Audio</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-tertiary text-surface-white flex items-center justify-center font-bold text-[11px] shrink-0">
+                    FS
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-on-surface truncate">Fajar Sidik, M.Sn.</span>
+<span class="font-caption text-caption text-text-muted font-code-sm">NIDN 0411088401</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col font-caption text-caption">
+<span class="font-semibold text-on-surface">3 SKS (1-2)</span>
+<span class="text-text-muted">40 Mhs / 10 Kelompok</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[210px]">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Audio Zoom F6</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Sennheiser MKH416</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Sony FX3 Mobile</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-right font-code-sm font-semibold text-on-surface">
+                200 Jam
+              </td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-caption font-caption font-code-sm">
+<span class="font-bold text-success">132 Jam</span>
+<span class="text-text-muted">66.0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-success rounded-full" style="width: 66.0%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption font-semibold bg-success-bg text-success border border-success/30">
+                  Normal (Sisa 68h)
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" onclick="fillQuickTransfer('DKV-402', 'DKV-304', 15)" title="Transfer Kuota" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-container transition-colors" title="Detail Riwayat" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Surplus Studio -->
+<tr class="hover:bg-surface-container-low/40 transition-colors bg-success-bg/10" data-semester="5" data-status="NORMAL">
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-caption text-primary font-bold">DKV-316</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-surface-container text-text-muted">Sem 5</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">Studio Audio Visual Terpadu</span>
+<span class="font-caption text-caption text-text-muted">Multi-Camera Production Lab</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-outline text-surface-white flex items-center justify-center font-bold text-[11px] shrink-0">
+                    DR
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-on-surface truncate">Dr. Irwan S., M.Sn.</span>
+<span class="font-caption text-caption text-text-muted font-code-sm">NIDN 0403067201</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col font-caption text-caption">
+<span class="font-semibold text-on-surface">4 SKS (1-3)</span>
+<span class="text-text-muted">32 Mhs / 8 Kelompok</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[210px]">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Switcher ATEM Constellation</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Blackmagic URSA Mini</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Teleprompter Pro</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-right font-code-sm font-semibold text-on-surface">
+                200 Jam
+              </td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-caption font-caption font-code-sm">
+<span class="font-bold text-success">114 Jam</span>
+<span class="text-text-muted">57.0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-success rounded-full" style="width: 57.0%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption font-semibold bg-success-bg text-success border border-success/30">
+                  Surplus (Sisa 86h)
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" onclick="fillQuickTransfer('DKV-316', 'DKV-304', 30)" title="Transfer Kuota" type="button">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-container transition-colors" title="Detail Riwayat" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Tugas Akhir -->
+<tr class="hover:bg-surface-container-low/40 transition-colors" data-semester="7" data-status="TERJADWAL">
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-caption text-info font-bold">DKV-499</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-surface-container text-text-muted">Sem 7-8</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-on-surface mt-0.5">Tugas Akhir &amp; Film Mandiri</span>
+<span class="font-caption text-caption text-text-muted">Produksi Skripsi Karya</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary text-surface-white flex items-center justify-center font-bold text-[11px] shrink-0">
+                    TP
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-on-surface truncate">Tim Penguji &amp; Pembimbing</span>
+<span class="font-caption text-caption text-text-muted font-code-sm">Kolektif TA</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col font-caption text-caption">
+<span class="font-semibold text-on-surface">6 SKS (Mandiri)</span>
+<span class="text-text-muted">28 Mahasiswa Sidang</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[210px]">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Cinema Master Tier</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Audio Pro Field Kit</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-right font-code-sm font-semibold text-on-surface">
+                140 Jam
+              </td>
+<td class="py-3.5 px-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-caption font-caption font-code-sm">
+<span class="font-bold text-info">70 Jam</span>
+<span class="text-text-muted">50.0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-info rounded-full" style="width: 50.0%"></div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-caption font-caption font-semibold bg-info-bg text-info border border-info/30">
+                  Terjadwal (Sisa 70h)
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-container transition-colors" title="Detail Riwayat" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-space-md border-t border-border flex flex-col sm:flex-row items-center justify-between gap-space-sm font-caption text-caption text-text-muted">
+<div>Menampilkan <strong class="text-on-surface">6 Mata Kuliah Aktif</strong> di bawah pengawasan Kaprodi DKV &amp; Sinematografi</div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1.5 rounded border border-border text-text-muted opacity-50 cursor-not-allowed" disabled="" type="button">Sebelumnya</button>
+<span class="px-3 py-1.5 rounded bg-primary-container text-on-primary font-semibold">1</span>
+<button class="px-2.5 py-1.5 rounded border border-border text-text-muted opacity-50 cursor-not-allowed" disabled="" type="button">Selanjutnya</button>
+</div>
+</div>
+</div>
+<!-- Quick Transfer Drawer / Card Form -->
+<div class="bg-surface-white rounded-xl border border-border shadow-sm p-space-lg" id="quick-transfer-card">
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-space-md border-b border-border gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">swap_horizontal_circle</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Form Cepat Transfer Kuota Antar-Mata Kuliah</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Penyesuaian kuota real-time antarmatakuliah praktikum dalam satu program studi</p>
+</div>
+</div>
+<div class="inline-flex items-center gap-1 px-3 py-1 rounded bg-surface-container-low text-text-muted font-caption text-caption border border-border">
+<span class="material-symbols-outlined text-[16px] text-info">info</span>
+<span>Berdasarkan SK Rektor Standar Beban Lab AV No. 44/2025</span>
+</div>
+</div>
+<form class="mt-space-md grid grid-cols-1 md:grid-cols-12 gap-space-md items-end" id="transferForm" onsubmit="event.preventDefault(); submitTransfer();">
+<!-- Source Course -->
+<div class="md:col-span-4 space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface">
+            Mata Kuliah Sumber (Penyumbang Kuota)
+          </label>
+<select class="w-full h-11 px-3 bg-surface-white border border-border rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="sourceCourse">
+<option value="DKV-316">DKV-316: Studio AV Terpadu (Sisa: 86 Jam)</option>
+<option value="DKV-208">DKV-208: Tata Kamera &amp; Cahaya (Sisa: 46 Jam)</option>
+<option value="DKV-402">DKV-402: Sinematografi Dokumenter (Sisa: 68 Jam)</option>
+</select>
+<span class="block font-caption text-caption text-success font-semibold">Tersedia cadangan aman di atas ambang batas</span>
+</div>
+<!-- Transfer Direction Icon -->
+<div class="hidden md:flex md:col-span-1 items-center justify-center pb-2 text-primary">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center border border-border">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</div>
+</div>
+<!-- Target Course -->
+<div class="md:col-span-4 space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface">
+            Mata Kuliah Tujuan (Penerima Tambahan)
+          </label>
+<select class="w-full h-11 px-3 bg-surface-white border border-border rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="targetCourse">
+<option value="DKV-304">DKV-304: Sinematografi II (Kritis: Sisa 22 Jam)</option>
+<option value="DKV-312">DKV-312: Produksi Iklan TV &amp; Web (Kritis: Sisa 24 Jam)</option>
+<option value="DKV-499">DKV-499: Tugas Akhir Mandiri (Sisa: 70 Jam)</option>
+</select>
+<span class="block font-caption text-caption text-warning font-semibold">Memerlukan mitigasi kuota sebelum Ujian Akhir</span>
+</div>
+<!-- Amount of Hours -->
+<div class="md:col-span-3 space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface flex justify-between">
+<span>Jumlah Jam Dialihkan</span>
+<span class="font-code-sm text-primary font-bold" id="sliderValueDisplay">25 Jam</span>
+</label>
+<div class="flex items-center gap-2">
+<input class="w-full accent-primary-container h-2 bg-surface-container rounded-lg cursor-pointer" id="hourSlider" max="50" min="5" oninput="document.getElementById('sliderValueDisplay').innerText = this.value + ' Jam'" step="5" type="range" value="25"/>
+</div>
+<span class="block font-caption text-caption text-text-muted">Maksimal pergeseran: 40 Jam/Term</span>
+</div>
+<!-- Reason / Academic Context -->
+<div class="md:col-span-8 space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface">
+            Alasan Pergeseran Beban Akademik
+          </label>
+<input class="w-full h-11 px-3 bg-surface-white border border-border rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="transferReason" type="text" value="Kebutuhan retake adegan eksterior malam Tugas Akhir rombel DKV-304 A/B"/>
+<span class="block font-caption text-caption text-text-muted">Akan dicatat dalam Berita Acara Kaprodi &amp; Log Mutasi Kepala Lab</span>
+</div>
+<!-- Submit Button -->
+<div class="md:col-span-4">
+<button class="w-full h-11 px-space-md rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-secondary transition-all shadow-sm flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span>Konfirmasi Pergeseran Kuota</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Toast Confirmation Alert (Triggered via JS) -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 pointer-events-none transition-all duration-300" id="toastNotification">
+<div class="flex items-center gap-3 px-4 py-3 bg-surface-white border-l-4 border-success rounded-lg shadow-xl text-on-surface border border-border">
+<span class="material-symbols-outlined text-success text-[24px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface" id="toastTitle">Pergeseran Kuota Berhasil</span>
+<span class="font-caption text-caption text-text-muted" id="toastMessage">25 Jam telah dialihkan ke DKV-304. Berita acara siap dicetak.</span>
+</div>
+<button class="ml-2 text-text-muted hover:text-on-surface" onclick="dismissToast()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Toggle Chart mode: Hours vs Percent
+  function setChartMode(mode) {
+    const btnHours = document.getElementById('btn-hours');
+    const btnPercent = document.getElementById('btn-percent');
+    const values = document.querySelectorAll('.metric-value');
+
+    if (mode === 'hours') {
+      btnHours.classList.add('bg-surface-white', 'text-on-surface', 'shadow-xs');
+      btnHours.classList.remove('text-text-muted');
+      btnPercent.classList.remove('bg-surface-white', 'text-on-surface', 'shadow-xs');
+      btnPercent.classList.add('text-text-muted');
+
+      values.forEach(el => {
+        el.innerText = el.getAttribute('data-hours') + ' Jam';
+      });
+    } else {
+      btnPercent.classList.add('bg-surface-white', 'text-on-surface', 'shadow-xs');
+      btnPercent.classList.remove('text-text-muted');
+      btnHours.classList.remove('bg-surface-white', 'text-on-surface', 'shadow-xs');
+      btnHours.classList.add('text-text-muted');
+
+      values.forEach(el => {
+        el.innerText = el.getAttribute('data-percent');
+      });
+    }
+  }
+
+  // Pre-fill quick transfer drawer from recommendations or table actions
+  function fillQuickTransfer(source, target, hours) {
+    const sourceSelect = document.getElementById('sourceCourse');
+    const targetSelect = document.getElementById('targetCourse');
+    const slider = document.getElementById('hourSlider');
+    const display = document.getElementById('sliderValueDisplay');
+
+    if (sourceSelect) sourceSelect.value = source;
+    if (targetSelect) targetSelect.value = target;
+    if (slider) {
+      slider.value = hours;
+      display.innerText = hours + ' Jam';
+    }
+
+    const element = document.getElementById('quick-transfer-card');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      element.classList.add('ring-2', 'ring-primary-container');
+      setTimeout(() => {
+        element.classList.remove('ring-2', 'ring-primary-container');
+      }, 1500);
+    }
+  }
+
+  // Filter Table functionality
+  function filterTable() {
+    const searchVal = document.getElementById('tableFilterInput').value.toLowerCase();
+    const statusVal = document.getElementById('statusFilter').value;
+    const semVal = document.getElementById('semesterFilter').value;
+
+    const rows = document.querySelectorAll('#quotaTable tbody tr');
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const status = row.getAttribute('data-status');
+      const semester = row.getAttribute('data-semester');
+
+      const matchesSearch = text.includes(searchVal);
+      const matchesStatus = (statusVal === 'ALL' || status === statusVal);
+      const matchesSem = (semVal === 'ALL' || semester === semVal);
+
+      if (matchesSearch && matchesStatus && matchesSem) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+
+  // Handle Quick Transfer Submission
+  function submitTransfer() {
+    const source = document.getElementById('sourceCourse').value;
+    const target = document.getElementById('targetCourse').value;
+    const hours = document.getElementById('hourSlider').value;
+
+    const toast = document.getElementById('toastNotification');
+    const msg = document.getElementById('toastMessage');
+
+    msg.innerText = hours + ' Jam telah dialihkan dari ' + source + ' ke ' + target + '. Berita acara tercatat di sistem.';
+
+    toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      dismissToast();
+    }, 4500);
+  }
+
+  function dismissToast() {
+    const toast = document.getElementById('toastNotification');
+    toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.remove('translate-y-0', 'opacity-100');
+  }
+</script></main></div></body></html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "danger-bg": "#FEF2F2",
+          "surface-white": "#FFFFFF",
+          "surface-container-low": "#f6f3f2",
+          "text-muted": "#6B7280",
+          "on-tertiary-fixed-variant": "#4a463f",
+          "on-tertiary-fixed": "#1e1b15",
+          "surface-dim": "#dcd9d9",
+          "success-bg": "#F0FDF4",
+          "surface-tint": "#9d4300",
+          "border": "#E5E7EB",
+          "primary-fixed": "#ffdbca",
+          "surface-bright": "#fcf9f8",
+          "info": "#0284C7",
+          "inverse-on-surface": "#f3f0ef",
+          "background": "#fcf9f8",
+          "info-bg": "#F0F9FF",
+          "warning-bg": "#FFFBEB",
+          "violet": "#7C3AED",
+          "primary": "#9d4300",
+          "tertiary": "#625e56",
+          "tertiary-fixed": "#e9e1d8",
+          "on-secondary-fixed": "#370e00",
+          "on-surface": "#1b1c1c",
+          "secondary-fixed": "#ffdbce",
+          "on-error-container": "#93000a",
+          "on-secondary-fixed-variant": "#7f2b00",
+          "warning": "#D97706",
+          "on-primary-fixed-variant": "#783200",
+          "primary-fixed-dim": "#ffb690",
+          "outline-variant": "#e0c0b1",
+          "surface-variant": "#e4e2e1",
+          "secondary-container": "#fd651e",
+          "primary-container": "#f97316",
+          "success": "#16A34A",
+          "error": "#ba1a1a",
+          "danger": "#DC2626",
+          "on-error": "#ffffff",
+          "violet-bg": "#F5F3FF",
+          "surface-container-highest": "#e4e2e1",
+          "surface-container-high": "#eae7e7",
+          "error-container": "#ffdad6",
+          "on-surface-variant": "#584237",
+          "surface-container-lowest": "#ffffff",
+          "on-tertiary-container": "#36322c",
+          "on-secondary": "#ffffff",
+          "on-primary-container": "#582200",
+          "tertiary-container": "#a09a91",
+          "inverse-primary": "#ffb690",
+          "surface": "#F5F5F5",
+          "surface-container": "#f0eded",
+          "on-background": "#1b1c1c",
+          "on-primary-fixed": "#341100",
+          "secondary-fixed-dim": "#ffb599",
+          "outline": "#8c7164",
+          "on-primary": "#ffffff",
+          "tertiary-fixed-dim": "#ccc5bc",
+          "secondary": "#a73a00",
+          "inverse-surface": "#303030",
+          "on-secondary-container": "#571a00",
+          "on-tertiary": "#ffffff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "space-xl": "2rem",
+          "space-lg": "1.5rem",
+          "margin": "1rem",
+          "space-md": "1rem",
+          "gutter": "1rem",
+          "space-sm": "0.5rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "display": [
+            "Plus Jakarta Sans"
+          ],
+          "caption": [
+            "Inter"
+          ],
+          "code-sm": [
+            "JetBrains Mono"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-sm": [
+            "17px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "display": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "fontWeight": "800"
+            }
+          ],
+          "caption": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "600"
+            }
+          ],
+          "code-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-white z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-white"><div class="flex items-center gap-space-sm"><img alt="lendora-favicon-180-siklus.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">Lendora</span><span class="font-caption text-caption text-text-muted uppercase tracking-wider">Campus Gear</span></div></div><span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-caption text-caption">Prodi</span></div><nav class="px-space-md py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm"><div class="px-3 pt-space-sm pb-1 font-caption text-caption uppercase text-text-muted tracking-wider">Utama</div><a class="flex items-center justify-between px-3 h-11 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard-prodi" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard Prodi</span></div></a><a aria-current="page" class="flex items-center justify-between px-3 h-11 transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm" data-path="otorisasi-khusus" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="font-label-md text-label-md">Otorisasi Khusus</span></div><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary font-caption text-caption">3 Baru</span></a><div class="px-3 pt-space-md pb-1 font-caption text-caption uppercase text-text-muted tracking-wider">Monitoring Prodi</div><a class="flex items-center gap-space-sm px-3 h-11 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kuota-dan-utilisasi-alat" href="#"><span class="material-symbols-outlined text-[20px]">pie_chart</span><span class="font-label-md text-label-md">Kuota &amp; Utilisasi Alat</span></a><a class="flex items-center gap-space-sm px-3 h-11 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="jadwal-praktikum" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-md text-label-md">Jadwal Praktikum</span></a><a class="flex items-center gap-space-sm px-3 h-11 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="mahasiswa-dan-reputasi" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-label-md text-label-md">Mahasiswa &amp; Reputasi</span></a><div class="px-3 pt-space-md pb-1 font-caption text-caption uppercase text-text-muted tracking-wider">Laporan &amp; Dokumen</div><a class="flex items-center gap-space-sm px-3 h-11 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="laporan-semester" href="#"><span class="material-symbols-outlined text-[20px]">summarize</span><span class="font-label-md text-label-md">Laporan Semester</span></a><a class="flex items-center gap-space-sm px-3 h-11 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="rekomendasi-pengadaan-av" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-label-md text-label-md">Rekomendasi Pengadaan AV</span></a></nav></div><div class="p-space-md bg-surface-container-low m-space-md rounded-xl flex flex-col gap-space-sm"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="min-w-0 flex flex-col"><span class="font-label-md text-label-md text-on-surface truncate">Dr. Irwan Setiawan</span><span class="font-caption text-caption text-text-muted truncate">Kaprodi DKV &amp; Film</span></div></div></div><button class="w-full h-9 rounded-lg bg-surface-white text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md flex items-center justify-center gap-1.5 shadow-[0_1px_2px_rgba(0,0,0,0.06)]" type="button"><span class="material-symbols-outlined text-[16px] text-primary">swap_horiz</span><span>Ganti Peran / Prodi</span></button></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-white/90 backdrop-blur-md z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-2 font-body-sm text-body-sm text-text-muted truncate"><span class="hover:text-on-surface transition-colors cursor-pointer">Prodi DKV &amp; Film</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="hover:text-on-surface transition-colors cursor-pointer">Otorisasi Khusus</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="font-code-sm text-code-sm text-primary font-semibold truncate">Detail Tiket LDR-BK-2026-0012</span></div><div class="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-bg text-success font-caption text-caption shrink-0"><span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span><span>Semester Ganjil 2026/2027 · Aktif</span></div></div><div class="flex items-center gap-space-md shrink-0"><div class="relative hidden md:block w-64"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Cari tiket, NIM, atau alat..." type="text"/></div><button aria-label="Notifikasi" class="relative w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 rounded-full bg-danger text-on-error font-caption text-[10px] leading-tight flex items-center justify-center font-bold">3</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Dr. Irwan Setiawan, M.Sn.</span><span class="font-caption text-caption text-text-muted">Kaprodi DKV &amp; Film</span></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface px-space-lg py-space-lg"><div class="flex flex-col w-full gap-space-lg">
+<!-- Header & Quick Action Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-white p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-1.5 max-w-3xl">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-caption text-caption tracking-wider">PANEL AKADEMIK PRODI</span>
+<span class="text-text-muted font-caption text-caption">•</span>
+<span class="font-caption text-caption text-text-muted">Otorisasi Khusus &amp; Dispensasi Kewenangan Kaprodi</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
+        Detail Otorisasi Tiket <span class="font-code-sm text-code-sm text-primary font-bold">LDR-BK-2026-0012</span>: Produksi Film Fiksi “Suara Senja”
+      </h1>
+<p class="font-body-sm text-body-sm text-text-muted">
+        Peminjaman paket peralatan Cinema 4K Grade A senilai <strong class="text-on-surface font-semibold">Rp 58.000.000</strong> selama <strong class="text-on-surface font-semibold">10 hari</strong> ke lokasi luar kota (Wonosobo &amp; Dieng). Memerlukan dispensasi batas nilai &amp; durasi standar operator loket.
+      </p>
+</div>
+<!-- Quick Action Group -->
+<div class="flex items-center gap-space-sm flex-wrap shrink-0">
+<button class="h-11 px-4 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Log Audit</span>
+</button>
+<button class="h-11 px-4 rounded-lg bg-surface hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Cetak PDF</span>
+</button>
+<a class="h-11 px-5 rounded-lg bg-primary-container hover:bg-secondary-container text-surface-white font-label-md text-label-md flex items-center gap-2 shadow-sm transition-all" href="#panel-eksekusi">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Setujui &amp; Terbitkan Dispensasi</span>
+</a>
+</div>
+</div>
+<!-- Escalation Context Banner -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md p-space-md bg-warning-bg rounded-xl shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-warning/10 text-warning flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">
+          Alasan Eskalasi ke Kaprodi: Melebihi Batas Durasi (&gt; 7 Hari) &amp; Nilai Unit (&gt; Rp 5.000.000 SOP Loket)
+        </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          SOP loket sirkulasi membatasi durasi peminjaman reguler maksimal 7 hari dan plafon tanggung jawab operator Rp 5.000.000. Pengajuan ini berdurasi <span class="font-semibold text-warning">10 hari</span> dengan estimasi risiko aset <span class="font-semibold text-warning">Rp 58.000.000</span> untuk Tugas Akhir kelulusan Semester 7.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0 self-end md:self-center">
+<span class="px-3 py-1 rounded-full bg-surface-white text-warning font-caption text-caption flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-warning animate-pulse"></span>
+        SLA Eskalasi: 4 Jam Tersisa
+      </span>
+</div>
+</div>
+<!-- Main Grid Layout (62% Left, 38% Right) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (Verifikasi, Portofolio & Aset) - 62% (col-span-7 or 8) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- 1. Card: Profil Pemohon & Rekam Jejak Akademik -->
+<div class="bg-surface-white p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">badge</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Profil Pemohon &amp; Rekam Jejak Akademik</h2>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Mahasiswa Aktif Terverifikasi
+          </span>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-space-md">
+<div class="relative w-14 h-14 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait photography of an Indonesian male cinema student wearing a neat collegiate shirt, studio lighting, clear depth of field, warm realistic academic tone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz7py5_JVrKeX8McNo4lYWC41mr6sQrHyA-6vlZ44XIAM7ERY2zrQ9cqC649Zu01edi__Mo-99n52Frpf8c0aMchpqi9MzgIIutPhkgnYdH8RPR0DcySbor5GjOPvh2qcG6GYiou9n9msAbl59E_t7wZQCyAzX1PODuN1Nw5GdghPloZKmAPnKGKwz8FILo0Zt3Hqq78WYYU5D3mKuNDd1Xwr41oM7yjT1q6JevRm4"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Dimas Arya Pangestu</span>
+<span class="font-code-sm text-code-sm text-text-muted">NIM 2205346077</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Semester 7 • S1 DKV Konsentrasi Sinematografi</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[15px] text-text-muted">school</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pembimbing: <strong class="text-on-surface">Bpk. Haryo Baskoro, M.Sn.</strong> (NIDN: 0014088201)</span>
+</div>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-1">
+<span class="px-3 py-1 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+              Rekomendasi SIAKAD
+            </span>
+<span class="font-caption text-caption text-text-muted">Disetujui 11 Nov 2026</span>
+</div>
+</div>
+<!-- Academic Key Metrics Bento -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm pt-1">
+<div class="p-3 rounded-lg bg-surface flex flex-col gap-0.5">
+<span class="font-caption text-caption text-text-muted">IPK Kumulatif</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">3.82 <span class="font-caption text-caption text-text-muted font-normal">/ 4.00</span></span>
+<span class="font-caption text-[11px] text-success flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> Cumlaude Track
+            </span>
+</div>
+<div class="p-3 rounded-lg bg-surface flex flex-col gap-0.5">
+<span class="font-caption text-caption text-text-muted">SKS Ditempuh</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">128 <span class="font-caption text-caption text-text-muted font-normal">SKS</span></span>
+<span class="font-caption text-[11px] text-info flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Syarat TA Terpenuhi
+            </span>
+</div>
+<div class="p-3 rounded-lg bg-surface flex flex-col gap-0.5">
+<span class="font-caption text-caption text-text-muted">Skor Kepatuhan Lab</span>
+<span class="font-headline-md text-headline-md text-success font-bold">98.5 <span class="font-caption text-caption text-text-muted font-normal">/ 100</span></span>
+<span class="font-caption text-[11px] text-success flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">verified</span> Bebas Kasus Denda
+            </span>
+</div>
+<div class="p-3 rounded-lg bg-surface flex flex-col gap-0.5">
+<span class="font-caption text-caption text-text-muted">Riwayat Pinjam</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">14 <span class="font-caption text-caption text-text-muted font-normal">Siklus</span></span>
+<span class="font-caption text-[11px] text-text-muted flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[12px]">check</span> 100% Tepat Waktu
+            </span>
+</div>
+</div>
+</div>
+<!-- 2. Card: Lembar Proposal Proyek & Portofolio Mahasiswa -->
+<div class="bg-surface-white p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">movie</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Proposal Proyek &amp; Portofolio Lapangan</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-violet-bg text-violet font-caption text-caption">Tugas Akhir Karya Seni</span>
+</div>
+<!-- Project Meta Strip -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm p-space-md bg-surface rounded-xl">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">Judul Karya Film</span>
+<span class="font-label-md text-label-md text-on-surface mt-0.5">“Suara Senja” (Fiksi Pendek 24 Menit)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">Lokasi Pengambilan Gambar</span>
+<span class="font-label-md text-label-md text-on-surface mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+              Wonosobo &amp; Kawah Sikidang, Dieng
+            </span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">Rentang Jadwal Produksi</span>
+<span class="font-label-md text-label-md text-on-surface mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-info">calendar_today</span>
+              15 Nov – 25 Nov 2026 (10 Hari)
+            </span>
+</div>
+</div>
+<!-- Portfolio Showcase Visual Banner -->
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container flex items-end p-4 shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Cinematic production still from student film project with dramatic misty mountain background in Dieng, gold hour sunset warm glow, professional color grading, cinematic 2.39 to 1 aspect ratio composition" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrAuvA3qjw5D2UrdSkggBKY2-xUPI8rFkMNDnLS-TXF1VsijvkOOOEAwcv-4B13nc3o59hPGyMxEPpLhHHoFzJampoFu-7EZZ6_dGHKuOOj0pMnzkXxOpIXwdlBpRdRrgtRIYh8Le5_A4X3wiUd9ZqkJwooG20X_Y8ak6nVDMkcCZXsTS2iEdnMDakJo_0LyTdqz__uIPzZoxqx80ipPnj9hanQFnbq-YNxbCO3K7Q')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/40 to-transparent"></div>
+<div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-2">
+<div class="flex flex-col">
+<span class="px-2 py-0.5 rounded bg-primary-container text-surface-white font-caption text-caption w-fit mb-1">Portofolio Unggulan</span>
+<span class="font-headline-sm text-headline-sm text-surface-white font-bold">“Lembayung Merapi” (Juara 2 Festival Film Kampus Nasional 2025)</span>
+<span class="font-caption text-caption text-surface-container-high">DoP / Sinematografer: Dimas Arya Pangestu • Durasi 18 Menit</span>
+</div>
+<a class="h-9 px-3.5 rounded-lg bg-surface-white/95 hover:bg-surface-white text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-primary">play_circle</span>
+<span>Putar Showreel</span>
+</a>
+</div>
+</div>
+<!-- Document Checklist Table -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Dokumen Legalitas &amp; Mitigasi Terlampir</span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">description</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Proposal Produksi &amp; Breakdown.pdf</span>
+<span class="font-caption text-caption text-text-muted">24 Halaman • 8.4 MB</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption shrink-0">Terverifikasi</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">fact_check</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">SPTJM Bermaterai Rp 10.000.pdf</span>
+<span class="font-caption text-caption text-text-muted">Ditandatangani Pemohon</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption shrink-0">Sah &amp; Legal</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-info text-[20px] shrink-0">security</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Polis Asuransi AS-EQ-2026-991</span>
+<span class="font-caption text-caption text-text-muted">Klaim Tanggungan 100% Nilai Aset</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-info-bg text-info font-caption text-caption shrink-0">Aktif</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">co_present</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Surat Rekomendasi Pembimbing</span>
+<span class="font-caption text-caption text-text-muted">Ditandatangani Bpk. Haryo Baskoro</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption shrink-0">Disetujui</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Card: Rincian Paket Peralatan Bernilai Tinggi -->
+<div class="bg-surface-white p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">videocam</span>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Paket Peralatan Bernilai Tinggi (Grade A)</h2>
+<span class="font-caption text-caption text-text-muted">4 Unit Aset Siap Alokasi Luar Kota</span>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-surface p-2 rounded-lg">
+<span class="font-caption text-caption text-text-muted">Total Valuasi Aset:</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Rp 58.000.000</span>
+</div>
+</div>
+<!-- Asset Items List -->
+<div class="flex flex-col gap-space-sm">
+<!-- Unit 1 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md p-space-md bg-surface-bright rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-16 h-16 rounded-lg bg-surface-white overflow-hidden shrink-0 flex items-center justify-center shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Sony FX3 Cinema Line full-frame digital camera with top audio handle isolated clean studio equipment render on neutral white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTkdw-0oSX1MjlPgFtL88TUD90h7rIyzWHhfK9-6PHZLdJVgsyZeKm9D3bCF2GAHbEt_d1xPj98bBZsk2QYG5Qg84x2ITZAtRpusLgFhYACv32DtaTK76gP-eFqd7HHruQ1yWNq63B8z3q2ucWNdScyHHP6GxOVfUz-fW1u-arRLVoT1yB7WQC_89s8_IGfV-QxD-f6AUTKcq5QdF26WvpWaQfvzwjy6vtAruXuZx2"/>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Sony FX3 Cinema Line Full-Frame Camera</span>
+<span class="font-code-sm text-code-sm text-primary bg-primary-fixed/50 px-2 py-0.5 rounded">LDR-CAM-0002</span>
+</div>
+<div class="flex items-center gap-3 mt-1 font-caption text-caption text-text-muted flex-wrap">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-success">verified</span> QC Pass Kalibrasi T4</span>
+<span>•</span>
+<span>Sensor &amp; Shutter Clean (8.240 click)</span>
+<span>•</span>
+<span class="text-on-surface font-medium">Nilai: Rp 35.000.000</span>
+</div>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between gap-1 shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-warning-bg text-warning font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lock_clock</span>
+                Direservasi Khusus
+              </span>
+<span class="font-caption text-caption text-text-muted">Karantina Siaga #1</span>
+</div>
+</div>
+<!-- Unit 2 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md p-space-md bg-surface-bright rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-16 h-16 rounded-lg bg-surface-white overflow-hidden shrink-0 flex items-center justify-center shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Sony FE 24-70mm f2.8 GM II professional camera lens, clean product studio photography on white backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByBlb2sdx6ejMMOMzQGak-Y_UrLV_0O19Re69KtrCQOJbARs29Ew-LHr_RRTqt1fTP47Lc6jeX2sodtP5zJMrXFO0zfe9jKQ5QvCXBQql1ioiISZRyKlg20V_h__UNMrw5Ifisn0kT4A9qZP2SYI9TLyhT-OWAwq-2righ76RtQ8Uei2k47Ai9yOBhRGg6ETXd1n8BHx4CSN8J4o5V_XPYBH-t61n3XCNVZ1IrUpZh"/>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Sony FE 24-70mm f/2.8 GM II</span>
+<span class="font-code-sm text-code-sm text-primary bg-primary-fixed/50 px-2 py-0.5 rounded">LDR-LNS-0004</span>
+</div>
+<div class="flex items-center gap-3 mt-1 font-caption text-caption text-text-muted flex-wrap">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-success">lens</span> Optik Tajam 92% MTF</span>
+<span>•</span>
+<span>Front/Rear Caps + Tulip Hood</span>
+<span>•</span>
+<span class="text-on-surface font-medium">Nilai: Rp 14.500.000</span>
+</div>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between gap-1 shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-warning-bg text-warning font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lock_clock</span>
+                Direservasi Khusus
+              </span>
+<span class="font-caption text-caption text-text-muted">Karantina Siaga #2</span>
+</div>
+</div>
+<!-- Unit 3 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md p-space-md bg-surface-bright rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-16 h-16 rounded-lg bg-surface-white overflow-hidden shrink-0 flex items-center justify-center shadow-sm">
+<img class="w-full h-full object-cover" data-alt="DJI RS3 Pro Gimbal Stabilizer Combo system with focus motor and carbon fiber arm components, clean technical studio photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjlBcuraObk6Emx7e1XafHpf-Bbd57486Mf4uo46WPJSP0TUl_ClLc3eMMSROmVpLMbUEKM_HJOn7lnwXKXMNJByixNeszlJz1c4zZzW4KoO5EHX7NXNoZOzyIS8IkrPcVy24UDv6P6BtwQeQNZEAfm5NOek1xAiQMCQQsItLJjmwRX5oXB4Is2qNYaULir1Vmse3FOeUDXdM32ub0F9txfxdTm3TusIxF44uUGesn"/>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">DJI RS3 Pro Gimbal Stabilizer Combo</span>
+<span class="font-code-sm text-code-sm text-primary bg-primary-fixed/50 px-2 py-0.5 rounded">LDR-ACC-0003</span>
+</div>
+<div class="flex items-center gap-3 mt-1 font-caption text-caption text-text-muted flex-wrap">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-success">tune</span> Lengkap Focus Motor &amp; LiDAR</span>
+<span>•</span>
+<span>Hard Case Peli Pelindung</span>
+<span>•</span>
+<span class="text-on-surface font-medium">Nilai: Rp 6.500.000</span>
+</div>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between gap-1 shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-warning-bg text-warning font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lock_clock</span>
+                Direservasi Khusus
+              </span>
+<span class="font-caption text-caption text-text-muted">Karantina Siaga #3</span>
+</div>
+</div>
+<!-- Unit 4 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md p-space-md bg-surface-bright rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-16 h-16 rounded-lg bg-surface-white overflow-hidden shrink-0 flex items-center justify-center shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Two V-Mount broadcast cinema camera batteries with dual rapid desktop charging dock unit, clean tech hardware studio shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOxwCiuCSRuTSXtfzL-T0ImxtlDKo8USd10J5pHofIDI0Ce0BprdjlQNW6yUYVD8FXchOePRnJzmyFz0RAZcHB2qzeZPR6TObrwC1luRSq1DfJgpaKdHGIubpE-mheo7o9HUzWQwNx2VZjruiBW2KmrTzQcRpX8PbVW_EPYDOJmxnQLVrsL2LooP47bxGm43TsiMJXl9PT0JcjbDSnde_VDH_YQuLTkYoqtz4OtQ58"/>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">2x V-Mount Battery 150Wh &amp; Dual Fast Charger</span>
+<span class="font-code-sm text-code-sm text-primary bg-primary-fixed/50 px-2 py-0.5 rounded">LDR-BAT-0008</span>
+</div>
+<div class="flex items-center gap-3 mt-1 font-caption text-caption text-text-muted flex-wrap">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-success">battery_charging_full</span> Kapasitas Sel 100% SOH</span>
+<span>•</span>
+<span>Kabel D-Tap Output Prima</span>
+<span>•</span>
+<span class="text-on-surface font-medium">Nilai: Rp 2.000.000</span>
+</div>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between gap-1 shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-warning-bg text-warning font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lock_clock</span>
+                Direservasi Khusus
+              </span>
+<span class="font-caption text-caption text-text-muted">Karantina Siaga #4</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (Evaluasi Risiko, Catatan & Eksekusi Otorisasi) - 38% -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- 1. Card: Matriks Evaluasi Risiko & Kuota Prodi -->
+<div class="bg-surface-white p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">analytics</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Matriks Risiko &amp; Dampak Kuota Prodi</h3>
+</div>
+<span class="px-2 py-0.5 rounded bg-success-bg text-success font-caption text-caption">Risiko Terkendali</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1: Dampak Matkul Lain -->
+<div class="p-3 rounded-lg bg-surface flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Dampak Terhadap Matkul Lain</span>
+<span class="px-2 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption">Rendah</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+              Praktikum Sinematografi pekan ke-11 memasuki fase pascaproduksi editing di lab. Utilisasi kamera studio tidak terganggu.
+            </p>
+</div>
+<!-- Item 2: Mitigasi Cuaca Ekstrem Dieng -->
+<div class="p-3 rounded-lg bg-surface flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Mitigasi Iklim Dingin Dieng</span>
+<span class="px-2 py-0.5 rounded-full bg-info-bg text-info font-caption text-caption">Siaga Mandiri</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+              Kru menyertakan 5 paket silica gel food-grade, seal bag kedap embun, serta rain cover tebal grade outdoor untuk kondensasi belerang.
+            </p>
+</div>
+<!-- Item 3: Kuota Jam Alat Prodi -->
+<div class="p-3 rounded-lg bg-surface flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Plafon Jam TA Prodi Terpakai</span>
+<span class="font-code-sm text-code-sm text-primary font-bold">70 Jam / 120 Jam Max</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 58.3%;"></div>
+</div>
+<span class="font-caption text-caption text-text-muted">
+              Tersisa sisa kuota 50 jam ekuivalen untuk kelompok TA DKV berikutnya.
+            </span>
+</div>
+</div>
+</div>
+<!-- 2. Card: Riwayat Keputusan & Komentar Pembimbing & Operator -->
+<div class="bg-surface-white p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">forum</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Rekomendasi &amp; Catatan Petugas</h3>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Pembimbing Note -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-white flex items-center justify-center font-caption text-caption font-bold text-primary shadow-sm">
+                  HB
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Bpk. Haryo Baskoro, M.Sn.</span>
+<span class="font-caption text-caption text-text-muted">Dosen Pembimbing Tugas Akhir</span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-muted">11 Nov • 14:20</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">
+              “Dimas memiliki keterampilan teknis operasional kamera FX3 yang sangat matang (mantan asisten lab semester 5 &amp; 6). Lokasi Dieng telah disurvei dengan aman bersama produser. Sangat direkomendasikan untuk dispensasi penuh.”
+            </p>
+</div>
+<!-- Operator Loket Note -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-white flex items-center justify-center font-caption text-caption font-bold text-secondary shadow-sm">
+                  BS
+                </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Budi Santoso</span>
+<span class="font-caption text-caption text-text-muted">Operator Loket Sirkulasi AV</span>
+</div>
+</div>
+<span class="font-caption text-caption text-text-muted">12 Nov • 08:30</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">
+              “Unit kamera, lensa GM II, gimbal, dan baterai telah disiapkan di lemari karantina siaga loket. Menunggu surat dispensasi sah Kaprodi sebelum surat jalan resmi diterbitkan sistem.”
+            </p>
+</div>
+</div>
+</div>
+<!-- 3. Card: Panel Eksekusi Otorisasi Kaprodi (High Priority Action Card) -->
+<div class="bg-surface-white p-space-lg rounded-xl shadow-md flex flex-col gap-space-md border-t-4 border-primary" id="panel-eksekusi">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">verified_user</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Otorisasi Digital Kaprodi</h3>
+</div>
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface text-text-muted">Fase Penentu</span>
+</div>
+<form class="flex flex-col gap-space-md" id="auth-form" onsubmit="event.preventDefault(); triggerAuthSuccess();">
+<!-- Pilihan Keputusan Radio Pill -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Keputusan Kaprodi:</label>
+<div class="grid grid-cols-1 gap-2">
+<label class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors has-[:checked]:bg-primary-fixed/40 has-[:checked]:text-on-primary-fixed">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary accent-primary" name="keputusan" type="radio" value="penuh"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Setujui Penuh (Dispensasi 10 Hari &amp; Rp 58 Jt)</span>
+<span class="font-caption text-caption text-text-muted">Izin resmi produksi luar kota tanpa pemotongan durasi.</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors has-[:checked]:bg-primary-fixed/40 has-[:checked]:text-on-primary-fixed">
+<input class="w-4 h-4 text-primary focus:ring-primary accent-primary" name="keputusan" type="radio" value="bersyarat"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Setujui Bersyarat (Wajib Lapor GPS Harian)</span>
+<span class="font-caption text-caption text-text-muted">Mahasiswa wajib unggah foto kondisi alat tiap pukul 20:00 WIB.</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors has-[:checked]:bg-primary-fixed/40 has-[:checked]:text-on-primary-fixed">
+<input class="w-4 h-4 text-primary focus:ring-primary accent-primary" name="keputusan" type="radio" value="revisi"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Minta Revisi Dokumen</span>
+<span class="font-caption text-caption text-text-muted">Kembalikan ke pemohon untuk penyesuaian jadwal / kru.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Textarea Catatan Resmi Kaprodi -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface" for="catatan-kaprodi">Instruksi &amp; Catatan Resmi Kaprodi:</label>
+<span class="font-caption text-caption text-text-muted">Tercantum pada PDF Izin</span>
+</div>
+<textarea class="w-full p-3 rounded-xl bg-surface font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all resize-none" id="catatan-kaprodi" rows="3">Dispensasi disetujui untuk penyelesaian Tugas Akhir Film Fiksi TA 2026. Patuhi SOP keselamatan alat di medan dingin Dieng dan pastikan unit kembali maksimal 25 Nov 2026 pukul 16:00 WIB.</textarea>
+</div>
+<!-- Digital Signature & Token Box -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">key</span>
+<span class="font-label-md text-label-md text-on-surface">Kredensial Otorisator Digital</span>
+</div>
+<span class="font-caption text-caption text-success font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+                Token Aktif
+              </span>
+</div>
+<div class="flex items-center justify-between text-text-muted font-caption text-caption">
+<span>Dr. Irwan Setiawan, M.Sn.</span>
+<span class="font-code-sm text-code-sm">NIP: 197804152005011003</span>
+</div>
+<label class="flex items-start gap-2 pt-1 cursor-pointer">
+<input checked="" class="mt-0.5 w-4 h-4 text-primary focus:ring-primary accent-primary rounded" id="declaration-check" required="" type="checkbox"/>
+<span class="font-caption text-caption text-on-surface leading-tight">
+                Saya menyatakan bahwa dispensasi ini telah dikaji sesuai pedoman akademik &amp; mitigasi risiko prodi.
+              </span>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full h-12 rounded-xl bg-primary-container hover:bg-secondary-container active:scale-[0.99] text-surface-white font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-all" id="submit-btn" type="submit">
+<span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+<span>Sahkan Otorisasi &amp; Terbitkan Surat Izin (F2)</span>
+</button>
+<div class="grid grid-cols-2 gap-2">
+<button class="h-10 rounded-lg bg-danger-bg hover:bg-error-container text-danger font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" onclick="confirmReject();" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>Tolak Izin</span>
+</button>
+<button class="h-10 rounded-lg bg-surface hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" onclick="forwardToDean();" type="button">
+<span class="material-symbols-outlined text-[16px]">forward</span>
+<span>Alihkan ke Dekanat</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 max-w-md w-full bg-surface-white p-4 rounded-xl shadow-xl flex items-center gap-3 transform translate-y-32 opacity-0 transition-all duration-300 z-50 pointer-events-none" id="toast-notification">
+<div class="w-10 h-10 rounded-lg bg-success-bg text-success flex items-center justify-center shrink-0" id="toast-icon-wrap">
+<span class="material-symbols-outlined text-[22px]" id="toast-icon">check_circle</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight" id="toast-title">Dispensasi Berhasil Diterbitkan</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate" id="toast-message">Surat izin dispensasi digital telah dikirimkan ke loket AV &amp; SIAKAD mahasiswa.</span>
+</div>
+<button class="text-text-muted hover:text-on-surface p-1" onclick="hideToast();" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Interactive Logic script for modal actions and shortcut handling -->
+<script>
+    function showToast(title, message, isSuccess = true) {
+      const toast = document.getElementById('toast-notification');
+      const toastTitle = document.getElementById('toast-title');
+      const toastMessage = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+      const toastIconWrap = document.getElementById('toast-icon-wrap');
+
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+
+      if (isSuccess) {
+        toastIcon.textContent = 'check_circle';
+        toastIconWrap.className = 'w-10 h-10 rounded-lg bg-success-bg text-success flex items-center justify-center shrink-0';
+      } else {
+        toastIcon.textContent = 'warning';
+        toastIconWrap.className = 'w-10 h-10 rounded-lg bg-danger-bg text-danger flex items-center justify-center shrink-0';
+      }
+
+      toast.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        hideToast();
+      }, 4000);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toast-notification');
+      toast.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }
+
+    function triggerAuthSuccess() {
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Memproses Kriptografi Digital...</span>';
+      
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">done</span><span>Telah Sah Terotorisasi</span>';
+        btn.classList.remove('bg-primary-container', 'hover:bg-secondary-container');
+        btn.classList.add('bg-success', 'hover:bg-success');
+        showToast('Dispensasi Resmi Diterbitkan!', 'Tiket LDR-BK-2026-0012 berstatus Disetujui Penuh oleh Kaprodi.', true);
+      }, 1000);
+    }
+
+    function confirmReject() {
+      if (confirm('Apakah Anda yakin ingin menolak permohonan otorisasi khusus ini? Tindakan akan membatalkan peminjaman alat.')) {
+        showToast('Permohonan Ditolak', 'Notifikasi penolakan telah diteruskan ke mahasiswa dan operator loket.', false);
+      }
+    }
+
+    function forwardToDean() {
+      showToast('Dialihkan ke Dekanat', 'Berkas telah dieskalasi ke Wakil Dekan I Bidang Akademik untuk peninjauan.', true);
+    }
+
+    // F2 Keyboard shortcut listener for fast approval
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F2') {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn && !submitBtn.disabled) {
+          triggerAuthSuccess();
+        }
+      }
+    });
+  </script>
+</div></main></div></body></html>

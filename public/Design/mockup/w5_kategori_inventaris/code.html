@@ -1,0 +1,905 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"danger":"#DC2626","secondary-fixed":"#ffdbce","on-tertiary-fixed-variant":"#4a463f","info":"#0284C7","on-error":"#ffffff","on-tertiary":"#ffffff","background":"#fcf9f8","inverse-surface":"#303030","violet":"#7C3AED","success":"#16A34A","surface-container-lowest":"#ffffff","on-primary-container":"#582200","inverse-primary":"#ffb690","surface-variant":"#e4e2e1","outline-variant":"#e0c0b1","on-secondary":"#ffffff","on-secondary-fixed-variant":"#7f2b00","tertiary-fixed-dim":"#ccc5bc","error":"#ba1a1a","on-background":"#1b1c1c","violet-bg":"#F5F3FF","on-primary-fixed":"#341100","inverse-on-surface":"#f3f0ef","on-tertiary-container":"#36322c","surface-container-highest":"#e4e2e1","danger-bg":"#FEF2F2","secondary":"#a73a00","error-container":"#ffdad6","info-bg":"#F0F9FF","on-tertiary-fixed":"#1e1b15","primary-fixed-dim":"#ffb690","surface-container":"#f0eded","success-bg":"#F0FDF4","on-primary-fixed-variant":"#783200","surface-dim":"#dcd9d9","surface-white":"#FFFFFF","on-surface-variant":"#584237","surface-container-low":"#f6f3f2","on-primary":"#ffffff","secondary-fixed-dim":"#ffb599","primary-fixed":"#ffdbca","text-muted":"#6B7280","warning-bg":"#FFFBEB","secondary-container":"#fd651e","surface-tint":"#9d4300","tertiary-container":"#a09a91","on-secondary-container":"#571a00","border":"#E5E7EB","surface-container-high":"#eae7e7","on-error-container":"#93000a","warning":"#D97706","primary-container":"#f97316","on-secondary-fixed":"#370e00","surface-bright":"#fcf9f8","on-surface":"#1b1c1c","tertiary":"#625e56","surface":"#F5F5F5","primary":"#9d4300","outline":"#8c7164","tertiary-fixed":"#e9e1d8"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1rem","space-xs":"0.25rem","space-sm":"0.5rem","space-md":"1rem","space-xl":"2rem","space-lg":"1.5rem","margin":"1rem"},"fontFamily":{"display":["Plus Jakarta Sans"],"label-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-sm":["Inter"],"code-sm":["JetBrains Mono"],"body-md":["Inter"],"caption":["Inter"],"headline-md":["Plus Jakarta Sans"]},"fontSize":{"display":["28px",{"lineHeight":"36px","fontWeight":"800"}],"label-md":["13px",{"lineHeight":"20px","fontWeight":"600"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"code-sm":["13px",{"lineHeight":"18px","fontWeight":"500"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-white border-r border-border z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between border-b border-border"><div class="flex items-center gap-space-sm"><img alt="Lendora Logo" class="w-9 h-9 object-contain rounded-lg shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0LQcSVOl1z2B8_mLzyQbAZF147syuxDx2ATfpNwvSB1gys9cfHHS6dC3oOZh4UZIpvSn6BdqDU9N_0yZ_dhvIyt5oLa4MFlKT5pS_00amNJfDXTXMLnVH1QfFOc39rJlP6qaTX3vBpFUMiqApS10yd6zBGtZzsgyhn_wnOqycKdaSnoVl_e2I2zDqmBQUByth2dCrnp8Qb1ftxa8TVIiYyhwOhORmcjlQyGobgBQsirxGxTms-VPJrg"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Lendora</span></div><span class="bg-primary-container/10 text-primary border border-primary-container/20 font-caption text-caption px-2 py-0.5 rounded-full">ADMIN CONSOLE</span></div><nav class="px-space-sm py-space-md space-y-space-md" data-active-classes="bg-primary-container text-on-primary font-label-md rounded-lg shadow-sm"><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">UTAMA</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="">Dashboard</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">INVENTARIS</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="aset" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="">Aset</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors bg-primary-container/10 text-primary-container" data-path="kategori" href="#"><span class="material-symbols-outlined text-[20px]">category</span><span class="">Kategori</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">PEMINJAMAN</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="antrean-persetujuan" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="">Antrean Persetujuan</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="semua-transaksi" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="">Semua Transaksi</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="kalender" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="">Kalender</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">OPERASIONAL</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="serah-terima" href="#"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="">Serah Terima</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pemeriksaan" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="">Pemeriksaan</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="maintenance" href="#"><span class="material-symbols-outlined text-[20px]">build</span><span class="">Maintenance</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">ORGANISASI</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pengguna-role" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="">Pengguna &amp; Role</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="laporan-analitik" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="">Laporan &amp; Analitik</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pengaturan" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="">Pengaturan</span></a></div></nav></div><div class="p-space-sm border-t border-border bg-surface-white"><div class="flex items-center justify-between p-2 rounded-lg bg-surface border border-border"><div class="flex items-center gap-space-sm min-w-0"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="min-w-0"><p class="font-label-md text-label-md text-on-surface truncate">Budi Santoso</p><span class="inline-block font-caption text-caption bg-warning-bg text-warning border border-border px-1.5 rounded-full">Operator Lab</span></div></div><a class="p-1.5 text-text-muted hover:text-danger hover:bg-danger-bg rounded-lg transition-colors flex items-center justify-center" data-path="logout" href="#" title="Keluar"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-64 min-h-screen flex flex-col"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-white border-b border-border z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-text-muted font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">home</span><span class="">/</span><span class="text-on-surface font-label-md text-label-md">Inventaris / Kategori</span></div><div class="relative w-96"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-11 pl-9 pr-3 rounded-lg border border-border bg-surface font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Cari kategori, slug, prefiks..." type="text"></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-success-bg border border-border"><span class="w-2 h-2 rounded-full bg-success animate-pulse"></span><span class="font-caption text-caption text-success">Shift Aktif: Lab Audio-Visual</span></div><button class="relative p-2 text-text-muted hover:text-on-surface hover:bg-surface rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full ring-2 ring-surface-white"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface flex-1 px-space-lg py-space-lg"><div class="flex flex-col w-full gap-space-lg pb-12">
+<!-- Script for Sidebar Menu Active Alignment & Breadcrumb Updates -->
+<script>
+    (function () {
+      const activeLink = document.querySelector('aside nav a[data-path="kategori"]');
+      if (activeLink) {
+        activeLink.classList.remove('text-on-surface-variant');
+        activeLink.classList.add('bg-primary-container/10', 'text-primary-container', 'font-label-md');
+      }
+      const breadcrumb = document.querySelector('header .flex.items-center.gap-space-xs span.text-on-surface');
+      if (breadcrumb) {
+        breadcrumb.textContent = 'Inventaris / Kategori';
+      }
+      const searchInput = document.querySelector('header input[type="text"]');
+      if (searchInput) {
+        searchInput.placeholder = 'Cari kategori, slug, prefiks...';
+      }
+    })();
+  </script>
+<!-- Page Header -->
+<section class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container/10 text-primary-container font-caption text-caption uppercase tracking-wider">Taksonomi Peralatan</span>
+<span class="text-text-muted font-caption text-caption">• Versi Skema 2.4</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Kategori Inventaris</h1>
+<p class="font-body-sm text-body-sm text-text-muted max-w-2xl">
+        Kelola struktur hierarki taksonomi peralatan lab multimedia, aturan peminjaman durasi khusus, dan konvensi prefiks kode unit aset.
+      </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-space-sm self-start lg:self-auto shrink-0">
+<button class="h-11 px-4 rounded-lg bg-surface-white text-on-surface hover:bg-surface transition-colors font-label-md text-label-md flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">tag</span>
+<span class="">Kelola Prefiks Kode</span>
+</button>
+<button class="h-11 px-5 rounded-lg bg-primary-container hover:bg-primary-container/90 text-on-primary transition-all font-label-md text-label-md flex items-center gap-2 shadow-sm hover:shadow active:scale-[0.99]" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="">Tambah Kategori</span>
+</button>
+</div>
+</section>
+<!-- Metric / Summary Cards Row (4 cards) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-white rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-primary-container/5 transition-transform group-hover:scale-125"></div>
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted uppercase">Total Kategori Induk</span>
+<div class="w-8 h-8 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">folder_copy</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-on-surface">5</span>
+<span class="font-label-md text-label-md text-text-muted">Kategori Pokok</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1 truncate">Kamera, Lensa, Audio, Lighting, Rig</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-white rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-info-bg transition-transform group-hover:scale-125"></div>
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted uppercase">Sub-Kategori Spesifik</span>
+<div class="w-8 h-8 rounded-lg bg-info-bg text-info flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">account_tree</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-on-surface">12</span>
+<span class="font-label-md text-label-md text-text-muted">Cabang Aktif</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1 truncate">Mirrorless, Cinema, Prime, Wireless, dll</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-white rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-success-bg transition-transform group-hover:scale-125"></div>
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted uppercase">Unit Terpetakan</span>
+<div class="w-8 h-8 rounded-lg bg-success-bg text-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-on-surface">24</span>
+<span class="font-label-md text-label-md text-text-muted">Unit Aset Lab</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="inline-block w-2 h-2 rounded-full bg-success"></span>
+<p class="font-caption text-caption text-success">100% inventaris terasosiasi taksonomi</p>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-white rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-warning-bg transition-transform group-hover:scale-125"></div>
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted uppercase">Kategori Teraktif</span>
+<div class="w-8 h-8 rounded-lg bg-warning-bg text-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2 truncate">
+<span class="font-headline-md text-headline-md text-on-surface truncate">Mirrorless</span>
+<span class="font-caption text-caption bg-warning-bg text-warning px-1.5 py-0.5 rounded-full shrink-0">8 Aset</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1 truncate">14 sirkulasi peminjaman bulan berjalan</p>
+</div>
+</div>
+</section>
+<!-- Main Content Layout (70% Tree List Table + 30% Detail & Info Panel) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (70% -> col-span-8) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Tree Table Card Container -->
+<div class="bg-surface-white rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Header & Toolbar -->
+<div class="p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-white">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Struktur Hirarki Kategori Peralatan</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Navigasi direktori rekursif aset multimedia</p>
+</div>
+<div class="flex items-center flex-wrap gap-2">
+<!-- Expand / Collapse All -->
+<div class="flex items-center bg-surface rounded-lg p-0.5">
+<button class="px-2.5 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-white rounded font-caption text-caption flex items-center gap-1 transition-all" id="btnExpandAll" title="Buka Semua Cabang" type="button">
+<span class="material-symbols-outlined text-[16px]">unfold_more</span>
+<span class="">Buka Semua</span>
+</button>
+<button class="px-2.5 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-white rounded font-caption text-caption flex items-center gap-1 transition-all" id="btnCollapseAll" title="Tutup Semua Cabang" type="button">
+<span class="material-symbols-outlined text-[16px]">unfold_less</span>
+<span class="">Tutup</span>
+</button>
+</div>
+<!-- Inactive Toggle -->
+<label class="flex items-center gap-2 cursor-pointer bg-surface px-2.5 py-1 rounded-lg select-none">
+<input checked="" class="w-3.5 h-3.5 rounded text-primary-container accent-primary-container cursor-pointer" type="checkbox">
+<span class="font-caption text-caption text-text-muted">Aset Draf/Kosong</span>
+</label>
+</div>
+</div>
+<!-- Filter Search Bar -->
+<div class="px-space-md pb-space-sm pt-0">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">filter_list</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:bg-surface-white focus:shadow-inner transition-all" id="treeFilterInput" placeholder="Filter nama atau slug kategori (cth: kamera, mic, drone)..." type="text">
+</div>
+</div>
+<!-- Tree Header Labels -->
+<div class="grid grid-cols-12 px-space-md py-2.5 bg-surface text-text-muted font-caption text-caption uppercase tracking-wider">
+<div class="col-span-6 flex items-center gap-2">Nama Kategori &amp; Slug</div>
+<div class="col-span-2 text-center">Prefiks</div>
+<div class="col-span-2 text-center">Populasi</div>
+<div class="col-span-2 text-right pr-2">Aksi</div>
+</div>
+<!-- Interactive Tree Rows Container -->
+<div class="divide-y divide-border/0 flex flex-col font-body-sm text-body-sm" id="categoryTree">
+<!-- ROOT 1: KAMERA -->
+<div class="category-node group" data-category="kamera">
+<div class="grid grid-cols-12 px-space-md py-3 items-center hover:bg-surface/50 transition-colors bg-surface-white">
+<div class="col-span-6 flex items-center gap-2 min-w-0">
+<button class="tree-toggle w-6 h-6 flex items-center justify-center rounded hover:bg-surface text-on-surface transition-transform" data-target="children-kamera" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform">expand_more</span>
+</button>
+<div class="w-7 h-7 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">photo_camera</span>
+</div>
+<div class="min-w-0">
+<span class="font-headline-sm text-[15px] text-on-surface font-semibold truncate block">Kamera</span>
+<span class="font-code-sm text-code-sm text-text-muted">slug: kamera</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface text-on-surface font-medium">CAM</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-container font-semibold">8 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-primary-container hover:bg-primary-container/10 flex items-center justify-center transition-colors" title="Tambah Sub-Kategori" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface flex items-center justify-center transition-colors" title="Edit Kategori" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<!-- Disabled delete -->
+<div class="relative group/tooltip flex items-center">
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+<div class="absolute bottom-full right-0 mb-1 hidden group-hover/tooltip:block z-20 w-48 p-2 bg-inverse-surface text-inverse-on-surface font-caption text-[11px] rounded shadow-lg pointer-events-none">
+                    Tidak bisa dihapus: memuat 8 unit aset aktif.
+                  </div>
+</div>
+</div>
+</div>
+<!-- Children Container -->
+<div class="flex flex-col bg-surface/30" id="children-kamera">
+<!-- Child 1.1: Kamera Mirrorless (Selected highlighted) -->
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-primary-container/5 transition-colors bg-primary-container/[0.03]">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-primary-container shrink-0"></div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Kamera Mirrorless</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-warning-bg text-warning font-caption">Maks 3 Hari</span>
+</div>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: kamera-mirrorless</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">CAM-MIR</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">6 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" title="Edit Sub-Kategori" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<div class="relative group/tooltip flex items-center">
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+<div class="absolute bottom-full right-0 mb-1 hidden group-hover/tooltip:block z-20 w-44 p-2 bg-inverse-surface text-inverse-on-surface font-caption text-[11px] rounded shadow-lg pointer-events-none">
+                      Memuat 6 unit aset aktif.
+                    </div>
+</div>
+</div>
+</div>
+<!-- Child 1.2: Kamera Cinema -->
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface truncate">Kamera Cinema</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-violet-bg text-violet font-caption">Otorisasi Khusus</span>
+</div>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: kamera-cinema</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">CAM-CIN</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">2 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" title="Edit Sub-Kategori" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<div class="relative group/tooltip flex items-center">
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+<div class="absolute bottom-full right-0 mb-1 hidden group-hover/tooltip:block z-20 w-44 p-2 bg-inverse-surface text-inverse-on-surface font-caption text-[11px] rounded shadow-lg pointer-events-none">
+                      Memuat 2 unit aset aktif.
+                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ROOT 2: LENSA -->
+<div class="category-node group" data-category="lensa">
+<div class="grid grid-cols-12 px-space-md py-3 items-center hover:bg-surface/50 transition-colors bg-surface-white">
+<div class="col-span-6 flex items-center gap-2 min-w-0">
+<button class="tree-toggle w-6 h-6 flex items-center justify-center rounded hover:bg-surface text-on-surface transition-transform" data-target="children-lensa" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform">expand_more</span>
+</button>
+<div class="w-7 h-7 rounded-lg bg-info-bg text-info flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">camera</span>
+</div>
+<div class="min-w-0">
+<span class="font-headline-sm text-[15px] text-on-surface font-semibold truncate block">Lensa</span>
+<span class="font-code-sm text-code-sm text-text-muted">slug: lensa</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface text-on-surface font-medium">LNS</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-info-bg text-info font-semibold">6 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-primary-container hover:bg-primary-container/10 flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<div class="relative group/tooltip flex items-center">
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+<div class="absolute bottom-full right-0 mb-1 hidden group-hover/tooltip:block z-20 w-44 p-2 bg-inverse-surface text-inverse-on-surface font-caption text-[11px] rounded shadow-lg pointer-events-none">
+                    Memuat 6 unit aset aktif.
+                  </div>
+</div>
+</div>
+</div>
+<!-- Children Lensa -->
+<div class="flex flex-col bg-surface/30" id="children-lensa">
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Lensa Zoom</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: lensa-zoom</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">LNS-ZM</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">4 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Lensa Prime</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: lensa-prime</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">LNS-PRM</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">2 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ROOT 3: AUDIO & MIKROFON -->
+<div class="category-node group" data-category="audio-mikrofon">
+<div class="grid grid-cols-12 px-space-md py-3 items-center hover:bg-surface/50 transition-colors bg-surface-white">
+<div class="col-span-6 flex items-center gap-2 min-w-0">
+<button class="tree-toggle w-6 h-6 flex items-center justify-center rounded hover:bg-surface text-on-surface transition-transform" data-target="children-audio" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform">expand_more</span>
+</button>
+<div class="w-7 h-7 rounded-lg bg-violet-bg text-violet flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">mic</span>
+</div>
+<div class="min-w-0">
+<span class="font-headline-sm text-[15px] text-on-surface font-semibold truncate block">Audio &amp; Mikrofon</span>
+<span class="font-code-sm text-code-sm text-text-muted">slug: audio-mikrofon</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface text-on-surface font-medium">MIC</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-violet-bg text-violet font-semibold">4 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-primary-container hover:bg-primary-container/10 flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<div class="relative group/tooltip flex items-center">
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+<div class="absolute bottom-full right-0 mb-1 hidden group-hover/tooltip:block z-20 w-44 p-2 bg-inverse-surface text-inverse-on-surface font-caption text-[11px] rounded shadow-lg pointer-events-none">
+                    Memuat 4 unit aset aktif.
+                  </div>
+</div>
+</div>
+</div>
+<!-- Children Audio -->
+<div class="flex flex-col bg-surface/30" id="children-audio">
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Wireless Mic System</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: audio-wireless</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">MIC-WLS</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">3 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Shotgun &amp; Boom Mic</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: audio-shotgun</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">MIC-SHT</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">1 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ROOT 4: LIGHTING & KELISTRIKAN -->
+<div class="category-node group" data-category="lighting">
+<div class="grid grid-cols-12 px-space-md py-3 items-center hover:bg-surface/50 transition-colors bg-surface-white">
+<div class="col-span-6 flex items-center gap-2 min-w-0">
+<button class="tree-toggle w-6 h-6 flex items-center justify-center rounded hover:bg-surface text-on-surface transition-transform" data-target="children-lighting" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform">expand_more</span>
+</button>
+<div class="w-7 h-7 rounded-lg bg-warning-bg text-warning flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">lightbulb</span>
+</div>
+<div class="min-w-0">
+<span class="font-headline-sm text-[15px] text-on-surface font-semibold truncate block">Lighting &amp; Kelistrikan</span>
+<span class="font-code-sm text-code-sm text-text-muted">slug: lighting</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface text-on-surface font-medium">LGT</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-warning-bg text-warning font-semibold">3 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-primary-container hover:bg-primary-container/10 flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Children Lighting -->
+<div class="flex flex-col bg-surface/30" id="children-lighting">
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Continuous LED Light</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: lighting-led</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">LGT-LED</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">2 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Strobe / Flash Studio</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: lighting-strobe</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">LGT-STR</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">1 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ROOT 5: TRIPOD & SUPPORT -->
+<div class="category-node group" data-category="tripod-support">
+<div class="grid grid-cols-12 px-space-md py-3 items-center hover:bg-surface/50 transition-colors bg-surface-white">
+<div class="col-span-6 flex items-center gap-2 min-w-0">
+<button class="tree-toggle w-6 h-6 flex items-center justify-center rounded hover:bg-surface text-on-surface transition-transform" data-target="children-tripod" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform">expand_more</span>
+</button>
+<div class="w-7 h-7 rounded-lg bg-surface text-on-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">precision_manufacturing</span>
+</div>
+<div class="min-w-0">
+<span class="font-headline-sm text-[15px] text-on-surface font-semibold truncate block">Tripod &amp; Support</span>
+<span class="font-code-sm text-code-sm text-text-muted">slug: tripod-support</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface text-on-surface font-medium">TRP</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface text-on-surface-variant font-semibold">3 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-primary-container hover:bg-primary-container/10 flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Children Tripod -->
+<div class="flex flex-col bg-surface/30" id="children-tripod">
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Tripod Video &amp; Fluid Head</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: tripod-video</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">TRP-VID</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">2 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 px-space-md py-2.5 items-center hover:bg-surface/60 transition-colors">
+<div class="col-span-6 flex items-center gap-2 pl-9 min-w-0 relative">
+<span class="text-text-muted/60 absolute left-6 top-1/2 -translate-y-1/2 text-xs">└─</span>
+<div class="w-2 h-2 rounded-full bg-text-muted/50 shrink-0"></div>
+<div class="min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate block">Gimbal Stabilizer</span>
+<span class="font-code-sm text-code-sm text-text-muted block">slug: stabilizer-gimbal</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white text-on-surface">TRP-GMB</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-white text-on-surface-variant font-medium">1 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-white flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted/40 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ROOT 6: ROOT BARU / KOSONG (Aksesoris & Drone) -->
+<div class="category-node group" data-category="drone-aksesoris">
+<div class="grid grid-cols-12 px-space-md py-3 items-center hover:bg-surface/50 transition-colors bg-surface-white">
+<div class="col-span-6 flex items-center gap-2 min-w-0">
+<button class="tree-toggle w-6 h-6 flex items-center justify-center rounded text-text-muted/40 cursor-default" type="button">
+<span class="material-symbols-outlined text-[20px] text-text-muted/40">remove</span>
+</button>
+<div class="w-7 h-7 rounded-lg bg-surface text-text-muted flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">flight</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-[15px] text-on-surface font-semibold truncate">Aksesoris &amp; Drone</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] bg-surface text-text-muted font-caption uppercase">Draf</span>
+</div>
+<span class="font-code-sm text-code-sm text-text-muted">slug: drone-aksesoris</span>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface text-on-surface font-medium">DRN</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface text-text-muted font-medium">0 Aset</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1 pr-1">
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-primary-container hover:bg-primary-container/10 flex items-center justify-center transition-colors" title="Tambah Sub-Kategori" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+</button>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface flex items-center justify-center transition-colors" title="Edit Kategori" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<!-- Active clickable Delete -->
+<button class="w-8 h-8 rounded-lg text-danger hover:bg-danger-bg flex items-center justify-center transition-colors" title="Hapus Kategori Kosong" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Pagination / Summary Info -->
+<div class="p-space-md bg-surface/40 flex items-center justify-between text-text-muted font-caption text-caption">
+<span class="">Menampilkan 6 kategori induk dan 10 sub-kategori spesifik.</span>
+<span class="text-on-surface font-medium">Semua taksonomi sinkron dengan modul Aset</span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (30% -> col-span-4) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card 1: Selected Category Details & Quick Action -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-md flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-container font-caption text-caption font-semibold">Sub-Kategori Terpilih</span>
+<span class="font-code-sm text-code-sm text-text-muted">ID: CAT-0101</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Kamera Mirrorless</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Induk: <strong class="text-on-surface font-medium">Kamera</strong></p>
+</div>
+<!-- Quick Spec Grid -->
+<div class="grid grid-cols-2 gap-2 p-3 bg-surface rounded-lg mt-1 font-body-sm">
+<div>
+<span class="font-caption text-caption text-text-muted block">Format Kode</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold">LDR-CAM-000X</span>
+</div>
+<div>
+<span class="font-caption text-caption text-text-muted block">Total Unit</span>
+<span class="font-label-md text-label-md text-primary-container font-semibold">6 Unit Tersedia</span>
+</div>
+<div class="col-span-2 pt-1 border-t border-border/60">
+<span class="font-caption text-caption text-text-muted block">Aturan Durasi Peminjaman</span>
+<span class="text-on-surface font-medium text-body-sm">Maksimal 3 Hari Kalender</span>
+</div>
+</div>
+<!-- Thumbnail Breakdown of Assets -->
+<div class="space-y-2 mt-2">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider block">Sample Unit Terdaftar (6 Total)</span>
+<div class="space-y-2">
+<!-- Asset 1 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface transition-colors">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface" data-alt="Close up studio shot of Sony Alpha A7 III mirrorless full frame camera body on dark textured background with crisp orange accent lighting, cinematic product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUU1Xiu4ZTOCskC3VYisho2W7KgPZ-CrGKJQlHrz4olVbM2EuI9YEHyqkYgs9OEd60v3XHCqmwNBy0zPL6m0WfQkjXRReu5Q65uf-8RSXa0Qjr1yvItXusJdi0jNREi8zGFPzZwEMg5OWS0doGIdGvCu1n0hHTkAer_PGell3nGX_dGiBqwhG2B2rwiFG7f-wGieqWhroKzpXdJ7KonwVH8BjT47GICYGvOwa8t69B">
+<div class="min-w-0 flex-1">
+<p class="font-label-md text-label-md text-on-surface truncate">Sony Alpha A7 III Body</p>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-text-muted">LDR-CAM-0001</span>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-success"></span>
+<span class="font-caption text-[11px] text-success">Siap Pakai</span>
+</div>
+</div>
+</div>
+<!-- Asset 2 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface transition-colors">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface" data-alt="Studio showcase of Canon EOS R6 Mark II mirrorless camera with professional lens mount on sleek minimalist surface, high contrast studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9PVDDeDBN_SXJfeG3B4UB3Wwis-WOwbLKoXYNFAeVzwraEboqzb1Oif5l9JwOeCkAu1FdVIlQ29N-2tUXgoKp-v0X5nqJpcdnsVmV6qfwO9KMrTPnnf_DJBMnsBk8n7ulFV_UwHgKyFp5-6Jz8tPQ2kiXTj3yRxLzFVqIewdn-mBlQBjyuCqR6M20czhxLzjm3peoIfoZKrt77ZiDlZ7HY1MbDmuM3MBqM2OuztHT">
+<div class="min-w-0 flex-1">
+<p class="font-label-md text-label-md text-on-surface truncate">Canon EOS R6 Mark II</p>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-text-muted">LDR-CAM-0003</span>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-warning"></span>
+<span class="font-caption text-[11px] text-warning">Dipinjam (Lab A)</span>
+</div>
+</div>
+</div>
+<!-- Asset 3 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface transition-colors">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface" data-alt="Fujifilm X-T4 mirrorless camera body retro aesthetic with dials and dials visible on matte workbench, warm editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOdKbER83DQSpsXMaGP8IKe-bHWyxDlkASXiLVf_-ylmjyo63bf1eo1Akwwn0nhk8DHlu_peceO-tyWsNZ6z6lpDnYr95jMkymvnqxU6shnzUSr-ZNkxFz8TfshU2vD-cMyavuVRQZ4ncRehO2ziD2ZEay_8VD_FsLB3IC151DnT_nwTVrIzq5rariEzmZ7rVuzOHkSXYiQr6jKrTeii-GtuuqpM8Re3S5J6DHoEt9">
+<div class="min-w-0 flex-1">
+<p class="font-label-md text-label-md text-on-surface truncate">Fujifilm X-T4 Silver Body</p>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-text-muted">LDR-CAM-0005</span>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-success"></span>
+<span class="font-caption text-[11px] text-success">Siap Pakai</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Policy Note -->
+<div class="p-2.5 rounded-lg bg-warning-bg/60 text-warning flex items-start gap-2 text-caption font-caption">
+<span class="material-symbols-outlined text-[18px] shrink-0">info</span>
+<span class="">Wajib inspeksi fisik sensor &amp; shutter count pada form serah-terima kepulangan aset kategori ini.</span>
+</div>
+<!-- Quick Edit Category Button -->
+<button class="w-full h-10 rounded-lg bg-surface hover:bg-surface-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-colors mt-1" type="button">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+<span class="">Ubah Pengaturan Kategori Ini</span>
+</button>
+</div>
+<!-- Card 2: Kebijakan Penghapusan Kategori -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-md flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[20px] text-primary-container">shield</span>
+<h3 class="font-headline-sm text-headline-sm">Kebijakan Proteksi Data</h3>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
+          Kategori yang memiliki unit aset aktif atau riwayat transaksi peminjaman dilindungi dari penghapusan demi menjaga integritas kode aset dan log audit fakultas.
+        </p>
+<div class="p-3 bg-surface rounded-lg mt-1 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-info text-[20px] shrink-0">swap_calls</span>
+<p class="font-caption text-caption text-text-muted">
+            Untuk menonaktifkan, pindahkan aset ke kategori lain terlebih dahulu via modul <span class="text-on-surface font-semibold underline decoration-primary-container">Inventaris Aset</span>.
+          </p>
+</div>
+</div>
+<!-- Card 3: Prefiks Kode Inventaris Lab -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-text-muted">barcode</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Prefiks Kode Lab</h3>
+</div>
+<span class="font-caption text-caption text-text-muted">6 Aktif</span>
+</div>
+<p class="font-caption text-caption text-text-muted">
+          Prefiks digunakan generator otomatis barcode QR dan pelabelan fisik perangkat.
+        </p>
+<!-- Compact table / badge pills list -->
+<div class="flex flex-col gap-2 mt-1">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-variant/40 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white font-bold text-primary-container">CAM</span>
+<span class="font-label-md text-label-md text-on-surface">Kamera &amp; Optik</span>
+</div>
+<span class="font-caption text-caption text-text-muted">8 Unit</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-variant/40 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white font-bold text-info">LNS</span>
+<span class="font-label-md text-label-md text-on-surface">Lensa Cine &amp; Photo</span>
+</div>
+<span class="font-caption text-caption text-text-muted">6 Unit</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-variant/40 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white font-bold text-violet">MIC</span>
+<span class="font-label-md text-label-md text-on-surface">Audio, Lavalier, Boom</span>
+</div>
+<span class="font-caption text-caption text-text-muted">4 Unit</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-variant/40 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white font-bold text-warning">LGT</span>
+<span class="font-label-md text-label-md text-on-surface">Lighting &amp; Strobe</span>
+</div>
+<span class="font-caption text-caption text-text-muted">3 Unit</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-variant/40 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white font-bold text-on-surface-variant">TRP</span>
+<span class="font-label-md text-label-md text-on-surface">Rig, Gimbal, Tripod</span>
+</div>
+<span class="font-caption text-caption text-text-muted">3 Unit</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-variant/40 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-white font-bold text-text-muted">DRN</span>
+<span class="font-label-md text-label-md text-on-surface">Drone &amp; Aerial (Baru)</span>
+</div>
+<span class="font-caption text-caption text-text-muted">0 Unit</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive JavaScript for Tree Collapse / Filter Features -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Toggle individual category tree branches
+      const toggles = document.querySelectorAll('.tree-toggle[data-target]');
+      toggles.forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const targetId = this.getAttribute('data-target');
+          const targetContainer = document.getElementById(targetId);
+          const icon = this.querySelector('.material-symbols-outlined');
+          if (targetContainer) {
+            if (targetContainer.classList.contains('hidden')) {
+              targetContainer.classList.remove('hidden');
+              icon.textContent = 'expand_more';
+            } else {
+              targetContainer.classList.add('hidden');
+              icon.textContent = 'chevron_right';
+            }
+          }
+        });
+      });
+
+      // Expand All Button
+      const btnExpandAll = document.getElementById('btnExpandAll');
+      if (btnExpandAll) {
+        btnExpandAll.addEventListener('click', function () {
+          toggles.forEach(toggle => {
+            const targetId = toggle.getAttribute('data-target');
+            const targetContainer = document.getElementById(targetId);
+            const icon = toggle.querySelector('.material-symbols-outlined');
+            if (targetContainer) {
+              targetContainer.classList.remove('hidden');
+              icon.textContent = 'expand_more';
+            }
+          });
+        });
+      }
+
+      // Collapse All Button
+      const btnCollapseAll = document.getElementById('btnCollapseAll');
+      if (btnCollapseAll) {
+        btnCollapseAll.addEventListener('click', function () {
+          toggles.forEach(toggle => {
+            const targetId = toggle.getAttribute('data-target');
+            const targetContainer = document.getElementById(targetId);
+            const icon = toggle.querySelector('.material-symbols-outlined');
+            if (targetContainer) {
+              targetContainer.classList.add('hidden');
+              icon.textContent = 'chevron_right';
+            }
+          });
+        });
+      }
+
+      // Search Filter
+      const filterInput = document.getElementById('treeFilterInput');
+      const nodes = document.querySelectorAll('.category-node');
+      if (filterInput) {
+        filterInput.addEventListener('input', function (e) {
+          const val = e.target.value.toLowerCase().trim();
+          nodes.forEach(node => {
+            const text = node.textContent.toLowerCase();
+            if (text.includes(val)) {
+              node.style.display = '';
+            } else {
+              node.style.display = 'none';
+            }
+          });
+        });
+      }
+    });
+  </script>
+</div></main></div>
+
+</body></html>

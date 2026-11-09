@@ -18,7 +18,7 @@ use App\Http\Controllers\Borrower\ProfileController as BorrowerProfileController
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return auth()->check() ? redirect('/dashboard') : view('welcome');
 });
 
 Route::get('/dashboard', function () {

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary-container":"#582200","violet":"#7C3AED","on-tertiary-fixed-variant":"#4a463f","outline":"#8c7164","on-primary-fixed":"#341100","inverse-primary":"#ffb690","violet-bg":"#F5F3FF","secondary":"#a73a00","surface-container":"#f0eded","warning":"#D97706","background":"#fcf9f8","info":"#0284C7","text-muted":"#6B7280","secondary-container":"#fd651e","success-bg":"#F0FDF4","inverse-surface":"#303030","tertiary-fixed-dim":"#ccc5bc","danger-bg":"#FEF2F2","tertiary-fixed":"#e9e1d8","secondary-fixed-dim":"#ffb599","surface-container-highest":"#e4e2e1","outline-variant":"#e0c0b1","border":"#E5E7EB","primary-fixed":"#ffdbca","on-background":"#1b1c1c","surface-container-lowest":"#ffffff","on-error":"#ffffff","on-secondary":"#ffffff","primary-fixed-dim":"#ffb690","surface-bright":"#fcf9f8","warning-bg":"#FFFBEB","success":"#16A34A","surface-container-high":"#eae7e7","tertiary-container":"#a09a91","danger":"#DC2626","surface-tint":"#9d4300","on-error-container":"#93000a","inverse-on-surface":"#f3f0ef","on-tertiary":"#ffffff","error-container":"#ffdad6","surface-white":"#FFFFFF","info-bg":"#F0F9FF","on-secondary-fixed-variant":"#7f2b00","on-tertiary-fixed":"#1e1b15","primary-container":"#f97316","surface-variant":"#e4e2e1","surface-dim":"#dcd9d9","primary":"#9d4300","on-surface":"#1b1c1c","surface-container-low":"#f6f3f2","on-primary":"#ffffff","on-surface-variant":"#584237","tertiary":"#625e56","on-primary-fixed-variant":"#783200","error":"#ba1a1a","secondary-fixed":"#ffdbce","on-secondary-container":"#571a00","surface":"#F5F5F5","on-tertiary-container":"#36322c","on-secondary-fixed":"#370e00"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-lg":"1.5rem","gutter":"1rem","space-sm":"0.5rem","margin":"1rem","space-xl":"2rem","space-xs":"0.25rem"},"fontFamily":{"body-sm":["Inter"],"display":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"code-sm":["JetBrains Mono"],"caption":["Inter"],"label-md":["Inter"],"headline-lg":["Plus Jakarta Sans"],"body-md":["Inter"]},"fontSize":{"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"display":["28px",{"lineHeight":"36px","fontWeight":"800"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"code-sm":["13px",{"lineHeight":"18px","fontWeight":"500"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-white border-r border-border z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-md border-b border-border flex items-center justify-between shrink-0"><div class="flex items-center gap-space-sm"><img alt="lendora-favicon-180-siklus.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"/><div class="flex flex-col"><span class="font-headline-md text-headline-sm text-on-surface font-bold tracking-tight leading-none">Lendora</span><span class="font-caption text-caption text-text-muted mt-0.5">Siklus AV Studio</span></div></div><span class="inline-flex items-center px-space-xs py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-caption text-caption uppercase tracking-wider font-semibold">PRODI</span></div><nav class="flex flex-col px-space-sm py-space-md gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-semibold shadow-sm border-l-4 border-secondary"><div class="px-space-sm pb-space-xs text-text-muted font-caption text-caption tracking-wider uppercase font-semibold">Utama</div><a class="group flex items-center justify-between px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard-prodi" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard Prodi</span></div></a><a class="group flex items-center justify-between px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="antrean-otorisasi-khusus" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">verified_user</span><span>Otorisasi Khusus</span></div><span class="px-2 py-0.5 rounded-full bg-danger-bg text-danger font-caption text-caption">3 Baru</span></a><div class="px-space-sm pt-space-md pb-space-xs text-text-muted font-caption text-caption tracking-wider uppercase font-semibold">Monitoring Prodi</div><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="kuota-dan-utilisasi-alat" href="#"><span class="material-symbols-outlined text-[20px]">pie_chart</span><span>Kuota &amp; Utilisasi Alat</span></a><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="kalender-jadwal-praktikum" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span>Jadwal Praktikum</span></a><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="mahasiswa-dan-reputasi" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Mahasiswa &amp; Reputasi</span></a><div class="px-space-sm pt-space-md pb-space-xs text-text-muted font-caption text-caption tracking-wider uppercase font-semibold">Laporan &amp; Dokumen</div><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="laporan-semester-prodi" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Laporan Semester</span></a><a class="group flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="rekomendasi-pengadaan-av" href="#"><span class="material-symbols-outlined text-[20px]">lightbulb</span><span>Rekomendasi AV</span></a></nav></div><div class="p-space-sm border-t border-border"><div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md text-on-surface truncate font-semibold">Dr. Irwan Setiawan</span><span class="font-caption text-caption text-text-muted truncate">Kaprodi DKV &amp; Film</span></div><span class="material-symbols-outlined text-text-muted text-[18px]">unfold_more</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-white border-b border-border z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-xs font-body-sm text-body-sm text-text-muted shrink-0"><span class="font-label-md text-label-md text-on-surface font-semibold">Prodi DKV &amp; Film</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-primary font-medium">Dashboard Admin Prodi</span></div><div class="h-4 w-px bg-border hidden lg:block"></div><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-low border border-border text-text-muted font-caption text-caption"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-semibold text-on-surface">Semester Ganjil 2026/2027</span><span class="text-text-muted">· Aktif</span></div></div><div class="flex items-center gap-space-md"><div class="relative hidden md:block w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-9 pl-9 pr-space-sm bg-surface-container-low border border-border rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Cari mahasiswa, matkul, unit..." type="text"/></div><button class="relative p-2 rounded-lg text-text-muted hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-danger ring-2 ring-surface-white"></span></button><button class="p-2 rounded-lg text-text-muted hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="h-6 w-px bg-border"></div><div class="flex items-center gap-space-sm cursor-pointer"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden xl:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight font-semibold">Dr. Irwan Setiawan, M.Sn.</span><span class="font-caption text-caption text-text-muted">Kaprodi DKV</span></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full">
+<div class="p-space-lg space-y-space-lg max-w-7xl mx-auto w-full">
+<!-- Top Action Breadcrumbs Bar -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-white p-space-md rounded-xl shadow-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs font-caption text-caption text-text-muted mb-1">
+<span>Panel Akademik</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Laporan &amp; Dokumen</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Laporan Semesteran &amp; Rekomendasi RAB</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Laporan Semester &amp; Rekomendasi RAB</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-low text-text-muted font-caption text-caption">T.A. 2026/2027 Ganjil</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="inline-flex items-center justify-center gap-space-xs px-3.5 h-[44px] rounded-lg bg-surface-white text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">picture_as_pdf</span>
+<span>Cetak Laporan Lengkap (PDF)</span>
+</button>
+<button class="inline-flex items-center justify-center gap-space-xs px-3.5 h-[44px] rounded-lg bg-surface-white text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">send</span>
+<span>Kirim Ringkasan ke Dekanat</span>
+</button>
+<button class="inline-flex items-center justify-center gap-space-xs px-4 h-[44px] rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:bg-secondary transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Ajukan Proposal RAB Semester Depan</span>
+</button>
+</div>
+</div>
+<!-- Executive Summary Metrics (4 cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Metric 1 -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption text-caption uppercase text-text-muted tracking-wider font-semibold">Utilisasi Jam Alat</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1 font-display">1.240 <span class="text-label-md font-body-md font-normal text-text-muted">Jam</span></span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">timer</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between bg-surface-container-low -mx-space-md -mb-space-md px-space-md py-2.5">
+<span class="inline-flex items-center gap-1 font-caption text-caption text-success font-semibold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +18.4%
+          </span>
+<span class="font-caption text-caption text-text-muted">vs semester lalu</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption text-caption uppercase text-text-muted tracking-wider font-semibold">Tingkat Keterpakaian</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1 font-display">88.6%</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-success-bg flex items-center justify-center text-success shrink-0">
+<span class="material-symbols-outlined text-[22px]">pie_chart</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between bg-surface-container-low -mx-space-md -mb-space-md px-space-md py-2.5">
+<span class="font-caption text-caption text-text-muted">Target optimum kampus</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold">80.0% Max</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption text-caption uppercase text-text-muted tracking-wider font-semibold">Insiden &amp; Biaya Rawat</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1 font-code-sm">Rp 7.850.000</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-warning-bg flex items-center justify-center text-warning shrink-0">
+<span class="material-symbols-outlined text-[22px]">handyman</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between bg-surface-container-low -mx-space-md -mb-space-md px-space-md py-2.5">
+<span class="font-caption text-caption text-text-muted">5 Kasus terdata</span>
+<span class="font-caption text-caption text-success font-semibold">94% Ter-cover Asuransi</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-white rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-caption text-caption uppercase text-text-muted tracking-wider font-semibold">Estimasi Belanja Modal (RAB)</span>
+<span class="font-headline-lg text-headline-lg font-bold text-secondary mt-1 font-code-sm">Rp 148.500.000</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">request_quote</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between bg-surface-container-low -mx-space-md -mb-space-md px-space-md py-2.5">
+<span class="font-caption text-caption text-text-muted">Basis Data:</span>
+<span class="font-caption text-caption text-danger font-semibold">Rasio Penolakan Jadwal</span>
+</div>
+</div>
+</div>
+<!-- Section 1: Bottleneck & Equipment Analysis -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-lg space-y-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm pb-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Analisis Utilisasi per Rumpun Peralatan &amp; Bottleneck Ketersediaan</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Komparasi total jam permintaan mahasiswa/dosen terhadap kapasitas jam operasional alat yang tersedia di studio.</p>
+</div>
+<div class="flex items-center gap-space-xs font-caption text-caption text-text-muted">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> Permintaan</span>
+<span class="flex items-center gap-1 ml-2"><span class="w-2.5 h-2.5 rounded-full bg-surface-container-highest"></span> Tersedia</span>
+</div>
+</div>
+<!-- Comparison Visual Breakdown -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg pt-2">
+<!-- Equipment Category 1 -->
+<div class="bg-surface-container-low p-space-md rounded-xl space-y-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-white flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">Kamera Cinema &amp; Fullframe</span>
+<span class="font-caption text-caption text-text-muted">FX3, FX6, A7S III, BMPCC 6K</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-danger-bg text-danger font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> KRITIS / Bottleneck
+            </span>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-body-sm font-label-md">
+<span class="text-text-muted font-body-sm">Permintaan vs Kapasitas</span>
+<span class="font-code-sm font-semibold text-danger">620 Jam / 480 Jam (-140 Jam)</span>
+</div>
+<!-- Progress Bar Stacked -->
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden relative">
+<div class="h-full bg-primary rounded-full" style="width: 100%;"></div>
+<div class="absolute top-0 right-0 h-full bg-danger rounded-r-full" style="width: 22.5%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-caption font-caption pt-1">
+<span class="text-danger font-semibold">Tingkat Penolakan Sesi: 22.5%</span>
+<span class="text-text-muted">48 Permintaan ditolak semester ini</span>
+</div>
+</div>
+<!-- Equipment Category 2 -->
+<div class="bg-surface-container-low p-space-md rounded-xl space-y-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-white flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">filter_center_focus</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">Lensa Cine Prime &amp; Zoom</span>
+<span class="font-caption text-caption text-text-muted">DZOFilm Vespid, GM 24-70, GM 70-200</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-success-bg text-success font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> SEIMBANG
+            </span>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-body-sm font-label-md">
+<span class="text-text-muted font-body-sm">Permintaan vs Kapasitas</span>
+<span class="font-code-sm font-semibold text-success">410 Jam / 450 Jam (+40 Jam Surplus)</span>
+</div>
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-success rounded-full" style="width: 91.1%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-caption font-caption pt-1">
+<span class="text-success font-semibold">Tingkat Penolakan Sesi: 0%</span>
+<span class="text-text-muted">Kebutuhan terakomodasi optimal</span>
+</div>
+</div>
+<!-- Equipment Category 3 -->
+<div class="bg-surface-container-low p-space-md rounded-xl space-y-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-white flex items-center justify-center text-warning shadow-sm">
+<span class="material-symbols-outlined text-[20px]">light_mode</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">Lighting Gaffer &amp; Grip</span>
+<span class="font-caption text-caption text-text-muted">Aputure 300D, Nova P300c, C-Stand Kit</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-warning-bg text-warning font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span> PERLU TAMBAHAN
+            </span>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-body-sm font-label-md">
+<span class="text-text-muted font-body-sm">Permintaan vs Kapasitas</span>
+<span class="font-code-sm font-semibold text-warning">380 Jam / 300 Jam (-80 Jam)</span>
+</div>
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden relative">
+<div class="h-full bg-warning rounded-full" style="width: 100%;"></div>
+<div class="absolute top-0 right-0 h-full bg-danger rounded-r-full" style="width: 21%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-caption font-caption pt-1">
+<span class="text-warning font-semibold">Tingkat Penolakan Sesi: 14.8%</span>
+<span class="text-text-muted">Konflik jadwal pada produksi akhir</span>
+</div>
+</div>
+<!-- Equipment Category 4 -->
+<div class="bg-surface-container-low p-space-md rounded-xl space-y-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-white flex items-center justify-center text-info shadow-sm">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">Audio Recorder &amp; Wireless Mic</span>
+<span class="font-caption text-caption text-text-muted">Zoom F6, Sennheiser G4, Rode Wireless PRO</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-info-bg text-info font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span> AMAN
+            </span>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-body-sm font-label-md">
+<span class="text-text-muted font-body-sm">Permintaan vs Kapasitas</span>
+<span class="font-code-sm font-semibold text-info">290 Jam / 320 Jam (+30 Jam Surplus)</span>
+</div>
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-info rounded-full" style="width: 90.6%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-caption font-caption pt-1">
+<span class="text-info font-semibold">Tingkat Penolakan Sesi: 0%</span>
+<span class="text-text-muted">Rotasi sirkulasi alat sangat stabil</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Smart RAB Generator -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-lg space-y-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm pb-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[24px]">smart_toy</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Rekomendasi Cerdas Pengadaan Alat Baru (Smart RAB Generator)</h2>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Rekomendasi otomatis berbasis rekam jejak penolakan pinjaman (booking rejection), antrean praktikum, dan proyeksi jumlah mahasiswa semester genap.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-lg bg-primary-fixed text-on-primary-fixed font-caption text-caption font-semibold">Model Prediksi: Akurasi 96.2%</span>
+</div>
+</div>
+<!-- Interactive Data-Driven Table -->
+<div class="overflow-x-auto rounded-xl shadow-sm bg-surface-white">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-text-muted font-caption text-caption uppercase tracking-wider">
+<th class="py-3.5 px-space-md">Rekomendasi Alat</th>
+<th class="py-3.5 px-space-md">Alasan Data-Driven</th>
+<th class="py-3.5 px-space-md text-center">Jumlah Unit</th>
+<th class="py-3.5 px-space-md text-right">Estimasi Harga Satuan</th>
+<th class="py-3.5 px-space-md text-right">Total Anggaran</th>
+<th class="py-3.5 px-space-md text-center">Prioritas Usulan</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border font-body-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low shrink-0 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-text-muted text-[24px]">photo_camera</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Sony Cinema FX3 Full-Frame Body</span>
+<span class="font-code-sm text-caption text-text-muted">SKU: PROD-CAM-FX3</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-xs">
+<p class="text-on-surface-variant font-body-sm">
+<strong class="text-danger font-semibold">Ditolak 48x</strong> pada Pekan 10–14 Mata Kuliah Sinema II. Rasio mahasiswa per kamera 9:1 (standar prodi 4:1).
+                </p>
+</td>
+<td class="py-4 px-space-md align-top text-center">
+<span class="font-code-sm font-bold text-on-surface bg-surface-container-low px-2 py-1 rounded">2 Unit</span>
+</td>
+<td class="py-4 px-space-md align-top text-right font-code-sm text-text-muted">
+                Rp 58.000.000
+              </td>
+<td class="py-4 px-space-md align-top text-right font-code-sm font-bold text-on-surface">
+                Rp 116.000.000
+              </td>
+<td class="py-4 px-space-md align-top text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-danger-bg text-danger font-caption text-caption font-semibold">
+                  Prioritas 1 (Urgent)
+                </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low shrink-0 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-text-muted text-[24px]">highlight</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Aputure LS 600c Pro RGBWW Light</span>
+<span class="font-code-sm text-caption text-text-muted">SKU: PROD-LGT-600C</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-xs">
+<p class="text-on-surface-variant font-body-sm">
+<strong class="text-warning font-semibold">Defisit 80 Jam</strong> saat produksi tugas akhir Studio Tata Cahaya. Lampu tungsten eksisting sering mengalami overheat.
+                </p>
+</td>
+<td class="py-4 px-space-md align-top text-center">
+<span class="font-code-sm font-bold text-on-surface bg-surface-container-low px-2 py-1 rounded">1 Unit</span>
+</td>
+<td class="py-4 px-space-md align-top text-right font-code-sm text-text-muted">
+                Rp 38.500.000
+              </td>
+<td class="py-4 px-space-md align-top text-right font-code-sm font-bold text-on-surface">
+                Rp 38.500.000
+              </td>
+<td class="py-4 px-space-md align-top text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-warning-bg text-warning font-caption text-caption font-semibold">
+                  Prioritas 2 (Peningkatan)
+                </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low shrink-0 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-text-muted text-[24px]">cast</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Wireless Video Transmitter Hollyland Mars 4K</span>
+<span class="font-code-sm text-caption text-text-muted">SKU: PROD-ACC-M4K</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-xs">
+<p class="text-on-surface-variant font-body-sm">
+                  Kebutuhan monitoring sutradara &amp; dosen pembimbing di lokasi outdoor tanpa kabel HDMI yang rentan putus.
+                </p>
+</td>
+<td class="py-4 px-space-md align-top text-center">
+<span class="font-code-sm font-bold text-on-surface bg-surface-container-low px-2 py-1 rounded">2 Unit</span>
+</td>
+<td class="py-4 px-space-md align-top text-right font-code-sm text-text-muted">
+                Rp 8.000.000
+              </td>
+<td class="py-4 px-space-md align-top text-right font-code-sm font-bold text-on-surface">
+                Rp 16.000.000
+              </td>
+<td class="py-4 px-space-md align-top text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-info-bg text-info font-caption text-caption font-semibold">
+                  Prioritas 2 (Peningkatan)
+                </span>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="bg-surface-container-low font-label-md">
+<td class="py-3 px-space-md text-right text-text-muted font-semibold" colspan="4">
+                Total Estimasi Usulan Anggaran RAB:
+              </td>
+<td class="py-3 px-space-md text-right font-code-sm text-headline-sm font-bold text-secondary">
+                Rp 170.500.000
+              </td>
+<td class="py-3 px-space-md text-center text-caption text-text-muted">
+                (Termasuk PPN 11%)
+              </td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Section 3: Pengesahan & Tanda Tangan Dokumen Laporan Semester -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-lg space-y-space-md">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Pengesahan &amp; Tanda Tangan Dokumen Laporan Semester</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Dokumen ini telah diverifikasi melalui sistem validasi kriptografis internal Universitas Multimedia Nusantara.</p>
+</div>
+<span class="px-3 py-1 rounded bg-success-bg text-success font-caption text-caption font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">verified</span> Terverifikasi Digital
+        </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg pt-space-xs">
+<!-- Kaprodi Signature Card -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex items-start justify-between relative overflow-hidden">
+<div class="flex flex-col justify-between h-full space-y-4">
+<div>
+<span class="font-caption text-caption uppercase text-text-muted font-semibold tracking-wider">Menyetujui &amp; Mengajukan,</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">Dr. Irwan Setiawan, M.Sn.</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Ketua Program Studi Desain Komunikasi Visual &amp; Film</p>
+<p class="font-code-sm text-caption text-text-muted mt-1">NIP: 19820412 200812 1 003</p>
+</div>
+<div class="pt-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-white text-on-surface font-caption text-caption shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-success">done_all</span> Tanda Tangan Elektronik: 14 Feb 2027
+              </span>
+</div>
+</div>
+<!-- QR Code Badge -->
+<div class="flex flex-col items-center bg-surface-white p-space-sm rounded-lg shadow-sm shrink-0">
+<!-- Simulated QR Code SVG -->
+<svg class="w-20 h-20 text-on-surface" fill="currentColor" viewbox="0 0 100 100">
+<rect fill="currentColor" height="30" rx="4" width="30" x="0" y="0"></rect>
+<rect fill="#FFFFFF" height="20" rx="2" width="20" x="5" y="5"></rect>
+<rect fill="currentColor" height="12" rx="1" width="12" x="9" y="9"></rect>
+<rect fill="currentColor" height="30" rx="4" width="30" x="70" y="0"></rect>
+<rect fill="#FFFFFF" height="20" rx="2" width="20" x="75" y="5"></rect>
+<rect fill="currentColor" height="12" rx="1" width="12" x="79" y="9"></rect>
+<rect fill="currentColor" height="30" rx="4" width="30" x="0" y="70"></rect>
+<rect fill="#FFFFFF" height="20" rx="2" width="20" x="5" y="75"></rect>
+<rect fill="currentColor" height="12" rx="1" width="12" x="9" y="79"></rect>
+<rect fill="currentColor" height="10" width="15" x="40" y="10"></rect>
+<rect fill="currentColor" height="15" width="20" x="40" y="30"></rect>
+<rect fill="currentColor" height="15" width="10" x="70" y="45"></rect>
+<rect fill="currentColor" height="20" width="15" x="45" y="70"></rect>
+<rect fill="currentColor" height="15" width="20" x="70" y="75"></rect>
+</svg>
+<span class="font-code-sm text-[10px] text-text-muted mt-1 font-mono">VERIF-KAPRODI-9B41</span>
+</div>
+</div>
+<!-- Koordinator Lab AV Signature Card -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex items-start justify-between relative overflow-hidden">
+<div class="flex flex-col justify-between h-full space-y-4">
+<div>
+<span class="font-caption text-caption uppercase text-text-muted font-semibold tracking-wider">Penyusun Teknis &amp; Verifikator,</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">Budi Santoso, S.Sn.</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Koordinator Laboratorium Audio Visual Studio</p>
+<p class="font-code-sm text-caption text-text-muted mt-1">NIP: 19890915 201403 1 008</p>
+</div>
+<div class="pt-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-white text-on-surface font-caption text-caption shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-success">done_all</span> Tanda Tangan Elektronik: 12 Feb 2027
+              </span>
+</div>
+</div>
+<!-- QR Code Badge -->
+<div class="flex flex-col items-center bg-surface-white p-space-sm rounded-lg shadow-sm shrink-0">
+<!-- Simulated QR Code SVG -->
+<svg class="w-20 h-20 text-on-surface" fill="currentColor" viewbox="0 0 100 100">
+<rect fill="currentColor" height="30" rx="4" width="30" x="0" y="0"></rect>
+<rect fill="#FFFFFF" height="20" rx="2" width="20" x="5" y="5"></rect>
+<rect fill="currentColor" height="12" rx="1" width="12" x="9" y="9"></rect>
+<rect fill="currentColor" height="30" rx="4" width="30" x="70" y="0"></rect>
+<rect fill="#FFFFFF" height="20" rx="2" width="20" x="75" y="5"></rect>
+<rect fill="currentColor" height="12" rx="1" width="12" x="79" y="9"></rect>
+<rect fill="currentColor" height="30" rx="4" width="30" x="0" y="70"></rect>
+<rect fill="#FFFFFF" height="20" rx="2" width="20" x="5" y="75"></rect>
+<rect fill="currentColor" height="12" rx="1" width="12" x="9" y="79"></rect>
+<rect fill="currentColor" height="12" width="12" x="40" y="15"></rect>
+<rect fill="currentColor" height="15" width="15" x="45" y="35"></rect>
+<rect fill="currentColor" height="10" width="15" x="65" y="50"></rect>
+<rect fill="currentColor" height="15" width="18" x="40" y="75"></rect>
+<rect fill="currentColor" height="20" width="15" x="75" y="70"></rect>
+</svg>
+<span class="font-code-sm text-[10px] text-text-muted mt-1 font-mono">VERIF-KORLAB-4E82</span>
+</div>
+</div>
+</div>
+<!-- Footer Note & Audit Trail -->
+<div class="bg-surface-container-low/70 p-space-md rounded-lg flex flex-col sm:flex-row sm:items-center justify-between text-caption font-caption text-text-muted gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>Nomor Dokumen Resmi: <strong class="text-on-surface font-code-sm">SK-LAB-DKV/2027/SMT-GANJIL/094</strong></span>
+</div>
+<div>
+<span>Dihasilkan otomatis oleh Sistem Siklus AV Lendora pada 15 Februari 2027, 09:42 WIB</span>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>
