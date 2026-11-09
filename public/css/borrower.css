@@ -727,3 +727,78 @@
         margin-left: 0;
     }
 }
+
+/* Halaman notifikasi & profil */
+.ldr-page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ldr-space-3);
+}
+
+.ldr-section-title {
+    margin: var(--ldr-space-2) 0 0;
+    font-size: 17px;
+}
+
+.ldr-notice-list {
+    display: grid;
+    gap: var(--ldr-space-3);
+}
+
+.ldr-notice {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ldr-space-3);
+}
+
+.ldr-notice--unread {
+    border-left: 4px solid var(--ldr-primary);
+}
+
+.ldr-notice__body {
+    display: grid;
+    gap: 4px;
+}
+
+.ldr-notice__time {
+    font-size: 12px;
+    color: var(--ldr-text-muted);
+}
+
+.ldr-profile-card {
+    display: flex;
+    align-items: center;
+    gap: var(--ldr-space-4);
+}
+
+.ldr-profile-card__avatar {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    font-family: var(--ldr-font-heading);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ldr-primary-ink);
+    background: var(--ldr-tint);
+    border-radius: 999px;
+}
+
+.ldr-profile-card h2 {
+    font-size: 18px;
+}
+
+.ldr-profile-card p {
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+.ldr-profile-form {
+    display: grid;
+    gap: var(--ldr-space-4);
+}

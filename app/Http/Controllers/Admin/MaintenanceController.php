@@ -23,11 +23,22 @@ class MaintenanceController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
+        $filters = [
+            'search' => trim((string) $request->query('search')) ?: null,
+            'status' => \App\Enums\MaintenanceStatus::tryFrom((string) $request->query('status'))?->value,
+        ];
 
         $maintenances = Maintenance::query()
             ->with(['asset', 'assignedTo', 'reportedBy'])
             ->whereHas('asset', fn ($query) => $query->where('organization_id', $user->organization_id))
             ->when($user->hasRole('technician'), fn ($query) => $query->where('assigned_to', $user->id))
+            ->when($filters['search'], function ($query, string $search): void {
+                $query->whereHas('asset', function ($query) use ($search): void {
+                    $query->where('code', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%");
+                });
+            })
+            ->when($filters['status'], fn ($query, string $status) => $query->where('status', $status))
             ->latest()
             ->paginate(15)
             ->withQueryString();
@@ -35,6 +46,7 @@ class MaintenanceController extends Controller
         return view('admin.maintenances.index', [
             'maintenances' => $maintenances,
             'role' => $user->role->slug,
+            'filters' => $filters,
         ]);
     }
 

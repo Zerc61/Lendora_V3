@@ -80,8 +80,52 @@ class HandoverTest extends TestCase
         Notification::assertSentTo($this->borrower, LoanPickupNotification::class);
     }
 
-    public function test_return_marks_booking_returned_but_asset_waits_for_inspection(): void
+    public function test_index_lists_only_bookings_waiting_for_handover(): void
     {
+        $approved = $this->booking(BookingStatus::Approved, AssetStatus::Reserved, BookingItemStatus::Approved);
+        $active = $this->booking(BookingStatus::Active, AssetStatus::Borrowed, BookingItemStatus::PickedUp);
+        $pending = $this->booking(BookingStatus::Pending, AssetStatus::Available, BookingItemStatus::Pending);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.handovers.index'))
+            ->assertOk()
+            ->assertSee($approved->code)
+            ->assertSee($active->code)
+            ->assertDontSee($pending->code);
+    }
+
+    public function test_borrower_cannot_open_handover_index(): void
+    {
+        $this->actingAs($this->borrower)
+            ->get(route('admin.handovers.index'))
+            ->assertForbidden();
+    }
+
+    public function test_handover_index_filters_by_type_and_search(): void
+    {
+        $approved = $this->booking(BookingStatus::Approved, AssetStatus::Reserved, BookingItemStatus::Approved);
+        $active = $this->booking(BookingStatus::Active, AssetStatus::Borrowed, BookingItemStatus::PickedUp);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.handovers.index', ['type' => 'pickup']))
+            ->assertOk()
+            ->assertSee($approved->code)
+            ->assertDontSee($active->code);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.handovers.index', ['type' => 'return']))
+            ->assertOk()
+            ->assertSee($active->code)
+            ->assertDontSee($approved->code);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.handovers.index', ['search' => $approved->code]))
+            ->assertOk()
+            ->assertSee($approved->code)
+            ->assertDontSee($active->code);
+    }
+
+    public function test_return_marks_booking_returned_but_asset_waits_for_inspection(): void    {
         $booking = $this->booking(BookingStatus::Active, AssetStatus::Borrowed, BookingItemStatus::PickedUp);
         $item = $booking->items->first();
         $asset = $item->asset;

@@ -6,6 +6,9 @@
     $roleSlug = auth()->user()->role->slug;
     $canReject = $canDecide && in_array($roleSlug, ['operator', 'organization_admin'], true);
     $isPending = $booking->status === App\Enums\BookingStatus::Pending;
+    $isPickup = $booking->status === App\Enums\BookingStatus::Approved;
+    $canHandover = in_array($roleSlug, ['operator', 'organization_admin'], true)
+        && in_array($booking->status, [App\Enums\BookingStatus::Approved, App\Enums\BookingStatus::Active], true);
 
     $formatRange = $booking->requested_start_date->format('M Y') === $booking->requested_end_date->format('M Y')
         ? $booking->requested_start_date->copy()->locale('id')->translatedFormat('d').'–'.$booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y')
@@ -123,8 +126,38 @@
 
             <section class="ldr-card">
                 <h2>{{ __('ui.booking.handover_history') }}</h2>
-                <p class="ldr-muted">{{ __('ui.booking.handover_empty') }}</p>
+
+                @forelse ($booking->handovers as $handover)
+                    <div class="ldr-spec-list">
+                        <div>
+                            <dt>{{ $handover->type->label() }}</dt>
+                            <dd>
+                                {{ $handover->happened_at?->copy()->locale('id')->translatedFormat('d M Y H:i') }}
+                                · {{ $handover->performedBy?->name ?? '—' }}
+                            </dd>
+                        </div>
+                        @if ($handover->notes)
+                            <div>
+                                <dt>{{ __('ui.booking.notes') }}</dt>
+                                <dd>{{ $handover->notes }}</dd>
+                            </div>
+                        @endif
+                    </div>
+                @empty
+                    <p class="ldr-muted">{{ __('ui.booking.handover_empty') }}</p>
+                @endforelse
             </section>
+
+            @if ($canHandover)
+                <section class="ldr-card">
+                    <h2>{{ __('ui.nav.handovers') }}</h2>
+
+                    <a class="ldr-btn ldr-btn--primary ldr-btn--block"
+                       href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => $isPickup ? 'pickup' : 'return']) }}">
+                        {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
+                    </a>
+                </section>
+            @endif
 
             @if ($isPending)
                 <section class="ldr-card ldr-decision-card">

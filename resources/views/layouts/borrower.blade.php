@@ -40,9 +40,8 @@
             <a class="ldr-appbar__brand" href="{{ route('borrower.home') }}">Lendora</a>
 
             <a class="ldr-appbar__bell"
-               href="#"
-               title="{{ __('ui.nav.coming_soon') }}"
-               aria-label="{{ __('ui.nav.notifications') }} ({{ __('ui.nav.coming_soon') }})">
+               href="{{ route('borrower.notifications.index') }}"
+               aria-label="{{ __('ui.nav.notifications') }}">
                 <x-icon name="bell" :size="22" />
                 @if (($unreadNotifications ?? 0) > 0)
                     <span class="ldr-dot" aria-hidden="true"></span>
@@ -77,8 +76,7 @@
             </a>
 
             <a class="ldr-bottom-nav__item {{ $activeNav === 'notifications' ? 'is-active' : '' }}"
-               href="#"
-               title="{{ __('ui.nav.coming_soon') }}"
+               href="{{ route('borrower.notifications.index') }}"
                @if ($activeNav === 'notifications') aria-current="page" @endif>
                 <span class="ldr-bottom-nav__icon">
                     <x-icon name="bell" :size="24" />
@@ -90,8 +88,7 @@
             </a>
 
             <a class="ldr-bottom-nav__item {{ $activeNav === 'profile' ? 'is-active' : '' }}"
-               href="#"
-               title="{{ __('ui.nav.coming_soon') }}"
+               href="{{ route('borrower.profile.edit') }}"
                @if ($activeNav === 'profile') aria-current="page" @endif>
                 <x-icon name="user" :size="24" />
                 <span>{{ __('ui.nav.profile') }}</span>

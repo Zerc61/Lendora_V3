@@ -11,7 +11,7 @@ class LoanPickupNotification extends Notification
 
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return $notifiable->wantsNotification('loan_pickup') ? ['database'] : [];
     }
 
     public function toArray(object $notifiable): array

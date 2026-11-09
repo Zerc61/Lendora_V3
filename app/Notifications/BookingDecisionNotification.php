@@ -15,7 +15,7 @@ class BookingDecisionNotification extends Notification
 
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return $notifiable->wantsNotification('booking_decision') ? ['database'] : [];
     }
 
     public function toArray(object $notifiable): array

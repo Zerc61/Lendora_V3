@@ -21,7 +21,28 @@ class User extends Authenticatable
         'role_id',
         'organization_id',
         'status',
+        'notification_preferences',
     ];
+
+    /**
+     * Notification keys a user can switch off, grouped by audience.
+     *
+     * @return array<string, array<string, string>>
+     */
+    public static function notificationTypes(): array
+    {
+        return [
+            'borrower' => [
+                'booking_received' => 'ui.notification.type.booking_received',
+                'booking_decision' => 'ui.notification.type.booking_decision',
+                'loan_pickup' => 'ui.notification.type.loan_pickup',
+                'loan_due_reminder' => 'ui.notification.type.loan_due_reminder',
+            ],
+            'staff' => [
+                'asset_damage' => 'ui.notification.type.asset_damage',
+            ],
+        ];
+    }
 
     protected $hidden = [
         'password',
@@ -33,7 +54,25 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'notification_preferences' => 'array',
         ];
+    }
+
+    public function wantsNotification(string $type): bool
+    {
+        return (bool) ($this->notification_preferences[$type] ?? true);
+    }
+
+    /**
+     * Notification keys relevant to this user's role.
+     *
+     * @return array<string, string>
+     */
+    public function notificationAudience(): array
+    {
+        return $this->hasRole('borrower')
+            ? self::notificationTypes()['borrower']
+            : self::notificationTypes()['staff'];
     }
 
     public function role(): BelongsTo

@@ -1,31 +1,50 @@
 @extends('layouts.admin')
 
-@section('title', __('ui.nav.maintenances'))
+@section('title', __('ui.maintenance.add'))
 
 @section('content')
-    <h1>Buat tugas perawatan</h1>
+    <div class="ldr-form-page ldr-form-narrow">
+        <div class="ldr-page-head">
+            <div>
+                <h1>{{ __('ui.maintenance.add') }}</h1>
+                <p class="ldr-muted">{{ __('ui.maintenance.create_description') }}</p>
+            </div>
+        </div>
 
-    <form method="POST" action="{{ route('admin.maintenances.store') }}">
-        @csrf
+        <form method="POST" action="{{ route('admin.maintenances.store') }}" class="ldr-card">
+            @csrf
 
-        <label for="asset_id">Aset</label>
-        <select id="asset_id" name="asset_id" required>
-            @foreach ($assets as $asset)
-                <option value="{{ $asset->id }}">{{ $asset->code }} · {{ $asset->name }}</option>
-            @endforeach
-        </select>
+            <div class="ldr-field">
+                <label class="ldr-label" for="asset_id">{{ __('ui.nav.assets') }} <span class="ldr-label__required" aria-hidden="true">*</span></label>
+                <select id="asset_id" class="ldr-input" name="asset_id" required>
+                    @foreach ($assets as $asset)
+                        <option value="{{ $asset->id }}" @selected(old('asset_id') == $asset->id)>{{ $asset->code }} · {{ $asset->name }}</option>
+                    @endforeach
+                </select>
+                @error('asset_id') <p class="ldr-field__error">{{ $message }}</p> @enderror
+            </div>
 
-        <label for="assigned_to">Teknisi</label>
-        <select id="assigned_to" name="assigned_to">
-            <option value="">Belum ditugaskan</option>
-            @foreach ($technicians as $technician)
-                <option value="{{ $technician->id }}">{{ $technician->name }}</option>
-            @endforeach
-        </select>
+            <div class="ldr-field">
+                <label class="ldr-label" for="assigned_to">{{ __('ui.maintenance.technician') }}</label>
+                <select id="assigned_to" class="ldr-input" name="assigned_to">
+                    <option value="">{{ __('ui.maintenance.unassigned') }}</option>
+                    @foreach ($technicians as $technician)
+                        <option value="{{ $technician->id }}" @selected(old('assigned_to') == $technician->id)>{{ $technician->name }}</option>
+                    @endforeach
+                </select>
+                @error('assigned_to') <p class="ldr-field__error">{{ $message }}</p> @enderror
+            </div>
 
-        <label for="description">Deskripsi</label>
-        <textarea id="description" name="description" required></textarea>
+            <div class="ldr-field">
+                <label class="ldr-label" for="description">{{ __('ui.maintenance.description') }} <span class="ldr-label__required" aria-hidden="true">*</span></label>
+                <textarea id="description" class="ldr-input" name="description" required>{{ old('description') }}</textarea>
+                @error('description') <p class="ldr-field__error">{{ $message }}</p> @enderror
+            </div>
 
-        <button type="submit">Simpan</button>
-    </form>
+            <div class="ldr-form-actions">
+                <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.common.save') }}</button>
+                <a class="ldr-btn ldr-btn--ghost" href="{{ route('admin.maintenances.index') }}">{{ __('ui.common.cancel') }}</a>
+            </div>
+        </form>
+    </div>
 @endsection

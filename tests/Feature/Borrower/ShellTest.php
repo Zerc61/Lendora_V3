@@ -31,6 +31,8 @@ class ShellTest extends TestCase
         $response->assertSee('css/borrower.css');
         $response->assertSee('Navigasi utama');
         $response->assertSeeInOrder(['Beranda', 'Katalog', 'Peminjaman Saya', 'Notifikasi', 'Profil']);
+        $response->assertSee(route('borrower.notifications.index'));
+        $response->assertSee(route('borrower.profile.edit'));
         $this->assertSame(5, substr_count($response->getContent(), 'ldr-bottom-nav__item'));
     }
 

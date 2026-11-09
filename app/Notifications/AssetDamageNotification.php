@@ -15,7 +15,7 @@ class AssetDamageNotification extends Notification
 
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return $notifiable->wantsNotification('asset_damage') ? ['database'] : [];
     }
 
     public function toArray(object $notifiable): array

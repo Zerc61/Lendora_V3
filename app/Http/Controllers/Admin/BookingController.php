@@ -89,7 +89,7 @@ class BookingController extends Controller
     {
         $this->authorize('view', $booking);
 
-        $booking->load(['items.asset.photos', 'borrower', 'approvedBy']);
+        $booking->load(['items.asset.photos', 'borrower', 'approvedBy', 'handovers.performedBy']);
 
         return view('admin.bookings.show', [
             'booking' => $booking,

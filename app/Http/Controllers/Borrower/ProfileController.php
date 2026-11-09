@@ -14,6 +14,7 @@ class ProfileController extends Controller
     {
         return view('borrower.profile.edit', [
             'user' => $request->user(),
+            'notificationTypes' => $request->user()->notificationAudience(),
         ]);
     }
 
@@ -25,6 +26,12 @@ class ProfileController extends Controller
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
         ];
+
+        if ($request->has('notifications')) {
+            $data['notification_preferences'] = collect(array_keys($user->notificationAudience()))
+                ->mapWithKeys(fn (string $key) => [$key => $request->boolean("notifications.{$key}")])
+                ->all();
+        }
 
         if ($request->filled('password')) {
             $data['password'] = (string) $request->input('password');

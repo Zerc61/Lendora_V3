@@ -4,34 +4,56 @@
 @section('nav', 'notifications')
 
 @section('content')
-    <h1>{{ __('ui.nav.notifications') }}</h1>
+    <div class="ldr-page-head">
+        <div>
+            <h1>{{ __('ui.nav.notifications') }}</h1>
+            <p class="ldr-muted">{{ __('ui.notification.unread', ['count' => $unreadCount]) }}</p>
+        </div>
+    </div>
 
-    <p>Belum dibaca: {{ $unreadCount }}</p>
+    @if ($unreadCount > 0)
+        <form method="POST" action="{{ route('borrower.notifications.read-all') }}">
+            @csrf
+            <button type="submit" class="ldr-btn ldr-btn--secondary ldr-btn--block">
+                <x-icon name="check-circle" :size="18" />
+                {{ __('ui.notification.mark_all') }}
+            </button>
+        </form>
+    @endif
 
-    <form method="POST" action="{{ route('borrower.notifications.read-all') }}">
-        @csrf
-        <button type="submit">Tandai semua dibaca</button>
-    </form>
+    @foreach (['today' => __('ui.notification.today'), 'earlier' => __('ui.notification.earlier')] as $key => $label)
+        <h2 class="ldr-section-title">{{ $label }}</h2>
 
-    @foreach (['today' => 'Hari ini', 'earlier' => 'Sebelumnya'] as $key => $label)
-        <h2>{{ $label }}</h2>
+        @if ($groups[$key]->isEmpty())
+            <x-empty-state
+                icon="bell"
+                :title="__('ui.notification.empty_title')"
+                :description="__('ui.notification.empty_description')"
+            />
+        @else
+            <div class="ldr-notice-list">
+                @foreach ($groups[$key] as $notification)
+                    <article class="ldr-card ldr-notice {{ $notification->read_at === null ? 'ldr-notice--unread' : '' }}">
+                        <div class="ldr-notice__body">
+                            <p>{{ $notification->data['message'] ?? __('ui.notification.fallback') }}</p>
+                            <span class="ldr-notice__time">
+                                {{ $notification->created_at?->copy()->locale('id')->translatedFormat('d M Y H:i') ?? '—' }}
+                            </span>
+                        </div>
 
-        <ul>
-            @forelse ($groups[$key] as $notification)
-                <li>
-                    {{ $notification->data['message'] ?? 'Notifikasi' }}
-                    <span>{{ $notification->created_at?->format('d M Y H:i') }}</span>
-
-                    @if ($notification->read_at === null)
-                        <form method="POST" action="{{ route('borrower.notifications.read', $notification->id) }}">
-                            @csrf
-                            <button type="submit">Tandai dibaca</button>
-                        </form>
-                    @endif
-                </li>
-            @empty
-                <li>Tidak ada notifikasi.</li>
-            @endforelse
-        </ul>
+                        @if ($notification->read_at === null)
+                            <form method="POST" action="{{ route('borrower.notifications.read', $notification->id) }}">
+                                @csrf
+                                <button type="submit" class="ldr-btn ldr-btn--ghost ldr-btn--sm">
+                                    {{ __('ui.notification.mark_read') }}
+                                </button>
+                            </form>
+                        @else
+                            <span class="ldr-badge ldr-badge--neutral">{{ __('ui.notification.read_badge') }}</span>
+                        @endif
+                    </article>
+                @endforeach
+            </div>
+        @endif
     @endforeach
 @endsection

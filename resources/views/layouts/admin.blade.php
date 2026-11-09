@@ -45,15 +45,15 @@
                 ['label' => __('ui.nav.calendar'), 'icon' => 'calendar', 'href' => route('admin.bookings.calendar'), 'match' => 'admin.bookings.calendar', 'roles' => ['operator', 'organization_admin']],
             ],
             __('ui.sections.operations') => [
-                ['label' => __('ui.nav.handovers'), 'icon' => 'arrow-left-right', 'href' => '#', 'roles' => ['operator']],
-                ['label' => __('ui.nav.inspections'), 'icon' => 'clipboard-check', 'href' => '#', 'roles' => ['operator', 'organization_admin', 'technician']],
-                ['label' => __('ui.nav.maintenances'), 'icon' => 'wrench', 'href' => '#', 'roles' => ['operator', 'organization_admin', 'technician']],
+                ['label' => __('ui.nav.handovers'), 'icon' => 'arrow-left-right', 'href' => route('admin.handovers.index'), 'match' => 'admin.handovers.*', 'roles' => ['operator', 'organization_admin']],
+                ['label' => __('ui.nav.inspections'), 'icon' => 'clipboard-check', 'href' => route('admin.inspections.index'), 'match' => 'admin.inspections.*', 'roles' => ['operator', 'organization_admin', 'technician']],
+                ['label' => __('ui.nav.maintenances'), 'icon' => 'wrench', 'href' => route('admin.maintenances.index'), 'match' => 'admin.maintenances.*', 'roles' => ['operator', 'organization_admin', 'technician']],
             ],
             __('ui.sections.administration') => [
-                ['label' => __('ui.nav.users'), 'icon' => 'users', 'href' => '#', 'roles' => ['organization_admin']],
-                ['label' => __('ui.nav.reports'), 'icon' => 'bar-chart', 'href' => '#', 'roles' => ['operator', 'organization_admin', 'admin_prodi']],
-                ['label' => __('ui.nav.settings'), 'icon' => 'settings', 'href' => '#', 'roles' => ['operator', 'organization_admin']],
-                ['label' => __('ui.nav.activity_logs'), 'icon' => 'activity', 'href' => '#', 'roles' => ['organization_admin']],
+                ['label' => __('ui.nav.users'), 'icon' => 'users', 'href' => route('admin.users.index'), 'match' => 'admin.users.*', 'roles' => ['organization_admin']],
+                ['label' => __('ui.nav.reports'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.*', 'roles' => ['operator', 'organization_admin', 'admin_prodi']],
+                ['label' => __('ui.nav.settings'), 'icon' => 'settings', 'href' => route('admin.settings.edit'), 'match' => 'admin.settings.*', 'roles' => ['organization_admin']],
+                ['label' => __('ui.nav.activity_logs'), 'icon' => 'activity', 'href' => route('admin.activity-logs.index'), 'match' => 'admin.activity-logs.*', 'roles' => ['organization_admin']],
             ],
         ];
 
@@ -113,13 +113,9 @@
                                 <li>
                                     <a class="ldr-sidebar__link {{ $isActive ? 'is-active' : '' }}"
                                        href="{{ $item['href'] }}"
-                                       @if ($item['href'] === '#') title="{{ __('ui.nav.coming_soon') }}" @endif
                                        @if ($isActive) aria-current="page" @endif>
                                         <x-icon :name="$item['icon']" :size="20" />
                                         <span class="ldr-sidebar__label">{{ $item['label'] }}</span>
-                                        @if ($item['href'] === '#')
-                                            <span class="ldr-sidebar__soon">{{ __('ui.nav.coming_soon') }}</span>
-                                        @endif
                                     </a>
                                 </li>
                             @endforeach
@@ -157,13 +153,42 @@
 
                 <span class="ldr-admin__title">@yield('title', __('ui.nav.dashboard'))</span>
 
-                <div class="ldr-admin__user">
+                <form class="ldr-admin__search" method="GET" action="{{ route('admin.search') }}" role="search">
+                    <label class="ldr-sr-only" for="admin-search">{{ __('ui.search.placeholder') }}</label>
+                    <x-icon name="search" :size="16" class="ldr-admin__search-icon" />
+                    <input id="admin-search"
+                           class="ldr-input"
+                           type="search"
+                           name="q"
+                           value="{{ request()->routeIs('admin.search') ? request('q') : '' }}"
+                           minlength="2"
+                           placeholder="{{ __('ui.search.placeholder') }}">
+                </form>
+
+                <a class="ldr-icon-btn ldr-admin__bell"
+                   href="{{ route('admin.notifications.index') }}"
+                   aria-label="{{ __('ui.notification.open', ['count' => $unreadNotifications ?? 0]) }}">
+                    <x-icon name="bell" :size="20" />
+                    @if (($unreadNotifications ?? 0) > 0)
+                        <span class="ldr-dot" aria-hidden="true"></span>
+                    @endif
+                </a>
+
+                <a class="ldr-admin__user" href="{{ route('admin.profile.edit') }}">
                     <span class="ldr-admin__user-name">{{ $user->name }}</span>
                     <span class="ldr-badge ldr-badge--primary">{{ $user->role->name }}</span>
-                </div>
+                </a>
             </header>
 
             <main id="main-content" class="ldr-admin__main">
+                @unless (request()->routeIs('admin.dashboard'))
+                    <nav class="ldr-breadcrumb" aria-label="{{ __('ui.breadcrumb') }}">
+                        <a href="{{ route('admin.dashboard') }}">{{ __('ui.nav.dashboard') }}</a>
+                        <span aria-hidden="true">/</span>
+                        <span aria-current="page">@yield('title', __('ui.nav.dashboard'))</span>
+                    </nav>
+                @endunless
+
                 @yield('content')
             </main>
         </div>
