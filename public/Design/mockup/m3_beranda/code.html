@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>Lendora</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "outline": "#8c7164",
+        "surface-container-low": "#f6f3f2",
+        "surface-bright": "#fcf9f8",
+        "inverse-surface": "#303030",
+        "text-muted": "#6B7280",
+        "surface-white": "#FFFFFF",
+        "on-primary": "#ffffff",
+        "primary-fixed-dim": "#ffb690",
+        "info": "#0284C7",
+        "on-surface-variant": "#584237",
+        "border": "#E5E7EB",
+        "on-primary-container": "#582200",
+        "violet-bg": "#F5F3FF",
+        "on-error-container": "#93000a",
+        "success": "#16A34A",
+        "background": "#fcf9f8",
+        "warning-bg": "#FFFBEB",
+        "inverse-primary": "#ffb690",
+        "surface-container-high": "#eae7e7",
+        "on-primary-fixed-variant": "#783200",
+        "secondary-container": "#fd651e",
+        "secondary": "#a73a00",
+        "error-container": "#ffdad6",
+        "danger": "#DC2626",
+        "tertiary": "#625e56",
+        "tertiary-container": "#a09a91",
+        "on-secondary-container": "#571a00",
+        "surface-variant": "#e4e2e1",
+        "tertiary-fixed": "#e9e1d8",
+        "surface-dim": "#dcd9d9",
+        "on-background": "#1b1c1c",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "on-primary-fixed": "#341100",
+        "error": "#ba1a1a",
+        "info-bg": "#F0F9FF",
+        "on-error": "#ffffff",
+        "surface-container-highest": "#e4e2e1",
+        "warning": "#D97706",
+        "danger-bg": "#FEF2F2",
+        "inverse-on-surface": "#f3f0ef",
+        "on-tertiary-fixed": "#1e1b15",
+        "on-tertiary-fixed-variant": "#4a463f",
+        "surface-tint": "#9d4300",
+        "on-secondary-fixed": "#370e00",
+        "success-bg": "#F0FDF4",
+        "primary-container": "#f97316",
+        "surface": "#F5F5F5",
+        "secondary-fixed": "#ffdbce",
+        "violet": "#7C3AED",
+        "surface-container": "#f0eded",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#e0c0b1",
+        "on-tertiary-container": "#36322c",
+        "on-secondary": "#ffffff",
+        "primary-fixed": "#ffdbca",
+        "tertiary-fixed-dim": "#ccc5bc",
+        "on-surface": "#1b1c1c",
+        "secondary-fixed-dim": "#ffb599",
+        "primary": "#9d4300",
+        "on-tertiary": "#ffffff"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.5rem",
+        "space-xl": "2rem",
+        "margin": "1rem",
+        "space-lg": "1.5rem",
+        "space-md": "1rem",
+        "space-xs": "0.25rem",
+        "gutter": "1rem"
+      },
+      "fontFamily": {
+        "headline-md": ["Plus Jakarta Sans"],
+        "caption": ["Inter"],
+        "display": ["Plus Jakarta Sans"],
+        "label-md": ["Inter"],
+        "headline-lg": ["Plus Jakarta Sans"],
+        "body-md": ["Inter"],
+        "code-sm": ["JetBrains Mono"],
+        "headline-sm": ["Plus Jakarta Sans"],
+        "body-sm": ["Inter"]
+      },
+      "fontSize": {
+        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+        "caption": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+        "display": ["28px", {"lineHeight": "36px", "fontWeight": "800"}],
+        "label-md": ["13px", {"lineHeight": "20px", "fontWeight": "600"}],
+        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+        "headline-sm": ["17px", {"lineHeight": "24px", "fontWeight": "600"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-on-surface min-h-screen flex flex-col antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface-white/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Lendora Logo" class="w-8 h-8 rounded-lg object-contain shrink-0 shadow-xs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS6-NsndtcUVlHLtX5BnSWmubUOixZVyyn7oJIHrpdojAiNzoL_h-jMvbIK80aVr5qozlyl0Hc6Yju9ZF4kbRFrvAn7ZguVYZdvfxHQxEbgnQESaIVC1-XB1Hecp5rzVhXvJExOciQ_x2_d8vSCn3UGias_4qtP5aikE1AWpM97g9GyWziaq17Z1ry9brvxeocuTUPWl8OzfaqYTUiqz8ffXYw1GOIFNpYDZ0nf2Rr49T_4gykZGQRdQ"><h1 class="text-headline-sm font-headline-sm text-on-surface tracking-tight truncate max-w-[170px]">Beranda</h1></div><div class="flex items-center gap-space-sm"><div class="w-10 h-10 flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPOP30q4siQAUb5jQtas83LmH7aKCzLmc_wH0If8-I9BAL5g1364rTGK8La-GyGgDPwVoXl35_LRN3ecXT_ebidWQvBgeCBDVUDUH8JRlBLS7bJHYjakQeBpHVjymeCVydOozDQ3k9nD-ljEFaWs4w20nB8LqhpO3aRQCdDtDibVHgnJzIGVwdws1VxI5RxhfdlWHsqRUl7aSdp8W1lK9cGpRUlOXp03IlETfkK6r9"></div></div></div></header><main class="flex-1 w-full bg-background pt-16 pb-24"><div class="flex flex-col w-full px-margin pb-6 gap-space-lg">
+<!-- Top Greeting Header -->
+<header class="flex flex-col pt-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-display text-display text-on-surface tracking-tight">Halo, Ani 👋</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Unit Kampus — Selamat beraktivitas!</p>
+</div>
+<div class="h-11 w-11 rounded-full bg-surface-container flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+</div>
+</header>
+<!-- Active Loan Card (Peminjaman Aktif) -->
+<section class="w-full bg-[#FFF7ED] rounded-[14px] p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between gap-space-sm mb-3">
+<div class="flex items-center gap-1.5 text-primary-container">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-caption text-caption tracking-wider uppercase font-bold">Peminjaman Aktif</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-warning-bg text-warning font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+        Kembalikan besok!
+      </span>
+</div>
+<div class="flex gap-space-md items-center bg-surface-white/80 rounded-xl p-3 shadow-sm mb-3">
+<div class="relative w-20 h-16 rounded-lg overflow-hidden shrink-0 bg-surface-container">
+<img alt="Sony A7 III Kit 28-70mm" class="w-full h-full object-cover" data-alt="Sony A7 III mirrorless professional camera body with standard 28-70mm lens mounted, positioned in clean university production studio with soft warm cinematic side lighting, pristine modern studio environment with neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7C_6Mxm2zROl0vBQPWEtD2j4hirH7qBoT7lph8Eu_JNIt3vi7ZYlFMBoTI9dp5bnqAdB-V4-jX16X1kjALKMskltJGZzeFY1Rcj0yI8_RI1JHUoheQf7whSjRh1mGxvbn0YjKCbK0wtAP9olqDBs5xkNyLOSPc9F5JtyjxNe0ydfxlYQdEbJEgx1CG37_4sODEszgAJCe8lbHoCpyYmN-_RMXwLBie0gRwPt32qfn">
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-code-sm text-code-sm text-text-muted tracking-tight truncate">LDR-BK-2026-0007</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate mt-0.5">Sony A7 III Kit 28-70mm</h3>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container">event</span>
+          Batas: 24 Okt, 15:30 WIB
+        </p>
+</div>
+</div>
+<button class="w-full h-11 bg-primary-container hover:bg-secondary transition-colors text-surface-white font-label-md text-label-md rounded-[10px] flex items-center justify-center gap-2 shadow-sm active:scale-[0.99]" type="button">
+<span class="">Lihat Detail</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</section>
+<!-- Category Quick Filter Shortcuts -->
+<section class="flex flex-col gap-space-sm -mx-margin">
+<div class="px-margin flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-muted">Kategori Perlengkapan</span>
+<span class="font-caption text-caption text-text-muted">5 Kategori</span>
+</div>
+<div class="flex overflow-x-auto no-scrollbar gap-2 px-margin py-1">
+<button class="h-9 px-4 rounded-full bg-[#FFF7ED] text-secondary font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">apps</span>
+<span class="">Semua</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white text-text-muted hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+<span class="">Kamera Mirrorless</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white text-text-muted hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">camera</span>
+<span class="">Lensa</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white text-text-muted hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">videocam</span>
+<span class="">Tripod</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white text-text-muted hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">wb_incandescent</span>
+<span class="">Lampu</span>
+</button>
+</div>
+</section>
+<!-- Recommendation Section -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Rekomendasi untuk kamu</h2>
+<a class="font-label-md text-label-md text-primary-container hover:text-secondary flex items-center gap-0.5" href="#">
+        Lihat Semua
+        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+<!-- Horizontal Swipeable List -->
+<div class="flex overflow-x-auto no-scrollbar gap-3.5 -mx-margin px-margin py-1">
+<!-- Card 1: Canon EOS R6 Mark II -->
+<article class="w-[210px] shrink-0 bg-surface-white rounded-[14px] shadow-sm flex flex-col overflow-hidden group">
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img alt="Canon EOS R6 Mark II" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Canon EOS R6 Mark II mirrorless cinema and photo hybrid camera displayed elegantly on modern concrete desk with subtle warm amber studio light accent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXhc6n-Jb-se8QC_Pc6yUGOztoDZ3Aw8IrDcAob9AuN0wwgf8Nya-XR0csKDVSpEvUDhZ19FBWfZ25hNy1y8U4qgRbhl9dtc6vgqdCYuvmnxQvxQ3mLRU3MItDYnLIr2nH2OQ8F7RgwfIH6zyh6-hUyDeTIFNJWMreVZiJYVDvU6hvByVGu0J9PlLVXITA_PfZti5NvkNyI74pEdLSs26lEQNdfQnbb6TurVS55owh">
+<span class="absolute top-2.5 right-2.5 inline-flex items-center px-2 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption shadow-xs">
+            Tersedia
+          </span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<span class="w-fit px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+              Kamera Mirrorless
+            </span>
+<span class="font-code-sm text-code-sm text-text-muted">LDR-CAM-0002</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-1 mt-0.5">Canon EOS R6 Mark II</h4>
+</div>
+<button class="w-full h-9 rounded-lg bg-surface-container hover:bg-primary-container hover:text-surface-white text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-1 mt-1" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+            Pinjam
+          </button>
+</div>
+</article>
+<!-- Card 2: Sony FE 24-70mm f/2.8 GM II -->
+<article class="w-[210px] shrink-0 bg-surface-white rounded-[14px] shadow-sm flex flex-col overflow-hidden group">
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img alt="Sony FE 24-70mm f/2.8 GM II" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Premium Sony FE 24-70mm f/2.8 G Master II camera lens closeup with beautiful glass optics reflection on dark textured studio table with warm light highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGqcjFK0JQuc6DPLFVOQqsaRq7qfGN5e5qmCARMVrt3X4s8_Nk7DUg9_uBIF_cucXTSilTspNS1Na6EOH3WSWlpdpTRVKqaP0oHweDQ6OTwDtUkqxl4HENju9LEiPrlZYbdmrllGNrSSnN5kpR2t_W8Rn1Ce0iHRoSpiKQMqlVCBlTPlt-2JMD3icsFOpPMTjqOLabXmX_aKgo_sV_lM-4l9dji_3Q90fmhs_RNTZm">
+<span class="absolute top-2.5 right-2.5 inline-flex items-center px-2 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption shadow-xs">
+            Tersedia
+          </span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<span class="w-fit px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+              Lensa
+            </span>
+<span class="font-code-sm text-code-sm text-text-muted">LDR-LNS-0001</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-1 mt-0.5">Sony FE 24-70mm GM II</h4>
+</div>
+<button class="w-full h-9 rounded-lg bg-surface-container hover:bg-primary-container hover:text-surface-white text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-1 mt-1" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+            Pinjam
+          </button>
+</div>
+</article>
+<!-- Card 3: Tripod Manfrotto Befree Live -->
+<article class="w-[210px] shrink-0 bg-surface-white rounded-[14px] shadow-sm flex flex-col overflow-hidden group">
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img alt="Tripod Manfrotto Befree Live" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Manfrotto Befree Live compact video tripod standing tall in modern campus media studio, precise aluminum legs with professional fluid head mechanism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJn9mzdS7zu4VLep4uUbOiDScQdYaobdCcMZiZItltviJbTRHuRJ-LhZo7-1pM8afrkBalJMjYwvmtGOCr81gc4VB2Wxvn6U3bFibhFxpGly975vHxJtBBZu1cwTAcGsZlJazSzVX0e7lmJJYy0WmC3SFsrF5MTAOIoeWlX8aY7z48i0D-te4p677gAJ3heOVL56uDLQbBaVLGJzhbGkAw7IuOHlZVqGKMb0yAIYw-">
+<span class="absolute top-2.5 right-2.5 inline-flex items-center px-2 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption shadow-xs">
+            Tersedia
+          </span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<span class="w-fit px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+              Tripod
+            </span>
+<span class="font-code-sm text-code-sm text-text-muted">LDR-TRP-0004</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-1 mt-0.5">Manfrotto Befree Live</h4>
+</div>
+<button class="w-full h-9 rounded-lg bg-surface-container hover:bg-primary-container hover:text-surface-white text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-1 mt-1" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+            Pinjam
+          </button>
+</div>
+</article>
+<!-- Card 4: Godox SL-60W Video Light -->
+<article class="w-[210px] shrink-0 bg-surface-white rounded-[14px] shadow-sm flex flex-col overflow-hidden group">
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img alt="Godox SL-60W Video Light" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Godox SL-60W continuous LED video light unit with reflector mounted on stand inside media production room with soft warm diffused background aura." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0zksSArGgnRP8SbgGctLJt8weREOiY5w_EA6nZO-NWhFTwr2Ty7sugrdobB-CBBctBfu0Kn9tsF8NEOfB3YX_ZHZI69Zh19m9UvS4U79wLpJZvCk4AS-fBOfqCyxJ7yVFCY11ch_9ZQPtNNkFPjepHamkkKgSo-uhSb6ksHs1qVtuIg7ze8ICa0MX1m_RB45a2y9m4yTmdp9JPJD86-dHe7prVpd5zN6xJmKzFnbm">
+<span class="absolute top-2.5 right-2.5 inline-flex items-center px-2 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption shadow-xs">
+            Tersedia
+          </span>
+</div>
+<div class="p-3 flex flex-col flex-1 justify-between gap-2">
+<div class="flex flex-col">
+<span class="w-fit px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+              Lampu
+            </span>
+<span class="font-code-sm text-code-sm text-text-muted">LDR-LGT-0002</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-1 mt-0.5">Godox SL-60W Video Light</h4>
+</div>
+<button class="w-full h-9 rounded-lg bg-surface-container hover:bg-primary-container hover:text-surface-white text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-1 mt-1" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+            Pinjam
+          </button>
+</div>
+</article>
+</div>
+</section>
+<!-- Section Pengumuman -->
+<section class="flex flex-col gap-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Pengumuman</h2>
+<div class="w-full bg-surface-white rounded-[14px] p-space-md shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-[#FFF7ED] text-primary-container flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[22px]">campaign</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Jadwal Operasional Ruang Operator</h3>
+<span class="w-2 h-2 rounded-full bg-primary-container shrink-0"></span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-1 leading-relaxed">
+          Pengambilan dan pengembalian unit dilayani Senin–Jumat pukul 08:30–16:00 WIB di Lemari A1 Ruang Operator.
+        </p>
+<div class="mt-2.5 flex items-center gap-2 text-primary-container font-caption text-caption">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="">Harap konfirmasi QR code saat serah terima unit</span>
+</div>
+</div>
+</div>
+</section>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-white/95 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-stretch h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 transition-colors py-space-xs text-primary-container font-semibold" data-path="beranda" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-caption text-caption mt-0.5">Beranda</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs" data-path="katalog" href="#"><span class="material-symbols-outlined text-[24px]">search</span><span class="font-caption text-caption mt-0.5">Katalog</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs relative" data-path="peminjaman-saya" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">assignment</span><span class="absolute -top-1 -right-2 min-w-[16px] h-4 px-1 rounded-full bg-primary-container text-surface-white text-[10px] font-bold flex items-center justify-center leading-none">1</span></div><span class="font-caption text-caption mt-0.5 whitespace-nowrap">Pinjaman</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs relative" data-path="notifikasi" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">notifications</span><span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-danger ring-2 ring-surface-white"></span></div><span class="font-caption text-caption mt-0.5">Notifikasi</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs" data-path="profil" href="#"><span class="material-symbols-outlined text-[24px]">person</span><span class="font-caption text-caption mt-0.5">Profil</span></a></div></nav>
+
+</body></html>

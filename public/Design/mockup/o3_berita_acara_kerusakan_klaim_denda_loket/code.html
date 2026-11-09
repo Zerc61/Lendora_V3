@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"primary-container":"#f97316","text-muted":"#6B7280","tertiary-container":"#a09a91","error-container":"#ffdad6","tertiary-fixed":"#e9e1d8","on-primary-container":"#582200","error":"#ba1a1a","on-tertiary-container":"#36322c","on-secondary-fixed-variant":"#7f2b00","primary":"#9d4300","info":"#0284C7","inverse-surface":"#303030","success-bg":"#F0FDF4","on-primary-fixed":"#341100","surface-container-low":"#f6f3f2","on-primary-fixed-variant":"#783200","surface-bright":"#fcf9f8","inverse-primary":"#ffb690","secondary-fixed":"#ffdbce","on-surface":"#1b1c1c","on-tertiary-fixed-variant":"#4a463f","surface-container":"#f0eded","surface-container-high":"#eae7e7","secondary":"#a73a00","secondary-fixed-dim":"#ffb599","on-primary":"#ffffff","outline-variant":"#e0c0b1","on-secondary":"#ffffff","border":"#E5E7EB","outline":"#8c7164","on-error-container":"#93000a","on-surface-variant":"#584237","surface-dim":"#dcd9d9","violet-bg":"#F5F3FF","warning-bg":"#FFFBEB","on-tertiary":"#ffffff","on-background":"#1b1c1c","secondary-container":"#fd651e","inverse-on-surface":"#f3f0ef","tertiary":"#625e56","background":"#fcf9f8","violet":"#7C3AED","surface-variant":"#e4e2e1","on-tertiary-fixed":"#1e1b15","surface":"#F5F5F5","primary-fixed":"#ffdbca","surface-tint":"#9d4300","primary-fixed-dim":"#ffb690","surface-container-highest":"#e4e2e1","info-bg":"#F0F9FF","on-secondary-fixed":"#370e00","success":"#16A34A","danger-bg":"#FEF2F2","tertiary-fixed-dim":"#ccc5bc","on-error":"#ffffff","on-secondary-container":"#571a00","surface-white":"#FFFFFF","surface-container-lowest":"#ffffff","warning":"#D97706","danger":"#DC2626"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-lg":"1.5rem","space-xl":"2rem","space-sm":"0.5rem","gutter":"1rem","space-xs":"0.25rem","margin":"1rem"},"fontFamily":{"label-md":["Inter"],"headline-lg":["Plus Jakarta Sans"],"display":["Plus Jakarta Sans"],"body-md":["Inter"],"headline-md":["Plus Jakarta Sans"],"caption":["Inter"],"headline-sm":["Plus Jakarta Sans"],"code-sm":["JetBrains Mono"],"body-sm":["Inter"]},"fontSize":{"label-md":["13px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],"display":["28px",{"lineHeight":"36px","fontWeight":"800"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"code-sm":["13px",{"lineHeight":"18px","fontWeight":"500"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-white border-r border-border z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 flex items-center px-space-lg border-b border-border gap-space-sm"><img alt="lendora-favicon-180-siklus.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrATjBJd894AFWhgAiRHN5fI-mNqQJe1lT56EWovzkBfox_noXl2tBLPBXLnQCdE0RO8TK72xVxNZNpat1nMw7CKbkDL-wfEEJXwN5a2YJsQy0UAdxeJ04EVZ5pZpko2y_PIU9PqThD6R6Sy58CsleHa2Fu4xNXHYHmYAXtvt6eBlwcimeFwLfjmwPn8ukpwyDPTdN-2g0Y0cwmdHgOOqbou3is-qO0Sgv1oKDmUc0e8Qp2IpbpDwWrAMd__"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-none tracking-tight">Lendora</span><span class="font-caption text-caption text-text-muted mt-0.5 tracking-wider uppercase">Campus Gear V3</span></div></div><nav class="flex-1 px-space-md py-space-md space-y-space-lg" data-active-classes="bg-primary-container text-surface-white font-label-md shadow-sm"><div class="space-y-space-xs"><div class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">UTAMA</div><div class="space-y-1"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="dashboard-loket" href="#"><span class="material-symbols-outlined text-[20px]">space_dashboard</span><span>Dashboard Loket</span></a></div></div><div class="space-y-space-xs"><div class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">OPERASIONAL LOKET</div><div class="space-y-1"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="kiosk-scanner-loket-cepat" href="#"><span class="material-symbols-outlined text-[20px]">qr_code_scanner</span><span>Kiosk Scanner Loket Cepat</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="serah-terima-handover" href="#"><span class="material-symbols-outlined text-[20px]">sync_alt</span><span>Serah Terima / Handover</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="pemeriksaan-inspeksi" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span>Pemeriksaan &amp; Inspeksi</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="antrean-persetujuan" href="#"><span class="material-symbols-outlined text-[20px]">pending_actions</span><span>Antrean Persetujuan</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="berita-acara-denda" href="#"><span class="material-symbols-outlined text-[20px]">gavel</span><span>Berita Acara &amp; Denda</span></a></div></div><div class="space-y-space-xs"><div class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">INVENTARIS &amp; LOGISTIK</div><div class="space-y-1"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="daftar-aset" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Daftar Aset</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="kalender-ketersediaan" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span>Kalender Ketersediaan</span></a></div></div></nav></div><div class="p-space-md border-t border-border bg-surface-white"><div class="flex items-center gap-space-sm px-space-sm py-2 bg-success-bg border border-border rounded-lg"><span class="w-2 h-2 rounded-full bg-success animate-pulse"></span><span class="font-code-sm text-code-sm text-success font-medium">Sistem Online v3.4.1</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-white border-b border-border z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-body-sm text-body-sm text-text-muted"><span class="hover:text-on-surface transition-colors">Operasional Loket</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="font-label-md text-label-md text-on-surface">O3 — Berita Acara Kerusakan &amp; Klaim Denda</span></div></div><div class="flex items-center gap-space-md"><div class="relative hidden xl:block w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-text-muted">search</span><input class="w-full h-10 pl-9 pr-3 rounded-lg border border-border bg-surface font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Cari tiket, NIM, atau seri alat..." type="text"/></div><div class="hidden md:flex items-center gap-space-xs bg-warning-bg border border-border px-3 py-1.5 rounded-full"><span class="material-symbols-outlined text-warning text-[18px]">schedule</span><span class="font-caption text-caption text-warning">Shift Siaga Loket A — Ruang Operator 1</span></div><button aria-label="Notifikasi" class="relative p-2 rounded-lg text-text-muted hover:text-on-surface hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-danger"></span></button><div class="h-8 w-px bg-border"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface leading-tight">Budi Santoso</span><span class="font-caption text-caption text-text-muted">Operator Loket Sirkulasi</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 px-space-lg py-space-lg bg-surface min-h-screen"><div class="flex flex-col w-full space-y-space-lg">
+<!-- TOP BAR: BAP IDENTIFIER & ACTIONS -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-white p-space-lg rounded-[14px] shadow-sm">
+<div class="flex flex-col space-y-1.5">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-danger-bg text-danger font-semibold tracking-wide uppercase">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">gavel</span>
+          Berita Acara Pemeriksaan (BAP)
+        </span>
+<span class="font-code-sm text-code-sm text-text-muted">Nomor Registrasi:</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface bg-surface-container px-2 py-0.5 rounded">LDR-BAP-2026-0004</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-violet-bg text-violet font-semibold">
+<span class="material-symbols-outlined text-[14px]">build_circle</span>
+          Tiket Maintenance T3/T4 Terbit
+        </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+        BAP Kerusakan &amp; Klaim Ganti Rugi: <span class="font-code-sm text-primary">LDR-BAP-2026-0004</span>
+</h1>
+<p class="font-body-sm text-body-sm text-text-muted max-w-4xl">
+        Pencatatan resmi insiden kerusakan fisik unit saat pengembalian loket, investigasi kronologi, penaksiran biaya reparasi teknisi, dan penerbitan surat klaim denda peminjam.
+      </p>
+</div>
+<!-- ACTION BUTTONS -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="h-[44px] px-4 rounded-[10px] bg-surface-white hover:bg-surface-container-low text-on-surface font-label-md text-label-md shadow-sm transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">history</span>
+<span>Riwayat BAP</span>
+</button>
+<button class="h-[44px] px-4 rounded-[10px] bg-surface-white hover:bg-surface-container-low text-on-surface font-label-md text-label-md shadow-sm transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-danger">picture_as_pdf</span>
+<span>Cetak BAP Resmi (PDF)</span>
+</button>
+<button class="h-[44px] px-5 rounded-[10px] bg-primary-container hover:bg-secondary text-surface-white font-label-md text-label-md shadow-sm transition-all flex items-center gap-2 font-semibold" type="button">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+<span>Sahkan &amp; Terbitkan Tagihan (F2)</span>
+</button>
+</div>
+</div>
+<!-- EMERGENCY ALERT SUMMARY BANNER -->
+<div class="bg-danger-bg p-space-md rounded-[14px] flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-danger text-surface-white flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-danger font-bold">Kategori Insiden: Kerusakan Berat pada Elemen Optik / Sensor</span>
+<span class="text-caption font-caption bg-surface-white text-danger px-2 py-0.5 rounded font-medium">(Bukan Keausan Normal)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1 leading-snug">
+          Unit <strong class="font-semibold text-on-surface">Sony Alpha A7 III (<span class="font-code-sm">LDR-CAM-0001</span>)</strong> dikembalikan dalam kondisi kaca filter sensor tergores &amp; mount bayonet retak akibat jatuh saat produksi di Pantai Depok. Akun peminjam ditangguhkan otomatis (<span class="font-code-sm text-danger font-semibold">Suspended</span>) hingga kompensasi tuntas.
+        </p>
+</div>
+</div>
+<div class="flex flex-row xl:flex-col items-end justify-between xl:justify-center w-full xl:w-auto shrink-0 gap-1 bg-surface-white/70 xl:bg-transparent p-2.5 xl:p-0 rounded-lg">
+<div class="flex items-center gap-1.5">
+<span class="font-caption text-caption text-text-muted uppercase">Status Pembayaran:</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-caption bg-warning-bg text-warning font-semibold">
+          Menunggu Pembayaran (Tempo 7 Hari)
+        </span>
+</div>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-caption text-caption text-text-muted">Total Klaim Denda:</span>
+<span class="font-headline-md text-headline-md font-bold text-danger">Rp 3.105.000</span>
+</div>
+</div>
+</div>
+<!-- TWO-COLUMN WORK AREA -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (Approx 62% width -> 7 cols of 12) -->
+<div class="xl:col-span-7 flex flex-col space-y-space-lg">
+<!-- CARD 1: DATA TRANSAKSI & PEMINJAM -->
+<div class="bg-surface-white rounded-[14px] p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-primary">badge</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Data Transaksi &amp; Peminjam Bertanggung Jawab</h2>
+</div>
+<span class="font-code-sm text-code-sm text-text-muted">Order Ref: LDR-BK-2026-0009</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Student profile info -->
+<div class="flex gap-3 bg-surface-container-low p-space-md rounded-xl">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-lg shrink-0">
+              RS
+            </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Rara Sekar</span>
+<span class="font-code-sm text-code-sm text-text-muted tabular-nums">NIM 2207412089</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Semester 5 — DKV Konsentrasi Film</span>
+<span class="font-caption text-caption text-text-muted mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">school</span>
+                PA: Dr. Irwan Setiawan, M.Sn.
+              </span>
+</div>
+</div>
+<!-- Account lock & borrowing quota status -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted uppercase">Status Akun Lab</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-danger-bg text-danger font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-danger"></span>
+                SUSPENDED
+              </span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted uppercase">Kuota Pinjam Mandiri</span>
+<span class="font-code-sm text-code-sm font-bold text-danger tabular-nums">0 Unit (Terkunci Sistem)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-text-muted">
+<span>Kontak WhatsApp:</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold tabular-nums">+62 812-9847-1120</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-text-muted">
+<span>Durasi Peminjaman:</span>
+<span class="font-code-sm text-code-sm text-on-surface tabular-nums">10 Nov – 13 Nov 2026</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 2: IDENTIFIKASI UNIT & BUKTI FISIK KERUSAKAN -->
+<div class="bg-surface-white rounded-[14px] p-space-lg shadow-sm space-y-space-md">
+<div class="flex flex-wrap items-center justify-between gap-2 pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-danger">photo_camera</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Identifikasi Fisik &amp; Temuan Kerusakan Unit</h2>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-caption font-caption bg-danger-bg text-danger font-semibold">
+            Kerusakan Fisik
+          </span>
+</div>
+<!-- Meta row -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-surface-container-low p-space-md rounded-xl text-body-sm font-body-sm">
+<div>
+<span class="text-caption font-caption text-text-muted block">Nama Perangkat:</span>
+<span class="font-semibold text-on-surface">Sony Alpha A7 III</span>
+</div>
+<div>
+<span class="text-caption font-caption text-text-muted block">Aset ID / Serial Number:</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface tabular-nums">LDR-CAM-0001 (SN: 4892019-S)</span>
+</div>
+<div>
+<span class="text-caption font-caption text-text-muted block">Waktu Serah-Balik:</span>
+<span class="font-code-sm text-code-sm text-on-surface tabular-nums">13 Nov 2026, 15:45 WIB</span>
+</div>
+<div>
+<span class="text-caption font-caption text-text-muted block">Petugas Pemeriksa:</span>
+<span class="font-semibold text-on-surface">Budi Santoso (Loket A)</span>
+</div>
+</div>
+<!-- Detailed findings list -->
+<div class="space-y-2.5">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-danger">fact_check</span>
+            Rincian Kerusakan Hasil Visual Check &amp; Collimator Tester:
+          </span>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<div class="p-3 bg-surface-container-low rounded-lg space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-danger font-semibold">1. Sensor Low-Pass Scratch</span>
+<span class="text-caption font-caption bg-danger-bg text-danger px-1.5 py-0.5 rounded font-mono">CRITICAL</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Goresan melintang 1.2 cm pada permukaan kaca optik pelindung sensor filter akibat pembersihan kasar tanpa blower di lingkungan pasir pantai. Bayangan permanen muncul pada f/4.0 ke atas.
+              </p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-danger font-semibold">2. Mount Bayonet Dent</span>
+<span class="text-caption font-caption bg-warning-bg text-warning px-1.5 py-0.5 rounded font-mono">HIGH RISK</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Ring kuningan mount lensa penyok sedalam 0.8mm akibat benturan sudut. Lensa prime 50mm macet saat diputar dan konektor pin elektronik AF kehilangan kontak.
+              </p>
+</div>
+</div>
+</div>
+<!-- Photographic evidence gallery -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Dokumentasi Bukti Fisik di Loket (3 Berkas Terlampir):</span>
+<span class="font-caption text-caption text-text-muted">Stempel Waktu Otomatis Sistem Loket</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<!-- Evidence Image 1 -->
+<div class="relative group rounded-xl overflow-hidden bg-surface-container border border-border">
+<div class="w-full h-36 bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up high magnification photograph of Sony mirrorless camera full frame sensor showing visible diagonal scratch mark on optical glass filter with laboratory scale bar in a professional clean workbench lighting condition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeCkkGQXSlwldfpVSD-jr4Chc6R51k-liS8yNGia2bh7ZcXRJhoEBEV0JPxEdB8UoZQ9GED8Ta3iwiHaAAL29epS0ZvgYGjyZhHWyEoqQYwpdwVRhIOVIgu4H8QBhS-g0bVJ2mfd_AjTjjDMaJ98zTjvykrcKdd7Xm9UA_ZOeLkBCN2n02aeU7yWhB-OobgPpErkLBq5vVOrIFi5xPAVgYuf6xUHyNvNqtMKqy9GyD"/>
+</div>
+<div class="p-2 bg-surface-white">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption font-bold text-on-surface">Goresan Sensor Optik</span>
+<span class="font-code-sm text-caption text-danger tabular-nums">CAM-0001-A.jpg</span>
+</div>
+<span class="font-caption text-caption text-text-muted block mt-0.5">13/11/2026 15:52 WIB</span>
+</div>
+</div>
+<!-- Evidence Image 2 -->
+<div class="relative group rounded-xl overflow-hidden bg-surface-container border border-border">
+<div class="w-full h-36 bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Macro macro detailed photo of damaged deformed brass lens bayonet mount on camera body showing visible metal dent and stripped alignment locking screw." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFy1ifQQdpO5Ruq73EKVUQAoapBEUp_NqGfvz7EfojytYzrk3auvhf-0kWJPaeLmy-AXLI3bAuUTvoyBdHJylEauiz76WoRBQFAlI0QxK1WasOywwo6dP6QuUzpCYF4y8tCONhc4JqBYiJ1IwVHlR3CKd-ZjhttCeI0GQYfqy_6vYQ0xQuoZZIWuKfE09xLFB5xzqyDPVtHtgDqQdhxCSOuYY2ac5XBYkU386g4loA"/>
+</div>
+<div class="p-2 bg-surface-white">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption font-bold text-on-surface">Mount Ring Cacat / Bentur</span>
+<span class="font-code-sm text-caption text-danger tabular-nums">CAM-0001-B.jpg</span>
+</div>
+<span class="font-caption text-caption text-text-muted block mt-0.5">13/11/2026 15:54 WIB</span>
+</div>
+</div>
+<!-- Evidence Image 3 -->
+<div class="relative group rounded-xl overflow-hidden bg-surface-container border border-border">
+<div class="w-full h-36 bg-surface-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Official university equipment hand-written incident statement form paper on desk with student signature and red official verified stamp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxUDnLTkmxW6AbyxZ_un7DmWM8XuXbZu9EZRgUGWkBDbjzPxCINxV1B6v35bdp08OxufY_9PLKYJwiFEoxXvcys7rvjKk-xXG48EbLhOXERxm83qZ9Sn4Zvyki6ek9hS-quefQDWKPRMqx_jIz1_Hfza3Unvy_HZ2djfngBrYFUxgI8JuglcZFC7MuJopG2cc043m4KsJI3Tuxjyw4zvasC-7y-QHQYxlHbqfXB8lD"/>
+</div>
+<div class="p-2 bg-surface-white">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption font-bold text-on-surface">Surat Pernyataan Mahasiswa</span>
+<span class="font-code-sm text-caption text-success tabular-nums">BAP-DOC-04.pdf</span>
+</div>
+<span class="font-caption text-caption text-text-muted block mt-0.5">Ttd Sah Mahasiswa</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Student statement quotation box -->
+<div class="p-space-md bg-surface-container-low rounded-xl space-y-1.5 border-l-4 border-primary">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">format_quote</span>
+            Kronologi Kejadian (Keterangan Tertulis Mahasiswa Peminjam):
+          </span>
+<p class="font-body-sm text-body-sm text-text-muted italic leading-relaxed">
+            “Saat shooting adegan film pendek di bibir Pantai Depok sekitar pukul 11:30 WIB, tripod terhempas angin samping dan unit terjatuh ke atas batu karang berpasir. Ketika lensa terlepas, kru panik melihat butiran pasir masuk ke area sensor dan berinisiatif mengusapnya menggunakan ujung kain kaos basah. Kami mengakui kesalahan penanganan darurat tanpa blower silikon.”
+          </p>
+</div>
+</div>
+<!-- CARD 3: RINCIAN INVESTIGASI TEKNISI & WORK ORDER -->
+<div class="bg-surface-white rounded-[14px] p-space-lg shadow-sm space-y-space-md">
+<div class="flex flex-wrap items-center justify-between gap-2 pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-violet">precision_manufacturing</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Rencana Reparasi &amp; Work Order Laboratorium</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm font-semibold text-violet bg-violet-bg px-2.5 py-0.5 rounded">
+              WO: LDR-WO-2026-0018
+            </span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between p-3 bg-surface-container-low rounded-xl gap-2">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-text-muted">engineering</span>
+<div>
+<span class="text-caption font-caption text-text-muted block">Teknisi Penguji:</span>
+<span class="font-label-md text-label-md text-on-surface">Pak Andi Pratama (Kepala Bengkel Lab AV - Teknisi Utama)</span>
+</div>
+</div>
+<div class="text-left md:text-right">
+<span class="text-caption font-caption text-text-muted block">Estimasi Waktu Pengerjaan:</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface">5 Hari Kerja (Modul W10 Lab T4)</span>
+</div>
+</div>
+<!-- Cost breakdown table from technician -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-body-sm font-body-sm">
+<thead>
+<tr class="bg-surface-container-low text-text-muted font-caption text-caption uppercase">
+<th class="py-2.5 px-3 rounded-l-lg">Item Suku Cadang / Komponen Servis</th>
+<th class="py-2.5 px-3">Kode Logistik</th>
+<th class="py-2.5 px-3 text-center">Jumlah</th>
+<th class="py-2.5 px-3 text-right rounded-r-lg">Estimasi Biaya (IDR)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<tr>
+<td class="py-3 px-3">
+<div class="font-semibold text-on-surface">Original Sony A7 III IR-Cut Glass Sensor Assembly</div>
+<div class="font-caption text-caption text-text-muted">Unit pengganti optik filter anti-aliasing sensor</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted">PART-SNY-A73-IRC</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm">1 Set</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-semibold tabular-nums">2.100.000</td>
+</tr>
+<tr>
+<td class="py-3 px-3">
+<div class="font-semibold text-on-surface">Lens Mount Ring Collar &amp; Brass Screw Set</div>
+<div class="font-caption text-caption text-text-muted">Penggantian ring penahan bayonet mount kuningan</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted">PART-SNY-A7-MNT</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm">1 Unit</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-semibold tabular-nums">450.000</td>
+</tr>
+<tr>
+<td class="py-3 px-3">
+<div class="font-semibold text-on-surface">Jasa Kalibrasi Optik Presisi &amp; Kolimasi Lab T4</div>
+<div class="font-caption text-caption text-text-muted">Alignment flange distance menggunakan optical collimator</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted">SRV-CAL-OPT-02</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm">1 Paket</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-semibold tabular-nums">400.000</td>
+</tr>
+<tr>
+<td class="py-3 px-3">
+<div class="font-semibold text-on-surface">Denda Penalti Utilisasi Aset Terhenti (Karantina 5 Hari)</div>
+<div class="font-caption text-caption text-text-muted">Kompensasi pembatalan jadwal produksi praktikum berikutnya</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted">PEN-DOWNTIME-5D</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm">5 Hari</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-semibold tabular-nums">500.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (Approx 38% width -> 5 cols of 12) -->
+<div class="xl:col-span-5 flex flex-col space-y-space-lg">
+<!-- CARD 4: KALKULASI KLAIM DENDA & SKEMA PEMBAYARAN -->
+<div class="bg-surface-white rounded-[14px] p-space-lg shadow-sm space-y-space-md border-t-4 border-primary-container">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-primary">calculate</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Rincian Perhitungan Klaim Ganti Rugi</h2>
+</div>
+<span class="font-caption text-caption font-bold text-primary uppercase">Kalkulasi Final</span>
+</div>
+<div class="space-y-2 text-body-sm font-body-sm">
+<div class="flex justify-between py-1 text-on-surface-variant">
+<span>Subtotal Suku Cadang Resmi (2 Item):</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface tabular-nums">Rp 2.550.000</span>
+</div>
+<div class="flex justify-between py-1 text-on-surface-variant">
+<span>Biaya Jasa Bengkel &amp; Uji Kolimasi:</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface tabular-nums">Rp 400.000</span>
+</div>
+<div class="flex justify-between py-1 text-on-surface-variant">
+<span>Biaya Kerugian Operasional Utilisasi:</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface tabular-nums">Rp 500.000</span>
+</div>
+<div class="flex justify-between py-1 text-success items-center">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">local_activity</span>
+<span>Subsidi Kas Dana Praktikum DKV (10%):</span>
+</div>
+<span class="font-code-sm text-code-sm font-semibold tabular-nums">-Rp 345.000</span>
+</div>
+<div class="pt-3 border-t border-border mt-2">
+<div class="flex justify-between items-baseline">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface block">Total Tagihan Denda</span>
+<span class="font-caption text-caption text-text-muted">Kewajiban bayar mahasiswa</span>
+</div>
+<div class="text-right">
+<span class="font-display text-display font-extrabold text-primary tabular-nums block">Rp 3.105.000</span>
+<span class="font-caption text-caption text-danger font-semibold">Jatuh Tempo: 20 Nov 2026, 17:00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- PAYMENT OPTIONS -->
+<div class="space-y-2 pt-2">
+<span class="font-label-md text-label-md text-on-surface block">Pilihan Metode Penyelesaian:</span>
+<div class="space-y-2">
+<!-- Option 1: Virtual Account -->
+<label class="flex items-start gap-3 p-3 rounded-xl border border-primary-container bg-primary/5 cursor-pointer">
+<input checked="" class="mt-1 accent-primary-container" name="payment_method" type="radio"/>
+<div class="flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Virtual Account BNI Kampus</span>
+<span class="font-caption text-caption bg-surface-white px-2 py-0.5 rounded text-primary font-semibold">Otomatis Terverifikasi</span>
+</div>
+<span class="font-code-sm text-code-sm font-bold text-on-surface mt-1 tabular-nums">988-0012-2207412089</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">Bebas biaya admin perbankan universitas</span>
+</div>
+</label>
+<!-- Option 2: Sparepart Replacement -->
+<label class="flex items-start gap-3 p-3 rounded-xl border border-border bg-surface-white hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="mt-1 accent-primary-container" name="payment_method" type="radio"/>
+<div class="flex flex-col flex-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Penggantian Sparepart Mandiri Resmi</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">Membawa part original Sony Center baru dengan invoice sah ke loket</span>
+</div>
+</label>
+<!-- Option 3: Installment Plan -->
+<label class="flex items-start gap-3 p-3 rounded-xl border border-border bg-surface-white hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="mt-1 accent-primary-container" name="payment_method" type="radio"/>
+<div class="flex flex-col flex-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Surat Perjanjian Cicilan Kasbon (2x Bayar)</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">Memerlukan persetujuan tanda tangan Wakil Dekan II Bidang Keuangan</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- CARD 5: REKOMENDASI SANKSI AKADEMIK & HAK AKSES -->
+<div class="bg-surface-white rounded-[14px] p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center gap-2 pb-space-sm border-b border-border">
+<span class="material-symbols-outlined text-[22px] text-warning">policy</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Sanksi Disipliner &amp; Hak Akses Lab</h2>
+</div>
+<ul class="space-y-2.5">
+<li class="flex items-start gap-2.5 text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px] text-danger shrink-0 mt-0.5">block</span>
+<div>
+<strong class="font-semibold text-on-surface">Pembekuan Peminjaman Mandiri:</strong>
+<p class="text-text-muted font-body-sm">Akun dikunci dari peminjaman mandiri selama 30 hari kalender setelah tagihan dilunasi.</p>
+</div>
+</li>
+<li class="flex items-start gap-2.5 text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px] text-warning shrink-0 mt-0.5">restart_alt</span>
+<div>
+<strong class="font-semibold text-on-surface">Wajib Mengulang Pelatihan SOP:</strong>
+<p class="text-text-muted font-body-sm">Wajib mengikuti “Workshop Penanganan Alat Ekstrem &amp; Outdoor DKV” (1 hari) sebelum hak akses dipulihkan.</p>
+</div>
+</li>
+<li class="flex items-start gap-2.5 text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px] text-info shrink-0 mt-0.5">forward_to_inbox</span>
+<div>
+<strong class="font-semibold text-on-surface">Tembusan Berita Acara Dikirimkan Ke:</strong>
+<p class="text-text-muted font-body-sm">Dosen Wali (Dr. Irwan Setiawan), Kaprodi DKV, dan Orang Tua / Wali Mahasiswa via email terdaftar.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- CARD 6: PENGESAHAN DOKUMEN & ACTION BUTTONS -->
+<div class="bg-surface-white rounded-[14px] p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center gap-2 pb-space-sm border-b border-border">
+<span class="material-symbols-outlined text-[22px] text-success">draw</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Pengesahan Dokumen BAP</h2>
+</div>
+<!-- Student Acknowledgement Checkbox -->
+<label class="flex items-start gap-3 p-3 bg-surface-container-low rounded-xl cursor-pointer">
+<input checked="" class="mt-1 w-4 h-4 accent-primary-container rounded" type="checkbox"/>
+<div class="flex flex-col text-body-sm font-body-sm">
+<span class="font-semibold text-on-surface">Pernyataan Pengakuan &amp; Kesanggupan Mahasiswa</span>
+<span class="text-text-muted text-caption font-caption mt-0.5">
+              “Saya, Rara Sekar, mengakui kelalaian operasional ini dan bersedia menyelesaikan tagihan kompensasi ganti rugi sebelum 20 November 2026.”
+            </span>
+<div class="flex items-center gap-1.5 mt-2 text-success font-code-sm text-caption">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Tanda tangan digital terekam (Auth ID: SEC-SIG-882194)</span>
+</div>
+</div>
+</label>
+<!-- Officer signature note -->
+<div class="flex items-center justify-between p-2.5 bg-surface-container-low rounded-lg text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-text-muted">shield_person</span>
+<div>
+<span class="font-semibold text-on-surface block leading-tight">Budi Santoso</span>
+<span class="font-caption text-caption text-text-muted">Operator Loket Sirkulasi (NIP. 198503142010011004)</span>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-caption bg-success-bg text-success font-semibold">
+            Verifikasi Bukti Sah
+          </span>
+</div>
+<!-- Call to Action Buttons -->
+<div class="space-y-2 pt-1">
+<button class="w-full h-[44px] rounded-[10px] bg-primary-container hover:bg-secondary text-surface-white font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+<span>Terbitkan SK BAP &amp; Kunci Denda (F2)</span>
+</button>
+<button class="w-full h-[44px] rounded-[10px] bg-surface-white hover:bg-surface-container-low border border-border text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">send</span>
+<span>Kirim Surat Tagihan via WhatsApp &amp; Email</span>
+</button>
+<button class="w-full h-[36px] text-danger hover:text-error hover:bg-danger-bg font-label-md text-label-md transition-colors rounded-lg flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Eskalasi ke Sidang Komite Disiplin Lab</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- AUDIT TRAIL / RECENT BAP HISTORY FOOTER -->
+<div class="bg-surface-white rounded-[14px] p-space-lg shadow-sm space-y-space-md mt-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-text-muted">history_edu</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Riwayat 4 BAP Insiden Loket Terakhir (Semester Berjalan)</h3>
+</div>
+<span class="font-caption text-caption text-text-muted">Diperbarui real-time dari Server Pusat Lab Sirkulasi</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-body-sm font-body-sm">
+<thead>
+<tr class="bg-surface-container-low text-text-muted font-caption text-caption uppercase">
+<th class="py-2.5 px-3 rounded-l-lg">Nomor BAP</th>
+<th class="py-2.5 px-3">Tanggal Insiden</th>
+<th class="py-2.5 px-3">Mahasiswa Peminjam</th>
+<th class="py-2.5 px-3">Alat Terimbas</th>
+<th class="py-2.5 px-3 text-right">Nilai Denda</th>
+<th class="py-2.5 px-3 text-center">Status Pembayaran</th>
+<th class="py-2.5 px-3 rounded-r-lg text-center">Tiket Lab</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<tr>
+<td class="py-3 px-3 font-code-sm text-code-sm font-bold text-primary tabular-nums">LDR-BAP-2026-0004</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted tabular-nums">13 Nov 2026</td>
+<td class="py-3 px-3">
+<span class="font-semibold text-on-surface">Rara Sekar</span>
+<span class="font-caption text-caption text-text-muted block font-mono">2207412089</span>
+</td>
+<td class="py-3 px-3">
+<span class="text-on-surface">Sony Alpha A7 III</span>
+<span class="font-code-sm text-caption text-text-muted block">LDR-CAM-0001</span>
+</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-bold text-danger tabular-nums">Rp 3.105.000</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-caption bg-warning-bg text-warning font-semibold">
+                Menunggu Pembayaran
+              </span>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="font-code-sm text-code-sm text-violet font-semibold">WO-0018</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-3 font-code-sm text-code-sm font-bold text-on-surface tabular-nums">LDR-BAP-2026-0003</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted tabular-nums">04 Nov 2026</td>
+<td class="py-3 px-3">
+<span class="font-semibold text-on-surface">Fahri Albar</span>
+<span class="font-caption text-caption text-text-muted block font-mono">2107411032</span>
+</td>
+<td class="py-3 px-3">
+<span class="text-on-surface">Aputure 300D II LED</span>
+<span class="font-code-sm text-caption text-text-muted block">LDR-LGT-0014</span>
+</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-bold text-on-surface tabular-nums">Rp 850.000</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-caption bg-success-bg text-success font-semibold">
+                Lunas (VA Mandiri)
+              </span>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="font-code-sm text-code-sm text-success font-semibold">SELESAI</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-3 font-code-sm text-code-sm font-bold text-on-surface tabular-nums">LDR-BAP-2026-0002</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted tabular-nums">28 Okt 2026</td>
+<td class="py-3 px-3">
+<span class="font-semibold text-on-surface">Dewi Anggraini</span>
+<span class="font-caption text-caption text-text-muted block font-mono">2307413008</span>
+</td>
+<td class="py-3 px-3">
+<span class="text-on-surface">Sennheiser EW-G4 Wireless Mic</span>
+<span class="font-code-sm text-caption text-text-muted block">LDR-AUD-0009</span>
+</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-bold text-on-surface tabular-nums">Rp 420.000</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-caption bg-success-bg text-success font-semibold">
+                Lunas (Part Ganti)
+              </span>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="font-code-sm text-code-sm text-success font-semibold">SELESAI</span>
+</td>
+</tr>
+<tr>
+<td class="py-3 px-3 font-code-sm text-code-sm font-bold text-on-surface tabular-nums">LDR-BAP-2026-0001</td>
+<td class="py-3 px-3 font-code-sm text-code-sm text-text-muted tabular-nums">15 Okt 2026</td>
+<td class="py-3 px-3">
+<span class="font-semibold text-on-surface">Bagas Wicaksono</span>
+<span class="font-caption text-caption text-text-muted block font-mono">2007411088</span>
+</td>
+<td class="py-3 px-3">
+<span class="text-on-surface">DJI Ronin RS3 Pro Gimbal</span>
+<span class="font-code-sm text-caption text-text-muted block">LDR-GMB-0003</span>
+</td>
+<td class="py-3 px-3 text-right font-code-sm text-code-sm font-bold text-on-surface tabular-nums">Rp 1.750.000</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-caption bg-success-bg text-success font-semibold">
+                Lunas (Cicilan 2x)
+              </span>
+</td>
+<td class="py-3 px-3 text-center">
+<span class="font-code-sm text-code-sm text-success font-semibold">SELESAI</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<script>
+  // Keyboard shortcut listener for F2 key to trigger official issuance
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'F2') {
+      event.preventDefault();
+      const primaryBtn = document.querySelector('button.bg-primary-container');
+      if (primaryBtn) {
+        primaryBtn.classList.add('scale-95');
+        setTimeout(() => {
+          primaryBtn.classList.remove('scale-95');
+          alert('SK Berita Acara Kerusakan LDR-BAP-2026-0004 berhasil disahkan! Notifikasi dan tagihan VA telah diteruskan ke mahasiswa peminjam.');
+        }, 150);
+      }
+    }
+  });
+</script></main></div></body></html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"danger":"#DC2626","secondary-fixed":"#ffdbce","on-tertiary-fixed-variant":"#4a463f","info":"#0284C7","on-error":"#ffffff","on-tertiary":"#ffffff","background":"#fcf9f8","inverse-surface":"#303030","violet":"#7C3AED","success":"#16A34A","surface-container-lowest":"#ffffff","on-primary-container":"#582200","inverse-primary":"#ffb690","surface-variant":"#e4e2e1","outline-variant":"#e0c0b1","on-secondary":"#ffffff","on-secondary-fixed-variant":"#7f2b00","tertiary-fixed-dim":"#ccc5bc","error":"#ba1a1a","on-background":"#1b1c1c","violet-bg":"#F5F3FF","on-primary-fixed":"#341100","inverse-on-surface":"#f3f0ef","on-tertiary-container":"#36322c","surface-container-highest":"#e4e2e1","danger-bg":"#FEF2F2","secondary":"#a73a00","error-container":"#ffdad6","info-bg":"#F0F9FF","on-tertiary-fixed":"#1e1b15","primary-fixed-dim":"#ffb690","surface-container":"#f0eded","success-bg":"#F0FDF4","on-primary-fixed-variant":"#783200","surface-dim":"#dcd9d9","surface-white":"#FFFFFF","on-surface-variant":"#584237","surface-container-low":"#f6f3f2","on-primary":"#ffffff","secondary-fixed-dim":"#ffb599","primary-fixed":"#ffdbca","text-muted":"#6B7280","warning-bg":"#FFFBEB","secondary-container":"#fd651e","surface-tint":"#9d4300","tertiary-container":"#a09a91","on-secondary-container":"#571a00","border":"#E5E7EB","surface-container-high":"#eae7e7","on-error-container":"#93000a","warning":"#D97706","primary-container":"#f97316","on-secondary-fixed":"#370e00","surface-bright":"#fcf9f8","on-surface":"#1b1c1c","tertiary":"#625e56","surface":"#F5F5F5","primary":"#9d4300","outline":"#8c7164","tertiary-fixed":"#e9e1d8"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1rem","space-xs":"0.25rem","space-sm":"0.5rem","space-md":"1rem","space-xl":"2rem","space-lg":"1.5rem","margin":"1rem"},"fontFamily":{"display":["Plus Jakarta Sans"],"label-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-sm":["Inter"],"code-sm":["JetBrains Mono"],"body-md":["Inter"],"caption":["Inter"],"headline-md":["Plus Jakarta Sans"]},"fontSize":{"display":["28px",{"lineHeight":"36px","fontWeight":"800"}],"label-md":["13px",{"lineHeight":"20px","fontWeight":"600"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"code-sm":["13px",{"lineHeight":"18px","fontWeight":"500"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-white border-r border-border z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between border-b border-border"><div class="flex items-center gap-space-sm"><img alt="Lendora Logo" class="w-9 h-9 object-contain rounded-lg shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0LQcSVOl1z2B8_mLzyQbAZF147syuxDx2ATfpNwvSB1gys9cfHHS6dC3oOZh4UZIpvSn6BdqDU9N_0yZ_dhvIyt5oLa4MFlKT5pS_00amNJfDXTXMLnVH1QfFOc39rJlP6qaTX3vBpFUMiqApS10yd6zBGtZzsgyhn_wnOqycKdaSnoVl_e2I2zDqmBQUByth2dCrnp8Qb1ftxa8TVIiYyhwOhORmcjlQyGobgBQsirxGxTms-VPJrg"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Lendora</span></div><span class="bg-primary-container/10 text-primary border border-primary-container/20 font-caption text-caption px-2 py-0.5 rounded-full">ADMIN CONSOLE</span></div><nav class="px-space-sm py-space-md space-y-space-md" data-active-classes="bg-primary-container text-on-primary font-label-md rounded-lg shadow-sm"><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">UTAMA</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="">Dashboard</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">INVENTARIS</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="aset" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="">Aset</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="kategori" href="#"><span class="material-symbols-outlined text-[20px]">category</span><span class="">Kategori</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">PEMINJAMAN</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="antrean-persetujuan" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="">Antrean Persetujuan</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="semua-transaksi" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="">Semua Transaksi</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="kalender" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="">Kalender</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">OPERASIONAL</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="serah-terima" href="#"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="">Serah Terima</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pemeriksaan" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="">Pemeriksaan</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="maintenance" href="#"><span class="material-symbols-outlined text-[20px]">build</span><span class="">Maintenance</span></a></div><div class="space-y-1"><p class="px-space-sm font-caption text-caption text-text-muted uppercase">ORGANISASI</p><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pengguna-role" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="">Pengguna &amp; Role</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="laporan-analitik" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="">Laporan &amp; Analitik</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pengaturan" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="">Pengaturan</span></a></div></nav></div><div class="p-space-sm border-t border-border bg-surface-white"><div class="flex items-center justify-between p-2 rounded-lg bg-surface border border-border"><div class="flex items-center gap-space-sm min-w-0"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="min-w-0"><p class="font-label-md text-label-md text-on-surface truncate">Budi Santoso</p><span class="inline-block font-caption text-caption bg-warning-bg text-warning border border-border px-1.5 rounded-full">Operator Lab</span></div></div><a class="p-1.5 text-text-muted hover:text-danger hover:bg-danger-bg rounded-lg transition-colors flex items-center justify-center" data-path="logout" href="#" title="Keluar"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-64 min-h-screen flex flex-col"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-white border-b border-border z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-text-muted font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">home</span><span class="">/</span><span class="text-on-surface font-label-md text-label-md">Lendora Console</span></div><div class="relative w-96"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-11 pl-9 pr-3 rounded-lg border border-border bg-surface font-body-sm text-body-sm text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Cari transaksi, aset, peminjam..." type="text"></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-success-bg border border-border"><span class="w-2 h-2 rounded-full bg-success animate-pulse"></span><span class="font-caption text-caption text-success">Shift Aktif: Lab Audio-Visual</span></div><button class="relative p-2 text-text-muted hover:text-on-surface hover:bg-surface rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full ring-2 ring-surface-white"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface flex-1 px-space-lg py-space-lg"><div class="flex flex-col w-full pb-24">
+<!-- Topbar Breadcrumb & Quick Actions Header -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-space-md mb-space-lg">
+<div class="space-y-1">
+<nav class="flex items-center gap-space-xs text-caption font-caption text-text-muted">
+<a class="hover:text-primary transition-colors" href="#">Inventaris</a>
+<span class="text-text-muted/60">/</span>
+<a class="hover:text-primary transition-colors" href="#">Aset</a>
+<span class="text-text-muted/60">/</span>
+<span class="text-on-surface font-label-md">Tambah Aset Baru</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Tambah Aset Baru</h1>
+<p class="font-body-sm text-body-sm text-text-muted">Daftarkan unit peralatan kamera, lensa, audio, atau studio baru ke dalam inventaris Lendora.</p>
+</div>
+<div class="flex items-center gap-space-sm self-start md:self-auto shrink-0">
+<button class="h-11 px-space-md bg-surface-white hover:bg-surface border border-border text-on-surface font-label-md text-label-md rounded-[10px] transition-colors flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">save_as</span>
+<span class="">Simpan Draf</span>
+</button>
+<button class="h-11 px-space-lg bg-primary-container hover:bg-secondary-container text-on-primary font-label-md text-label-md rounded-[10px] transition-colors flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span class="">Simpan Aset</span>
+</button>
+</div>
+</div>
+<!-- Main Two-Column Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start mb-space-lg">
+<!-- LEFT CARD: Identitas Aset (Card 1) -->
+<section class="lg:col-span-7 bg-surface-white rounded-xl border border-border shadow-sm p-space-lg flex flex-col gap-space-lg">
+<div class="flex items-center justify-between border-b border-border pb-space-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Identitas Aset</h2>
+<p class="font-caption text-caption text-text-muted">Spesifikasi inti dan identifikasi unit hardware</p>
+</div>
+</div>
+<span class="font-caption text-caption uppercase px-2 py-0.5 rounded-full bg-surface-container text-text-muted">Bagian 1/3</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Nama Peralatan -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-name">
+            Nama Peralatan <span class="text-danger">*</span>
+</label>
+<input class="w-full h-11 px-3 rounded-[10px] border border-border bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all placeholder:text-text-muted" id="asset-name" placeholder="Masukkan nama resmi perlengkapan..." type="text" value="Sony Alpha 7 IV Mirrorless Body Only">
+</div>
+<!-- Kategori Peralatan (Cascading) -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-category">
+            Kategori Peralatan <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 pl-3 pr-10 rounded-[10px] border border-border bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all appearance-none cursor-pointer" id="asset-category">
+<option selected="">Kamera &gt; Kamera Mirrorless</option>
+<option>Kamera &gt; Kamera Cinema</option>
+<option>Kamera &gt; Action &amp; 360 Cam</option>
+<option>Lensa &gt; Prime Lens E-Mount</option>
+<option>Lensa &gt; Zoom Lens E-Mount</option>
+<option>Audio &gt; Wireless Microphone System</option>
+<option>Lighting &gt; Continuous LED Bi-Color</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[20px]">
+              expand_more
+            </span>
+</div>
+</div>
+<!-- Row: Merek & Model -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-brand">
+              Merek <span class="text-danger">*</span>
+</label>
+<input class="w-full h-11 px-3 rounded-[10px] border border-border bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="asset-brand" type="text" value="Sony">
+</div>
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-model">
+              Model <span class="text-danger">*</span>
+</label>
+<input class="w-full h-11 px-3 rounded-[10px] border border-border bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="asset-model" type="text" value="ILCE-7M4 / A7 IV">
+</div>
+</div>
+<!-- Kode Aset & Auto-Badge -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-code">
+              Kode Aset (Auto/Kustom) <span class="text-danger">*</span>
+</label>
+<span class="inline-flex items-center gap-1 font-caption text-caption px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> Auto-Generated
+            </span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">
+              tag
+            </span>
+<input class="w-full h-11 pl-9 pr-24 rounded-[10px] border border-border bg-surface font-code-sm text-code-sm font-medium text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="asset-code" type="text" value="LDR-CAM-0004">
+<button class="absolute right-2 top-1/2 -translate-y-1/2 px-2.5 py-1 text-caption font-label-md rounded-md bg-surface-white hover:bg-surface-container border border-border text-text-muted hover:text-on-surface transition-all flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">refresh</span> Ubah
+            </button>
+</div>
+<p class="font-caption text-caption text-text-muted">Format otomatis unit baru berdasarkan kategori (LDR-[KATEGORI]-[NOMOR_URUT]).</p>
+</div>
+<!-- Nomor Serial (SN) with Inline Validation Error -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-sn">
+            Nomor Serial (SN) <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-danger text-[18px]">
+              warning
+            </span>
+<input class="w-full h-11 pl-9 pr-3 rounded-[10px] border border-danger bg-danger-bg/40 font-code-sm text-code-sm text-danger font-medium focus:outline-none focus:ring-2 focus:ring-danger/20 transition-all" id="asset-sn" type="text" value="SN-481920391">
+</div>
+<div class="flex items-start gap-1.5 text-danger font-caption text-caption mt-1 p-2 rounded-lg bg-danger-bg">
+<span class="material-symbols-outlined text-[16px] shrink-0 mt-0.5">error</span>
+<p class="">
+              Serial number sudah terdaftar pada sistem (Unit: <strong class="font-semibold">LDR-CAM-0001 - Sony A7 III</strong>) — periksa kembali label barcode unit fisik Anda.
+            </p>
+</div>
+</div>
+<!-- Deskripsi & Spesifikasi Singkat -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-desc">
+            Deskripsi &amp; Spesifikasi Singkat
+          </label>
+<textarea class="w-full p-3 rounded-[10px] border border-border bg-surface-white font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all resize-none leading-relaxed" id="asset-desc" rows="3">Kamera full-frame 33MP, perekaman 4K 60p 10-bit 4:2:2, sensor Exmor R CMOS, port HDMI full-size, dual slot SD/CFexpress Type A. Paket standar termasuk strap dan body cap.</textarea>
+</div>
+<!-- Kelengkapan Bawaan Unit (Tag Chips) -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md text-on-surface">
+              Kelengkapan Bawaan Unit
+            </label>
+<span class="font-caption text-caption text-text-muted">3 item dicatat</span>
+</div>
+<div class="flex flex-wrap items-center gap-2 p-2.5 rounded-[10px] border border-border bg-surface min-h-[50px]">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-white border border-border text-on-surface font-body-sm text-body-sm shadow-xs">
+<span class="">1x Tutup Body</span>
+<button class="text-text-muted hover:text-danger rounded-full transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-white border border-border text-on-surface font-body-sm text-body-sm shadow-xs">
+<span class="">1x Strap Original</span>
+<button class="text-text-muted hover:text-danger rounded-full transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-white border border-border text-on-surface font-body-sm text-body-sm shadow-xs">
+<span class="">1x Baterai NP-FZ100</span>
+<button class="text-text-muted hover:text-danger rounded-full transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</span>
+<button class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary-fixed hover:bg-secondary-fixed border border-primary-fixed-dim text-secondary font-label-md text-caption transition-all" type="button">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span class="">Tambah item kelengkapan</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT CARD: Status & Operasional Lab (Card 2) -->
+<section class="lg:col-span-5 bg-surface-white rounded-xl border border-border shadow-sm p-space-lg flex flex-col gap-space-lg">
+<div class="flex items-center justify-between border-b border-border pb-space-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-info-bg flex items-center justify-center text-info">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Status &amp; Operasional Lab</h2>
+<p class="font-caption text-caption text-text-muted">Ketersediaan, perolehan, dan otoritas peminjaman</p>
+</div>
+</div>
+<span class="font-caption text-caption uppercase px-2 py-0.5 rounded-full bg-surface-container text-text-muted">Bagian 2/3</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Status Ketersediaan Awal -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-status">
+            Status Ketersediaan Awal <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<div class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-success"></span>
+</div>
+<select class="w-full h-11 pl-7 pr-10 rounded-[10px] border border-border bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all appearance-none cursor-pointer font-medium" id="asset-status">
+<option selected="">Tersedia (Siap Dipinjam)</option>
+<option>Dalam Perbaikan (Maintenance)</option>
+<option>Dipesan (Reserved)</option>
+<option>Dinonaktifkan (Arsip)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[20px]">
+              expand_more
+            </span>
+</div>
+</div>
+<!-- Kondisi Fisik & Fungsi -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-condition">
+            Kondisi Fisik &amp; Fungsi <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<div class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-success"></span>
+</div>
+<select class="w-full h-11 pl-7 pr-10 rounded-[10px] border border-border bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all appearance-none cursor-pointer" id="asset-condition">
+<option selected="">Baik (Optimal / Layak Pakai)</option>
+<option>Cukup (Ada goresan kosmetik, fungsi normal)</option>
+<option>Rusak Ringan (Perlu kalibrasi)</option>
+<option>Rusak Berat (Tidak boleh beredar)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[20px]">
+              expand_more
+            </span>
+</div>
+</div>
+<!-- Row: Lokasi Simpan & Batas Maksimal Pinjam -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-location">
+              Lokasi Simpan <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 pl-3 pr-8 rounded-[10px] border border-border bg-surface-white font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all appearance-none cursor-pointer" id="asset-location">
+<option selected="">Lemari A1 — Kamera Mirrorless Utama</option>
+<option>Lemari A2 — Lensa Prime Cinema</option>
+<option>Lemari B1 — Audio &amp; Wireless Kit</option>
+<option>Rak C2 — Lighting &amp; Grip</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">
+                expand_more
+              </span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="max-loan">
+              Batas Maks. Pinjam
+            </label>
+<div class="relative">
+<input class="w-full h-11 px-3 pr-14 rounded-[10px] border border-border bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="max-loan" max="14" min="1" type="number" value="3">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 font-caption text-caption text-text-muted pointer-events-none">
+                Hari
+              </span>
+</div>
+</div>
+</div>
+<!-- Row: Tanggal Perolehan & Harga Perolehan -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="acquire-date">
+              Tanggal Perolehan <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 pl-9 pr-3 rounded-[10px] border border-border bg-surface-white font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="acquire-date" type="text" value="12 Nov 2026">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">
+                calendar_today
+              </span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-value">
+              Harga Perolehan / Nilai <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3 rounded-[10px] border border-border bg-surface-white font-code-sm text-code-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="asset-value" type="text" value="Rp 32.500.000">
+</div>
+<p class="font-caption text-caption text-text-muted">Digunakan untuk perhitungan batas kewenangan &amp; klaim SOP.</p>
+</div>
+</div>
+<!-- Sumber Pengadaan / Hibah -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="asset-funding">
+            Sumber Pengadaan / Hibah
+          </label>
+<div class="relative">
+<select class="w-full h-11 pl-3 pr-10 rounded-[10px] border border-border bg-surface-white font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all appearance-none cursor-pointer" id="asset-funding">
+<option selected="">Dana DIPA Fakultas Komunikasi &amp; Multimedia 2026</option>
+<option>Hibah Riset Kerjasama Industri (Sony ID)</option>
+<option>Anggaran Operasional Lab Semester Ganjil</option>
+<option>Sumbangan Alumni Media Kreatif</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[20px]">
+              expand_more
+            </span>
+</div>
+</div>
+<!-- Catatan Khusus Operator -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="operator-notes">
+            Catatan Khusus Operator
+          </label>
+<textarea class="w-full p-3 rounded-[10px] border border-border bg-surface-white font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all resize-none placeholder:text-text-muted" id="operator-notes" placeholder="Contoh: Lensa mounting bersih, sensor baru dibersihkan lab, proteksi layar kaca terpasang." rows="2"></textarea>
+</div>
+<!-- Toggle: Perlu Persetujuan Khusus -->
+<div class="flex items-start justify-between gap-space-md p-3.5 rounded-[10px] bg-warning-bg/40 border border-warning/30">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-warning text-[18px]">verified_user</span>
+<span class="font-label-md text-label-md text-on-surface">Perlu Persetujuan Khusus</span>
+</div>
+<p class="font-caption text-caption text-text-muted">
+              Unit dengan nilai &gt; Rp 20.000.000 wajib divalidasi ketua laboratorium secara manual.
+            </p>
+</div>
+<!-- Active Orange Toggle -->
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-0.5">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container rounded-full peer peer-checked:bg-primary-container transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-white after:border-border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+</label>
+</div>
+</div>
+</section>
+</div>
+<!-- FULL-WIDTH CARD: Foto & Dokumentasi Fisik Unit (Card 3) -->
+<section class="w-full bg-surface-white rounded-xl border border-border shadow-sm p-space-lg mb-space-lg flex flex-col gap-space-lg">
+<div class="flex items-center justify-between border-b border-border pb-space-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-violet-bg flex items-center justify-center text-violet">
+<span class="material-symbols-outlined text-[20px]">collections</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Dokumentasi Foto Unit</h2>
+<p class="font-caption text-caption text-text-muted">
+            Unggah minimal 2 foto resolusi baik (tampak depan, nomor serial, dan kelengkapan). Foto pertama akan menjadi thumbnail katalog borrower.
+          </p>
+</div>
+</div>
+<span class="font-caption text-caption uppercase px-2 py-0.5 rounded-full bg-surface-container text-text-muted">Bagian 3/3</span>
+</div>
+<!-- Drag & Drop Upload Zone -->
+<div class="border-2 border-dashed border-border hover:border-primary-container/80 transition-colors rounded-xl bg-surface/60 p-space-lg flex flex-col items-center justify-center text-center cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-surface-white group-hover:scale-105 transition-transform flex items-center justify-center border border-border shadow-xs mb-space-sm text-primary">
+<span class="material-symbols-outlined text-[28px]">cloud_upload</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface mb-0.5">
+        Tarik &amp; lepas foto di sini, atau <span class="text-primary-container underline underline-offset-2">Jelajahi File</span>
+</p>
+<p class="font-caption text-caption text-text-muted">
+        Maksimal 5MB per berkas, format JPG, PNG, atau WebP (Rekomendasi rasio 4:3)
+      </p>
+</div>
+<!-- 4 Photo Thumbnails Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Photo 1 (Cover / Utama) -->
+<div class="group relative rounded-xl border-2 border-primary-container bg-surface-white overflow-hidden shadow-sm flex flex-col">
+<div class="relative w-full aspect-4/3 bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" data-alt="Close-up professional studio photograph of a Sony Alpha 7 IV mirrorless digital camera body front angle on clean gray surface with soft cinematic studio key light, warm orange accents in background, sharp 8k product photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuButtjbfM_qPENv950a3EgVqOSLRStLQpOJKpmpSJJv0U2CxkJOVT5-0SBQWPdd6uLs-CGTqxFZ_Q-VJotNCapGiDpjqSX05l82O4DxmgflzMC7wE1v1xM1s7JH96G-jMcPZrn8tF6gxg90Rq5PsAMRHBzZBBn5HhXqCceMH3nh8QBCvfGjs6tDsStlQiQl7DTFqMiMoCEx6Ap2UN8BLoDwk1_CZ0HpGVLJKrI9Vu7T">
+<div class="absolute top-2.5 left-2.5">
+<span class="inline-flex items-center gap-1 font-caption text-caption px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-semibold shadow-xs">
+<span class="material-symbols-outlined text-[14px]">star</span> Cover Utama
+            </span>
+</div>
+<div class="absolute top-2.5 right-2.5 flex items-center gap-1 bg-surface-white/90 backdrop-blur-sm rounded-lg p-1 border border-border/80">
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-on-surface rounded transition-colors" title="Ubah urutan" type="button">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-danger rounded transition-colors" title="Hapus foto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex items-center justify-between bg-surface-white border-t border-border">
+<label class="flex items-center gap-2 cursor-pointer text-caption font-label-md text-on-surface">
+<input checked="" class="w-4 h-4 text-primary-container focus:ring-primary-container" name="cover-photo" type="radio">
+<span class="">Jadikan Sampul</span>
+</label>
+<span class="font-code-sm text-caption text-text-muted">A7IV_FRNT.jpg</span>
+</div>
+</div>
+<!-- Photo 2 (Rear View) -->
+<div class="group relative rounded-xl border border-border bg-surface-white overflow-hidden shadow-sm flex flex-col hover:border-primary-container/40 transition-colors">
+<div class="relative w-full aspect-4/3 bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" data-alt="Backside photograph of Sony A7 IV mirrorless camera showing the articulating LCD screen, buttons layout, viewfinder, and operational dials illuminated with clean technical studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJY43gFpEvMgvGcPMlMujya7NLp05X0zwLpXuemTiKYBgTUHKyXHgHtlIcjFMfnNxxm-0_mTuJXuvKg2amh6z383WlEuyLff9_Ct0wlW6TxqWpvgZdGblqp-1AmeRP1xhzE0h1RvKMzLupfhGG-4NmxTCgr3J--xDlWfWXER6kJpRIkK0yGdMZDEMzEnBl4_Y4tCTeZdnqX17OTy9-tP3WKbIKpvGVEjnahmGkIVmm">
+<div class="absolute top-2.5 right-2.5 flex items-center gap-1 bg-surface-white/90 backdrop-blur-sm rounded-lg p-1 border border-border/80">
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-on-surface rounded transition-colors" title="Ubah urutan" type="button">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-danger rounded transition-colors" title="Hapus foto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex items-center justify-between bg-surface-white border-t border-border">
+<label class="flex items-center gap-2 cursor-pointer text-caption font-label-md text-text-muted hover:text-on-surface">
+<input class="w-4 h-4 text-primary-container focus:ring-primary-container" name="cover-photo" type="radio">
+<span class="">Jadikan Sampul</span>
+</label>
+<span class="font-code-sm text-caption text-text-muted">A7IV_BACK.jpg</span>
+</div>
+</div>
+<!-- Photo 3 (Top Dial & Mount) -->
+<div class="group relative rounded-xl border border-border bg-surface-white overflow-hidden shadow-sm flex flex-col hover:border-primary-container/40 transition-colors">
+<div class="relative w-full aspect-4/3 bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" data-alt="Top down overhead macro photo of Sony A7 IV camera body displaying top dials, mode switch, shutter button, hotshoe mount, and clean lens sensor bayonet under soft overhead fluorescent lab light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcMo-LhtVRRuTgUOm526yYiA12oRhQKQpUehMDI6LBFRQ8pUIFTfId3cP68HR6F4-e68-kx50d9sM9WwtXo_bmaTNU4vSR435V34EhNH2JmjUA7iH2Gw4hoQYRGhNn67HPqwsTCPM-f_haperqmVPmsojF3-CgjnSvUUf5dycc8ti1M5NDW2IJ6RcPeXb2fbBncaxEFYlCOii6bi2Vov631J-rFPGtuOJKGnUew9Fp">
+<div class="absolute top-2.5 right-2.5 flex items-center gap-1 bg-surface-white/90 backdrop-blur-sm rounded-lg p-1 border border-border/80">
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-on-surface rounded transition-colors" title="Ubah urutan" type="button">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-danger rounded transition-colors" title="Hapus foto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex items-center justify-between bg-surface-white border-t border-border">
+<label class="flex items-center gap-2 cursor-pointer text-caption font-label-md text-text-muted hover:text-on-surface">
+<input class="w-4 h-4 text-primary-container focus:ring-primary-container" name="cover-photo" type="radio">
+<span class="">Jadikan Sampul</span>
+</label>
+<span class="font-code-sm text-caption text-text-muted">A7IV_TOP.jpg</span>
+</div>
+</div>
+<!-- Photo 4 (Serial Number Close-up) -->
+<div class="group relative rounded-xl border border-border bg-surface-white overflow-hidden shadow-sm flex flex-col hover:border-primary-container/40 transition-colors">
+<div class="relative w-full aspect-4/3 bg-surface overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" data-alt="Macro close-up photography of the metal camera bottom plate showing the silver serial number label barcode and manufacturer regulatory stamps, sharp focus with industrial measurement aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7C818_TtahZCnK049prPQnWzgYtzOkyyWO-5l3bCHgzscYBSNpFvN7-FIyitIOHkxgOPdDnMG6eoOkWsrUTd_6o2WVyPWJJnbRK4Wnf8QOJ97jtXj7dtAYPE8cEwqmeyV5HSz5ZOP5gMSvtuL-lFq4Z4YhGM7DGLe3U9VOAaMFNbc_POs_AL8R5oo4pteeNa0ZHIQHTbvwm68fz3dm4PkV9erUWn292FOv7-Bvoy4">
+<div class="absolute top-2.5 right-2.5 flex items-center gap-1 bg-surface-white/90 backdrop-blur-sm rounded-lg p-1 border border-border/80">
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-on-surface rounded transition-colors" title="Ubah urutan" type="button">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center text-text-muted hover:text-danger rounded transition-colors" title="Hapus foto" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex items-center justify-between bg-surface-white border-t border-border">
+<label class="flex items-center gap-2 cursor-pointer text-caption font-label-md text-text-muted hover:text-on-surface">
+<input class="w-4 h-4 text-primary-container focus:ring-primary-container" name="cover-photo" type="radio">
+<span class="">Jadikan Sampul</span>
+</label>
+<span class="font-code-sm text-caption text-text-muted">A7IV_SN_BASE.jpg</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Sticky Form Action Footer Bar -->
+<aside class="fixed bottom-0 left-64 right-0 bg-surface-white/95 backdrop-blur border-t border-border z-40 px-space-lg py-3 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-2 text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-info text-[20px]">info</span>
+<span class="">Perubahan akan dicatat dalam Log Audit Operator (<strong class="text-on-surface font-semibold">Budi Santoso</strong>).</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="text-text-muted hover:text-danger font-label-md text-label-md px-3 py-2 transition-colors" type="button">
+        Reset Formulir
+      </button>
+<button class="h-10 px-4 rounded-[10px] border border-border bg-surface-white hover:bg-surface text-on-surface font-label-md text-label-md transition-colors shadow-xs" type="button">
+        Batal
+      </button>
+<button class="h-10 px-5 rounded-[10px] bg-primary-container hover:bg-secondary-container text-on-primary font-label-md text-label-md transition-all flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="">Simpan Aset</span>
+<kbd class="font-code-sm text-caption bg-on-primary/20 text-on-primary px-1.5 py-0.5 rounded ml-0.5">F2</kbd>
+</button>
+</div>
+</aside>
+<!-- Micro-interaction key handler for F2 save shortcut -->
+<script>
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F2') {
+        e.preventDefault();
+        const toast = document.createElement('div');
+        toast.className = 'fixed top-20 right-6 z-50 flex items-center gap-3 bg-surface-white border-l-4 border-success p-4 rounded-xl shadow-xl transition-all transform duration-300';
+        toast.innerHTML = '<span class="material-symbols-outlined text-success">check_circle</span><div><p class="font-label-md text-label-md text-on-surface">Validasi Data Berjalan</p><p class="font-caption text-caption text-text-muted">Periksa kembali duplikasi Serial Number sebelum menyimpan permanen.</p></div>';
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 3500);
+      }
+    });
+  </script>
+</div></main></div>
+
+</body></html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"border":"#E5E7EB","danger":"#DC2626","surface-container-lowest":"#ffffff","inverse-primary":"#ffb690","background":"#fcf9f8","on-primary":"#ffffff","text-muted":"#6B7280","surface-bright":"#fcf9f8","error":"#ba1a1a","info-bg":"#F0F9FF","tertiary-container":"#a09a91","on-error":"#ffffff","primary":"#9d4300","on-tertiary-container":"#36322c","secondary-fixed":"#ffdbce","on-error-container":"#93000a","surface-white":"#FFFFFF","violet":"#7C3AED","on-primary-container":"#582200","secondary-fixed-dim":"#ffb599","outline-variant":"#e0c0b1","outline":"#8c7164","secondary-container":"#fd651e","inverse-surface":"#303030","surface-container-highest":"#e4e2e1","on-primary-fixed-variant":"#783200","warning":"#D97706","on-secondary-fixed-variant":"#7f2b00","surface-container-low":"#f6f3f2","on-primary-fixed":"#341100","error-container":"#ffdad6","primary-container":"#f97316","success":"#16A34A","surface-tint":"#9d4300","surface-container":"#f0eded","on-tertiary-fixed":"#1e1b15","on-tertiary-fixed-variant":"#4a463f","on-secondary-fixed":"#370e00","on-tertiary":"#ffffff","secondary":"#a73a00","surface":"#F5F5F5","surface-dim":"#dcd9d9","inverse-on-surface":"#f3f0ef","info":"#0284C7","surface-container-high":"#eae7e7","surface-variant":"#e4e2e1","on-surface-variant":"#584237","on-surface":"#1b1c1c","tertiary-fixed-dim":"#ccc5bc","on-background":"#1b1c1c","tertiary-fixed":"#e9e1d8","danger-bg":"#FEF2F2","on-secondary-container":"#571a00","success-bg":"#F0FDF4","violet-bg":"#F5F3FF","primary-fixed-dim":"#ffb690","tertiary":"#625e56","warning-bg":"#FFFBEB","primary-fixed":"#ffdbca","on-secondary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-sm":"0.5rem","space-xl":"2rem","space-lg":"1.5rem","margin":"1rem","space-xs":"0.25rem","space-md":"1rem","gutter":"1rem"},"fontFamily":{"body-sm":["Inter"],"headline-sm":["Plus Jakarta Sans"],"body-md":["Inter"],"headline-md":["Plus Jakarta Sans"],"label-md":["Inter"],"code-sm":["JetBrains Mono"],"headline-lg":["Plus Jakarta Sans"],"display":["Plus Jakarta Sans"],"caption":["Inter"]},"fontSize":{"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"20px","fontWeight":"600"}],"code-sm":["13px",{"lineHeight":"18px","fontWeight":"500"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],"display":["28px",{"lineHeight":"36px","fontWeight":"800"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-white border-r border-border z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-md border-b border-border flex items-center gap-space-sm"><img alt="Lendora Logo" class="h-9 w-9 shrink-0 object-contain rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0LQcSVOl1z2B8_mLzyQbAZF147syuxDx2ATfpNwvSB1gys9cfHHS6dC3oOZh4UZIpvSn6BdqDU9N_0yZ_dhvIyt5oLa4MFlKT5pS_00amNJfDXTXMLnVH1QfFOc39rJlP6qaTX3vBpFUMiqApS10yd6zBGtZzsgyhn_wnOqycKdaSnoVl_e2I2zDqmBQUByth2dCrnp8Qb1ftxa8TVIiYyhwOhORmcjlQyGobgBQsirxGxTms-VPJrg"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Lendora</span><span class="font-caption text-caption text-text-muted uppercase tracking-wider mt-space-xs">Admin Console</span></div></div><nav class="px-space-sm py-space-md space-y-space-md flex-1" data-active-classes="bg-[#FFF7ED] text-primary-container font-headline-sm border border-primary-container/20"><div class="space-y-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted uppercase tracking-wider block mb-space-xs">Utama</span><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="">Dashboard</span></a></div><div class="space-y-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted uppercase tracking-wider block mb-space-xs">Inventaris</span><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="aset" href="#"><span class="material-symbols-outlined text-[20px]">devices</span><span class="">Aset</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="kategori" href="#"><span class="material-symbols-outlined text-[20px]">category</span><span class="">Kategori</span></a></div><div class="space-y-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted uppercase tracking-wider block mb-space-xs">Peminjaman</span><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="antrean-persetujuan" href="#"><span class="material-symbols-outlined text-[20px]">pending_actions</span><span class="">Antrean Persetujuan</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="semua-transaksi" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="">Semua Transaksi</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="kalender" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="">Kalender</span></a></div><div class="space-y-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted uppercase tracking-wider block mb-space-xs">Operasional</span><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="serah-terima" href="#"><span class="material-symbols-outlined text-[20px]">sync_alt</span><span class="">Serah Terima</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg transition-colors min-h-[44px] bg-[#FFF7ED] text-primary-container font-headline-sm border border-primary-container/20" data-path="pemeriksaan" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="">Pemeriksaan</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="maintenance" href="#"><span class="material-symbols-outlined text-[20px]">build_circle</span><span class="">Maintenance</span></a></div><div class="space-y-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted uppercase tracking-wider block mb-space-xs">Organisasi</span><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="pengguna-role" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="">Pengguna &amp; Role</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="laporan-analitik" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="">Laporan &amp; Analitik</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors min-h-[44px]" data-path="pengaturan" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="">Pengaturan</span></a></div></nav></div><div class="p-space-md border-t border-border bg-surface-white"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md text-on-surface truncate">Budi Santoso</span><span class="font-caption text-caption text-text-muted truncate">Operator Lab</span></div></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-white border-b border-border z-40 px-space-lg flex items-center justify-between shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"><div class="flex items-center gap-space-lg flex-1 max-w-2xl"><div class="flex items-center gap-space-xs text-text-muted font-body-sm text-body-sm"><span class="font-label-md text-label-md text-text-muted">Operasional</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="font-label-md text-label-md text-on-surface">Pemeriksaan</span></div><div class="relative flex-1"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-11 pl-9 pr-space-md bg-surface-white border border-border rounded-lg font-body-md text-body-md text-on-surface placeholder:text-text-muted focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" placeholder="Cari unit, barcode, riwayat inspeksi..." type="search"></div></div><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-space-xs h-7 px-space-md rounded-full bg-success-bg text-success font-label-md text-caption border border-success/20"><span class="w-2 h-2 rounded-full bg-success animate-pulse"></span><span class="">Shift Aktif: Lab Audio-Visual</span></div><div class="relative flex items-center"><button class="w-11 h-11 rounded-lg flex items-center justify-center text-text-muted hover:text-on-surface hover:bg-surface-container transition-colors relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 bg-primary-container rounded-full ring-2 ring-surface-white"></span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full">
+<div class="px-space-lg py-space-lg space-y-space-lg max-w-[1440px] mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="space-y-space-xs max-w-3xl">
+<div class="flex items-center gap-space-xs text-text-muted font-caption text-caption uppercase tracking-wider">
+<span class="">Operasional</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Pemeriksaan Fisik &amp; Fungsi</span>
+</div>
+<h1 class="font-display text-display text-on-surface tracking-tight">Pemeriksaan Fisik &amp; Fungsi Aset (Inspeksi)</h1>
+<p class="font-body-md text-body-md text-text-muted">
+          Verifikasi kondisi teknis unit setelah pengembalian atau inspeksi berkala. Hasil pemeriksaan 
+          <span class="font-semibold text-warning">"Perlu Perbaikan"</span> atau 
+          <span class="font-semibold text-danger">"Rusak"</span> otomatis memicu tiket tugas maintenance dan memperbarui ketersediaan aset.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-11 px-space-md bg-surface-white hover:bg-surface-container-low text-on-surface font-label-md text-label-md rounded-lg shadow-sm flex items-center gap-space-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="">Ekspor Log Inspeksi</span>
+</button>
+<button class="h-11 px-space-md bg-surface-white hover:bg-surface-container-low text-on-surface font-label-md text-label-md rounded-lg shadow-sm flex items-center gap-space-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="">Kalender Jadwal Rutin</span>
+</button>
+</div>
+</div>
+<!-- Top KPI Stats Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Stat 1 -->
+<div class="bg-surface-white p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-success-bg text-success flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">fact_check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Inspeksi Hari Ini</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">14</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Unit</span>
+</div>
+<span class="font-caption text-caption text-success truncate">11 Selesai Masuk, 3 Menunggu</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-white p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-warning-bg text-warning flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">build_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Perlu Tindakan</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">2</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Unit</span>
+</div>
+<span class="font-caption text-caption text-warning truncate">Sensor kotor &amp; kabel kendor</span>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-white p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-danger-bg text-danger flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">report_problem</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Karantina / Rusak</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">1</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Unit</span>
+</div>
+<span class="font-caption text-caption text-danger truncate">Mount aus, dialihkan ke Servis</span>
+</div>
+</div>
+<!-- Stat 4 -->
+<div class="bg-surface-white p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-info-bg text-info flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Indeks Kelayakan</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">96.8%</span>
+<span class="material-symbols-outlined text-success text-[16px]">trending_up</span>
+</div>
+<span class="font-caption text-caption text-info truncate">Standar Lab Audio-Visual OK</span>
+</div>
+</div>
+</div>
+<!-- Main Two Column Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Section 1: Form Rekam Pemeriksaan Baru (~68% -> 8 cols) -->
+<div class="lg:col-span-8 bg-surface-white rounded-xl shadow-sm p-space-lg space-y-space-lg">
+<!-- Form Header -->
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-low p-space-md rounded-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Formulir Hasil Inspeksi Masuk / Berkala</h2>
+<p class="font-caption text-caption text-text-muted">Protokol verifikasi teknis gear sebelum masuk rak inventaris</p>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-primary-fixed text-primary font-caption text-caption font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+            Draft Aktif
+          </div>
+</div>
+<!-- Row 1: Asset Target & Booking Context -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Asset Target Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between space-y-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-caption text-caption text-text-muted uppercase tracking-wider font-semibold">Unit Aset Target *</label>
+<button class="text-primary-container hover:text-primary font-caption text-caption font-semibold flex items-center gap-0.5" type="button">
+<span class="">Ganti Unit</span>
+<kbd class="font-code-sm text-[10px] bg-surface-white px-1 py-0.5 rounded shadow-sm text-text-muted">Ctrl+K</kbd>
+</button>
+</div>
+<div class="flex items-center gap-space-md bg-surface-white p-space-sm rounded-lg shadow-sm">
+<img class="w-14 h-14 rounded-lg object-cover shrink-0 bg-surface-container" data-alt="Sony Alpha 7 III mirrorless camera body in immaculate condition sitting on laboratory inspection table with subtle lens reflection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKP1t07geAIyCUNnjRjI8_ZkaAVUPePIT3aNd_UgBrHxdyGO-tx-rjN4sPLCQviZK1112Z6vg9N2qhkQIPoqo72wnK5G6c5RkOaS3mRs5e6fkK4vr8yYufHR1BYflYBERIr13EG4hj6wgf-U5r0IkjSIaCOhy1aXCaMz_CZLbd3H48-VkBUw9-yH0sLyaHI5IuhEFeTPxLpN3Uaqj1FgAa1luAsUxCuyIH5vFjnIpQ">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Sony Alpha 7 III Body</span>
+<div class="flex items-center gap-space-xs text-text-muted font-code-sm text-code-sm">
+<span class="text-primary font-semibold">LDR-CAM-0001</span>
+<span class="">•</span>
+<span class="">SN: 481920391</span>
+</div>
+<span class="font-caption text-caption text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px]">warehouse</span> Lemari Rak A1 (Slot 02)
+                </span>
+</div>
+</div>
+</div>
+<!-- Transaction Context Selection -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between space-y-space-sm">
+<label class="font-caption text-caption text-text-muted uppercase tracking-wider font-semibold">Konteks Transaksi / Sumber *</label>
+<div class="space-y-space-xs">
+<div class="relative">
+<select class="w-full h-11 pl-space-md pr-10 bg-surface-white rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container appearance-none cursor-pointer">
+<option selected="">Pasca-Pengembalian: LDR-BK-2026-0007 (Ani Rahmawati - DKV)</option>
+<option>Inspeksi Rutin Bulanan (Preventive Audit)</option>
+<option>Laporan Kerusakan Borrower Lapangan</option>
+<option>Verifikasi Pengadaan Unit Baru</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[20px]">unfold_more</span>
+</div>
+<div class="flex items-center gap-space-xs text-text-muted font-caption text-caption pt-1">
+<span class="material-symbols-outlined text-[14px] text-info">info</span>
+<span class="">Peminjaman berakhir: Hari ini, 14:30 WIB (Tepat Waktu)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Radio Card Selection for Inspection Outcome -->
+<div class="space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface flex items-center justify-between">
+<span class="">Hasil Pemeriksaan Fisik &amp; Fungsi Aset *</span>
+<span class="font-caption text-caption text-text-muted">Pilih satu status penentuan kondisi final</span>
+</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md" id="statusRadioGroup">
+<!-- Option 1: Selected (Baik) -->
+<label class="cursor-pointer relative flex flex-col p-space-md rounded-xl bg-success-bg shadow-sm transition-all hover:shadow-md">
+<input checked="" class="sr-only peer" name="inspection_status" type="radio" value="baik">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-headline-sm text-headline-sm text-success">Baik &amp; Optimal</span>
+<span class="w-4 h-4 rounded-full bg-success flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[12px] font-bold">check</span>
+</span>
+</div>
+<div class="inline-flex items-center self-start px-2 py-0.5 rounded-full bg-success text-on-primary font-caption text-caption font-semibold mb-2">
+                Tersedia / Siap Pinjam
+              </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Unit berfungsi 100%, fisik bersih sesuai standar SOP, sensor jernih, aksesori lengkap.
+              </p>
+</label>
+<!-- Option 2: Minor Repair -->
+<label class="cursor-pointer relative flex flex-col p-space-md rounded-xl bg-surface-container-low hover:bg-warning-bg shadow-sm transition-all hover:shadow-md">
+<input class="sr-only peer" name="inspection_status" type="radio" value="perbaikan">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-headline-sm text-headline-sm text-warning">Perlu Perbaikan</span>
+<span class="w-4 h-4 rounded-full bg-surface-white flex items-center justify-center text-text-muted"></span>
+</div>
+<div class="inline-flex items-center self-start px-2 py-0.5 rounded-full bg-warning text-on-primary font-caption text-caption font-semibold mb-2">
+                Perlu Servis Ringan
+              </div>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Kendala non-fatal: kotoran sensor membandel, kabel kendor, perlu kalibrasi lab.
+              </p>
+</label>
+<!-- Option 3: Damage/Quarantine -->
+<label class="cursor-pointer relative flex flex-col p-space-md rounded-xl bg-surface-container-low hover:bg-danger-bg shadow-sm transition-all hover:shadow-md">
+<input class="sr-only peer" name="inspection_status" type="radio" value="rusak">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-headline-sm text-headline-sm text-danger">Rusak / Malfungsi</span>
+<span class="w-4 h-4 rounded-full bg-surface-white flex items-center justify-center text-text-muted"></span>
+</div>
+<div class="inline-flex items-center self-start px-2 py-0.5 rounded-full bg-danger text-on-primary font-caption text-caption font-semibold mb-2">
+                Karantina Segera
+              </div>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Kerusakan mekanikal/elektronik fatal, tidak layak pinjam, alihkan ke teknisi rekanan.
+              </p>
+</label>
+</div>
+</div>
+<!-- Row 3: Checklist Standard Testing -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface">Checklist Poin Pengujian Standar Kamera *</label>
+<span class="font-caption text-caption text-success font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">done_all</span> 4/4 Poin Lolos Uji
+            </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<!-- Checklist Item 1 -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" type="checkbox">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface">Fungsi Shutter &amp; Sensor</span>
+<span class="font-caption text-caption text-text-muted">Sensor bersih tanpa debu/jamur, shutter mekanik responsif</span>
+</div>
+</label>
+<!-- Checklist Item 2 -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" type="checkbox">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface">Port &amp; Kelistrikan</span>
+<span class="font-caption text-caption text-text-muted">Port HDMI/Type-C kencang, slot SD 1 &amp; 2 membaca</span>
+</div>
+</label>
+<!-- Checklist Item 3 -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" type="checkbox">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface">Layar LCD &amp; EVF</span>
+<span class="font-caption text-caption text-text-muted">Viewfinder tajam, artikulasi lancar, touchscreen responsif</span>
+</div>
+</label>
+<!-- Checklist Item 4 -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary-container focus:ring-primary-container accent-primary-container" type="checkbox">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface">Kelengkapan Fisik Bawaan</span>
+<span class="font-caption text-caption text-text-muted">Body cap, strap original, 2x baterai telah terverifikasi utuh</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Row 4: Catatan Temuan & Rekomendasi -->
+<div class="space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface flex items-center justify-between">
+<span class="">Catatan Temuan Inspektur / Detail Kondisi *</span>
+<span class="font-caption text-caption text-text-muted">Tercatat permanen pada Log Audit</span>
+</label>
+<textarea class="w-full p-space-sm bg-surface-white rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="Tuliskan detail kondisi fisik, goresan mikro, atau keluhan operasional..." rows="3">Pemeriksaan pasca pengembalian LDR-BK-2026-0007 berjalan lancar. Sensor bersih tanpa noda minyak, bodi luar bersih diseka alkohol 70%, firmware ver 4.01 stabil. Unit siap dikembalikan ke rak Lemari A1.</textarea>
+</div>
+<!-- Row 5: Action Buttons & SOP Alert -->
+<div class="space-y-space-md pt-space-xs">
+<div class="p-space-sm rounded-lg bg-info-bg text-info flex items-center gap-space-sm font-caption text-caption">
+<span class="material-symbols-outlined text-[20px] shrink-0">info</span>
+<span class="">Hasil status <strong>Perlu Perbaikan</strong> atau <strong>Rusak</strong> akan otomatis menghasilkan tiket tugas di modul Maintenance (W10) dan mengubah status aset menjadi <em>In Maintenance</em>.</span>
+</div>
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-space-sm pt-space-xs">
+<button class="w-full sm:w-auto h-11 px-space-md bg-surface-white hover:bg-surface-container-low text-on-surface font-label-md text-label-md rounded-lg shadow-sm transition-colors" type="button">
+              Batal / Reset Form
+            </button>
+<button class="w-full sm:w-auto h-11 px-space-lg bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-label-md rounded-lg shadow-sm flex items-center justify-center gap-space-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Simpan &amp; Konfirmasi Hasil Inspeksi (Enter)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Section 2: Sidebar Policy & Automations (~32% -> 4 cols) -->
+<div class="lg:col-span-4 space-y-space-md">
+<!-- Card 1: SOP Standar Pemeriksaan Lab -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-md space-y-space-md">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[20px]">rule</span>
+<h3 class="">SOP Standar Pemeriksaan Lab</h3>
+</div>
+<div class="space-y-space-sm font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-start gap-space-sm">
+<span class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center font-bold text-[11px] text-text-muted shrink-0 mt-0.5">1</span>
+<p class="">Uji <strong>Shutter &amp; Burst Mode</strong> pada rentang kecepatan 1/250s hingga 1/8000s mekanis.</p>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center font-bold text-[11px] text-text-muted shrink-0 mt-0.5">2</span>
+<p class="">Inspeksi <strong>Sensor pada f/22</strong> terhadap dinding putih netral untuk mendeteksi debu mikro.</p>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center font-bold text-[11px] text-text-muted shrink-0 mt-0.5">3</span>
+<p class="">Pengecekan resistansi pin hotshoe dan kebersihan <strong>dudukan lensa (mount ring)</strong>.</p>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center font-bold text-[11px] text-text-muted shrink-0 mt-0.5">4</span>
+<p class="">Sanitasi bodi menggunakan isopropyl 70% dan pencocokan <strong>Serial Number fisik</strong>.</p>
+</div>
+</div>
+</div>
+<!-- Card 2: Workflow Automation Diagram -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-md space-y-space-md">
+<div class="flex items-center gap-space-xs text-on-surface font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[20px] text-primary">account_tree</span>
+<h3 class="">Keterkaitan Alur Sistem</h3>
+</div>
+<p class="font-caption text-caption text-text-muted">Otomatisasi backend yang dipicu dari submit formulir inspeksi:</p>
+<div class="relative pl-6 space-y-space-md before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-high">
+<div class="relative">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-primary-fixed text-primary flex items-center justify-center text-[10px] font-bold">1</span>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="font-label-md text-caption text-on-surface block">Pencatatan Log Inspeksi</span>
+<span class="font-caption text-caption text-text-muted">Menyimpan audit trail inspector &amp; parameter kondisi</span>
+</div>
+</div>
+<div class="relative">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-surface-container text-text-muted flex items-center justify-center text-[10px] font-bold">2</span>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="font-label-md text-caption text-on-surface block">Update Status Database</span>
+<span class="font-caption text-caption text-text-muted">Aset diubah: "Tersedia" atau "Maintenance"</span>
+</div>
+</div>
+<div class="relative">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-surface-container text-text-muted flex items-center justify-center text-[10px] font-bold">3</span>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="font-label-md text-caption text-on-surface block">Trigger Tiket Servis &amp; Denda</span>
+<span class="font-caption text-caption text-text-muted">Bila rusak, buat tiket ke modul W10 &amp; notif ganti rugi</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Inspector Profile -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-md flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm shrink-0">
+            BS
+          </div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Petugas Pemeriksa</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Budi Santoso</span>
+<span class="font-body-sm text-body-sm text-text-muted">Operator Lab &amp; Teknisi Junior</span>
+<div class="flex items-center gap-space-xs mt-1 text-success font-caption text-caption">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="">Shift Pagi (08:00 - 16:00)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Data Table Riwayat Pemeriksaan -->
+<div class="bg-surface-white rounded-xl shadow-sm p-space-lg space-y-space-md">
+<!-- Table Header & Controls -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Riwayat Pemeriksaan Unit (30 Hari Terakhir)</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Catatan verifikasi kondisi aset setelah penggunaan maupun pengecekan preventif</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="relative min-w-[240px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-space-md bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="Filter unit, barcode, serial..." type="text">
+</div>
+<div class="relative">
+<select class="h-10 pl-3 pr-8 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container appearance-none cursor-pointer">
+<option>Semua Hasil Inspeksi</option>
+<option>Hanya: Baik &amp; Siap</option>
+<option>Hanya: Perlu Perbaikan</option>
+<option>Hanya: Rusak / Karantina</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[16px]">expand_more</span>
+</div>
+<button class="h-10 w-10 bg-surface-container-low hover:bg-surface-container text-on-surface rounded-lg flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Responsive Table Container -->
+<div class="overflow-x-auto -mx-space-lg px-space-lg">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-text-muted font-caption text-caption uppercase tracking-wider">
+<th class="py-space-sm px-space-md rounded-l-lg">Tanggal &amp; Waktu</th>
+<th class="py-space-sm px-space-md">Unit Aset</th>
+<th class="py-space-sm px-space-md">Konteks / Transaksi</th>
+<th class="py-space-sm px-space-md">Pemeriksa</th>
+<th class="py-space-sm px-space-md">Hasil</th>
+<th class="py-space-sm px-space-md max-w-[280px]">Catatan Temuan</th>
+<th class="py-space-sm px-space-md">Status Tiket</th>
+<th class="py-space-sm px-space-md rounded-r-lg text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border font-body-sm text-body-sm text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md whitespace-nowrap font-code-sm text-code-sm text-text-muted">
+                14 Nov 2026<br><span class="text-[11px]">15:45 WIB</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container shrink-0" data-alt="Sony Alpha 7 III black body camera closeup detail top view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeaVX9-g9GXQKWXz45Z10Fy10_VmRmeoSsmEmolg8sUt4Re6nmZQEoK5xm92qYovw7r0fiw5Id9w-jpwRV-TgxM5HSKMPannVOGqZzPUqYzLIme4J1ym18IJs_7g-y8JeFGZZsAaRAh8fGh8OSH3G8Q4UCgkJirpLFIA1I6weLQpYmfrAokmGZp4nGnltiV5bFFSkPI8_ENLY8i858Ajs6h9oOu9fGGvh3BdWs705f">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-md text-on-surface truncate">Sony Alpha 7 III</span>
+<span class="font-code-sm text-code-sm text-primary">LDR-CAM-0001</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">LDR-BK-2026-0007</span>
+<span class="font-caption text-caption text-text-muted">Ani Rahmawati (DKV)</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface">Budi Santoso</span>
+<span class="font-caption text-caption text-text-muted block">Operator</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Baik
+                </span>
+</td>
+<td class="py-space-md px-space-md max-w-[280px]">
+<p class="truncate text-on-surface-variant font-body-sm" title="Sensor bersih, fungsi 100%, siap rak Lemari A1">Sensor bersih, fungsi 100%, siap rak Lemari A1</p>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-caption text-caption">
+                  Selesai / Tanpa Tiket
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" title="Lihat Rincian" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" title="Cetak Berita Acara" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md whitespace-nowrap font-code-sm text-code-sm text-text-muted">
+                14 Nov 2026<br><span class="text-[11px]">11:20 WIB</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container shrink-0" data-alt="Sony FE 24-70mm f2.8 GM zoom lens front element closeup with antireflective coating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Qhqrdcy7LlFe6zCfbiVI8X6hButBxsMSY_HDSIEzoA4uvfcIgH8jbqlP1BEV1XHg0gGuSkF_2nA0jGlpDO6kSH47mOgOSMg3G6k9UVyo61A7ZViZ5zPZY7HrsO3lOvP6RgTZQF_URd9RoBolLjVvs1_6ZsSKhDtZhQhNmvYIuzmV_Tx4brTHmRnhKlPeHbsKe_88X2FfpMXvwKLM_CWuqpyO4i5uJB0uFfEpJJvO">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-md text-on-surface truncate">Sony FE 24-70mm GM</span>
+<span class="font-code-sm text-code-sm text-primary">LDR-LNS-0001</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">LDR-BK-2026-0007</span>
+<span class="font-caption text-caption text-text-muted">Ani Rahmawati (DKV)</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface">Budi Santoso</span>
+<span class="font-caption text-caption text-text-muted block">Operator</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Baik
+                </span>
+</td>
+<td class="py-space-md px-space-md max-w-[280px]">
+<p class="truncate text-on-surface-variant font-body-sm" title="Elemen optik bersih, zoom ring presisi tanpa kendala">Elemen optik bersih, zoom ring presisi</p>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-caption text-caption">
+                  Selesai / Tanpa Tiket
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md whitespace-nowrap font-code-sm text-code-sm text-text-muted">
+                13 Nov 2026<br><span class="text-[11px]">16:10 WIB</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container shrink-0" data-alt="Rode Wireless GO II receiver and microphone transmitters compact audio gear kit on white surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7cj0LeNeiURmPtnxCl-20LlLNiKpt3gkTLpgUmFTJl1zqMlgxC2BfWWcKdQMfsaf1BOHmuCJI1tsmUOeg9XPqwq1yJDB59IAj2Wj_dLaXhn6XT-MttWybDs-hGbB45vyLwP8YaUvzI60fsTQbcPZL33nG7cl5Oc-T6OYnoMhPVWGdoCr1cY30pvpGWcHDAQvDQXVDm7tq7lsEajo5YUtkBCuzNVi6MC9Kd1UzpN0Y">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-md text-on-surface truncate">Rode Wireless GO II</span>
+<span class="font-code-sm text-code-sm text-primary">LDR-MIC-0001</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">LDR-BK-2026-0003</span>
+<span class="font-caption text-caption text-text-muted">Nabila Putri (Ilkom)</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface">Hendra K.</span>
+<span class="font-caption text-caption text-text-muted block">Operator</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-warning-bg text-warning font-caption text-caption font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span> Perlu Perbaikan
+                </span>
+</td>
+<td class="py-space-md px-space-md max-w-[280px]">
+<p class="truncate text-on-surface-variant font-body-sm" title="Kabel lavalier 3.5mm kresek saat digerakkan, transmitter butuh update firmware">Kabel lavalier kresek saat gerak, TX butuh update</p>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-warning-bg text-warning font-caption text-caption font-semibold">
+                  MNT-0042 Aktif
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md whitespace-nowrap font-code-sm text-code-sm text-text-muted">
+                12 Nov 2026<br><span class="text-[11px]">14:00 WIB</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container shrink-0" data-alt="Canon EOS R6 Mark II mirrorless camera with articulated LCD screen displaying damage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_wmzH3T3FBObfFt1bqmGZvQDQuzRih1suRFop1rZAkd0DJF54IU-7u1dcJm_wXeRTe1O5uPuruPQiVzISi8yr446fkAyeU6ms5qhB8KdEBCXsJJx_KhFjtethDRl1wiQoY4Gky3lBFocpXIuw4uhB-Tie5vO3ZzRyScxrcyCq2TiBgShQsHxRpXH6sFm3ptGG2b35vKHr6ejfenhilOWff-ESQot7MCVhAM6z6zv7">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-md text-on-surface truncate">Canon EOS R6 Mark II</span>
+<span class="font-code-sm text-code-sm text-primary">LDR-CAM-0002</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">Laporan Pengguna</span>
+<span class="font-caption text-caption text-text-muted">Insiden di Lapangan</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface">Pak Andi</span>
+<span class="font-caption text-caption text-text-muted block">Teknisi Lab</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-danger-bg text-danger font-caption text-caption font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-danger"></span> Rusak
+                </span>
+</td>
+<td class="py-space-md px-space-md max-w-[280px]">
+<p class="truncate text-on-surface-variant font-body-sm" title="Layar LCD artikulasi mati total pasca jatuh di lapangan, hinge patah">Layar LCD artikulasi mati total pasca jatuh</p>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-danger-bg text-danger font-caption text-caption font-semibold">
+                  MNT-0040 Berjalan
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md whitespace-nowrap font-code-sm text-code-sm text-text-muted">
+                11 Nov 2026<br><span class="text-[11px]">10:30 WIB</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container shrink-0" data-alt="Godox SL-60W studio LED video light continuous illumination equipment in audio video studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4L3w-VZmFYssQI-GyyEw-jYn6UV58ccOKGslXiEZpe7gED_3Uon2AFWZhQbUyYRZ122YcDLH2XH_MLY4MCujCSYMV3MYn964W-iEhXplsx4WTCMc_YFJbvqKR8VSrWcOh304r0kWZynTrfl68DsVjtf8SigBShJXjxDpW7mQWxUpxoCe-E0JJgyAdlr2e3Wc4B4c68uvDPMPgodfiejPrfPx_CRDbxHvU-PBzOHaT">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-md text-on-surface truncate">Godox SL-60W LED</span>
+<span class="font-code-sm text-code-sm text-primary">LDR-LGT-0001</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">Inspeksi Rutin Bulanan</span>
+<span class="font-caption text-caption text-text-muted">Preventive Checklist</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface">Budi Santoso</span>
+<span class="font-caption text-caption text-text-muted block">Operator</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Baik
+                </span>
+</td>
+<td class="py-space-md px-space-md max-w-[280px]">
+<p class="truncate text-on-surface-variant font-body-sm" title="Fan pendingin normal, output lux sesuai toleransi 5600K">Fan pendingin normal, output lux normal</p>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-caption text-caption">
+                  Selesai / Tanpa Tiket
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md whitespace-nowrap font-code-sm text-code-sm text-text-muted">
+                10 Nov 2026<br><span class="text-[11px]">09:15 WIB</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container shrink-0" data-alt="Heavy duty Manfrotto 055 aluminum 3 section tripod legs studio equipment setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1xRTdWY0AJ5VcOARoZaYPtfmsJomptz8dd0W3CRmk68lJ8ZVHGZYK6nNxru4kbmB9SiIl3s3m8NY45rvLla17cIXLFw-KI7_lDOMLaf-X_RehF_vuugGi5S9PgFMo0aDWp_gn8xmMoLHziLo4Ma0nb41kWmRBr4vIxIHAveYSFGLCbwk5p81FmAvneedUBfktAz8Gv-h_DAguQO2dv0QU9ay2_Zbud57IiqbjPOY5">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-md text-on-surface truncate">Tripod Manfrotto 055</span>
+<span class="font-code-sm text-code-sm text-primary">LDR-TRP-0001</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">LDR-BK-2026-0001</span>
+<span class="font-caption text-caption text-text-muted">Fajar Setiawan (IKOM)</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface">Hendra K.</span>
+<span class="font-caption text-caption text-text-muted block">Operator</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-warning-bg text-warning font-caption text-caption font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span> Perlu Perbaikan
+                </span>
+</td>
+<td class="py-space-md px-space-md max-w-[280px]">
+<p class="truncate text-on-surface-variant font-body-sm" title="Pengunci leg section ke-3 agak longgar, perlu kencangkan baut L">Pengunci leg section ke-3 longgar, baut L kencang</p>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-success-bg text-success font-caption text-caption font-semibold">
+                  Selesai Diservis Lab
+                </span>
+</td>
+<td class="py-space-md px-space-md text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-text-muted hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-md">
+<span class="font-caption text-caption text-text-muted">
+          Menampilkan <span class="font-semibold text-on-surface">1–6</span> dari <span class="font-semibold text-on-surface">48</span> catatan inspeksi
+        </span>
+<div class="flex items-center gap-1">
+<button class="h-9 px-3 rounded-lg bg-surface-white text-text-muted font-caption text-caption opacity-40 cursor-not-allowed" disabled="" type="button">
+            Sebelumnya
+          </button>
+<button class="h-9 w-9 rounded-lg bg-primary-container text-on-primary font-caption text-caption font-semibold flex items-center justify-center shadow-sm" type="button">
+            1
+          </button>
+<button class="h-9 w-9 rounded-lg bg-surface-white hover:bg-surface-container-low text-on-surface font-caption text-caption flex items-center justify-center" type="button">
+            2
+          </button>
+<button class="h-9 w-9 rounded-lg bg-surface-white hover:bg-surface-container-low text-on-surface font-caption text-caption flex items-center justify-center" type="button">
+            3
+          </button>
+<button class="h-9 px-3 rounded-lg bg-surface-white hover:bg-surface-container-low text-on-surface font-caption text-caption" type="button">
+            Selanjutnya
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

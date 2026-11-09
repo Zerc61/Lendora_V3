@@ -1,0 +1,638 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"border":"#E5E7EB","on-error-container":"#93000a","tertiary-container":"#a09a91","text-muted":"#6B7280","tertiary":"#625e56","error-container":"#ffdad6","primary-fixed-dim":"#ffb690","secondary-container":"#fd651e","outline":"#8c7164","surface-dim":"#dcd9d9","background":"#fcf9f8","error":"#ba1a1a","on-tertiary-fixed-variant":"#4a463f","surface-container":"#f0eded","secondary-fixed-dim":"#ffb599","warning-bg":"#FFFBEB","primary-container":"#f97316","surface-container-low":"#f6f3f2","inverse-surface":"#303030","on-surface":"#1b1c1c","on-secondary-container":"#571a00","on-secondary-fixed-variant":"#7f2b00","surface-bright":"#fcf9f8","inverse-on-surface":"#f3f0ef","danger":"#DC2626","tertiary-fixed":"#e9e1d8","on-secondary":"#ffffff","on-secondary-fixed":"#370e00","surface-container-highest":"#e4e2e1","violet-bg":"#F5F3FF","info-bg":"#F0F9FF","on-tertiary-fixed":"#1e1b15","on-tertiary-container":"#36322c","secondary-fixed":"#ffdbce","surface-white":"#FFFFFF","surface":"#F5F5F5","on-primary":"#ffffff","on-tertiary":"#ffffff","surface-variant":"#e4e2e1","danger-bg":"#FEF2F2","surface-container-high":"#eae7e7","on-background":"#1b1c1c","surface-container-lowest":"#ffffff","violet":"#7C3AED","success-bg":"#F0FDF4","primary":"#9d4300","on-surface-variant":"#584237","info":"#0284C7","secondary":"#a73a00","tertiary-fixed-dim":"#ccc5bc","inverse-primary":"#ffb690","on-primary-container":"#582200","success":"#16A34A","warning":"#D97706","on-primary-fixed":"#341100","on-error":"#ffffff","on-primary-fixed-variant":"#783200","outline-variant":"#e0c0b1","primary-fixed":"#ffdbca","surface-tint":"#9d4300"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-lg":"1.5rem","margin":"1rem","space-md":"1rem","space-xs":"0.25rem","gutter":"1rem","space-xl":"2rem","space-sm":"0.5rem"},fontFamily:{"body-md":["Inter"],"code-sm":["JetBrains Mono"],"headline-sm":["Plus Jakarta Sans"],"display":["Plus Jakarta Sans"],"caption":["Inter"],"body-sm":["Inter"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-md":["Inter"]},fontSize:{"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"code-sm":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["17px",{lineHeight:"24px",fontWeight:"600"}],"display":["28px",{lineHeight:"36px",fontWeight:"800"}],"caption":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"headline-lg":["24px",{lineHeight:"32px",fontWeight:"700"}],"label-md":["13px",{lineHeight:"20px",fontWeight:"600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-white border-r border-border z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-md border-b border-border flex items-center justify-between shrink-0"><div class="flex items-center gap-space-sm"><img alt="Lendora Logo" class="h-9 w-9 object-contain rounded shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0LQcSVOl1z2B8_mLzyQbAZF147syuxDx2ATfpNwvSB1gys9cfHHS6dC3oOZh4UZIpvSn6BdqDU9N_0yZ_dhvIyt5oLa4MFlKT5pS_00amNJfDXTXMLnVH1QfFOc39rJlP6qaTX3vBpFUMiqApS10yd6zBGtZzsgyhn_wnOqycKdaSnoVl_e2I2zDqmBQUByth2dCrnp8Qb1ftxa8TVIiYyhwOhORmcjlQyGobgBQsirxGxTms-VPJrg"><div class="flex flex-col"><span class="font-headline-md text-headline-sm tracking-tight text-on-surface font-bold">Lendora</span><span class="font-caption text-caption text-primary tracking-wider uppercase font-semibold">Admin Console</span></div></div></div><nav class="px-space-sm py-space-md flex flex-col gap-space-lg" data-active-classes="bg-primary-fixed text-primary font-bold border-l-4 border-primary-container pl-[12px]"><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">Utama</span><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-md text-label-md">Dashboard</span></a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">Inventaris</span><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="aset" href="#"><span class="material-symbols-outlined text-[20px]">photo_camera</span><span class="font-label-md text-label-md">Aset</span></a><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="kategori" href="#"><span class="material-symbols-outlined text-[20px]">category</span><span class="font-label-md text-label-md">Kategori</span></a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">Peminjaman</span><a aria-current="page" class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg transition-colors bg-primary-fixed text-primary font-bold border-l-4 border-primary-container pl-[12px]" data-path="antrean-persetujuan" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="font-label-md text-label-md">Antrean Persetujuan</span></a><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="semua-transaksi" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-label-md text-label-md">Semua Transaksi</span></a><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="kalender-peminjaman" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-md text-label-md">Kalender</span></a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">Operasional</span><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="serah-terima" href="#"><span class="material-symbols-outlined text-[20px]">assignment_return</span><span class="font-label-md text-label-md">Serah Terima</span></a><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="pemeriksaan-kondisi" href="#"><span class="material-symbols-outlined text-[20px]">rule</span><span class="font-label-md text-label-md">Pemeriksaan</span></a><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="pemeliharaan" href="#"><span class="material-symbols-outlined text-[20px]">build_circle</span><span class="font-label-md text-label-md">Maintenance</span></a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-caption text-caption text-text-muted tracking-wider uppercase">Organisasi</span><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="pengguna-role" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-label-md text-label-md">Pengguna &amp; Role</span></a><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="laporan-analitik" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-label-md text-label-md">Laporan &amp; Analitik</span></a><a class="flex items-center gap-space-sm px-space-sm h-11 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="pengaturan" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-md text-label-md">Pengaturan</span></a></div></nav></div><div class="p-space-sm border-t border-border bg-surface-white"><div class="flex items-center justify-between p-space-sm rounded-lg hover:bg-surface transition-colors"><div class="flex items-center gap-space-sm overflow-hidden"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col truncate"><span class="font-label-md text-label-md text-on-surface truncate">Budi Santoso</span><span class="font-caption text-caption text-text-muted truncate">Operator Lab</span></div></div><a class="p-1 text-text-muted hover:text-danger hover:bg-danger-bg rounded transition-colors" data-path="keluar" href="#" title="Keluar Akun"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-white border-b border-border z-40 px-space-lg flex items-center justify-between shadow-[0_1px_2px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md flex-1 max-w-xl"><div class="flex items-center gap-space-xs text-text-muted font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">folder</span><span class="">Peminjaman</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-primary font-semibold">Antrean Persetujuan</span></div><div class="h-5 w-px bg-border hidden sm:block"></div><div class="relative flex-1 hidden md:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span><input class="w-full h-10 pl-9 pr-space-md rounded-lg bg-surface border border-border text-on-surface placeholder:text-text-muted font-body-sm text-body-sm focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" placeholder="Cari transaksi, aset, peminjam..." type="text"></div></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden lg:flex items-center gap-space-xs px-3 py-1 rounded-full bg-warning-bg border border-warning/20 text-warning"><span class="material-symbols-outlined text-[16px]">schedule</span><span class="font-caption text-caption font-semibold">Shift Aktif: Lab Audio-Visual</span></div><div class="relative"><button class="w-10 h-10 rounded-lg flex items-center justify-center text-text-muted hover:text-on-surface hover:bg-surface transition-colors relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary-container ring-2 ring-surface-white"></span></button></div><div class="h-6 w-px bg-border"></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-md text-label-md text-on-surface font-semibold">Budi Santoso</span><span class="font-caption text-caption text-text-muted">Operator Lab</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Content Canvas Container -->
+<div class="p-space-lg max-w-[1440px] w-full mx-auto flex flex-col gap-space-lg">
+<!-- 1. Top Header Area -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Antrean Persetujuan Peminjaman</h1>
+<p class="font-body-md text-body-md text-text-muted max-w-3xl">
+          Tinjau dan proses permohonan reservasi peralatan mahasiswa &amp; civitas kampus. Periksa ketersediaan unit dan jadwal konflik sebelum menyetujui.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-11 px-4 rounded-lg bg-surface-white border border-border text-on-surface font-label-md text-label-md flex items-center gap-2 hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">history</span>
+<span class="">Riwayat Keputusan</span>
+</button>
+<button class="h-11 px-4 rounded-lg bg-surface-white border border-border text-on-surface font-label-md text-label-md flex items-center gap-2 hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+</span>
+<span class="">Pemeriksaan Otomatis</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-success-bg text-success font-semibold">Aktif</span>
+</button>
+</div>
+</div>
+<!-- 2. KPI / Summary Metric Row (4 cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col justify-between gap-space-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Menunggu Verifikasi</span>
+<div class="w-9 h-9 rounded-lg bg-warning-bg text-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">5 Pengajuan</div>
+<p class="font-body-sm text-body-sm text-warning font-medium mt-0.5">2 prioritas tinggi hari ini</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-warning h-full rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col justify-between gap-space-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Potensi Konflik Jadwal</span>
+<div class="w-9 h-9 rounded-lg bg-danger-bg text-danger flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg font-bold text-danger tracking-tight">1 Konflik Terdeteksi</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Memerlukan mitigasi unit alternatif</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-danger h-full rounded-full" style="width: 20%;"></div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col justify-between gap-space-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Otorisasi Khusus (&gt; Rp 5 Jt)</span>
+<div class="w-9 h-9 rounded-lg bg-violet-bg text-violet flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">security</span>
+</div>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg font-bold text-violet tracking-tight">1 Menunggu Prodi</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Di luar batas operator lab</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-violet h-full rounded-full" style="width: 20%;"></div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col justify-between gap-space-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Tingkat Kelulusan Pekan Ini</span>
+<div class="w-9 h-9 rounded-lg bg-success-bg text-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">92.4%</div>
+<p class="font-body-sm text-body-sm text-success font-medium mt-0.5">48 dari 52 disetujui tanpa insiden</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-success h-full rounded-full" style="width: 92.4%;"></div>
+</div>
+</div>
+</div>
+<!-- 3. Filter Bar & Quick Tools -->
+<div class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search bar -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full h-11 pl-9 pr-space-md rounded-lg bg-surface border border-border text-on-surface placeholder:text-text-muted font-body-sm text-body-sm focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Cari kode reservasi (LDR-BK-...), nama peminjam, atau unit alat..." type="text">
+</div>
+<!-- Dropdowns -->
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-space-sm">
+<div class="relative min-w-[200px] flex-1 sm:flex-none">
+<select class="w-full h-11 px-3 pr-8 rounded-lg bg-surface-white border border-border text-on-surface font-body-sm text-body-sm appearance-none focus:outline-none focus:border-primary-container cursor-pointer">
+<option value="">Semua Program Studi</option>
+<option value="dkv">Desain Komunikasi Visual (DKV)</option>
+<option value="ftv">Film &amp; Televisi</option>
+<option value="jurnalis">Jurnalistik</option>
+<option value="dp">Desain Produk</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">arrow_drop_down</span>
+</div>
+<div class="relative min-w-[160px] flex-1 sm:flex-none">
+<select class="w-full h-11 px-3 pr-8 rounded-lg bg-surface-white border border-border text-on-surface font-body-sm text-body-sm appearance-none focus:outline-none focus:border-primary-container cursor-pointer">
+<option value="">Semua Urgensi</option>
+<option value="tinggi">Prioritas Tinggi</option>
+<option value="reguler">Reguler</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">arrow_drop_down</span>
+</div>
+<div class="relative min-w-[220px] flex-1 sm:flex-none">
+<select class="w-full h-11 px-3 pr-8 rounded-lg bg-surface-white border border-border text-on-surface font-body-sm text-body-sm appearance-none focus:outline-none focus:border-primary-container cursor-pointer">
+<option value="terdekat">Jadwal Peminjaman Terdekat</option>
+<option value="terbaru">Pengajuan Terbaru</option>
+<option value="terlama">Pengajuan Terlama</option>
+<option value="nilai">Total Nilai Tertinggi</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">swap_vert</span>
+</div>
+</div>
+</div>
+<!-- Toggle filter pills -->
+<div class="flex items-center gap-2 overflow-x-auto pt-2 border-t border-border">
+<button class="h-9 px-4 rounded-full bg-primary-fixed border border-primary text-primary font-caption text-caption flex items-center gap-1.5 shrink-0 transition-colors" type="button">
+<span class="">Semua</span>
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px] font-bold">5</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white border border-border text-text-muted hover:border-text-muted font-caption text-caption flex items-center gap-1.5 shrink-0 transition-colors" type="button">
+<span class="">Siap Setujui</span>
+<span class="w-5 h-5 rounded-full bg-surface text-text-muted flex items-center justify-center text-[10px] font-bold">3</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white border border-border text-danger hover:border-danger font-caption text-caption flex items-center gap-1.5 shrink-0 transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="">Konflik Jadwal</span>
+<span class="w-5 h-5 rounded-full bg-danger-bg text-danger flex items-center justify-center text-[10px] font-bold">1</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-surface-white border border-border text-violet hover:border-violet font-caption text-caption flex items-center gap-1.5 shrink-0 transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">security</span>
+<span class="">Otorisasi Tinggi</span>
+<span class="w-5 h-5 rounded-full bg-violet-bg text-violet flex items-center justify-center text-[10px] font-bold">1</span>
+</button>
+</div>
+</div>
+<!-- 4. Main Content Area (Layout 2 Kolom: Kiri 68%, Kanan 32%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Kolom Kiri: 68% (8 cols on lg) -> Stack Kartu Permohonan -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- KARTU 1: Permohonan Normal Siap Setujui -->
+<article class="bg-surface-white border border-border rounded-xl shadow-sm overflow-hidden flex flex-col transition-all hover:shadow-md">
+<!-- Card Header -->
+<div class="p-space-md bg-surface-white border-b border-border flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-code-sm text-code-sm font-semibold tracking-wide text-on-surface bg-surface px-2.5 py-1 rounded">LDR-BK-2026-0011</span>
+<span class="h-6 px-2.5 rounded-full bg-warning-bg text-warning font-caption text-caption flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                Menunggu Persetujuan
+              </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">Diajukan: <strong class="text-on-surface font-medium">12 Nov 2026, 08:30 WIB</strong></span>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-space-md flex flex-col gap-space-md">
+<!-- Borrower Meta & Purpose -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md bg-surface p-space-md rounded-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary-fixed text-primary font-bold text-headline-sm flex items-center justify-center shrink-0 border border-outline-variant/30">
+                  RS
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Rara Sekar Kirana</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-success-bg text-success border border-success/20">Borrower Aktif</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">NIM: 2205104018 · DKV Semester 5</span>
+<div class="mt-1 flex items-start gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">assignment</span>
+<span class="">Keperluan: <strong class="text-on-surface">Tugas Akhir Dokumentasi Pameran Karya Seni Rupa</strong></span>
+</div>
+</div>
+</div>
+<!-- Schedule Pill Container -->
+<div class="sm:text-right shrink-0 bg-surface-white border border-border p-3 rounded-lg">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider block">Rentang Peminjaman</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold block">14–16 Nov 2026</span>
+<span class="font-caption text-caption text-text-muted block mt-0.5">3 Hari Kalender</span>
+<div class="mt-2 pt-2 border-t border-border flex flex-col text-left font-caption text-caption text-text-muted gap-0.5">
+<div class="">Pickup: <span class="text-on-surface font-medium">14 Nov, 09:00 WIB</span></div>
+<div class="">Kembali: <span class="text-on-surface font-medium">16 Nov, 16:00 WIB</span></div>
+</div>
+</div>
+</div>
+<!-- Items Table/List -->
+<div class="flex flex-col gap-2">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Daftar Peralatan (2 Unit)</span>
+<div class="border border-border rounded-lg overflow-hidden divide-y divide-border">
+<!-- Item 1 -->
+<div class="p-3 bg-surface-white flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-12 h-12 rounded object-cover border border-border shrink-0" data-alt="Close up photography of Sony Alpha 7 III mirrorless full frame camera body on dark clean studio surface, high detail, studio product lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk-EjTorWak3UpCYUWeFrGEWRdaQBuykaGj-Bic8dmnFGvh02IcSnfZDgY_kC_JM0ilSMp_tqYp10VvLIn_Et-MjF67M4gnm-RipVQLUx7VEBTKsW6PzOoUHGlVwCshVPq5MH32A3jrg8DIi58GAR6U9xZOMMfU9Mc3RLu7uzCLlsBgz_Dp0MiBMUs1F1lRZbqlZOiA7ygZNLHVZByRg6mpFLkpZp6ts1XZyJMgquq">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Sony Alpha 7 III Body</span>
+<div class="flex items-center gap-2 mt-0.5 font-code-sm text-code-sm text-text-muted">
+<span class="">LDR-CAM-0001</span>
+<span class="">•</span>
+<span class="">Rp 24.500.000</span>
+</div>
+</div>
+</div>
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                    Tersedia di Lemari A1
+                  </span>
+</div>
+<!-- Item 2 -->
+<div class="p-3 bg-surface-white flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-12 h-12 rounded object-cover border border-border shrink-0" data-alt="Professional Sony FE 24-70mm f2.8 G Master camera lens resting on neutral studio display shelf with reflection, sharp optics lens glass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs518QJGXocyVXXBoBeva4JTBkbV5HXd1xxf_oXIUmCXYmOGWzVRt-NdwCU8fZMUk54Uk06D_Yia_blXvsD1OTLy4dwolg5w2lR9-C4k9V6cnrJ2M6wuXTVDRf9Io9MNbE_SFkLN-8sjGvBYTcZzvwiAv_QX1i6Fb_rjkZO5ae--wGZn1eCdCToNh0NWbpGEr6dut-954OTUDmZTJWedFP-IvHmxVvwLSnL_ad0BXO">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Sony FE 24–70mm f/2.8 GM</span>
+<div class="flex items-center gap-2 mt-0.5 font-code-sm text-code-sm text-text-muted">
+<span class="">LDR-LNS-0001</span>
+<span class="">•</span>
+<span class="">Rp 28.000.000</span>
+</div>
+</div>
+</div>
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                    Tersedia di Lemari B2
+                  </span>
+</div>
+</div>
+</div>
+<!-- Notes & Attachments -->
+<div class="p-3 rounded-lg bg-surface border border-border flex items-start gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-text-muted shrink-0 mt-0.5">description</span>
+<div class="flex-1">
+<span class="">Catatan: <em>Sudah menyertakan surat rekomendasi dosen pembimbing pameran (Surat-Pengantar-DKV-08.pdf).</em></span>
+</div>
+<a class="font-caption text-caption text-primary font-semibold hover:underline shrink-0 flex items-center gap-0.5" href="#">
+<span class="material-symbols-outlined text-[14px]">attachment</span>
+                Lihat Berkas
+              </a>
+</div>
+</div>
+<!-- Card Footer Actions -->
+<div class="p-space-md bg-surface/50 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div>
+<span class="font-caption text-caption text-text-muted block uppercase tracking-wider">Total Nilai Peralatan</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Rp 52.500.000</span>
+<span class="font-caption text-caption text-text-muted">(dalam lingkup proyek resmi DKV)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-10 px-4 rounded-lg border border-danger text-danger bg-surface-white hover:bg-danger-bg font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span class="">Tolak Permohonan</span>
+</button>
+<button class="h-10 px-5 rounded-lg bg-primary-container hover:bg-secondary-container text-white font-label-md text-label-md flex items-center gap-1.5 transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span class="">Setujui Peminjaman</span>
+</button>
+</div>
+</div>
+</article>
+<!-- KARTU 2: Permohonan DENGAN BANNER KONFLIK JADWAL (CRITICAL SPEC) -->
+<article class="bg-surface-white border-2 border-danger/40 rounded-xl shadow-sm overflow-hidden flex flex-col transition-all hover:shadow-md">
+<!-- Card Header -->
+<div class="p-space-md bg-surface-white border-b border-border flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-code-sm text-code-sm font-semibold tracking-wide text-on-surface bg-surface px-2.5 py-1 rounded">LDR-BK-2026-0009</span>
+<span class="h-6 px-2.5 rounded-full bg-danger-bg text-danger font-caption text-caption flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-danger"></span>
+                Konflik Jadwal Terdeteksi
+              </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">Diajukan: <strong class="text-on-surface font-medium">11 Nov 2026, 21:15 WIB</strong></span>
+</div>
+</div>
+<!-- RED DANGER BANNER -->
+<div class="p-space-md bg-danger-bg border-b border-danger/20 flex items-start gap-3">
+<span class="material-symbols-outlined text-danger text-[22px] shrink-0 mt-0.5">error</span>
+<div class="flex-1 font-body-sm text-body-sm text-on-surface">
+<strong class="text-danger font-semibold">⚠ Konflik Jadwal Terdeteksi:</strong> Unit <code class="font-code-sm bg-surface-white px-1.5 py-0.5 rounded border border-danger/30 text-danger font-semibold">LDR-CAM-0001</code> (Sony Alpha 7 III) sudah memiliki jadwal peminjaman disetujui pada <strong class="text-on-surface font-semibold">13–14 Nov 2026</strong> oleh <em>Ani Rahmawati (Booking LDR-BK-2026-0007)</em>. Silakan tolak atau tawarkan unit pengganti <strong class="text-primary font-semibold">LDR-CAM-0002</strong>.
+            </div>
+</div>
+<!-- Card Body -->
+<div class="p-space-md flex flex-col gap-space-md">
+<!-- Borrower Meta & Purpose -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md bg-surface p-space-md rounded-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-on-surface font-bold text-headline-sm flex items-center justify-center shrink-0 border border-border">
+                  DA
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dimas Arya Putra</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-container text-text-muted">Semester Akhir</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">NIM: 2108201044 · Broadcasting Semester 7</span>
+<div class="mt-1 flex items-start gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">assignment</span>
+<span class="">Tujuan: <strong class="text-on-surface">Liputan Lapangan Festival Budaya Kampus</strong></span>
+</div>
+</div>
+</div>
+<!-- Schedule Pill Container -->
+<div class="sm:text-right shrink-0 bg-surface-white border border-danger/30 p-3 rounded-lg">
+<span class="font-caption text-caption text-danger uppercase tracking-wider block font-semibold">Rentang Tabrakan</span>
+<span class="font-headline-sm text-headline-sm text-danger font-bold block">13–15 Nov 2026</span>
+<span class="font-caption text-caption text-text-muted block mt-0.5">3 Hari Kalender</span>
+</div>
+</div>
+<!-- Items List -->
+<div class="flex flex-col gap-2">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Daftar Peralatan (2 Unit)</span>
+<div class="border border-border rounded-lg overflow-hidden divide-y divide-border">
+<!-- Item 1 (Conflict) -->
+<div class="p-3 bg-danger-bg/30 flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-12 h-12 rounded object-cover border border-danger/30 shrink-0" data-alt="Camera body Sony Alpha 7 III shown with warning outline in camera equipment gear storage room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzqjkHmZU3cUQwDBQRqwHKmkEC175Y4cEb88clEj5hnplL6APIgMmDPw3-h4UK1uS0v90n8eZsiFwD-ljzsGptPa6H9VYj4BENraV9XzKCKcryayDm0dICTbH-Ex8AG82pIGsq7E17WZlyAzuZkTZQxS5c8FvMh69BDmFIxx3vpzlxTW8nJ3o9_QncR4EZfxcIvXFJB4npozBapYSfUQxNOtMaPx1XNhn30jyFkZpD">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Sony Alpha 7 III Body</span>
+<div class="flex items-center gap-2 mt-0.5 font-code-sm text-code-sm text-text-muted">
+<span class="text-danger font-semibold">LDR-CAM-0001</span>
+<span class="">•</span>
+<span class="">Rp 24.500.000</span>
+</div>
+</div>
+</div>
+<span class="h-6 px-2.5 rounded-full bg-danger-bg border border-danger/30 text-danger font-caption text-caption flex items-center gap-1 shrink-0 font-semibold">
+<span class="material-symbols-outlined text-[14px]">event_busy</span>
+                    Jadwal Bertabrakan (Konflik 2 Hari)
+                  </span>
+</div>
+<!-- Item 2 (Free) -->
+<div class="p-3 bg-surface-white flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-12 h-12 rounded object-cover border border-border shrink-0" data-alt="Rode Wireless GO II Dual channel compact wireless microphone kit on clean studio audio workstation table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA9hviEFFp7hEdYzy4EnRVOiJaT1iju1K4wzbfV3o8iQ-Gnymxp5rBn5WkEcuqs15SVT8K6GWhUXBr5ZGnRTbAl-aE6EN0wX1OdOt3JHHIWoIIE4lWBZ4OxqfhRdYq65VKRLQmKfgxNo--744u5xloo-K81V-qt2ARHWSzXw6aQtpjTNjOxee0fho3ji8SaXmq9IG_iTqji6WajKsKIE3WG9nGwsHUt93rXnVr5Q-z">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Rode Wireless GO II Dual</span>
+<div class="flex items-center gap-2 mt-0.5 font-code-sm text-code-sm text-text-muted">
+<span class="">LDR-MIC-0001</span>
+<span class="">•</span>
+<span class="">Rp 4.200.000</span>
+</div>
+</div>
+</div>
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                    Tersedia Bebas
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card Footer Actions -->
+<div class="p-space-md bg-surface/50 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-warning text-[20px]">lightbulb</span>
+<span class="font-body-sm text-body-sm text-text-muted">Tersedia alternatif: <strong class="text-on-surface">Canon EOS R6 Mark II (LDR-CAM-0002)</strong></span>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 flex-wrap">
+<button class="h-10 px-4 rounded-lg border border-danger text-danger bg-danger-bg hover:bg-danger hover:text-white font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span class="">Tolak (Konflik Jadwal)</span>
+</button>
+<button class="h-10 px-4 rounded-lg border border-border bg-surface-white hover:bg-surface text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">published_with_changes</span>
+<span class="">Sarankan Unit Alternatif</span>
+</button>
+<div class="relative group">
+<button class="h-10 px-4 rounded-lg bg-surface-container text-text-muted opacity-50 cursor-not-allowed font-label-md text-label-md flex items-center gap-1.5 border border-border" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span class="">Setujui</span>
+</button>
+<div class="absolute bottom-full right-0 mb-2 hidden group-hover:block w-48 bg-inverse-surface text-inverse-on-surface text-caption font-caption p-2 rounded shadow-lg z-20 text-center">
+                  Tidak Dapat Disetujui (Konflik Jadwal)
+                </div>
+</div>
+</div>
+</div>
+</article>
+<!-- KARTU 3: Permohonan DI LUAR BATAS KEWENANGAN OPERATOR (> RP 5.000.000) -->
+<article class="bg-surface-white border border-border rounded-xl shadow-sm overflow-hidden flex flex-col transition-all hover:shadow-md">
+<!-- Card Header -->
+<div class="p-space-md bg-surface-white border-b border-border flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-code-sm text-code-sm font-semibold tracking-wide text-on-surface bg-surface px-2.5 py-1 rounded">LDR-BK-2026-0012</span>
+<span class="h-6 px-2.5 rounded-full bg-violet-bg text-violet font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">shield_person</span>
+                Otorisasi Khusus
+              </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">Diajukan: <strong class="text-on-surface font-medium">12 Nov 2026, 09:40 WIB</strong></span>
+</div>
+</div>
+<!-- High Value Info Banner -->
+<div class="p-space-md bg-violet-bg border-b border-violet/20 flex items-start gap-3">
+<span class="material-symbols-outlined text-violet text-[22px] shrink-0 mt-0.5">info</span>
+<div class="flex-1 font-body-sm text-body-sm text-on-surface">
+<strong class="text-violet font-semibold">ℹ Melebihi Batas Kewenangan Operator (Rp 5.000.000):</strong> Unit bernilai tinggi &amp; durasi proyek khusus memerlukan verifikasi Ketua Laboratorium / Organization Admin.
+            </div>
+</div>
+<!-- Card Body -->
+<div class="p-space-md flex flex-col gap-space-md">
+<!-- Borrower Meta & Purpose -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md bg-surface p-space-md rounded-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-violet-bg text-violet font-bold text-headline-sm flex items-center justify-center shrink-0 border border-violet/30">
+                  FH
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Fajar Hidayat, M.Sn.</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-violet-bg text-violet border border-violet/20">Dosen Pendamping</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">NIDN: 0418058801 · Lab Multimedia &amp; TV</span>
+<div class="mt-1 flex items-start gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">movie</span>
+<span class="">Tujuan: <strong class="text-on-surface">Produksi Film Pendek Kompetisi Nasional Kemendikbud</strong></span>
+</div>
+</div>
+</div>
+<!-- Schedule Pill Container -->
+<div class="sm:text-right shrink-0 bg-surface-white border border-border p-3 rounded-lg">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider block">Durasi Panjang</span>
+<span class="font-headline-sm text-headline-sm text-violet font-bold block">16–22 Nov 2026</span>
+<span class="font-caption text-caption text-text-muted block mt-0.5">7 Hari Kalender (Maksimal)</span>
+</div>
+</div>
+<!-- Items List -->
+<div class="border border-border rounded-lg overflow-hidden divide-y divide-border">
+<div class="p-3 bg-surface-white flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-12 h-12 rounded object-cover border border-border shrink-0" data-alt="Sony FX3 Cinema Line professional full frame camera with top handle XLR unit mounted in film production cage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdSVWTKst8MIXrmadeSJi-NQkzLpoBX1KXE05ize4SqLSArSFxcQjnWFr5EWlDtl3dUU3Z5LoDWEP1nl5ZPFN3pPsba-3AjqGItNNDjvFjEegWFOKkU_0rsswzmg89SHVQzsXeubaNvKMYQXocy-61-_0oK_UmzvxP1Q57tcal_GU966D1ZyKP3Mp7EC9lMqEjybza0i9Nk_UirIxZRlaZ2Hlu3cxDxeahDWkEvE8V">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Sony FX3 Cinema Line + XLR Handle Unit</span>
+<div class="flex items-center gap-2 mt-0.5 font-code-sm text-code-sm text-text-muted">
+<span class="">LDR-CAM-0003</span>
+<span class="">•</span>
+<span class="text-violet font-semibold">Rp 58.000.000</span>
+</div>
+</div>
+</div>
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                  Unit Siap di Vault Khusus
+                </span>
+</div>
+</div>
+</div>
+<!-- Card Footer Actions -->
+<div class="p-space-md bg-surface/50 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div>
+<span class="font-caption text-caption text-text-muted block uppercase tracking-wider">Status Otorisasi</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Membutuhkan persetujuan Organization Admin (Dr. Irwan Setiadi)</span>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-10 px-4 rounded-lg border border-primary-container text-primary-container bg-surface-white hover:bg-primary-fixed/30 font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">forward</span>
+<span class="">Teruskan ke Organization Admin</span>
+</button>
+<button class="h-10 px-4 rounded-lg bg-surface-container text-text-muted opacity-50 cursor-not-allowed font-label-md text-label-md flex items-center gap-1.5 border border-border" disabled="" title="Di luar kewenangan Operator Lab" type="button">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span class="">Menunggu Otorisasi Admin</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Kolom Kanan: 32% (4 cols on lg) -> Panel Aturan, SOP & Log Keputusan -->
+<aside class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Card 1: Pedoman Kebijakan Persetujuan Lab -->
+<section class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-2 border-b border-border pb-3">
+<span class="material-symbols-outlined text-primary text-[20px]">policy</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Pedoman Kebijakan Lab</h2>
+</div>
+<div class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface-variant">
+<!-- Rule 1 -->
+<div class="flex items-start gap-2.5 p-2.5 rounded-lg bg-surface">
+<div class="w-6 h-6 rounded bg-primary-fixed text-primary font-bold text-caption flex items-center justify-center shrink-0">
+                1
+              </div>
+<p class="leading-relaxed">
+<strong class="text-on-surface">Durasi Reguler:</strong> Peminjaman mahasiswa maksimal <strong>3 hari kalender</strong> kecuali melampirkan izin Kaprodi.
+              </p>
+</div>
+<!-- Rule 2 -->
+<div class="flex items-start gap-2.5 p-2.5 rounded-lg bg-surface">
+<div class="w-6 h-6 rounded bg-primary-fixed text-primary font-bold text-caption flex items-center justify-center shrink-0">
+                2
+              </div>
+<p class="leading-relaxed">
+<strong class="text-on-surface">Batas Nilai Unit:</strong> Batas kewenangan operator lab maksimal unit dengan total nilai <strong>Rp 5.000.000</strong>. Unit cinema line memerlukan persetujuan Kaprodi / Kepala Lab.
+              </p>
+</div>
+<!-- Rule 3 -->
+<div class="flex items-start gap-2.5 p-2.5 rounded-lg bg-surface">
+<div class="w-6 h-6 rounded bg-primary-fixed text-primary font-bold text-caption flex items-center justify-center shrink-0">
+                3
+              </div>
+<p class="leading-relaxed">
+<strong class="text-on-surface">Larangan Tabrakan:</strong> Unit status Maintenance atau Konflik <strong>dilarang disetujui</strong> tanpa alokasi pengganti.
+              </p>
+</div>
+</div>
+</section>
+<!-- Card 2: Unit Alternatif Siap Pakai (Standby) -->
+<section class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-border pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-success text-[20px]">swap_horizontal_circle</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Unit Siap Cadangan</h2>
+</div>
+<span class="font-caption text-caption text-text-muted">Standby Lab</span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Standby Unit 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface border border-border">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-surface-white border border-border flex items-center justify-center text-text-muted">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Canon EOS R6 Mark II</span>
+<span class="font-code-sm text-code-sm text-text-muted">LDR-CAM-0002</span>
+</div>
+</div>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-success-bg text-success font-semibold">Tersedia</span>
+</div>
+<!-- Standby Unit 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface border border-border">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-bg border border-border flex items-center justify-center text-text-muted">
+<span class="material-symbols-outlined text-[18px]">lens</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Canon RF 50mm f/1.2 L</span>
+<span class="font-code-sm text-code-sm text-text-muted">LDR-LNS-0004</span>
+</div>
+</div>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-success-bg text-success font-semibold">Tersedia</span>
+</div>
+<!-- Standby Unit 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface border border-border">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-surface-white border border-border flex items-center justify-center text-text-muted">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">DJI Mic 2 Wireless Trans</span>
+<span class="font-code-sm text-code-sm text-text-muted">LDR-MIC-0003</span>
+</div>
+</div>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-success-bg text-success font-semibold">Tersedia</span>
+</div>
+</div>
+</section>
+<!-- Card 3: Aktivitas Verifikasi Terakhir (Audit Log) -->
+<section class="bg-surface-white border border-border rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-border pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-[20px]">manage_search</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Aktivitas Terakhir</h2>
+</div>
+<a class="font-caption text-caption text-primary hover:underline font-semibold" href="#">Lihat Semua</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Log Item 1 -->
+<div class="flex items-start gap-3 border-l-2 border-success pl-3 py-0.5">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-on-surface">LDR-BK-2026-0007</span>
+<span class="font-caption text-caption text-success font-bold">Disetujui</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface">Ani Rahmawati · Oleh Budi Santoso</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">11 Nov 2026, 21:30 WIB</span>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="flex items-start gap-3 border-l-2 border-danger pl-3 py-0.5">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-on-surface">LDR-BK-2026-0005</span>
+<span class="font-caption text-caption text-danger font-bold">Ditolak</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface">Bagas Pratama · Unit dalam perawatan</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">11 Nov 2026, 14:10 WIB</span>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="flex items-start gap-3 border-l-2 border-success pl-3 py-0.5">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-on-surface">LDR-BK-2026-0003</span>
+<span class="font-caption text-caption text-success font-bold">Disetujui</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface">Nabila Putri · Oleh Hendra (Op. Sore)</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">10 Nov 2026, 16:45 WIB</span>
+</div>
+</div>
+</div>
+</section>
+</aside>
+</div>
+</div>
+</div>
+<script>
+  // Simple toast feedback for quick action triggers without full page reload
+  document.addEventListener('DOMContentLoaded', () => {
+    const approveBtn = document.querySelector('button:has(.material-symbols-outlined:contains("check"))');
+    // Micro-interactions can be added smoothly here
+  });
+</script></main></div>
+
+</body></html>

@@ -1,0 +1,586 @@
+/* ============================================================
+   LENDORA — Onboarding (pengunjung baru)
+   Tiga slide, mobile-first + layout desktop dua kolom.
+   ============================================================ */
+
+.ldr-onboarding {
+    min-height: 100dvh;
+    background: #FCF9F8;
+    color: var(--ldr-text);
+}
+
+.ldr-onboarding__shell {
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 520px);
+    min-height: 100dvh;
+    margin-inline: auto;
+    padding: clamp(16px, 4vw, 28px) clamp(16px, 5vw, 24px) 32px;
+}
+
+.ldr-onboarding [hidden] {
+    display: none !important;
+}
+
+/* ---------- Header ---------- */
+.ldr-onboarding__header {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ldr-space-3);
+    padding-block: 2px 10px;
+}
+
+.ldr-onboarding__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--ldr-text);
+    text-decoration: none;
+}
+
+.ldr-onboarding__logo {
+    display: block;
+    width: auto;
+    height: 32px;
+}
+
+.ldr-onboarding__brand-badge {
+    padding: 3px 9px;
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #7F2B00;
+    background: #FFDBCE;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.ldr-onboarding__skip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ldr-text-muted);
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.ldr-onboarding__skip:hover {
+    color: var(--ldr-text);
+    background: var(--ldr-surface);
+}
+
+/* ---------- Struktur utama ---------- */
+.ldr-onboarding__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--ldr-space-4);
+}
+
+.ldr-onboarding__visual {
+    flex: none;
+    margin-top: var(--ldr-space-2);
+}
+
+/* ---------- Hero ---------- */
+.ldr-onboarding__hero-frame {
+    position: relative;
+    padding: 14px;
+    background: #F6F3F2;
+    border-radius: 20px;
+    box-shadow: var(--ldr-shadow-sm);
+}
+
+.ldr-onboarding__photo {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: clamp(220px, 58vw, 292px);
+    object-fit: cover;
+    object-position: center;
+    background: #E4E2E1;
+    border-radius: 14px;
+}
+
+.ldr-onboarding__photo--2 {
+    object-position: 20% 38%;
+}
+
+.ldr-onboarding__photo--3 {
+    object-position: 82% 58%;
+}
+
+.ldr-onboarding__hero-frame::after {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    pointer-events: none;
+    background:
+        linear-gradient(to top, rgba(28, 25, 23, .68) 0%, rgba(28, 25, 23, .06) 44%, transparent 70%),
+        linear-gradient(145deg, rgba(249, 115, 22, .20), transparent 58%);
+    border-radius: 14px;
+}
+
+.ldr-onboarding__badges {
+    position: absolute;
+    z-index: 1;
+    top: 26px;
+    right: 26px;
+    left: 26px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--ldr-space-2);
+}
+
+.ldr-onboarding__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    padding: 6px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ldr-text);
+    background: rgba(255, 255, 255, .95);
+    border-radius: 999px;
+    box-shadow: var(--ldr-shadow-sm);
+    backdrop-filter: blur(6px);
+}
+
+.ldr-onboarding__pill .ldr-icon {
+    color: var(--ldr-primary);
+}
+
+.ldr-onboarding__pill--secondary .ldr-icon {
+    color: var(--ldr-info);
+}
+
+.ldr-onboarding__hero-foot {
+    position: absolute;
+    z-index: 1;
+    right: 26px;
+    bottom: 26px;
+    left: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ldr-space-2);
+}
+
+.ldr-onboarding__safe {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 11px;
+    font-size: 11.5px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--ldr-text);
+    background: rgba(255, 255, 255, .92);
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
+
+.ldr-onboarding__dot-live {
+    width: 8px;
+    height: 8px;
+    flex: none;
+    background: var(--ldr-success);
+    border-radius: 999px;
+}
+
+.ldr-onboarding__lab {
+    padding: 5px 10px;
+    font-family: var(--ldr-font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ldr-text-muted);
+    text-align: center;
+    background: rgba(255, 255, 255, .86);
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
+
+/* ---------- Indikator slide ---------- */
+.ldr-onboarding__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-top: var(--ldr-space-2);
+}
+
+.ldr-onboarding__dot {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.ldr-onboarding__dot::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    background: #D8C7BD;
+    border-radius: 999px;
+    transition: inset .2s ease, background-color .2s ease;
+}
+
+.ldr-onboarding__dot.is-active::before {
+    right: 0;
+    left: 0;
+    background: var(--ldr-primary);
+}
+
+.ldr-onboarding__dot:focus-visible {
+    outline: 2px solid var(--ldr-primary);
+    outline-offset: 2px;
+}
+
+/* ---------- Konten ---------- */
+.ldr-onboarding__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.ldr-onboarding__panels {
+    flex: 1;
+}
+
+.ldr-onboarding__heading {
+    margin: 0;
+    font-family: var(--ldr-font-heading);
+    font-size: clamp(25px, 7vw, 31px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -.025em;
+}
+
+.ldr-onboarding__lead {
+    margin-top: var(--ldr-space-3);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ldr-text-muted);
+}
+
+.ldr-onboarding__heading:focus-visible {
+    outline: 2px solid var(--ldr-primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* ---------- Fitur ---------- */
+.ldr-onboarding__features {
+    display: grid;
+    gap: 10px;
+    margin: var(--ldr-space-5) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ldr-onboarding__feature {
+    display: flex;
+    align-items: center;
+    gap: var(--ldr-space-3);
+    padding: 10px 12px;
+    background: var(--ldr-white);
+    border: 1px solid rgba(229, 231, 235, .7);
+    border-radius: 14px;
+    box-shadow: var(--ldr-shadow-sm);
+}
+
+.ldr-onboarding__feature-icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    color: var(--ldr-primary);
+    background: var(--ldr-tint);
+    border-radius: 10px;
+}
+
+.ldr-onboarding__feature--warning .ldr-onboarding__feature-icon {
+    color: var(--ldr-warning);
+    background: var(--ldr-warning-bg);
+}
+
+.ldr-onboarding__feature--success .ldr-onboarding__feature-icon {
+    color: var(--ldr-success);
+    background: var(--ldr-success-bg);
+}
+
+.ldr-onboarding__feature-text {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+}
+
+.ldr-onboarding__feature-text strong {
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.ldr-onboarding__feature-text span {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--ldr-text-muted);
+}
+
+/* ---------- Footer ---------- */
+.ldr-onboarding__footer {
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+    margin-top: auto;
+    padding-top: var(--ldr-space-6);
+}
+
+.ldr-onboarding__cta {
+    min-height: 52px;
+    font-family: var(--ldr-font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 14px 30px -14px rgba(249, 115, 22, .65);
+}
+
+.ldr-onboarding__login {
+    font-size: 14px;
+    color: var(--ldr-text-muted);
+}
+
+.ldr-onboarding__login a {
+    font-weight: 700;
+    color: var(--ldr-primary);
+    text-decoration: none;
+}
+
+.ldr-onboarding__login a:hover {
+    text-decoration: underline;
+}
+
+.ldr-onboarding__footnote {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+    font-size: 11.5px;
+    line-height: 1.4;
+    color: var(--ldr-text-muted);
+    text-align: center;
+}
+
+.ldr-onboarding__footnote .ldr-icon {
+    color: var(--ldr-primary);
+}
+
+/* ---------- Animasi ---------- */
+@media (prefers-reduced-motion: no-preference) {
+    .ldr-onboarding__slide.is-active,
+    .ldr-onboarding__panel.is-active {
+        animation: ldr-onboarding-in .4s ease-out both;
+    }
+}
+
+@keyframes ldr-onboarding-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 360px) {
+    .ldr-onboarding__brand-badge {
+        display: none;
+    }
+
+    .ldr-onboarding__badges,
+    .ldr-onboarding__hero-foot {
+        right: 20px;
+        left: 20px;
+    }
+
+    .ldr-onboarding__pill {
+        font-size: 10.5px;
+    }
+
+    .ldr-onboarding__safe {
+        font-size: 10.5px;
+    }
+
+    .ldr-onboarding__lab {
+        font-size: 10px;
+    }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 900px) {
+    .ldr-onboarding__shell {
+        width: min(1180px, calc(100% - 64px));
+        padding: 28px 0 36px;
+    }
+
+    .ldr-onboarding__header {
+        padding-block: 0 24px;
+    }
+
+    .ldr-onboarding__logo {
+        height: 38px;
+    }
+
+    .ldr-onboarding__brand-badge {
+        padding: 4px 11px;
+        font-size: 10.5px;
+    }
+
+    .ldr-onboarding__body {
+        display: grid;
+        grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+        align-items: stretch;
+        gap: clamp(40px, 5vw, 76px);
+    }
+
+    .ldr-onboarding__visual {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    .ldr-onboarding__hero-frame {
+        padding: 16px;
+        border-radius: 28px;
+        box-shadow: 0 24px 60px -30px rgba(28, 25, 23, .35);
+    }
+
+    .ldr-onboarding__photo {
+        height: clamp(420px, 60vh, 590px);
+        border-radius: 18px;
+    }
+
+    .ldr-onboarding__hero-frame::after {
+        inset: 16px;
+        border-radius: 18px;
+    }
+
+    .ldr-onboarding__badges {
+        top: 34px;
+        right: 34px;
+        left: 34px;
+    }
+
+    .ldr-onboarding__hero-foot {
+        right: 34px;
+        bottom: 34px;
+        left: 34px;
+    }
+
+    .ldr-onboarding__pill {
+        padding: 8px 13px;
+        font-size: 13px;
+    }
+
+    .ldr-onboarding__safe {
+        padding: 8px 13px;
+        font-size: 13px;
+    }
+
+    .ldr-onboarding__lab {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+
+    .ldr-onboarding__dots {
+        justify-content: flex-start;
+        padding-top: var(--ldr-space-3);
+        padding-left: 10px;
+    }
+
+    .ldr-onboarding__content {
+        justify-content: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .ldr-onboarding__heading {
+        font-size: clamp(34px, 3.2vw, 45px);
+        line-height: 1.14;
+    }
+
+    .ldr-onboarding__lead {
+        margin-top: var(--ldr-space-4);
+        font-size: 17px;
+        line-height: 1.65;
+    }
+
+    .ldr-onboarding__features {
+        gap: 12px;
+        margin-top: var(--ldr-space-6);
+    }
+
+    .ldr-onboarding__feature {
+        padding: 12px 14px;
+        border-radius: 16px;
+    }
+
+    .ldr-onboarding__feature-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+    }
+
+    .ldr-onboarding__feature-text strong {
+        font-size: 14.5px;
+    }
+
+    .ldr-onboarding__feature-text span {
+        font-size: 13.5px;
+    }
+
+    .ldr-onboarding__footer {
+        gap: 12px;
+        padding-top: var(--ldr-space-8);
+    }
+
+    .ldr-onboarding__cta {
+        min-height: 56px;
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .ldr-onboarding__body {
+        grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    }
+
+    .ldr-onboarding__content {
+        max-width: 520px;
+    }
+}

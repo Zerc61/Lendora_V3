@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>Lendora</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "outline": "#8c7164",
+        "surface-container-low": "#f6f3f2",
+        "surface-bright": "#fcf9f8",
+        "inverse-surface": "#303030",
+        "text-muted": "#6B7280",
+        "surface-white": "#FFFFFF",
+        "on-primary": "#ffffff",
+        "primary-fixed-dim": "#ffb690",
+        "info": "#0284C7",
+        "on-surface-variant": "#584237",
+        "border": "#E5E7EB",
+        "on-primary-container": "#582200",
+        "violet-bg": "#F5F3FF",
+        "on-error-container": "#93000a",
+        "success": "#16A34A",
+        "background": "#fcf9f8",
+        "warning-bg": "#FFFBEB",
+        "inverse-primary": "#ffb690",
+        "surface-container-high": "#eae7e7",
+        "on-primary-fixed-variant": "#783200",
+        "secondary-container": "#fd651e",
+        "secondary": "#a73a00",
+        "error-container": "#ffdad6",
+        "danger": "#DC2626",
+        "tertiary": "#625e56",
+        "tertiary-container": "#a09a91",
+        "on-secondary-container": "#571a00",
+        "surface-variant": "#e4e2e1",
+        "tertiary-fixed": "#e9e1d8",
+        "surface-dim": "#dcd9d9",
+        "on-background": "#1b1c1c",
+        "on-secondary-fixed-variant": "#7f2b00",
+        "on-primary-fixed": "#341100",
+        "error": "#ba1a1a",
+        "info-bg": "#F0F9FF",
+        "on-error": "#ffffff",
+        "surface-container-highest": "#e4e2e1",
+        "warning": "#D97706",
+        "danger-bg": "#FEF2F2",
+        "inverse-on-surface": "#f3f0ef",
+        "on-tertiary-fixed": "#1e1b15",
+        "on-tertiary-fixed-variant": "#4a463f",
+        "surface-tint": "#9d4300",
+        "on-secondary-fixed": "#370e00",
+        "success-bg": "#F0FDF4",
+        "primary-container": "#f97316",
+        "surface": "#F5F5F5",
+        "secondary-fixed": "#ffdbce",
+        "violet": "#7C3AED",
+        "surface-container": "#f0eded",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#e0c0b1",
+        "on-tertiary-container": "#36322c",
+        "on-secondary": "#ffffff",
+        "primary-fixed": "#ffdbca",
+        "tertiary-fixed-dim": "#ccc5bc",
+        "on-surface": "#1b1c1c",
+        "secondary-fixed-dim": "#ffb599",
+        "primary": "#9d4300",
+        "on-tertiary": "#ffffff"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.5rem",
+        "space-xl": "2rem",
+        "margin": "1rem",
+        "space-lg": "1.5rem",
+        "space-md": "1rem",
+        "space-xs": "0.25rem",
+        "gutter": "1rem"
+      },
+      "fontFamily": {
+        "headline-md": ["Plus Jakarta Sans"],
+        "caption": ["Inter"],
+        "display": ["Plus Jakarta Sans"],
+        "label-md": ["Inter"],
+        "headline-lg": ["Plus Jakarta Sans"],
+        "body-md": ["Inter"],
+        "code-sm": ["JetBrains Mono"],
+        "headline-sm": ["Plus Jakarta Sans"],
+        "body-sm": ["Inter"]
+      },
+      "fontSize": {
+        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+        "caption": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+        "display": ["28px", {"lineHeight": "36px", "fontWeight": "800"}],
+        "label-md": ["13px", {"lineHeight": "20px", "fontWeight": "600"}],
+        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+        "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+        "headline-sm": ["17px", {"lineHeight": "24px", "fontWeight": "600"}],
+        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-on-surface min-h-screen flex flex-col antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface-white/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Lendora Logo" class="h-8 w-8 rounded-lg object-contain shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS6-NsndtcUVlHLtX5BnSWmubUOixZVyyn7oJIHrpdojAiNzoL_h-jMvbIK80aVr5qozlyl0Hc6Yju9ZF4kbRFrvAn7ZguVYZdvfxHQxEbgnQESaIVC1-XB1Hecp5rzVhXvJExOciQ_x2_d8vSCn3UGias_4qtP5aikE1AWpM97g9GyWziaq17Z1ry9brvxeocuTUPWl8OzfaqYTUiqz8ffXYw1GOIFNpYDZ0nf2Rr49T_4gykZGQRdQ"><h1 class="text-headline-sm font-headline-sm text-on-surface tracking-tight truncate max-w-[170px]">Katalog</h1></div><div class="flex items-center gap-space-sm"><div class="w-10 h-10 flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPOP30q4siQAUb5jQtas83LmH7aKCzLmc_wH0If8-I9BAL5g1364rTGK8La-GyGgDPwVoXl35_LRN3ecXT_ebidWQvBgeCBDVUDUH8JRlBLS7bJHYjakQeBpHVjymeCVydOozDQ3k9nD-ljEFaWs4w20nB8LqhpO3aRQCdDtDibVHgnJzIGVwdws1VxI5RxhfdlWHsqRUl7aSdp8W1lK9cGpRUlOXp03IlETfkK6r9"></div></div></div></header><main class="flex-1 w-full bg-background pt-16 pb-24"><div class="flex flex-col w-full px-margin pb-space-lg">
+<!-- Search & Filter Controls -->
+<div class="flex items-center gap-space-sm pt-space-sm">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px] pointer-events-none">search</span>
+<input class="w-full h-[44px] pl-10 pr-3 bg-surface-white text-on-surface font-body-md text-body-md rounded-[10px] shadow-sm outline-none placeholder:text-text-muted transition-all focus:shadow-[0_0_0_2px_rgba(249,115,22,0.35)]" id="catalogSearch" placeholder="Cari kamera, lensa, tripod..." type="search">
+</div>
+<button aria-label="Filter katalog" class="h-[44px] w-[44px] shrink-0 bg-surface-white rounded-[10px] flex items-center justify-center text-on-surface shadow-sm active:scale-95 transition-transform" id="filterTrigger" type="button">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant">tune</span>
+</button>
+</div>
+<!-- Horizontal Scrollable Category Filter Chips -->
+<div class="mt-space-md -mx-margin px-margin flex items-center gap-space-sm overflow-x-auto no-scrollbar scroll-smooth">
+<button class="category-chip shrink-0 h-[36px] px-3.5 rounded-full bg-[#FFF7ED] text-primary-container font-label-md text-label-md shadow-sm transition-all" data-category="all" type="button">
+      Semua
+    </button>
+<button class="category-chip shrink-0 h-[36px] px-3.5 rounded-full bg-surface-white text-text-muted font-label-md text-label-md shadow-sm hover:text-on-surface transition-all" data-category="camera" type="button">
+      Kamera Mirrorless
+    </button>
+<button class="category-chip shrink-0 h-[36px] px-3.5 rounded-full bg-surface-white text-text-muted font-label-md text-label-md shadow-sm hover:text-on-surface transition-all" data-category="lens" type="button">
+      Lensa
+    </button>
+<button class="category-chip shrink-0 h-[36px] px-3.5 rounded-full bg-surface-white text-text-muted font-label-md text-label-md shadow-sm hover:text-on-surface transition-all" data-category="tripod" type="button">
+      Tripod
+    </button>
+<button class="category-chip shrink-0 h-[36px] px-3.5 rounded-full bg-surface-white text-text-muted font-label-md text-label-md shadow-sm hover:text-on-surface transition-all" data-category="lighting" type="button">
+      Lampu &amp; Aksesori
+    </button>
+</div>
+<!-- Results Counter & Quick Sort -->
+<div class="mt-space-md flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="font-body-sm text-body-sm text-text-muted tabular-nums">24 unit tersedia</span>
+</div>
+<div class="relative">
+<button class="flex items-center gap-1 h-8 px-2.5 rounded-lg bg-surface-container-low text-on-surface font-label-md text-caption active:bg-surface-variant transition-colors" id="sortBtn" type="button">
+<span class="">Terbaru</span>
+<span class="material-symbols-outlined text-[18px] text-text-muted">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<!-- 2-Column Responsive Asset Grid -->
+<div class="mt-space-md grid grid-cols-2 gap-3" id="assetGrid">
+<!-- Card 1: Sony A7 III -->
+<article class="bg-surface-white rounded-[14px] overflow-hidden shadow-sm flex flex-col justify-between transition-transform active:scale-[0.98]">
+<div>
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional studio shot of a Sony A7 III mirrorless full-frame camera mounted with a prime lens, clean studio lighting with soft highlights, resting on a matte industrial workspace, neutral warm background matching Lendora tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbpkCXy1VEbEh8HN2DSbUh5zyTzKef96e2On8iDFrhEyLFFlXRLXRf6sJFxIW8pIT0iOadQmyCErY9V-an7xHWbmriG_xVEnmXNqSBbW0kcOUah3e5DW58T0ZGmYbKNWv29YaztQr7LbrCrFS0zCRowz3hCIHwEu6mSg-D0scb7pfHkQJXc017Bopzrka1Up5J6uyn2HF0mHkZljHfsW7lR1r9m20vacgkizDBLxmO">
+<div class="absolute top-2 right-2 flex items-center">
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+              Tersedia
+            </span>
+</div>
+</div>
+<div class="p-3">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+            Kamera Mirrorless
+          </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug line-clamp-1">Sony A7 III</h2>
+<p class="font-code-sm text-code-sm text-text-muted mt-0.5">LDR-CAM-0001</p>
+</div>
+</div>
+<div class="px-3 pb-3 pt-0">
+<div class="pt-2 flex items-center justify-between text-text-muted font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-success">check_circle</span>
+            Baik
+          </span>
+<span class="flex items-center gap-0.5 text-caption font-caption text-text-muted">
+<span class="material-symbols-outlined text-[14px]">inventory_2</span>
+            Lemari A1
+          </span>
+</div>
+</div>
+</article>
+<!-- Card 2: Canon EOS R6 -->
+<article class="bg-surface-white rounded-[14px] overflow-hidden shadow-sm flex flex-col justify-between transition-transform active:scale-[0.98]">
+<div>
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Canon EOS R6 digital mirrorless camera angled view on equipment tray, crisp studio key lights, professional cinematography equipment aesthetic, minimal warm studio surroundings." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8aDpbEE6bwZhbEdYyhWs79msqm4ruq_qvvmkC5OMJpOI7hB8F1xn5syqIqHRA8NjqKu_e8j3D9MAr25sObgQb5YZMI9AWBvzd55jTYrMcRNa0wUVf7CyImcqGC6zf7ZvBabnYZ5OgGerPLk-8NSij8ZoIfhObMCAunAoLFc3G0VP9u6Q4pt-SZ41SMlnJ_xJa1-_jOV38FG5qdWOzRk49zjyBPpQLBiXnpt7RCskb">
+<div class="absolute top-2 right-2 flex items-center">
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+              Tersedia
+            </span>
+</div>
+</div>
+<div class="p-3">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+            Kamera Mirrorless
+          </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug line-clamp-1">Canon EOS R6</h2>
+<p class="font-code-sm text-code-sm text-text-muted mt-0.5">LDR-CAM-0002</p>
+</div>
+</div>
+<div class="px-3 pb-3 pt-0">
+<div class="pt-2 flex items-center justify-between text-text-muted font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-success">check_circle</span>
+            Baik
+          </span>
+<span class="flex items-center gap-0.5 text-caption font-caption text-text-muted">
+<span class="material-symbols-outlined text-[14px]">inventory_2</span>
+            Lemari A1
+          </span>
+</div>
+</div>
+</article>
+<!-- Card 3: Sony 24-70mm GM -->
+<article class="bg-surface-white rounded-[14px] overflow-hidden shadow-sm flex flex-col justify-between transition-transform active:scale-[0.98]">
+<div>
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Sony FE 24-70mm f/2.8 GM zoom lens placed vertically on high quality matte film table, subtle glass flare on lens front element, precise technical camera gear photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYP6WZHRcTcnazw6wd3JhyVnuqQmvDkNe8GWcVN5FpG_wp6X1giKolE9KefhY2ehlhiI7diRQXKMOsyUpHPjU-FzvfS5y9ronJsPDs8cFRFbqw7a9j2DtHaFpm3VN30lzaAzettfaVoQZrwYZhGv08cZze4WaHj2WxPBdWgsLnBLJGIFZDu27_KhK8HszRcrjNsPlwCPl5t4mNNzsD_JAdy6eoiN_POkFOOO3HMFFp">
+<div class="absolute top-2 right-2 flex items-center">
+<span class="h-6 px-2.5 rounded-full bg-info-bg text-info font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-info"></span>
+              Dipinjam
+            </span>
+</div>
+</div>
+<div class="p-3">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+            Lensa
+          </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug line-clamp-1">Sony 24-70mm GM</h2>
+<p class="font-code-sm text-code-sm text-text-muted mt-0.5">LDR-LNS-0001</p>
+</div>
+</div>
+<div class="px-3 pb-3 pt-0">
+<div class="pt-2 flex items-center text-info font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[15px] mr-1">schedule</span>
+<span class="">Kembali 14 Nov</span>
+</div>
+</div>
+</article>
+<!-- Card 4: Manfrotto Tripod -->
+<article class="bg-surface-white rounded-[14px] overflow-hidden shadow-sm flex flex-col justify-between transition-transform active:scale-[0.98]">
+<div>
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Manfrotto Befree Live compact video travel tripod standing in media production room, fluid video head visible, durable carbon fiber and aluminum details, soft rim light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEHbPjKuZDoZtnj0Mld7rW6OUR4wT0PXKS_9XvQNczForhVPqsj4RC_VK4UcH_fdxsV_Yq_Cd8Oi_JE5twma4X9waMqij7whEvJrKZZhxLjibXRbZ0T6TzW0gk8YZAoiHvCIMBBl8k2Sq_96NEgotdmq7cWUDvgFQKe4EzkLeGzRmg6GvEA2UTFnwRl_xQIebn1R4DtZZIa-gKJOmXjSKTQe9oj4b-DF-6ehNvec9D">
+<div class="absolute top-2 right-2 flex items-center">
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+              Tersedia
+            </span>
+</div>
+</div>
+<div class="p-3">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+            Tripod
+          </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug line-clamp-1">Manfrotto Befree</h2>
+<p class="font-code-sm text-code-sm text-text-muted mt-0.5">LDR-TRP-0001</p>
+</div>
+</div>
+<div class="px-3 pb-3 pt-0">
+<div class="pt-2 flex items-center justify-between text-text-muted font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-success">check_circle</span>
+            Baik
+          </span>
+<span class="flex items-center gap-0.5 text-caption font-caption text-text-muted">
+<span class="material-symbols-outlined text-[14px]">inventory_2</span>
+            Area B2
+          </span>
+</div>
+</div>
+</article>
+<!-- Card 5: Godox SL60W -->
+<article class="bg-surface-white rounded-[14px] overflow-hidden shadow-sm flex flex-col justify-between transition-transform active:scale-[0.98]">
+<div>
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Godox SL60W continuous LED video light unit with reflector mounted, studio lighting gear on neutral staging table, clean product equipment photo with warm accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWRscq41I1CcJjuug5L-bJs9jwHycmaOXL5vZ-miIB4qi5fKE7oTBpO1LH8Zu9AGu5DXT3tXmi_EGnTOVEMJSg8gIgxvZvlAjjLvckpUtRX7xX_ss3uE8J_yrfcWQyVqxo-g0NFscCRfawQ9_fvpdlVHcT7Wtu7Y_2IgFx500VZ6Tw5_OWyge2iNaUxWtcUg1VXuIH7PP7l6RBcVpsEx7c_H00AGi1BYEtP5UTGc9B">
+<div class="absolute top-2 right-2 flex items-center">
+<span class="h-6 px-2.5 rounded-full bg-success-bg text-success font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+              Tersedia
+            </span>
+</div>
+</div>
+<div class="p-3">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+            Lampu
+          </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug line-clamp-1">Godox SL60W LED</h2>
+<p class="font-code-sm text-code-sm text-text-muted mt-0.5">LDR-LMP-0001</p>
+</div>
+</div>
+<div class="px-3 pb-3 pt-0">
+<div class="pt-2 flex items-center justify-between text-text-muted font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-success">check_circle</span>
+            Baik
+          </span>
+<span class="flex items-center gap-0.5 text-caption font-caption text-text-muted">
+<span class="material-symbols-outlined text-[14px]">inventory_2</span>
+            Rak C1
+          </span>
+</div>
+</div>
+</article>
+<!-- Card 6: DJI RS 3 Pro Gimbal -->
+<article class="bg-surface-white rounded-[14px] overflow-hidden shadow-sm flex flex-col justify-between transition-transform active:scale-[0.98]">
+<div>
+<div class="relative w-full aspect-[4/3] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="DJI RS 3 Pro 3-axis handheld gimbal stabilizer resting on dark equipment case, carbon fiber arms, precision mechanical balance knobs, sleek video gear aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnx9rCaqpBlEVvHC7kstdnarJXN8FlLOhFCTc7gZCG3FUzCorRDkaTvXVRfte08gyCN46V_Q1YsxXSzZpUwqriJhx5DZ6AOAykmZLzd-tfWBsWgtiIy2LZA28TmuqXg_0KrKhEmZ4xciqdE3bSSGlYXa_mdeP7CrDc0zqvGFUUlxRfgryskgEZ3sO3J6XlCdQanIYyML2Y5OWOmmOXRZp-jgtrXeA0oeSIcsOu8l-C">
+<div class="absolute top-2 right-2 flex items-center">
+<span class="h-6 px-2.5 rounded-full bg-violet-bg text-violet font-caption text-caption flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-violet"></span>
+              Direservasi
+            </span>
+</div>
+</div>
+<div class="p-3">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption mb-1">
+            Aksesori
+          </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug line-clamp-1">DJI RS 3 Pro</h2>
+<p class="font-code-sm text-code-sm text-text-muted mt-0.5">LDR-ACC-0003</p>
+</div>
+</div>
+<div class="px-3 pb-3 pt-0">
+<div class="pt-2 flex items-center text-violet font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[15px] mr-1">event_seat</span>
+<span class="">Booked besok</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+<script>
+  (function () {
+    const chips = document.querySelectorAll('.category-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => {
+          c.classList.remove('bg-[#FFF7ED]', 'text-primary-container');
+          c.classList.add('bg-surface-white', 'text-text-muted');
+        });
+        chip.classList.remove('bg-surface-white', 'text-text-muted');
+        chip.classList.add('bg-[#FFF7ED]', 'text-primary-container');
+      });
+    });
+
+    const searchInput = document.getElementById('catalogSearch');
+    const assetCards = document.querySelectorAll('#assetGrid article');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        assetCards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(query)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-white/95 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-stretch h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs" data-path="beranda" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-caption text-caption mt-0.5">Beranda</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 transition-colors py-space-xs text-primary-container font-semibold" data-path="katalog" href="#"><span class="material-symbols-outlined text-[24px]">search</span><span class="font-caption text-caption mt-0.5">Katalog</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs relative" data-path="peminjaman-saya" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">assignment</span><span class="absolute -top-1 -right-2 min-w-[16px] h-4 px-1 rounded-full bg-primary-container text-surface-white text-[10px] font-bold flex items-center justify-center leading-none">1</span></div><span class="font-caption text-caption mt-0.5 whitespace-nowrap">Pinjaman</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs relative" data-path="notifikasi" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">notifications</span><span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-danger ring-2 ring-surface-white"></span></div><span class="font-caption text-caption mt-0.5">Notifikasi</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] flex-1 text-text-muted hover:text-on-surface transition-colors py-space-xs" data-path="profil" href="#"><span class="material-symbols-outlined text-[24px]">person</span><span class="font-caption text-caption mt-0.5">Profil</span></a></div></nav>
+
+</body></html>
