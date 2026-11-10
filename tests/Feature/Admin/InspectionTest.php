@@ -84,6 +84,29 @@ class InspectionTest extends TestCase
         Notification::assertSentTo($this->admin, AssetDamageNotification::class);
     }
 
+    public function test_organization_admin_can_view_inspections_but_cannot_record_one(): void
+    {
+        $asset = $this->borrowedAsset();
+
+        $this->actingAs($this->admin)
+            ->get(route('admin.inspections.index'))
+            ->assertOk()
+            ->assertDontSee(route('admin.inspections.create'));
+
+        $this->actingAs($this->admin)
+            ->get(route('admin.inspections.create'))
+            ->assertForbidden();
+
+        $this->actingAs($this->admin)
+            ->post(route('admin.inspections.store'), [
+                'asset_id' => $asset->id,
+                'result' => InspectionResult::Ok->value,
+            ])
+            ->assertForbidden();
+
+        $this->assertSame(0, \App\Models\Inspection::count());
+    }
+
     public function test_ok_result_returns_asset_to_available(): void
     {
         $asset = $this->borrowedAsset();

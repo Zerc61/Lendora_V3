@@ -212,14 +212,17 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::post('bookings/{booking}/extensions/{extension}/reject', [AdminBookingController::class, 'rejectExtension'])->name('bookings.extensions.reject');
 
             Route::get('handovers', [AdminHandoverController::class, 'index'])->name('handovers.index');
-            Route::get('bookings/{booking}/handover', [AdminHandoverController::class, 'show'])->name('bookings.handover');
-            Route::post('bookings/{booking}/handover', [AdminHandoverController::class, 'store'])->name('bookings.handover.store');
             Route::get('bookings/{booking}/receipt/{type}', [AdminHandoverController::class, 'receipt'])
                 ->whereIn('type', ['pickup', 'return'])
                 ->name('bookings.receipt');
 
             Route::post('assets/{asset}/retire', [AdminAssetController::class, 'retire'])->name('assets.retire');
             Route::resource('assets', AdminAssetController::class)->except(['show', 'index']);
+        });
+
+        Route::middleware('role:operator')->group(function () {
+            Route::get('bookings/{booking}/handover', [AdminHandoverController::class, 'show'])->name('bookings.handover');
+            Route::post('bookings/{booking}/handover', [AdminHandoverController::class, 'store'])->name('bookings.handover.store');
         });
 
         Route::middleware('role:organization_admin')->group(function () {
@@ -236,11 +239,16 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
         });
 
         Route::middleware('role:operator,organization_admin,technician')->group(function () {
-            Route::resource('inspections', AdminInspectionController::class)->only(['index', 'create', 'store']);
+            Route::get('inspections', [AdminInspectionController::class, 'index'])->name('inspections.index');
             Route::get('inspections/{inspection}', [AdminInspectionController::class, 'show'])
                 ->whereNumber('inspection')
                 ->name('inspections.show');
             Route::get('maintenances', [AdminMaintenanceController::class, 'index'])->name('maintenances.index');
+        });
+
+        Route::middleware('role:operator,technician')->group(function () {
+            Route::get('inspections/create', [AdminInspectionController::class, 'create'])->name('inspections.create');
+            Route::post('inspections', [AdminInspectionController::class, 'store'])->name('inspections.store');
         });
 
         Route::middleware('role:operator,organization_admin')->group(function () {

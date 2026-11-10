@@ -7,7 +7,7 @@
     $canReject = $canDecide && in_array($roleSlug, ['operator', 'organization_admin'], true);
     $isPending = $booking->status === App\Enums\BookingStatus::Pending;
     $isPickup = $booking->status === App\Enums\BookingStatus::Approved;
-    $canHandover = in_array($roleSlug, ['operator', 'organization_admin'], true)
+    $canHandover = $roleSlug === 'operator'
         && in_array($booking->status, [App\Enums\BookingStatus::Approved, App\Enums\BookingStatus::Active], true);
 
     $formatRange = $booking->requested_start_date->format('M Y') === $booking->requested_end_date->format('M Y')
@@ -429,7 +429,7 @@
                         {{ __('ui.booking.report_damage') }}
                     </a>
 
-                    @if ($booking->status === App\Enums\BookingStatus::Active)
+                    @if ($roleSlug === 'operator' && $booking->status === App\Enums\BookingStatus::Active)
                         <a class="ldr-btn ldr-btn--ghost ldr-btn--block"
                            href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => 'return']) }}">
                             <x-icon name="arrow-left-right" :size="16" />

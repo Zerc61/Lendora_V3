@@ -208,6 +208,27 @@ class HandoverTest extends TestCase
             ->assertSee('Kamera Uji');
     }
 
+    public function test_organization_admin_can_view_handovers_but_cannot_record_one(): void
+    {
+        $admin = User::where('email', 'admin@lendora.test')->firstOrFail();
+        $booking = $this->booking(BookingStatus::Approved, AssetStatus::Reserved, BookingItemStatus::Approved);
+
+        $this->actingAs($admin)
+            ->get(route('admin.handovers.index'))
+            ->assertOk()
+            ->assertDontSee(route('admin.bookings.handover', ['booking' => $booking, 'type' => 'pickup']));
+
+        $this->actingAs($admin)
+            ->get(route('admin.bookings.handover', ['booking' => $booking, 'type' => 'pickup']))
+            ->assertForbidden();
+
+        $this->actingAs($admin)
+            ->post(route('admin.bookings.handover.store', $booking), ['type' => 'pickup'])
+            ->assertForbidden();
+
+        $this->assertSame(0, $booking->handovers()->count());
+    }
+
     private function booking(BookingStatus $status, AssetStatus $assetStatus, BookingItemStatus $itemStatus): Booking
     {
         $asset = Asset::create([

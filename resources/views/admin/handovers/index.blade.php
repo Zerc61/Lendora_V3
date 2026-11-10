@@ -2,6 +2,10 @@
 
 @section('title', __('ui.nav.handovers'))
 
+@php
+    $canHandover = auth()->user()->role->slug === 'operator';
+@endphp
+
 @section('content')
     <div class="ldr-page-head">
         <div>
@@ -106,11 +110,13 @@
                         <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.bookings.show', $booking) }}">
                             {{ __('ui.booking.detail_action') }}
                         </a>
-                        <a class="ldr-btn ldr-btn--primary ldr-btn--sm"
-                           href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => $isPickup ? 'pickup' : 'return']) }}">
-                            <x-icon name="arrow-left-right" :size="16" />
-                            {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
-                        </a>
+                        @if ($canHandover)
+                            <a class="ldr-btn ldr-btn--primary ldr-btn--sm"
+                               href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => $isPickup ? 'pickup' : 'return']) }}">
+                                <x-icon name="arrow-left-right" :size="16" />
+                                {{ $isPickup ? __('ui.handover.pickup_action') : __('ui.handover.return_action') }}
+                            </a>
+                        @endif
                     </div>
                 </article>
             @endforeach
