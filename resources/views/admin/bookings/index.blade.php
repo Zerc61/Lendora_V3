@@ -35,10 +35,12 @@
         </div>
 
         <div class="ldr-page-head__actions">
-            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.bookings.calendar') }}">
-                <x-icon name="calendar" :size="18" />
-                {{ __('ui.booking.calendar') }}
-            </a>
+            @if (in_array(auth()->user()->role->slug, ['operator', 'organization_admin'], true))
+                <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.bookings.calendar') }}">
+                    <x-icon name="calendar" :size="18" />
+                    {{ __('ui.booking.calendar') }}
+                </a>
+            @endif
             <a class="ldr-btn ldr-btn--ghost ldr-btn--sm" href="{{ route('admin.bookings.index', ['status' => 'all']) }}">
                 {{ __('ui.queue.history') }}
                 <x-icon name="arrow-right" :size="16" />

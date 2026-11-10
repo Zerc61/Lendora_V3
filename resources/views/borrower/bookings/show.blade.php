@@ -39,7 +39,7 @@
                 <span class="ldr-loan-summary__icon"><x-icon name="camera" :size="22" /></span>
                 <div>
                     <div class="ldr-loan-summary__topline">
-                        <span class="ldr-mono ldr-loan-code">{{ $booking->code }}</span>
+                        <h1 class="ldr-mono ldr-loan-code">{{ $booking->code }}</h1>
                         <x-status-badge type="booking" :status="$status->value" />
                     </div>
                     <p>{{ $booking->items->pluck('asset.name')->filter()->join(', ') }}</p>
