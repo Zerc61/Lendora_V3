@@ -17,13 +17,22 @@ class BorrowerScoreService
         ];
     }
 
-    private function getTier(int $score): string
+    public function tierFor(?int $score): ?string
     {
+        if ($score === null) {
+            return null;
+        }
+
         if ($score >= 90) return 'A+';
         if ($score >= 80) return 'A';
         if ($score >= 70) return 'B+';
         if ($score >= 60) return 'B';
         if ($score >= 50) return 'C';
         return 'D';
+    }
+
+    private function getTier(int $score): string
+    {
+        return (string) $this->tierFor($score);
     }
 }

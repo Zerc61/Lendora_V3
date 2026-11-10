@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\SearchController as AdminSearchController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\ShiftController as AdminShiftController;
+use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Borrower\BookingController as BorrowerBookingController;
 use App\Http\Controllers\Borrower\BookingExtensionController as BorrowerBookingExtensionController;
@@ -155,6 +156,10 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
 
         Route::middleware('role:operator,organization_admin,admin_prodi')->group(function () {
             Route::get('categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+        });
+
+        Route::middleware('role:admin_prodi')->group(function () {
+            Route::get('students', [AdminStudentController::class, 'index'])->name('students.index');
         });
 
         Route::middleware('role:operator,organization_admin')->group(function () {

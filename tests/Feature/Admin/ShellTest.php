@@ -71,6 +71,8 @@ class ShellTest extends TestCase
         $response->assertSee('Laporan');
         $response->assertSee(__('ui.nav.otorisasi_khusus'));
         $response->assertSee(__('ui.nav.dashboard_prodi'));
+        $response->assertSee(__('ui.nav.students'));
+        $response->assertSee(route('admin.students.index'));
         $response->assertSee(route('admin.bookings.approval'));
         $response->assertSee(route('admin.assets.index'));
         $response->assertDontSee('Pengguna');
