@@ -77,6 +77,31 @@
             ];
         }
 
+        if ($role === 'organization_admin') {
+            $groups = [
+                __('ui.sections.inventory') => [
+                    ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.categories'), 'icon' => 'layers', 'href' => route('admin.categories.index'), 'match' => 'admin.categories.*', 'roles' => ['organization_admin']],
+                ],
+                __('ui.sections.borrowings') => [
+                    ['label' => __('ui.nav.booking_queue'), 'icon' => 'clipboard-list', 'href' => route('admin.bookings.index'), 'match' => 'admin.bookings.index', 'active_status' => 'not_all', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.all_bookings'), 'icon' => 'layers', 'href' => route('admin.bookings.index', ['status' => 'all']), 'match' => 'admin.bookings.index', 'active_status' => 'all', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.calendar'), 'icon' => 'calendar', 'href' => route('admin.bookings.calendar'), 'match' => 'admin.bookings.calendar', 'roles' => ['organization_admin']],
+                ],
+                __('ui.sections.operations') => [
+                    ['label' => __('ui.nav.handovers'), 'icon' => 'arrow-left-right', 'href' => route('admin.handovers.index'), 'match' => 'admin.handovers.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.inspections'), 'icon' => 'clipboard-check', 'href' => route('admin.inspections.index'), 'match' => 'admin.inspections.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.maintenances'), 'icon' => 'wrench', 'href' => route('admin.maintenances.index'), 'match' => 'admin.maintenances.*', 'roles' => ['organization_admin']],
+                ],
+                __('ui.sections.organization') => [
+                    ['label' => __('ui.nav.users_roles'), 'icon' => 'users', 'href' => route('admin.users.index'), 'match' => 'admin.users.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.reports_analytics'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.settings'), 'icon' => 'settings', 'href' => route('admin.settings.edit'), 'match' => 'admin.settings.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.activity_logs'), 'icon' => 'activity', 'href' => route('admin.activity-logs.index'), 'match' => 'admin.activity-logs.*', 'roles' => ['organization_admin']],
+                ],
+            ];
+        }
+
         if ($role === 'admin_prodi') {
             $groups = [
                 __('ui.sections.prodi_authorization') => [
