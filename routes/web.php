@@ -163,6 +163,7 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
         Route::middleware('role:admin_prodi')->group(function () {
             Route::get('courses', [AdminCourseController::class, 'index'])->name('courses.index');
             Route::get('practicum', [AdminPracticumScheduleController::class, 'index'])->name('practicum.index');
+            Route::get('reports/semester', [AdminReportController::class, 'semester'])->name('reports.semester');
             Route::get('students', [AdminStudentController::class, 'index'])->name('students.index');
         });
 

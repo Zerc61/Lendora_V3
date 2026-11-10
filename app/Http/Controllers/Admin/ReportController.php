@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\BookingItem;
 use App\Services\ReportAnalyticsService;
+use App\Services\SemesterReportService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -15,7 +16,10 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ReportController extends Controller
 {
-    public function __construct(private readonly ReportAnalyticsService $analytics) {}
+    public function __construct(
+        private readonly ReportAnalyticsService $analytics,
+        private readonly SemesterReportService $semester,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -27,6 +31,11 @@ class ReportController extends Controller
             $to,
             $request->integer('category_id') ?: null,
         ));
+    }
+
+    public function semester(Request $request): View
+    {
+        return view('admin.reports.semester', $this->semester->for($request->user()));
     }
 
     public function print(Request $request): View

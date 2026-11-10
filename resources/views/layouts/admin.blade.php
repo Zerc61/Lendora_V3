@@ -90,7 +90,8 @@
                     ['label' => __('ui.nav.categories'), 'icon' => 'layers', 'href' => route('admin.categories.index'), 'match' => 'admin.categories.*', 'roles' => ['admin_prodi']],
                 ],
                 __('ui.sections.reports_documents') => [
-                    ['label' => __('ui.nav.reports'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.semester_report'), 'icon' => 'clipboard-list', 'href' => route('admin.reports.semester'), 'match' => 'admin.reports.semester*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.reports'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.index', 'roles' => ['admin_prodi']],
                 ],
             ];
         }
