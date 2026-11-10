@@ -6,13 +6,17 @@ use App\Enums\PenaltyStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Penalty;
 use App\Services\PaymentService;
+use App\Services\PdfService;
 use App\Services\PenaltyService;
 use App\Services\SettingService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class PenaltyController extends Controller
 {
+    public function __construct(private readonly PdfService $pdf) {}
+
     public function index(Request $request): View
     {
         $user = $request->user();
@@ -78,7 +82,7 @@ class PenaltyController extends Controller
         ]);
     }
 
-    public function document(Request $request, Penalty $penalty, string $type): View
+    public function document(Request $request, Penalty $penalty, string $type): View|Response
     {
         abort_unless($penalty->borrower_id === $request->user()->id, 403);
 
@@ -89,11 +93,17 @@ class PenaltyController extends Controller
             'total_amount' => $penalty->total_amount,
         ];
 
-        return view('borrower.penalties.document', [
+        $data = [
             'penalty' => $penalty,
             'breakdown' => $breakdown,
             'type' => $type,
-        ]);
+        ];
+
+        if ($request->query('format') === 'pdf') {
+            return $this->pdf->download('borrower.penalties.document', $data, $penalty->bap_number.'-'.$type.'.pdf');
+        }
+
+        return view('borrower.penalties.document', $data);
     }
 
     public function submitProof(Request $request, \App\Models\Payment $payment): \Illuminate\Http\RedirectResponse

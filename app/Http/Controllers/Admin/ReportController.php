@@ -6,16 +6,26 @@ use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\BookingItem;
+use App\Services\PdfService;
 use App\Services\ReportAnalyticsService;
+use App\Services\SemesterReportService;
+use App\Services\SpreadsheetService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ReportController extends Controller
 {
-    public function __construct(private readonly ReportAnalyticsService $analytics) {}
+    public function __construct(
+        private readonly ReportAnalyticsService $analytics,
+        private readonly SemesterReportService $semester,
+        private readonly PdfService $pdf,
+        private readonly SpreadsheetService $spreadsheet,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -27,6 +37,66 @@ class ReportController extends Controller
             $to,
             $request->integer('category_id') ?: null,
         ));
+    }
+
+    public function semester(Request $request): View
+    {
+        return view('admin.reports.semester', $this->semester->for($request->user()));
+    }
+
+    public function semesterExport(Request $request): StreamedResponse|BinaryFileResponse
+    {
+        $report = $this->semester->for($request->user());
+        $base = 'laporan-semester-'.$report['semester']['term'].'-'.str_replace('/', '-', $report['semester']['year']);
+        $headings = ['Kategori', 'Unit', 'Jam permintaan', 'Jam kapasitas', 'Pemanfaatan (%)', 'Pengajuan', 'Ditolak', 'Rasio penolakan (%)', 'Status'];
+        $rows = $report['rows']->map(fn (array $row): array => [
+            $row['category']->name,
+            $row['units'],
+            $row['demand_hours'],
+            $row['capacity_hours'],
+            $row['utilization'],
+            $row['requests'],
+            $row['rejected'],
+            $row['rejection_rate'],
+            $row['status'],
+        ])->values();
+
+        if ($request->query('format') === 'xlsx') {
+            return $this->spreadsheet->download($base.'.xlsx', $headings, $rows);
+        }
+
+        return response()->streamDownload(function () use ($headings, $rows): void {
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, $headings);
+
+            foreach ($rows as $row) {
+                fputcsv($handle, $row);
+            }
+
+            fclose($handle);
+        }, $base.'.csv', ['Content-Type' => 'text/csv; charset=UTF-8']);
+    }
+
+    public function semesterPdf(Request $request): Response
+    {
+        $report = $this->semester->for($request->user());
+        $filename = 'laporan-semester-'.$report['semester']['term'].'-'.str_replace('/', '-', $report['semester']['year']).'.pdf';
+
+        return $this->pdf->download('admin/reports/semester', $report, $filename, 'a4');
+    }
+
+    public function pdf(Request $request): Response
+    {
+        [$from, $to] = $this->period($request);
+        $data = $this->analytics->build(
+            $request->user()->organization_id,
+            $from,
+            $to,
+            $request->integer('category_id') ?: null,
+        );
+
+        return $this->pdf->download('admin/reports/print', $data, 'laporan-'.$from->format('Ymd').'-'.$to->format('Ymd').'.pdf');
     }
 
     public function print(Request $request): View
@@ -41,7 +111,7 @@ class ReportController extends Controller
         ));
     }
 
-    public function export(Request $request): StreamedResponse
+    public function export(Request $request): StreamedResponse|BinaryFileResponse
     {
         [$from, $to] = $this->period($request);
         $categoryId = $request->integer('category_id') ?: null;
@@ -63,27 +133,33 @@ class ReportController extends Controller
             ->orderBy('requested_start_date')
             ->get();
 
-        $filename = "laporan-peminjaman-{$from->format('Ymd')}-{$to->format('Ymd')}.csv";
+        $base = "laporan-peminjaman-{$from->format('Ymd')}-{$to->format('Ymd')}";
+        $headings = ['Kode', 'Peminjam', 'Mulai', 'Selesai', 'Durasi (hari)', 'Status', 'Unit'];
+        $rows = $bookings->map(fn (Booking $booking): array => [
+            $booking->code,
+            $booking->borrower?->name,
+            $booking->requested_start_date->toDateString(),
+            $booking->requested_end_date->toDateString(),
+            $booking->durationInDays(),
+            $booking->status->value,
+            $booking->items->map(fn (BookingItem $item) => $item->asset?->code)->filter()->implode('; '),
+        ]);
 
-        return response()->streamDownload(function () use ($bookings): void {
+        if ($request->query('format') === 'xlsx') {
+            return $this->spreadsheet->download($base.'.xlsx', $headings, $rows);
+        }
+
+        return response()->streamDownload(function () use ($headings, $rows): void {
             $handle = fopen('php://output', 'w');
 
-            fputcsv($handle, ['Kode', 'Peminjam', 'Mulai', 'Selesai', 'Durasi (hari)', 'Status', 'Unit']);
+            fputcsv($handle, $headings);
 
-            foreach ($bookings as $booking) {
-                fputcsv($handle, [
-                    $booking->code,
-                    $booking->borrower?->name,
-                    $booking->requested_start_date->toDateString(),
-                    $booking->requested_end_date->toDateString(),
-                    $booking->durationInDays(),
-                    $booking->status->value,
-                    $booking->items->map(fn (BookingItem $item) => $item->asset?->code)->filter()->implode('; '),
-                ]);
+            foreach ($rows as $row) {
+                fputcsv($handle, $row);
             }
 
             fclose($handle);
-        }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
+        }, $base.'.csv', ['Content-Type' => 'text/csv; charset=UTF-8']);
     }
 
     /**

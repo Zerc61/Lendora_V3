@@ -7,7 +7,7 @@
     $canReject = $canDecide && in_array($roleSlug, ['operator', 'organization_admin'], true);
     $isPending = $booking->status === App\Enums\BookingStatus::Pending;
     $isPickup = $booking->status === App\Enums\BookingStatus::Approved;
-    $canHandover = in_array($roleSlug, ['operator', 'organization_admin'], true)
+    $canHandover = $roleSlug === 'operator'
         && in_array($booking->status, [App\Enums\BookingStatus::Approved, App\Enums\BookingStatus::Active], true);
 
     $formatRange = $booking->requested_start_date->format('M Y') === $booking->requested_end_date->format('M Y')
@@ -93,7 +93,7 @@
                         @csrf
                         <button type="submit" class="ldr-btn ldr-btn--primary" @disabled(! $canDecide)>
                             <x-icon name="check-circle" :size="18" />
-                            {{ __('ui.booking.approve') }}
+                            {{ $roleSlug === 'admin_prodi' && $canDecide ? __('ui.prodi.approve') : __('ui.booking.approve') }}
                         </button>
                     </form>
 
@@ -128,6 +128,94 @@
         <div class="ldr-alert ldr-alert--warning" role="status">
             {{ $blockReason }}
         </div>
+    @endif
+
+    @if ($prodiReview && $isPending && $prodiReview['card']['is_special'])
+        <section class="ldr-card ldr-prodi-review">
+            <div class="ldr-prodi-review__head">
+                <span class="ldr-prodi-panel__icon"><x-icon name="shield-check" :size="20" /></span>
+                <div>
+                    <h2>{{ __('ui.prodi.identity_title') }}</h2>
+                    <p class="ldr-muted">{{ __('ui.prodi.identity_hint') }}</p>
+                </div>
+                <span class="ldr-badge ldr-badge--warning">
+                    {{ __('ui.prodi.value') }}: Rp {{ number_format($prodiReview['value'], 0, ',', '.') }}
+                </span>
+            </div>
+
+            <div class="ldr-prodi-escalation">
+                <strong>{{ __('ui.prodi.escalation_title') }}</strong>
+
+                @if ($prodiReview['reasons'] === [])
+                    <p>{{ __('ui.prodi.no_escalation') }}</p>
+                @else
+                    <ul>
+                        @foreach ($prodiReview['reasons'] as $reason)
+                            <li>{{ $reason }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+
+            <dl class="ldr-prodi-identity">
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.booking.borrower') }}</dt>
+                    <dd>{{ $borrower->name }}</dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>NIM</dt>
+                    <dd>{{ $borrower->nim ?: '—' }}</dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.profile.study_program') }}</dt>
+                    <dd>{{ $borrower->study_program ?: '—' }}</dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.prodi.semester') }}</dt>
+                    <dd>{{ $borrower->semester ?: '—' }}</dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.prodi.cohort') }}</dt>
+                    <dd>{{ $borrower->cohort_year ?: '—' }}</dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.prodi.concentration') }}</dt>
+                    <dd>{{ $borrower->study_concentration ?: '—' }}</dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.prodi.dpa') }}</dt>
+                    <dd>
+                        {{ $borrower->dpa_name ?: '—' }}
+                        @if ($borrower->dpa_nidn)
+                            <span class="ldr-muted">NIDN {{ $borrower->dpa_nidn }}</span>
+                        @endif
+                    </dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.prodi.compliance') }}</dt>
+                    <dd>
+                        {{ $borrower->compliance_score ?? '—' }}
+                        @if ($borrower->compliance_score !== null)
+                            <span class="ldr-muted">/ 100 · {{ $prodiReview['score']['tier'] }}</span>
+                        @endif
+                    </dd>
+                </div>
+                <div class="ldr-prodi-identity__item">
+                    <dt>{{ __('ui.prodi.academic_status') }}</dt>
+                    <dd>
+                        <span class="ldr-badge {{ $borrower->academic_verified_at ? 'ldr-badge--success' : 'ldr-badge--warning' }}">
+                            {{ $borrower->academic_verified_at ? __('ui.prodi.verified') : __('ui.prodi.unverified') }}
+                        </span>
+                    </dd>
+                </div>
+            </dl>
+
+            <ul class="ldr-prodi-rules">
+                <li>{{ __('ui.prodi.rule_duration', ['days' => $prodiReview['rules']['max_days']]) }}</li>
+                <li>{{ __('ui.prodi.rule_value', ['limit' => number_format($prodiReview['rules']['operator_limit'], 0, ',', '.')]) }}</li>
+                <li>{{ __('ui.prodi.rule_authority') }}</li>
+            </ul>
+        </section>
     @endif
 
     <div class="ldr-detail-grid">
@@ -341,7 +429,7 @@
                         {{ __('ui.booking.report_damage') }}
                     </a>
 
-                    @if ($booking->status === App\Enums\BookingStatus::Active)
+                    @if ($roleSlug === 'operator' && $booking->status === App\Enums\BookingStatus::Active)
                         <a class="ldr-btn ldr-btn--ghost ldr-btn--block"
                            href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => 'return']) }}">
                             <x-icon name="arrow-left-right" :size="16" />

@@ -207,6 +207,7 @@
     flex: none;
     align-items: center;
     gap: var(--ldr-space-3);
+    min-width: 0;
     min-height: 60px;
     padding: 0 var(--ldr-space-6);
     background: var(--ldr-white);
@@ -374,6 +375,7 @@
 .ldr-admin__search {
     position: relative;
     flex: 0 1 260px;
+    min-width: 0;
 }
 
 .ldr-admin__search .ldr-input {
@@ -393,6 +395,7 @@
 .ldr-admin__user {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     gap: var(--ldr-space-2);
     font-size: 14px;
     color: var(--ldr-text-muted);
@@ -571,6 +574,25 @@
         padding-left: 0;
         border-left: 0;
     }
+
+    .ldr-admin__user .ldr-badge,
+    .ldr-admin__shift {
+        display: none;
+    }
+
+    .ldr-admin__title {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ldr-admin__user-name {
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 640px) {
@@ -587,6 +609,7 @@
     flex: 1;
     padding: var(--ldr-space-6);
     overflow-y: auto;
+    min-width: 0;
 }
 
 .ldr-admin__backdrop {
@@ -795,6 +818,7 @@
     border-radius: var(--ldr-radius-card);
     box-shadow: var(--ldr-shadow-sm);
     overflow: hidden;
+    contain: paint;
 }
 
 .ldr-table-wrap {
@@ -4367,6 +4391,13 @@
     border-radius: var(--ldr-radius-card);
 }
 
+@media screen and (max-width: 640px) {
+    .ldr-print .ldr-card {
+        overflow-x: auto;
+        contain: paint;
+    }
+}
+
 .ldr-print-head {
     display: flex;
     flex-wrap: wrap;
@@ -5460,5 +5491,414 @@
     .ldr-apv-item .ldr-badge {
         grid-column: 2;
         justify-self: start;
+    }
+}
+
+/* Admin Prodi */
+.ldr-prodi-head__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--ldr-space-2);
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ldr-primary-ink);
+    background: var(--ldr-tint);
+    border-radius: 999px;
+}
+
+.ldr-prodi-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ldr-space-3);
+    margin-bottom: var(--ldr-space-4);
+}
+
+.ldr-prodi-alert > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.ldr-prodi-alert p {
+    margin-top: 2px;
+    font-size: 12.5px;
+}
+
+.ldr-prodi-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: var(--ldr-space-4);
+    align-items: start;
+}
+
+.ldr-prodi-rail {
+    display: grid;
+    gap: var(--ldr-space-4);
+}
+
+.ldr-prodi-panel {
+    padding: var(--ldr-space-4);
+}
+
+.ldr-prodi-panel__head,
+.ldr-prodi-review__head {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ldr-space-3);
+    margin-bottom: var(--ldr-space-3);
+}
+
+.ldr-prodi-panel__head > div,
+.ldr-prodi-review__head > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.ldr-prodi-panel__head h2,
+.ldr-prodi-review__head h2 {
+    font-size: 15px;
+}
+
+.ldr-prodi-panel__head p,
+.ldr-prodi-review__head p {
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.ldr-prodi-panel__icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    color: var(--ldr-primary-ink);
+    background: var(--ldr-tint);
+    border-radius: 9px;
+}
+
+.ldr-prodi-rules {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding-left: 18px;
+    font-size: 12.5px;
+    color: var(--ldr-text-muted);
+}
+
+.ldr-prodi-bars {
+    display: grid;
+    gap: var(--ldr-space-3);
+}
+
+.ldr-prodi-bar__head {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--ldr-space-2);
+    margin-bottom: 4px;
+    font-size: 12.5px;
+}
+
+.ldr-prodi-bar__track {
+    height: 6px;
+    overflow: hidden;
+    background: var(--ldr-surface);
+    border-radius: 999px;
+}
+
+.ldr-prodi-bar__fill {
+    display: block;
+    height: 100%;
+    background: var(--ldr-primary);
+    border-radius: inherit;
+}
+
+.ldr-prodi-card__assets {
+    font-size: 12.5px;
+    color: var(--ldr-text-muted);
+}
+
+.ldr-prodi-review {
+    margin-bottom: var(--ldr-space-4);
+    padding: var(--ldr-space-5);
+}
+
+.ldr-prodi-escalation {
+    margin-bottom: var(--ldr-space-4);
+    padding: var(--ldr-space-3);
+    font-size: 12.5px;
+    color: var(--ldr-warning-ink);
+    background: var(--ldr-warning-bg);
+    border: 1px solid #FDE68A;
+    border-radius: var(--ldr-radius-input);
+}
+
+.ldr-prodi-escalation ul {
+    margin: 4px 0 0;
+    padding-left: 18px;
+}
+
+.ldr-prodi-identity {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--ldr-space-3);
+    margin: 0 0 var(--ldr-space-4);
+}
+
+.ldr-prodi-identity__item {
+    padding: var(--ldr-space-3);
+    background: var(--ldr-surface);
+    border-radius: var(--ldr-radius-input);
+}
+
+.ldr-prodi-identity__item dt {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ldr-text-muted);
+}
+
+.ldr-prodi-identity__item dd {
+    margin: 2px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+@media (max-width: 1080px) {
+    .ldr-prodi-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ldr-prodi-alert {
+        flex-wrap: wrap;
+    }
+}
+
+/* Admin Prodi — jadwal praktikum */
+.ldr-practicum-card {
+    margin-bottom: var(--ldr-space-3);
+}
+
+.ldr-practicum-table th,
+.ldr-practicum-table td {
+    vertical-align: top;
+}
+
+.ldr-practicum-table th[scope="row"] {
+    position: static;
+    min-width: 190px;
+    font-size: 13px;
+    background: var(--ldr-white);
+}
+
+.ldr-practicum-table td {
+    min-width: 170px;
+}
+
+.ldr-practicum-slot {
+    display: grid;
+    gap: 2px;
+    margin-bottom: 6px;
+    padding: 8px 10px;
+    font-size: 12px;
+    background: var(--ldr-tint);
+    border-left: 3px solid var(--ldr-primary);
+    border-radius: var(--ldr-radius-input);
+}
+
+.ldr-practicum-slot.is-conflict {
+    background: var(--ldr-danger-bg);
+    border-left-color: var(--ldr-danger-ink);
+}
+
+.ldr-practicum-slot__time {
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: .02em;
+}
+
+.ldr-practicum-slot__course {
+    font-weight: 600;
+}
+
+.ldr-practicum-slot__meta {
+    color: var(--ldr-text-muted);
+}
+
+.ldr-practicum-empty {
+    font-size: 12px;
+}
+
+.ldr-practicum-conflicts {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    font-size: 12.5px;
+}
+
+.ldr-practicum-legend {
+    display: flex;
+    gap: var(--ldr-space-2);
+    font-size: 12px;
+}
+
+/* Admin Prodi — laporan semester */
+.ldr-semester-sign {
+    margin-top: var(--ldr-space-4);
+    padding: var(--ldr-space-4);
+    background: var(--ldr-white);
+    border: 1px solid var(--ldr-border);
+    border-radius: var(--ldr-radius-card);
+}
+
+.ldr-semester-sign__grid {
+    display: grid;
+    gap: var(--ldr-space-4);
+    margin-top: var(--ldr-space-3);
+}
+
+.ldr-semester-sign__party {
+    display: grid;
+    gap: 2px;
+    padding: var(--ldr-space-3);
+    background: var(--ldr-tint);
+    border-radius: var(--ldr-radius-input);
+}
+
+@media (min-width: 768px) {
+    .ldr-semester-sign__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Admin Prodi — kuota MK */
+.ldr-quota-form {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.ldr-input--sm {
+    width: 92px;
+    padding: 6px 8px;
+    font-size: 13px;
+}
+
+.ldr-quota-transfer {
+    margin-top: var(--ldr-space-4);
+    padding: var(--ldr-space-4);
+}
+
+.ldr-quota-transfer__form {
+    display: grid;
+    gap: var(--ldr-space-3);
+    margin-top: var(--ldr-space-3);
+}
+
+@media (min-width: 900px) {
+    .ldr-quota-transfer__form {
+        grid-template-columns: 1fr 1fr 160px auto;
+        align-items: end;
+    }
+}
+
+/* Admin Prodi — plotting jadwal praktikum */
+.ldr-practicum-plot {
+    margin-bottom: var(--ldr-space-4);
+    padding: var(--ldr-space-4);
+}
+
+.ldr-practicum-plot__form {
+    display: grid;
+    gap: var(--ldr-space-3);
+    margin-top: var(--ldr-space-3);
+}
+
+@media (min-width: 900px) {
+    .ldr-practicum-plot__form {
+        grid-template-columns: 1.2fr 1fr 140px 120px 120px auto;
+        align-items: end;
+    }
+}
+
+.ldr-practicum-slot__remove {
+    margin-top: 4px;
+    border: 0;
+    background: none;
+    padding: 0;
+    font-size: 11px;
+    color: var(--ldr-danger, #DC2626);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Admin Prodi — inline edit data master */
+.ldr-inline-edit {
+    margin-top: 6px;
+}
+
+.ldr-inline-edit > summary {
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--ldr-primary-strong, #EA580C);
+    list-style: none;
+}
+
+.ldr-inline-edit > summary::-webkit-details-marker {
+    display: none;
+}
+
+.ldr-inline-edit > summary::before {
+    content: "✎ ";
+}
+
+.ldr-inline-edit__form {
+    display: grid;
+    gap: var(--ldr-space-2);
+    margin-top: var(--ldr-space-2);
+    padding: var(--ldr-space-3);
+    border: 1px solid var(--ldr-border, #E5E7EB);
+    border-radius: var(--ldr-radius-md, 8px);
+    background: var(--ldr-surface, #F5F5F5);
+    min-width: 220px;
+}
+
+.ldr-inline-delete {
+    margin-top: 4px;
+}
+
+.ldr-inline-delete button {
+    border: 0;
+    background: none;
+    padding: 0;
+    font-size: 11px;
+    color: var(--ldr-danger, #DC2626);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.ldr-course-create,
+.ldr-room-create {
+    margin-top: var(--ldr-space-4);
+    padding: var(--ldr-space-4);
+}
+
+.ldr-course-create__form,
+.ldr-room-create__form {
+    display: grid;
+    gap: var(--ldr-space-3);
+    margin-top: var(--ldr-space-3);
+}
+
+@media (min-width: 900px) {
+    .ldr-course-create__form {
+        grid-template-columns: repeat(6, 1fr) auto;
+        align-items: start;
+    }
+
+    .ldr-room-create__form {
+        grid-template-columns: repeat(4, 1fr) auto;
+        align-items: start;
     }
 }

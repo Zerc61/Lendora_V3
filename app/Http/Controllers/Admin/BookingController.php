@@ -16,16 +16,23 @@ use App\Models\Category;
 use App\Models\User;
 use App\Services\ApprovalQueueService;
 use App\Services\BookingService;
+use App\Services\SpreadsheetService;
+use App\Services\BorrowerScoreService;
 use App\Services\GanttService;
+use App\Services\SettingService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookingController extends Controller
 {
-    public function __construct(private readonly BookingService $bookings) {}
+    public function __construct(
+        private readonly BookingService $bookings,
+        private readonly SpreadsheetService $spreadsheet,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -109,6 +116,7 @@ class BookingController extends Controller
             'category_id' => $request->integer('category_id') ?: null,
             'urgency' => $request->query('urgency') ?: null,
             'sort' => $request->query('sort') ?: 'nearest',
+            'scope' => $request->user()->hasRole('admin_prodi') ? 'special' : null,
         ];
 
         return view(
@@ -185,11 +193,47 @@ class BookingController extends Controller
 
         $booking->load(['items.asset.photos', 'borrower', 'approvedBy', 'handovers.performedBy', 'extensions']);
 
+        $prodiReview = null;
+
+        if ($request->user()->hasRole('admin_prodi')) {
+            $settings = app(SettingService::class);
+            $maxLoanDays = $settings->maxLoanDays($booking->organization_id);
+            $operatorLimit = $settings->operatorApprovalLimit($booking->organization_id);
+            $value = $booking->totalAssetValue();
+            $reasons = [];
+
+            if ($booking->isLongDuration($maxLoanDays)) {
+                $reasons[] = __('ui.prodi.escalation_duration', [
+                    'days' => $booking->durationInDays(),
+                    'max' => $maxLoanDays,
+                ]);
+            }
+
+            if ($value > $operatorLimit) {
+                $reasons[] = __('ui.prodi.escalation_value', [
+                    'value' => number_format($value, 0, ',', '.'),
+                    'limit' => number_format($operatorLimit, 0, ',', '.'),
+                ]);
+            }
+
+            $prodiReview = [
+                'card' => app(ApprovalQueueService::class)->card($request->user(), $booking),
+                'score' => app(BorrowerScoreService::class)->summary($booking->borrower),
+                'value' => $value,
+                'reasons' => $reasons,
+                'rules' => [
+                    'max_days' => $maxLoanDays,
+                    'operator_limit' => $operatorLimit,
+                ],
+            ];
+        }
+
         return view('admin.bookings.show', [
             'booking' => $booking,
             'timeline' => $this->bookings->timelineFor($booking),
             'canDecide' => $this->bookings->decisionBlockReason($request->user(), $booking) === null,
             'blockReason' => $this->bookings->decisionBlockReason($request->user(), $booking),
+            'prodiReview' => $prodiReview,
         ]);
     }
 
@@ -282,13 +326,17 @@ class BookingController extends Controller
         return view('admin.bookings.calendar', compact('gantt', 'filters', 'categories'));
     }
 
-    public function calendarExport(Request $request): StreamedResponse
+    public function calendarExport(Request $request): StreamedResponse|BinaryFileResponse
     {
         $organizationId = $request->user()->organization_id;
         $start = Carbon::parse((string) $request->query('date_from', now()->toDateString()));
         $days = max(1, min(60, $request->integer('days') ?: 14));
         $categoryId = $request->integer('category_id') ?: null;
-        $format = $request->query('format') === 'ics' ? 'ics' : 'csv';
+        $format = match ($request->query('format')) {
+            'ics' => 'ics',
+            'xlsx' => 'xlsx',
+            default => 'csv',
+        };
 
         $gantt = app(GanttService::class)->build($organizationId, $start, $days, $categoryId);
         $filename = "jadwal-ketersediaan-{$start->format('Ymd')}.{$format}";
@@ -320,24 +368,29 @@ class BookingController extends Controller
             }, $filename, ['Content-Type' => 'text/calendar; charset=UTF-8']);
         }
 
-        return response()->streamDownload(function () use ($gantt): void {
+        $headings = ['Kode Aset', 'Nama', 'Kategori', 'Status', 'Mulai', 'Selesai', 'Referensi', 'Konflik'];
+        $rows = collect($gantt['rows'])->flatMap(fn (array $row): array => collect($row['bars'])->map(fn (array $bar): array => [
+            $row['asset']->code,
+            $row['asset']->name,
+            $row['asset']->category?->name,
+            $bar['status'],
+            $bar['start'],
+            $bar['end'],
+            $bar['code'],
+            $bar['conflict'] ? 'ya' : 'tidak',
+        ])->all())->all();
+
+        if ($format === 'xlsx') {
+            return $this->spreadsheet->download($filename, $headings, $rows);
+        }
+
+        return response()->streamDownload(function () use ($headings, $rows): void {
             $handle = fopen('php://output', 'w');
 
-            fputcsv($handle, ['Kode Aset', 'Nama', 'Kategori', 'Status', 'Mulai', 'Selesai', 'Referensi', 'Konflik']);
+            fputcsv($handle, $headings);
 
-            foreach ($gantt['rows'] as $row) {
-                foreach ($row['bars'] as $bar) {
-                    fputcsv($handle, [
-                        $row['asset']->code,
-                        $row['asset']->name,
-                        $row['asset']->category?->name,
-                        $bar['status'],
-                        $bar['start'],
-                        $bar['end'],
-                        $bar['code'],
-                        $bar['conflict'] ? 'ya' : 'tidak',
-                    ]);
-                }
+            foreach ($rows as $row) {
+                fputcsv($handle, $row);
             }
 
             fclose($handle);

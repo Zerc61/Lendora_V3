@@ -1,4 +1,4 @@
-@extends('layouts.borrower')
+@extends(($pdf ?? false) ? 'layouts.pdf' : 'layouts.borrower')
 
 @section('title', $penalty->bap_number)
 @section('nav', 'profile')
@@ -6,6 +6,7 @@
 @section('content')
     <div class="ldr-print-page" id="print-area">
         <header class="ldr-print-header">
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('borrower.penalties.document', ['penalty' => $penalty, 'type' => $type]) }}?format=pdf">{{ __('ui.common.download_pdf') }}</a>
             <h1>{{ __('ui.penalty.bap_title') }}</h1>
             <p class="ldr-print-meta">{{ $penalty->bap_number }} · {{ $penalty->incident_at->format('d M Y') }}</p>
         </header>

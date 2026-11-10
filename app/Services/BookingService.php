@@ -11,6 +11,7 @@ use App\Models\Asset;
 use App\Models\Booking;
 use App\Models\BookingExtension;
 use App\Models\BookingItem;
+use App\Models\Course;
 use App\Models\Organization;
 use App\Models\User;
 use App\Notifications\BookingAlternativeNotification;
@@ -21,6 +22,7 @@ use Carbon\CarbonInterface;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class BookingService
@@ -40,6 +42,7 @@ class BookingService
         CarbonInterface $start,
         CarbonInterface $end,
         string $purpose,
+        ?int $courseId = null,
     ): Booking {
         $start = Carbon::parse($start)->startOfDay();
         $end = Carbon::parse($end)->startOfDay();
@@ -61,7 +64,9 @@ class BookingService
             ]);
         }
 
-        return DB::transaction(function () use ($borrower, $assetIds, $start, $end, $purpose): Booking {
+        return DB::transaction(function () use ($borrower, $assetIds, $start, $end, $purpose, $courseId): Booking {
+            $courseId = $this->resolveCourseId($borrower, $courseId);
+
             $assets = Asset::query()
                 ->where('organization_id', $borrower->organization_id)
                 ->whereIn('id', $assetIds)
@@ -81,6 +86,7 @@ class BookingService
             $booking = $this->persistBooking($borrower->organization, [
                 'borrower_id' => $borrower->id,
                 'status' => BookingStatus::Pending,
+                'course_id' => $courseId,
                 'purpose' => $purpose,
                 'requested_start_date' => $start->toDateString(),
                 'requested_end_date' => $end->toDateString(),
@@ -105,6 +111,27 @@ class BookingService
 
             return $booking->load('items.asset');
         });
+    }
+
+    private function resolveCourseId(User $borrower, ?int $courseId): ?int
+    {
+        if ($courseId === null) {
+            return null;
+        }
+
+        $course = Course::query()
+            ->where('organization_id', $borrower->organization_id)
+            ->where('is_active', true)
+            ->whereKey($courseId)
+            ->first();
+
+        if ($course === null) {
+            throw ValidationException::withMessages([
+                'course_id' => __('messages.booking.course_invalid'),
+            ]);
+        }
+
+        return $course->id;
     }
 
     public function approve(Booking $booking, User $approver): Booking
@@ -134,6 +161,7 @@ class BookingService
                 'approved_by' => $approver->id,
                 'approved_at' => now(),
                 'due_at' => $booking->requested_end_date->copy()->setTime(16, 0),
+                'return_token' => $booking->return_token ?? $this->newReturnToken(),
             ]);
 
             $booking->items()->update(['status' => BookingItemStatus::Approved]);
@@ -732,6 +760,26 @@ class BookingService
         }
 
         return null;
+    }
+
+    public function ensureReturnToken(Booking $booking): Booking
+    {
+        if ($booking->return_token !== null) {
+            return $booking;
+        }
+
+        $booking->forceFill(['return_token' => $this->newReturnToken()])->save();
+
+        return $booking;
+    }
+
+    private function newReturnToken(): string
+    {
+        do {
+            $token = Str::upper(Str::random(10));
+        } while (Booking::withTrashed()->where('return_token', $token)->exists());
+
+        return $token;
     }
 
     /**

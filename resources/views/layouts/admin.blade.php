@@ -77,6 +77,51 @@
             ];
         }
 
+        if ($role === 'organization_admin') {
+            $groups = [
+                __('ui.sections.inventory') => [
+                    ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.categories'), 'icon' => 'layers', 'href' => route('admin.categories.index'), 'match' => 'admin.categories.*', 'roles' => ['organization_admin']],
+                ],
+                __('ui.sections.borrowings') => [
+                    ['label' => __('ui.nav.booking_queue'), 'icon' => 'clipboard-list', 'href' => route('admin.bookings.index'), 'match' => 'admin.bookings.index', 'active_status' => 'not_all', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.all_bookings'), 'icon' => 'layers', 'href' => route('admin.bookings.index', ['status' => 'all']), 'match' => 'admin.bookings.index', 'active_status' => 'all', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.calendar'), 'icon' => 'calendar', 'href' => route('admin.bookings.calendar'), 'match' => 'admin.bookings.calendar', 'roles' => ['organization_admin']],
+                ],
+                __('ui.sections.operations') => [
+                    ['label' => __('ui.nav.handovers'), 'icon' => 'arrow-left-right', 'href' => route('admin.handovers.index'), 'match' => 'admin.handovers.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.inspections'), 'icon' => 'clipboard-check', 'href' => route('admin.inspections.index'), 'match' => 'admin.inspections.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.maintenances'), 'icon' => 'wrench', 'href' => route('admin.maintenances.index'), 'match' => 'admin.maintenances.*', 'roles' => ['organization_admin']],
+                ],
+                __('ui.sections.organization') => [
+                    ['label' => __('ui.nav.users_roles'), 'icon' => 'users', 'href' => route('admin.users.index'), 'match' => 'admin.users.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.reports_analytics'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.settings'), 'icon' => 'settings', 'href' => route('admin.settings.edit'), 'match' => 'admin.settings.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.activity_logs'), 'icon' => 'activity', 'href' => route('admin.activity-logs.index'), 'match' => 'admin.activity-logs.*', 'roles' => ['organization_admin']],
+                ],
+            ];
+        }
+
+        if ($role === 'admin_prodi') {
+            $groups = [
+                __('ui.sections.prodi_authorization') => [
+                    ['label' => __('ui.nav.otorisasi_khusus'), 'icon' => 'shield-check', 'href' => route('admin.bookings.approval'), 'match' => 'admin.bookings.approval', 'roles' => ['admin_prodi'], 'badge' => 'special_approvals'],
+                ],
+                __('ui.sections.prodi_monitoring') => [
+                    ['label' => __('ui.nav.course_quota'), 'icon' => 'bar-chart', 'href' => route('admin.courses.index'), 'match' => 'admin.courses.*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.practicum'), 'icon' => 'calendar', 'href' => route('admin.practicum.index'), 'match' => 'admin.practicum.*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.students'), 'icon' => 'users', 'href' => route('admin.students.index'), 'match' => 'admin.students.*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.categories'), 'icon' => 'layers', 'href' => route('admin.categories.index'), 'match' => 'admin.categories.*', 'roles' => ['admin_prodi']],
+                ],
+                __('ui.sections.reports_documents') => [
+                    ['label' => __('ui.nav.semester_report'), 'icon' => 'clipboard-list', 'href' => route('admin.reports.semester'), 'match' => 'admin.reports.semester*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.reports'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.index', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.recommendations'), 'icon' => 'book-open', 'href' => route('admin.recommendations.index'), 'match' => 'admin.recommendations.*', 'roles' => ['admin_prodi']],
+                ],
+            ];
+        }
+
         foreach ($groups as $label => $items) {
             $items = array_values(array_filter(
                 $items,
@@ -119,7 +164,7 @@
                        href="{{ route('admin.dashboard') }}"
                        @if (request()->routeIs('admin.dashboard')) aria-current="page" @endif>
                         <x-icon name="home" :size="20" />
-                        <span class="ldr-sidebar__label">{{ __('ui.nav.dashboard') }}</span>
+                        <span class="ldr-sidebar__label">{{ $role === 'admin_prodi' ? __('ui.nav.dashboard_prodi') : __('ui.nav.dashboard') }}</span>
                     </a>
                 @endif
 

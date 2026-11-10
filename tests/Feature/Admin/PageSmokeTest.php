@@ -35,7 +35,6 @@ class PageSmokeTest extends TestCase
             route('admin.assets.index'),
             route('admin.categories.index'),
             route('admin.inspections.index'),
-            route('admin.inspections.create'),
             route('admin.maintenances.index'),
             route('admin.maintenances.create'),
             route('admin.handovers.index'),

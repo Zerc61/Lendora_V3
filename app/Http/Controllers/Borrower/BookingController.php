@@ -7,16 +7,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Asset;
 use App\Models\Booking;
+use App\Models\Course;
 use App\Services\BookingService;
+use App\Services\PdfService;
 use App\Services\SettingService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookingController extends Controller
 {
-    public function __construct(private readonly BookingService $bookings) {}
+    public function __construct(
+        private readonly BookingService $bookings,
+        private readonly PdfService $pdf,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -65,6 +71,11 @@ class BookingController extends Controller
             'assets' => $assets,
             'maxLoanDays' => app(SettingService::class)->maxLoanDays(),
             'conflict' => null,
+            'courses' => Course::query()
+                ->where('organization_id', $request->user()->organization_id)
+                ->where('is_active', true)
+                ->orderBy('code')
+                ->get(),
         ]);
     }
 
@@ -76,6 +87,7 @@ class BookingController extends Controller
             Carbon::parse($request->input('requested_start_date')),
             Carbon::parse($request->input('requested_end_date')),
             (string) $request->input('purpose'),
+            $request->filled('course_id') ? (int) $request->input('course_id') : null,
         );
 
         return redirect()
@@ -106,21 +118,32 @@ class BookingController extends Controller
             ->with('status', __('messages.booking.cancelled'));
     }
 
-    public function document(Request $request, Booking $booking, string $type): View
+    public function document(Request $request, Booking $booking, string $type): View|Response
     {
         $this->authorize('view', $booking);
 
-        return view('borrower.bookings.document', [
+        $data = [
             'booking' => $booking,
             'type' => $type,
-        ]);
+        ];
+
+        if ($request->query('format') === 'pdf') {
+            return $this->pdf->download('borrower.bookings.document', $data, $booking->code.'-'.$type.'.pdf');
+        }
+
+        return view('borrower.bookings.document', $data);
     }
 
-    public function returnPass(Request $request, Booking $booking): View
+    public function returnPass(Request $request, Booking $booking): View|Response
     {
         $this->authorize('view', $booking);
 
+        $booking = $this->bookings->ensureReturnToken($booking);
         $booking->load(['items.asset.photos']);
+
+        if ($request->query('format') === 'pdf') {
+            return $this->pdf->download('borrower.bookings.return-pass', compact('booking'), $booking->code.'-pass.pdf');
+        }
 
         return view('borrower.bookings.return-pass', compact('booking'));
     }

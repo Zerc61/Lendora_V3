@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ActivityLogController as AdminActivityLogControll
 use App\Http\Controllers\Admin\AssetController as AdminAssetController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HandoverController as AdminHandoverController;
 use App\Http\Controllers\Admin\InspectionController as AdminInspectionController;
@@ -12,11 +13,15 @@ use App\Http\Controllers\Admin\MaintenanceController as AdminMaintenanceControll
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\PenaltyController as AdminPenaltyController;
+use App\Http\Controllers\Admin\PracticumScheduleController as AdminPracticumScheduleController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\RecommendationController as AdminRecommendationController;
+use App\Http\Controllers\Admin\RoomController as AdminRoomController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\SearchController as AdminSearchController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\ShiftController as AdminShiftController;
+use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Borrower\BookingController as BorrowerBookingController;
 use App\Http\Controllers\Borrower\BookingExtensionController as BorrowerBookingExtensionController;
@@ -144,6 +149,7 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::get('reports', [AdminReportController::class, 'index'])->name('reports.index');
             Route::get('reports/print', [AdminReportController::class, 'print'])->name('reports.print');
             Route::get('reports/export', [AdminReportController::class, 'export'])->name('reports.export');
+            Route::get('reports/pdf', [AdminReportController::class, 'pdf'])->name('reports.pdf');
         });
 
         Route::middleware('role:operator,organization_admin,admin_prodi,technician')->group(function () {
@@ -155,6 +161,26 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
 
         Route::middleware('role:operator,organization_admin,admin_prodi')->group(function () {
             Route::get('categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+        });
+
+        Route::middleware('role:admin_prodi')->group(function () {
+            Route::get('courses', [AdminCourseController::class, 'index'])->name('courses.index');
+            Route::put('courses/{course}/quota', [AdminCourseController::class, 'updateQuota'])->name('courses.quota.update');
+            Route::post('courses/transfer', [AdminCourseController::class, 'transfer'])->name('courses.transfer');
+            Route::post('courses', [AdminCourseController::class, 'store'])->name('courses.store');
+            Route::put('courses/{course}', [AdminCourseController::class, 'update'])->name('courses.update');
+            Route::delete('courses/{course}', [AdminCourseController::class, 'destroy'])->name('courses.destroy');
+            Route::get('practicum', [AdminPracticumScheduleController::class, 'index'])->name('practicum.index');
+            Route::post('practicum', [AdminPracticumScheduleController::class, 'store'])->name('practicum.store');
+            Route::delete('practicum/{schedule}', [AdminPracticumScheduleController::class, 'destroy'])->name('practicum.destroy');
+            Route::post('rooms', [AdminRoomController::class, 'store'])->name('rooms.store');
+            Route::put('rooms/{room}', [AdminRoomController::class, 'update'])->name('rooms.update');
+            Route::delete('rooms/{room}', [AdminRoomController::class, 'destroy'])->name('rooms.destroy');
+            Route::get('recommendations', [AdminRecommendationController::class, 'index'])->name('recommendations.index');
+            Route::get('reports/semester', [AdminReportController::class, 'semester'])->name('reports.semester');
+            Route::get('reports/semester/export', [AdminReportController::class, 'semesterExport'])->name('reports.semester.export');
+            Route::get('reports/semester/pdf', [AdminReportController::class, 'semesterPdf'])->name('reports.semester.pdf');
+            Route::get('students', [AdminStudentController::class, 'index'])->name('students.index');
         });
 
         Route::middleware('role:operator,organization_admin')->group(function () {
@@ -201,14 +227,17 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::post('bookings/{booking}/extensions/{extension}/reject', [AdminBookingController::class, 'rejectExtension'])->name('bookings.extensions.reject');
 
             Route::get('handovers', [AdminHandoverController::class, 'index'])->name('handovers.index');
-            Route::get('bookings/{booking}/handover', [AdminHandoverController::class, 'show'])->name('bookings.handover');
-            Route::post('bookings/{booking}/handover', [AdminHandoverController::class, 'store'])->name('bookings.handover.store');
             Route::get('bookings/{booking}/receipt/{type}', [AdminHandoverController::class, 'receipt'])
                 ->whereIn('type', ['pickup', 'return'])
                 ->name('bookings.receipt');
 
             Route::post('assets/{asset}/retire', [AdminAssetController::class, 'retire'])->name('assets.retire');
             Route::resource('assets', AdminAssetController::class)->except(['show', 'index']);
+        });
+
+        Route::middleware('role:operator')->group(function () {
+            Route::get('bookings/{booking}/handover', [AdminHandoverController::class, 'show'])->name('bookings.handover');
+            Route::post('bookings/{booking}/handover', [AdminHandoverController::class, 'store'])->name('bookings.handover.store');
         });
 
         Route::middleware('role:organization_admin')->group(function () {
@@ -225,11 +254,16 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
         });
 
         Route::middleware('role:operator,organization_admin,technician')->group(function () {
-            Route::resource('inspections', AdminInspectionController::class)->only(['index', 'create', 'store']);
+            Route::get('inspections', [AdminInspectionController::class, 'index'])->name('inspections.index');
             Route::get('inspections/{inspection}', [AdminInspectionController::class, 'show'])
                 ->whereNumber('inspection')
                 ->name('inspections.show');
             Route::get('maintenances', [AdminMaintenanceController::class, 'index'])->name('maintenances.index');
+        });
+
+        Route::middleware('role:operator,technician')->group(function () {
+            Route::get('inspections/create', [AdminInspectionController::class, 'create'])->name('inspections.create');
+            Route::post('inspections', [AdminInspectionController::class, 'store'])->name('inspections.store');
         });
 
         Route::middleware('role:operator,organization_admin')->group(function () {

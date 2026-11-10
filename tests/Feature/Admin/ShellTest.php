@@ -27,8 +27,10 @@ class ShellTest extends TestCase
         $response->assertOk();
         $response->assertSee('css/lendora.css');
         $response->assertSee('css/admin.css');
-        $response->assertSeeInOrder(['Inventaris', 'Transaksi', 'Operasional', 'Administrasi']);
+        $response->assertSeeInOrder(['Inventaris', 'Peminjaman', 'Operasional', 'Organisasi']);
         $response->assertSee('Log Aktivitas');
+        $response->assertSee('Pengguna & Role');
+        $response->assertSee('Laporan & Analitik');
         $response->assertSee(route('admin.users.index'));
         $response->assertSee(route('admin.settings.edit'));
         $response->assertSee(route('admin.activity-logs.index'));
@@ -69,7 +71,24 @@ class ShellTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Laporan');
+        $response->assertSee(__('ui.nav.otorisasi_khusus'));
+        $response->assertSee(__('ui.nav.dashboard_prodi'));
+        $response->assertSee(__('ui.nav.students'));
+        $response->assertSee(__('ui.nav.course_quota'));
+        $response->assertSee(route('admin.courses.index'));
+        $response->assertSee(__('ui.nav.practicum'));
+        $response->assertSee(route('admin.practicum.index'));
+        $response->assertSee(__('ui.nav.semester_report'));
+        $response->assertSee(route('admin.reports.semester'));
+        $response->assertSee(__('ui.nav.recommendations'));
+        $response->assertSee(route('admin.recommendations.index'));
+        $response->assertSee(route('admin.students.index'));
+        $response->assertSee(route('admin.bookings.approval'));
+        $response->assertSee(route('admin.assets.index'));
         $response->assertDontSee('Pengguna');
+        $response->assertDontSee('Log Aktivitas');
+        $response->assertDontSee(route('admin.handovers.index'));
+        $response->assertDontSee(route('admin.settings.edit'));
     }
 
     private function user(string $email): User

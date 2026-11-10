@@ -167,6 +167,24 @@ class UiRegressionTest extends TestCase
         }
     }
 
+    public function test_borrower_documents_download_as_pdf(): void
+    {
+        $booking = Booking::where('borrower_id', $this->borrower->id)->firstOrFail();
+        $penalty = $this->makePenalty();
+
+        foreach ([
+            route('borrower.bookings.document', ['booking' => $booking, 'type' => 'letter']).'?format=pdf',
+            route('borrower.bookings.return-pass', $booking).'?format=pdf',
+            route('borrower.penalties.document', ['penalty' => $penalty, 'type' => 'bap']).'?format=pdf',
+        ] as $url) {
+            $this->actingAs($this->borrower)
+                ->get($url)
+                ->assertOk()
+                ->assertHeader('content-type', 'application/pdf')
+                ->assertDownload();
+        }
+    }
+
     public function test_payment_detail_page_renders_enum_labels(): void
     {
         $penalty = $this->makePenalty();
@@ -272,6 +290,18 @@ class UiRegressionTest extends TestCase
             ->assertSee('id="qr-svg"', false)
             ->assertSee('data-qr-token="'.$booking->return_token.'"', false)
             ->assertSee('data-size="200"', false);
+    }
+
+    public function test_return_pass_generates_missing_token(): void
+    {
+        $booking = Booking::where('borrower_id', $this->borrower->id)->firstOrFail();
+        $booking->update(['return_token' => null]);
+
+        $this->actingAs($this->borrower)
+            ->get(route('borrower.bookings.return-pass', $booking))
+            ->assertOk();
+
+        $this->assertNotEmpty($booking->fresh()->return_token);
     }
 
     public function test_booking_create_page_renders_selected_assets(): void

@@ -3,6 +3,7 @@
 @section('title', __('ui.nav.inspections'))
 
 @php
+    $canInspect = in_array(auth()->user()->role->slug, ['operator', 'technician'], true);
     $fitness = $summary['total'] > 0 ? round(($summary['ok'] / $summary['total']) * 100, 1) : 0;
 @endphp
 
@@ -14,12 +15,14 @@
             <p class="ldr-muted">{{ __('ui.inspection.index_description') }}</p>
         </div>
 
-        <div class="ldr-page-head__actions">
-            <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.inspections.create') }}">
-                <x-icon name="clipboard-check" :size="18" />
-                {{ __('ui.inspection.add') }}
-            </a>
-        </div>
+        @if ($canInspect)
+            <div class="ldr-page-head__actions">
+                <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.inspections.create') }}">
+                    <x-icon name="clipboard-check" :size="18" />
+                    {{ __('ui.inspection.add') }}
+                </a>
+            </div>
+        @endif
     </div>
 
     <div class="ldr-kpi-grid">

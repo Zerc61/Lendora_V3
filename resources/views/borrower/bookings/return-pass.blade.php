@@ -1,10 +1,11 @@
-@extends('layouts.borrower')
+@extends(($pdf ?? false) ? 'layouts.pdf' : 'layouts.borrower')
 
 @section('title', $booking->code)
 @section('nav', 'bookings')
 
 @section('content')
     <div class="ldr-return-pass">
+        <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('borrower.bookings.return-pass', $booking) }}?format=pdf">{{ __('ui.common.download_pdf') }}</a>
         <header class="ldr-return-pass__head">
             <h1>{{ __('ui.booking.qr_pass') }}</h1>
             <p class="ldr-muted">{{ $booking->code }}</p>

@@ -92,6 +92,12 @@ class PenaltyBapTest extends TestCase
             ->assertSee(__('ui.penalty.print_hint'));
 
         $this->actingAs($this->operator)
+            ->get(route('admin.penalties.print', $penalty).'?format=pdf')
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertDownload();
+
+        $this->actingAs($this->operator)
             ->post(route('admin.penalties.issue', $penalty))
             ->assertRedirect(route('admin.penalties.show', $penalty));
 

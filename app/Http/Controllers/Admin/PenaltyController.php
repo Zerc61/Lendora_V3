@@ -12,14 +12,19 @@ use App\Models\Maintenance;
 use App\Models\Penalty;
 use App\Models\User;
 use App\Services\BapService;
+use App\Services\PdfService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class PenaltyController extends Controller
 {
-    public function __construct(private readonly BapService $bap) {}
+    public function __construct(
+        private readonly BapService $bap,
+        private readonly PdfService $pdf,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -131,13 +136,19 @@ class PenaltyController extends Controller
         return back()->with('status', __('messages.bap.item_added'));
     }
 
-    public function print(Request $request, Penalty $penalty): View
+    public function print(Request $request, Penalty $penalty): View|Response
     {
         $this->assertOrganization($request, $penalty);
 
-        return view('admin.penalties.print', [
+        $data = [
             'penalty' => $penalty->load(['items', 'borrower', 'asset', 'booking', 'maintenance', 'issuer']),
-        ]);
+        ];
+
+        if ($request->query('format') === 'pdf') {
+            return $this->pdf->download('admin.penalties.print', $data, $penalty->bap_number.'.pdf');
+        }
+
+        return view('admin.penalties.print', $data);
     }
 
     public function issue(Request $request, Penalty $penalty): RedirectResponse
