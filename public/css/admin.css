@@ -5644,3 +5644,70 @@
         flex-wrap: wrap;
     }
 }
+
+/* Admin Prodi — jadwal praktikum */
+.ldr-practicum-card {
+    margin-bottom: var(--ldr-space-3);
+}
+
+.ldr-practicum-table th,
+.ldr-practicum-table td {
+    vertical-align: top;
+}
+
+.ldr-practicum-table th[scope="row"] {
+    position: static;
+    min-width: 190px;
+    font-size: 13px;
+    background: var(--ldr-white);
+}
+
+.ldr-practicum-table td {
+    min-width: 170px;
+}
+
+.ldr-practicum-slot {
+    display: grid;
+    gap: 2px;
+    margin-bottom: 6px;
+    padding: 8px 10px;
+    font-size: 12px;
+    background: var(--ldr-tint);
+    border-left: 3px solid var(--ldr-primary);
+    border-radius: var(--ldr-radius-input);
+}
+
+.ldr-practicum-slot.is-conflict {
+    background: var(--ldr-danger-bg);
+    border-left-color: var(--ldr-danger-ink);
+}
+
+.ldr-practicum-slot__time {
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: .02em;
+}
+
+.ldr-practicum-slot__course {
+    font-weight: 600;
+}
+
+.ldr-practicum-slot__meta {
+    color: var(--ldr-text-muted);
+}
+
+.ldr-practicum-empty {
+    font-size: 12px;
+}
+
+.ldr-practicum-conflicts {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    font-size: 12.5px;
+}
+
+.ldr-practicum-legend {
+    display: flex;
+    gap: var(--ldr-space-2);
+    font-size: 12px;
+}

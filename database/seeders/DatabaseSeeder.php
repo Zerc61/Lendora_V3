@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             BorrowerShowcaseSeeder::class,
             SettingSeeder::class,
             CourseSeeder::class,
+            RoomSeeder::class,
+            PracticumScheduleSeeder::class,
             PickupLocationSeeder::class,
             DemoTransactionSeeder::class,
             AnnouncementSeeder::class,

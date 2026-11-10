@@ -74,6 +74,8 @@ class ShellTest extends TestCase
         $response->assertSee(__('ui.nav.students'));
         $response->assertSee(__('ui.nav.course_quota'));
         $response->assertSee(route('admin.courses.index'));
+        $response->assertSee(__('ui.nav.practicum'));
+        $response->assertSee(route('admin.practicum.index'));
         $response->assertSee(route('admin.students.index'));
         $response->assertSee(route('admin.bookings.approval'));
         $response->assertSee(route('admin.assets.index'));

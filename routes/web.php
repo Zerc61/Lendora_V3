@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\MaintenanceController as AdminMaintenanceControll
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\PenaltyController as AdminPenaltyController;
+use App\Http\Controllers\Admin\PracticumScheduleController as AdminPracticumScheduleController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\SearchController as AdminSearchController;
@@ -161,6 +162,7 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
 
         Route::middleware('role:admin_prodi')->group(function () {
             Route::get('courses', [AdminCourseController::class, 'index'])->name('courses.index');
+            Route::get('practicum', [AdminPracticumScheduleController::class, 'index'])->name('practicum.index');
             Route::get('students', [AdminStudentController::class, 'index'])->name('students.index');
         });
 

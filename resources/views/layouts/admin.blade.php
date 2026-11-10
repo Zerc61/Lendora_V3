@@ -84,6 +84,7 @@
                 ],
                 __('ui.sections.prodi_monitoring') => [
                     ['label' => __('ui.nav.course_quota'), 'icon' => 'bar-chart', 'href' => route('admin.courses.index'), 'match' => 'admin.courses.*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.practicum'), 'icon' => 'calendar', 'href' => route('admin.practicum.index'), 'match' => 'admin.practicum.*', 'roles' => ['admin_prodi']],
                     ['label' => __('ui.nav.students'), 'icon' => 'users', 'href' => route('admin.students.index'), 'match' => 'admin.students.*', 'roles' => ['admin_prodi']],
                     ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['admin_prodi']],
                     ['label' => __('ui.nav.categories'), 'icon' => 'layers', 'href' => route('admin.categories.index'), 'match' => 'admin.categories.*', 'roles' => ['admin_prodi']],
