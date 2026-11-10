@@ -13,6 +13,7 @@ use App\Services\AssetService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AssetController extends Controller
 {
@@ -29,6 +30,7 @@ class AssetController extends Controller
             'category_id' => $request->integer('category_id') ?: null,
             'status' => AssetStatus::tryFrom((string) $request->query('status'))?->value,
             'condition_status' => AssetCondition::tryFrom((string) $request->query('condition_status'))?->value,
+            'location' => trim((string) $request->query('location')) ?: null,
         ];
 
         $assets = Asset::query()
@@ -44,6 +46,7 @@ class AssetController extends Controller
             ->when($filters['category_id'], fn ($query, int $categoryId) => $query->where('category_id', $categoryId))
             ->when($filters['status'], fn ($query, string $status) => $query->where('status', $status))
             ->when($filters['condition_status'], fn ($query, string $condition) => $query->where('condition_status', $condition))
+            ->when($filters['location'], fn ($query, string $location) => $query->where('location', $location))
             ->latest()
             ->paginate(15)
             ->withQueryString();
@@ -63,7 +66,51 @@ class AssetController extends Controller
             'maintenance' => (int) ($statusCounts[AssetStatus::Maintenance->value] ?? 0),
         ];
 
-        return view('admin.assets.index', compact('assets', 'categories', 'filters', 'summary'));
+        $locations = Asset::query()
+            ->where('organization_id', $organizationId)
+            ->whereNotNull('location')
+            ->where('location', '!=', '')
+            ->distinct()
+            ->orderBy('location')
+            ->pluck('location');
+
+        return view('admin.assets.index', compact('assets', 'categories', 'filters', 'summary', 'locations'));
+    }
+
+    public function export(Request $request): StreamedResponse
+    {
+        $this->authorize('viewAny', Asset::class);
+
+        $organizationId = $request->user()->organization_id;
+        $assets = Asset::query()
+            ->with('category')
+            ->where('organization_id', $organizationId)
+            ->when($request->integer('category_id') ?: null, fn ($query, int $categoryId) => $query->where('category_id', $categoryId))
+            ->when(AssetStatus::tryFrom((string) $request->query('status'))?->value, fn ($query, string $status) => $query->where('status', $status))
+            ->when(trim((string) $request->query('condition_status')) ?: null, fn ($query, string $condition) => $query->where('condition_status', $condition))
+            ->when(trim((string) $request->query('location')) ?: null, fn ($query, string $location) => $query->where('location', $location))
+            ->orderBy('code')
+            ->get();
+
+        return response()->streamDownload(function () use ($assets): void {
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, ['Kode', 'Nama', 'Kategori', 'Status', 'Kondisi', 'Lokasi', 'Serial']);
+
+            foreach ($assets as $asset) {
+                fputcsv($handle, [
+                    $asset->code,
+                    $asset->name,
+                    $asset->category?->name,
+                    $asset->status->value,
+                    $asset->condition_status?->value,
+                    $asset->location,
+                    $asset->serial_number,
+                ]);
+            }
+
+            fclose($handle);
+        }, 'daftar-aset-'.now()->format('Ymd').'.csv', ['Content-Type' => 'text/csv; charset=UTF-8']);
     }
 
     public function create(Request $request): View

@@ -9,6 +9,7 @@ use App\Models\ActivityLog;
 use App\Models\Asset;
 use App\Models\Booking;
 use App\Models\Maintenance;
+use App\Services\OperatorDashboardService;
 use App\Services\SettingService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -84,6 +85,10 @@ class DashboardController extends Controller
                 ->get()
             : collect();
 
+        $operatorDashboard = $role === 'operator'
+            ? app(OperatorDashboardService::class)->for($user)
+            : null;
+
         return view('admin.dashboard', compact(
             'user',
             'role',
@@ -93,6 +98,7 @@ class DashboardController extends Controller
             'tasks',
             'operatorQueue',
             'operatorDueToday',
+            'operatorDashboard',
         ));
     }
 

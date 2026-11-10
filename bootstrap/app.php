@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureActiveStatus;
+use App\Http\Middleware\EnsureKioskToken;
 use App\Http\Middleware\EnsureRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => EnsureRole::class,
             'active' => EnsureActiveStatus::class,
+            'kiosk.token' => EnsureKioskToken::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

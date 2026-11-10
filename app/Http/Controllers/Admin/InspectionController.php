@@ -11,6 +11,7 @@ use App\Models\Inspection;
 use App\Services\InspectionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class InspectionController extends Controller
@@ -93,10 +94,42 @@ class InspectionController extends Controller
             $bookingItem,
             (string) $request->input('result'),
             $request->input('notes'),
+            [
+                'context' => $request->input('context'),
+                'checklist' => $request->input('checklist'),
+                'condition_score' => $request->input('condition_score'),
+                'photo_paths' => $this->storePhotos($request, $asset),
+            ],
         );
 
         return redirect()
             ->route('admin.inspections.index')
             ->with('status', __('messages.inspection.recorded'));
+    }
+
+    public function show(Request $request, Inspection $inspection): View
+    {
+        abort_unless(
+            $inspection->asset->organization_id === $request->user()->organization_id,
+            404,
+        );
+
+        return view('admin.inspections.show', [
+            'inspection' => $inspection->load(['asset.photos', 'inspector', 'bookingItem.booking', 'maintenance']),
+        ]);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function storePhotos(Request $request, Asset $asset): array
+    {
+        $paths = [];
+
+        foreach ((array) $request->file('photos', []) as $photo) {
+            $paths[] = $photo->store("inspections/{$asset->code}", 'public');
+        }
+
+        return $paths;
     }
 }

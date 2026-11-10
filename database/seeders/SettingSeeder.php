@@ -44,6 +44,12 @@ class SettingSeeder extends Seeder
             'suspension_on_penalty' => '1',
             'recovery_step_2_title' => 'Workshop SOP Lab Outdoor (1 Hari)',
             'recovery_step_3_title' => 'Otorisasi Pemulihan oleh Kaprodi',
+            'maintenance_monthly_budget' => '10000000',
+            'operator_shift_label' => 'Pagi (08:00–16:00)',
+            'queue_prefix' => 'A',
+            'queue_retention_days' => '7',
+            'bap_compliance_penalty' => '20',
+            'bap_subsidy_percent' => '10',
         ];
 
         foreach ($settings as $key => $value) {

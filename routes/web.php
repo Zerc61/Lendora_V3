@@ -7,12 +7,16 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HandoverController as AdminHandoverController;
 use App\Http\Controllers\Admin\InspectionController as AdminInspectionController;
+use App\Http\Controllers\Admin\KioskController as AdminKioskController;
 use App\Http\Controllers\Admin\MaintenanceController as AdminMaintenanceController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Admin\PenaltyController as AdminPenaltyController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\SearchController as AdminSearchController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\ShiftController as AdminShiftController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Borrower\BookingController as BorrowerBookingController;
 use App\Http\Controllers\Borrower\BookingExtensionController as BorrowerBookingExtensionController;
@@ -25,6 +29,7 @@ use App\Http\Controllers\Borrower\PenaltyController as BorrowerPenaltyController
 use App\Http\Controllers\Borrower\PaymentController as BorrowerPaymentController;
 use App\Http\Controllers\Borrower\ProfileController as BorrowerProfileController;
 use App\Http\Controllers\Borrower\TwoFactorController as BorrowerTwoFactorController;
+use App\Http\Controllers\Kiosk\QueueController as KioskQueueController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -87,6 +92,16 @@ Route::middleware(['auth', 'role:borrower'])
         Route::post('payments/{payment}/proof', [BorrowerPenaltyController::class, 'submitProof'])->name('payments.proof');
     });
 
+Route::middleware('kiosk.token')
+    ->prefix('kiosk')
+    ->name('kiosk.')
+    ->group(function () {
+        Route::get('/', [KioskQueueController::class, 'index'])->name('queue');
+        Route::post('tickets', [KioskQueueController::class, 'store'])
+            ->middleware('throttle:10,1')
+            ->name('tickets.store');
+    });
+
 Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_prodi,technician'])
     ->prefix('admin')
     ->name('admin.')
@@ -105,6 +120,21 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
         Route::get('bookings/calendar', [AdminBookingController::class, 'calendar'])
             ->middleware('role:operator,organization_admin')
             ->name('bookings.calendar');
+        Route::get('bookings/calendar/export', [AdminBookingController::class, 'calendarExport'])
+            ->middleware('role:operator,organization_admin')
+            ->name('bookings.calendar.export');
+
+        Route::middleware('role:operator,organization_admin,admin_prodi')->group(function () {
+            Route::get('bookings/approval', [AdminBookingController::class, 'approval'])
+                ->name('bookings.approval');
+        });
+
+        Route::middleware('role:operator,organization_admin')->group(function () {
+            Route::get('bookings/walk-in', [AdminBookingController::class, 'walkInForm'])
+                ->name('bookings.walk-in');
+            Route::post('bookings/walk-in', [AdminBookingController::class, 'walkInStore'])
+                ->name('bookings.walk-in.store');
+        });
 
         Route::middleware('role:operator,organization_admin,admin_prodi')->group(function () {
             Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
@@ -112,10 +142,14 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::post('bookings/{booking}/approve', [AdminBookingController::class, 'approve'])->name('bookings.approve');
 
             Route::get('reports', [AdminReportController::class, 'index'])->name('reports.index');
+            Route::get('reports/print', [AdminReportController::class, 'print'])->name('reports.print');
             Route::get('reports/export', [AdminReportController::class, 'export'])->name('reports.export');
         });
 
         Route::middleware('role:operator,organization_admin,admin_prodi,technician')->group(function () {
+            Route::get('assets/export', [AdminAssetController::class, 'export'])
+                ->middleware('role:operator,organization_admin')
+                ->name('assets.export');
             Route::get('assets', [AdminAssetController::class, 'index'])->name('assets.index');
         });
 
@@ -124,13 +158,54 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
         });
 
         Route::middleware('role:operator,organization_admin')->group(function () {
+            Route::get('kiosk', [AdminKioskController::class, 'index'])->name('kiosk.index');            Route::post('kiosk/lookup', [AdminKioskController::class, 'lookup'])->name('kiosk.lookup');
+            Route::post('kiosk/process', [AdminKioskController::class, 'process'])->name('kiosk.process');
+            Route::get('kiosk/queue', [AdminKioskController::class, 'queue'])->name('kiosk.queue');
+            Route::post('kiosk/queue/call-next', [AdminKioskController::class, 'callNext'])->name('kiosk.queue.call');
+            Route::post('kiosk/queue/{ticket}/serve', [AdminKioskController::class, 'serve'])->name('kiosk.queue.serve');
+            Route::post('shifts/notes', [AdminShiftController::class, 'store'])->name('shifts.notes.store');
+
+            Route::get('penalties', [AdminPenaltyController::class, 'index'])->name('penalties.index');
+            Route::get('penalties/create', [AdminPenaltyController::class, 'create'])->name('penalties.create');
+            Route::post('penalties', [AdminPenaltyController::class, 'store'])->name('penalties.store');
+            Route::get('penalties/{penalty}', [AdminPenaltyController::class, 'show'])
+                ->whereNumber('penalty')
+                ->name('penalties.show');
+            Route::get('penalties/{penalty}/print', [AdminPenaltyController::class, 'print'])
+                ->whereNumber('penalty')
+                ->name('penalties.print');
+            Route::post('penalties/{penalty}/issue', [AdminPenaltyController::class, 'issue'])
+                ->whereNumber('penalty')
+                ->name('penalties.issue');
+            Route::post('penalties/{penalty}/escalate', [AdminPenaltyController::class, 'escalate'])
+                ->whereNumber('penalty')
+                ->name('penalties.escalate');
+            Route::post('penalties/{penalty}/items', [AdminPenaltyController::class, 'storeItem'])
+                ->whereNumber('penalty')
+                ->name('penalties.items.store');
+
+            Route::get('payments', [AdminPaymentController::class, 'index'])->name('payments.index');
+            Route::post('payments/{payment}/verify', [AdminPaymentController::class, 'verify'])
+                ->whereNumber('payment')
+                ->name('payments.verify');
+            Route::post('payments/{payment}/reject', [AdminPaymentController::class, 'reject'])
+                ->whereNumber('payment')
+                ->name('payments.reject');
+        });
+
+        Route::middleware('role:operator,organization_admin')->group(function () {
             Route::post('bookings/{booking}/reject', [AdminBookingController::class, 'reject'])->name('bookings.reject');
+            Route::post('bookings/{booking}/suggest-alternative', [AdminBookingController::class, 'suggest'])->name('bookings.suggest');
+            Route::post('bookings/{booking}/reassign', [AdminBookingController::class, 'reassign'])->name('bookings.reassign');
             Route::post('bookings/{booking}/extensions/{extension}/approve', [AdminBookingController::class, 'approveExtension'])->name('bookings.extensions.approve');
             Route::post('bookings/{booking}/extensions/{extension}/reject', [AdminBookingController::class, 'rejectExtension'])->name('bookings.extensions.reject');
 
             Route::get('handovers', [AdminHandoverController::class, 'index'])->name('handovers.index');
             Route::get('bookings/{booking}/handover', [AdminHandoverController::class, 'show'])->name('bookings.handover');
             Route::post('bookings/{booking}/handover', [AdminHandoverController::class, 'store'])->name('bookings.handover.store');
+            Route::get('bookings/{booking}/receipt/{type}', [AdminHandoverController::class, 'receipt'])
+                ->whereIn('type', ['pickup', 'return'])
+                ->name('bookings.receipt');
 
             Route::post('assets/{asset}/retire', [AdminAssetController::class, 'retire'])->name('assets.retire');
             Route::resource('assets', AdminAssetController::class)->except(['show', 'index']);
@@ -151,6 +226,9 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
 
         Route::middleware('role:operator,organization_admin,technician')->group(function () {
             Route::resource('inspections', AdminInspectionController::class)->only(['index', 'create', 'store']);
+            Route::get('inspections/{inspection}', [AdminInspectionController::class, 'show'])
+                ->whereNumber('inspection')
+                ->name('inspections.show');
             Route::get('maintenances', [AdminMaintenanceController::class, 'index'])->name('maintenances.index');
         });
 
@@ -163,6 +241,15 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::get('maintenances/{maintenance}/edit', [AdminMaintenanceController::class, 'edit'])->name('maintenances.edit');
             Route::put('maintenances/{maintenance}', [AdminMaintenanceController::class, 'update'])->name('maintenances.update');
             Route::delete('maintenances/{maintenance}', [AdminMaintenanceController::class, 'destroy'])->name('maintenances.destroy');
+        });
+
+        Route::middleware('role:operator,organization_admin,technician')->group(function () {
+            Route::get('maintenances/{maintenance}', [AdminMaintenanceController::class, 'show'])
+                ->whereNumber('maintenance')
+                ->name('maintenances.show');
+            Route::post('maintenances/{maintenance}/parts', [AdminMaintenanceController::class, 'storePart'])
+                ->whereNumber('maintenance')
+                ->name('maintenances.parts.store');
         });
 
         Route::middleware('role:technician')->group(function () {

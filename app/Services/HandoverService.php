@@ -9,6 +9,7 @@ use App\Enums\BookingStatus;
 use App\Enums\HandoverType;
 use App\Models\Asset;
 use App\Models\Booking;
+use App\Models\Handover;
 use App\Models\User;
 use App\Notifications\LoanPickupNotification;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -27,10 +28,11 @@ class HandoverService
         User $operator,
         array $itemConditions,
         ?string $notes = null,
+        array $options = [],
     ): Booking {
         $this->assertStaff($operator, $booking);
 
-        return DB::transaction(function () use ($booking, $operator, $itemConditions, $notes): Booking {
+        return DB::transaction(function () use ($booking, $operator, $itemConditions, $notes, $options): Booking {
             $booking = Booking::query()->whereKey($booking->id)->lockForUpdate()->firstOrFail();
 
             if ($booking->status !== BookingStatus::Approved) {
@@ -61,12 +63,21 @@ class HandoverService
                     ->update(['status' => AssetStatus::Borrowed->value]);
             }
 
-            $booking->handovers()->create([
+            $handover = $booking->handovers()->create([
+                'code' => $options['code'] ?? $this->receiptCode($booking, HandoverType::Pickup),
                 'type' => HandoverType::Pickup,
                 'performed_by' => $operator->id,
+                'shift_label' => $options['shift_label'] ?? null,
+                'borrower_signature_path' => $options['borrower_signature_path'] ?? null,
+                'operator_signature_path' => $options['operator_signature_path'] ?? null,
+                'photo_paths' => $options['photo_paths'] ?? null,
+                'checklist' => $options['checklist'] ?? null,
                 'happened_at' => $happenedAt,
+                'due_at' => $booking->due_at,
                 'notes' => $notes,
             ]);
+
+            $this->storeItems($handover, $booking, $conditions, $options);
 
             $this->logger->log(
                 'handover.pickup',
@@ -90,10 +101,11 @@ class HandoverService
         User $operator,
         array $itemConditions,
         ?string $notes = null,
+        array $options = [],
     ): Booking {
         $this->assertStaff($operator, $booking);
 
-        return DB::transaction(function () use ($booking, $operator, $itemConditions, $notes): Booking {
+        return DB::transaction(function () use ($booking, $operator, $itemConditions, $notes, $options): Booking {
             $booking = Booking::query()->whereKey($booking->id)->lockForUpdate()->firstOrFail();
 
             if ($booking->status !== BookingStatus::Active) {
@@ -125,12 +137,21 @@ class HandoverService
             ]);
 
             // Asset status is decided by inspection, never by the return handover itself.
-            $booking->handovers()->create([
+            $handover = $booking->handovers()->create([
+                'code' => $options['code'] ?? $this->receiptCode($booking, HandoverType::Return),
                 'type' => HandoverType::Return,
                 'performed_by' => $operator->id,
+                'shift_label' => $options['shift_label'] ?? null,
+                'borrower_signature_path' => $options['borrower_signature_path'] ?? null,
+                'operator_signature_path' => $options['operator_signature_path'] ?? null,
+                'photo_paths' => $options['photo_paths'] ?? null,
+                'checklist' => $options['checklist'] ?? null,
                 'happened_at' => $happenedAt,
+                'due_at' => $booking->due_at,
                 'notes' => $notes,
             ]);
+
+            $this->storeItems($handover, $booking, $conditions, $options);
 
             $this->logger->log(
                 'handover.return',
@@ -142,6 +163,29 @@ class HandoverService
 
             return $booking->fresh(['items.asset', 'handovers.performedBy', 'borrower']);
         });
+    }
+
+    private function receiptCode(Booking $booking, HandoverType $type): string
+    {
+        $suffix = $type === HandoverType::Pickup ? 'OUT' : 'IN';
+
+        return sprintf('TRX-%d-%04d-%s', now()->year, $booking->id, $suffix);
+    }
+
+    private function storeItems(Handover $handover, Booking $booking, array $conditions, array $options): void
+    {
+        foreach ($booking->items as $item) {
+            $handover->items()->create([
+                'booking_item_id' => $item->id,
+                'condition' => $conditions[$item->id],
+                'accessories' => $options['accessories'][$item->id]
+                    ?? $options['accessories'][(string) $item->id]
+                    ?? null,
+                'notes' => $options['item_notes'][$item->id]
+                    ?? $options['item_notes'][(string) $item->id]
+                    ?? null,
+            ]);
+        }
     }
 
     private function assertStaff(User $operator, Booking $booking): void

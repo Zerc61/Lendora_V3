@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\MaintenancePriority;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,6 +26,9 @@ class StoreMaintenanceRequest extends FormRequest
                 'nullable',
                 Rule::exists('users', 'id')->where('organization_id', $organizationId),
             ],
+            'priority' => ['nullable', Rule::enum(MaintenancePriority::class)],
+            'vendor' => ['nullable', 'string', 'max:120'],
+            'due_at' => ['nullable', 'date'],
             'description' => ['required', 'string', 'max:2000'],
         ];
     }

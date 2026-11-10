@@ -107,7 +107,10 @@ class MaintenanceTest extends TestCase
             ->get(route('admin.maintenances.index'))
             ->assertOk()
             ->assertSee($maintenance->asset->code)
-            ->assertSee('Kamera Uji');
+            ->assertSee('Kamera Uji')
+            ->assertSee($maintenance->code)
+            ->assertSee(__('ui.maintenance.ticket'))
+            ->assertSee('ldr-badge--priority-', false);
     }
 
     public function test_technician_dashboard_and_finish_form_render_work_order(): void
@@ -125,6 +128,36 @@ class MaintenanceTest extends TestCase
             ->assertOk()
             ->assertSee('Lembar kerja')
             ->assertSee('Perbaikan lensa.');
+    }
+
+    public function test_ticket_detail_adds_part_and_updates_cost(): void
+    {
+        $maintenance = $this->maintenance(MaintenanceStatus::InProgress);
+
+        $this->actingAs($this->admin)
+            ->get(route('admin.maintenances.show', $maintenance))
+            ->assertOk()
+            ->assertSee($maintenance->asset->code)
+            ->assertSee(__('ui.maintenance.progress_title'))
+            ->assertSee(__('ui.maintenance.total_bill'))
+            ->assertSee(__('ui.maintenance.ticket_summary'));
+
+        $this->actingAs($this->admin)
+            ->post(route('admin.maintenances.parts.store', $maintenance), [
+                'name' => 'Flex Cable LCD',
+                'part_code' => 'PART-LCD-01',
+                'quantity' => 2,
+                'unit_cost' => 150_000,
+            ])
+            ->assertRedirect(route('admin.maintenances.show', $maintenance));
+
+        $this->assertDatabaseHas('maintenance_parts', [
+            'maintenance_id' => $maintenance->id,
+            'part_code' => 'PART-LCD-01',
+            'quantity' => 2,
+        ]);
+
+        $this->assertSame(300_000, $maintenance->fresh()->cost);
     }
 
     private function maintenance(MaintenanceStatus $status = MaintenanceStatus::Scheduled, bool $assigned = true): Maintenance

@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             BookingExtensionSeeder::class,
             PenaltySeeder::class,
             PaymentSeeder::class,
+            OperatorDemoSeeder::class,
         ]);
     }
 }

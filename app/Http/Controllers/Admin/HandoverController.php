@@ -7,6 +7,7 @@ use App\Enums\HandoverType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHandoverRequest;
 use App\Models\Booking;
+use App\Services\HandoverMediaService;
 use App\Services\HandoverService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +15,10 @@ use Illuminate\View\View;
 
 class HandoverController extends Controller
 {
-    public function __construct(private readonly HandoverService $handovers) {}
+    public function __construct(
+        private readonly HandoverService $handovers,
+        private readonly HandoverMediaService $media,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -67,17 +71,37 @@ class HandoverController extends Controller
         $type = HandoverType::from((string) $request->input('type'));
         $conditions = (array) $request->input('conditions', []);
         $notes = $request->input('notes');
+        $options = $this->media->options($request, $booking);
 
         if ($type === HandoverType::Pickup) {
-            $this->handovers->recordPickup($booking, $request->user(), $conditions, $notes);
+            $this->handovers->recordPickup($booking, $request->user(), $conditions, $notes, $options);
             $message = __('messages.handover.pickup_recorded');
         } else {
-            $this->handovers->recordReturn($booking, $request->user(), $conditions, $notes);
+            $this->handovers->recordReturn($booking, $request->user(), $conditions, $notes, $options);
             $message = __('messages.handover.return_recorded');
         }
 
         return redirect()
             ->route('admin.bookings.show', $booking)
             ->with('status', $message);
+    }
+
+    public function receipt(Request $request, Booking $booking, string $type): View
+    {
+        $this->authorize('view', $booking);
+
+        $handoverType = HandoverType::from($type);
+
+        $handover = $booking->handovers()
+            ->with(['items.bookingItem.asset', 'performedBy'])
+            ->where('type', $handoverType->value)
+            ->latest('happened_at')
+            ->firstOrFail();
+
+        return view('admin.bookings.receipt', [
+            'booking' => $booking,
+            'handover' => $handover,
+            'type' => $handoverType,
+        ]);
     }
 }

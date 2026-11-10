@@ -103,7 +103,11 @@ class HandoverTest extends TestCase
             ->assertOk()
             ->assertSee($booking->code)
             ->assertSee('Kamera Uji')
-            ->assertSee('Kondisi unit');
+            ->assertSee('Kondisi unit')
+            ->assertSee('data-signature="borrower_signature"', false)
+            ->assertSee('data-signature-input="operator_signature"', false)
+            ->assertSee('name="accessories[', false)
+            ->assertSee(__('ui.handover.statement'));
     }
 
     public function test_borrower_cannot_open_handover_index(): void
@@ -160,6 +164,48 @@ class HandoverTest extends TestCase
             'booking_id' => $booking->id,
             'type' => HandoverType::Return->value,
         ]);
+    }
+
+    public function test_pickup_saves_item_checklist_photos_metadata_and_receipt_code(): void
+    {
+        Notification::fake();
+
+        $booking = $this->booking(BookingStatus::Approved, AssetStatus::Reserved, BookingItemStatus::Approved);
+        $item = $booking->items->first();
+
+        $this->actingAs($this->operator)
+            ->post(route('admin.bookings.handover.store', $booking), [
+                'type' => HandoverType::Pickup->value,
+                'conditions' => [$item->id => 'good'],
+                'accessories' => [$item->id => ['body_cap', 'battery']],
+                'checklist' => ['sensor_clean' => true, 'battery_full' => true],
+                'item_notes' => [$item->id => 'Lengkap.'],
+                'shift_label' => 'Pagi (08:00–16:00)',
+                'notes' => 'Diserahkan lengkap.',
+            ])
+            ->assertRedirect(route('admin.bookings.show', $booking));
+
+        $this->assertDatabaseHas('handovers', [
+            'booking_id' => $booking->id,
+            'code' => sprintf('TRX-%d-%04d-OUT', now()->year, $booking->id),
+            'shift_label' => 'Pagi (08:00–16:00)',
+        ]);
+
+        $this->assertDatabaseHas('handover_items', [
+            'booking_item_id' => $item->id,
+            'condition' => 'good',
+            'notes' => 'Lengkap.',
+        ]);
+
+        $handover = $booking->handovers()->where('type', HandoverType::Pickup->value)->firstOrFail();
+        $this->assertSame(['body_cap', 'battery'], $handover->items->first()->accessories);
+        $this->assertSame(['sensor_clean' => true, 'battery_full' => true], $handover->checklist);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.bookings.receipt', ['booking' => $booking, 'type' => 'pickup']))
+            ->assertOk()
+            ->assertSee($handover->code)
+            ->assertSee('Kamera Uji');
     }
 
     private function booking(BookingStatus $status, AssetStatus $assetStatus, BookingItemStatus $itemStatus): Booking

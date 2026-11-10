@@ -101,6 +101,41 @@ class InspectionTest extends TestCase
         $this->assertSame('good', $asset->condition_status->value);
     }
 
+    public function test_inspection_stores_context_checklist_score_and_links_maintenance(): void
+    {
+        Notification::fake();
+
+        $asset = $this->borrowedAsset();
+
+        $this->actingAs($this->operator)
+            ->post(route('admin.inspections.store'), [
+                'asset_id' => $asset->id,
+                'context' => 'routine',
+                'result' => InspectionResult::NeedsRepair->value,
+                'checklist' => ['shutter' => true, 'sensor' => false, 'ports' => true],
+                'condition_score' => 72,
+                'notes' => 'Sensor perlu dibersihkan.',
+            ])
+            ->assertRedirect(route('admin.inspections.index'));
+
+        $inspection = \App\Models\Inspection::where('asset_id', $asset->id)->firstOrFail();
+
+        $this->assertSame('routine', $inspection->context->value);
+        $this->assertSame(72, $inspection->condition_score);
+        $this->assertSame('maintenance', $inspection->follow_up->value);
+        $this->assertNotNull($inspection->maintenance_id);
+        $this->assertNotNull($inspection->code);
+        $this->assertSame(['shutter' => true, 'sensor' => false, 'ports' => true], $inspection->checklist);
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.inspections.show', $inspection))
+            ->assertOk()
+            ->assertSee($inspection->code)
+            ->assertSee($asset->code)
+            ->assertSee(__('ui.inspection.detail_title'))
+            ->assertSee(__('ui.inspection.linked_maintenance'));
+    }
+
     public function test_index_renders_summary_and_record(): void
     {
         $asset = $this->borrowedAsset();
@@ -116,7 +151,9 @@ class InspectionTest extends TestCase
             ->get(route('admin.inspections.index'))
             ->assertOk()
             ->assertSee($asset->code)
-            ->assertSee('Sensor berdebu.');
+            ->assertSee('Sensor berdebu.')
+            ->assertSee(__('ui.inspection.kpi_fitness'))
+            ->assertSee(__('ui.inspection.history_title'));
     }
 
     private function borrowedAsset(): Asset

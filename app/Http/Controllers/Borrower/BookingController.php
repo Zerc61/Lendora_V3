@@ -56,7 +56,7 @@ class BookingController extends Controller
             ->all();
 
         $assets = Asset::query()
-            ->with('category')
+            ->with(['category', 'photos'])
             ->where('organization_id', $request->user()->organization_id)
             ->whereIn('id', $ids)
             ->get();

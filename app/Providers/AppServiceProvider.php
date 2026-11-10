@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 use App\Enums\BookingStatus;
+use App\Enums\QueueTicketStatus;
 use App\Models\Booking;
+use App\Models\QueueTicket;
 use App\Services\ActivityLogger;
 use App\Services\SettingService;
+use App\Services\ShiftService;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
@@ -61,6 +64,35 @@ class AppServiceProvider extends ServiceProvider
             $view->with('orgName', $settings->get('organization_name', 'Unit Kampus'));
             $view->with('operatorPhone', $settings->get('operator_contact_phone', 'Ext. 402'));
             $view->with('operatorWhatsApp', $settings->get('operator_contact_whatsapp', '+62 812-3456-7890'));
+        });
+
+        View::composer('layouts.admin', function ($view): void {
+            $user = auth()->user();
+            $role = $user?->role?->slug;
+            $sidebarCounts = [];
+            $adminShift = null;
+
+            if ($user !== null && in_array($role, ['operator', 'organization_admin'], true)) {
+                $adminShift = app(ShiftService::class)->current($user->organization_id);
+
+                if (Schema::hasTable('bookings')) {
+                    $sidebarCounts['approvals'] = Booking::query()
+                        ->where('organization_id', $user->organization_id)
+                        ->where('status', BookingStatus::Pending->value)
+                        ->count();
+                }
+
+                if (Schema::hasTable('queue_tickets')) {
+                    $sidebarCounts['queue'] = QueueTicket::query()
+                        ->where('organization_id', $user->organization_id)
+                        ->whereDate('service_date', now()->toDateString())
+                        ->where('status', QueueTicketStatus::Waiting->value)
+                        ->count();
+                }
+            }
+
+            $view->with('adminShift', $adminShift);
+            $view->with('sidebarCounts', $sidebarCounts);
         });
 
         Event::listen(Login::class, function (Login $event): void {

@@ -235,8 +235,8 @@ class UiRegressionTest extends TestCase
         $this->actingAs($this->borrower)
             ->get(route('borrower.catalog.show', $asset))
             ->assertOk()
-            ->assertSee('href="#availability-calendar"', false)
-            ->assertSee('id="availability-calendar"', false);
+            ->assertSee('href="#asset-availability"', false)
+            ->assertSee('id="asset-availability"', false);
     }
 
     public function test_booking_progress_dots_are_cumulative(): void

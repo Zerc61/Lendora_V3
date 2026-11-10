@@ -52,7 +52,9 @@ class ReportTest extends TestCase
         $this->assertGreaterThan(0, $kpis['borrowed_days']);
         $this->assertSame(0, $kpis['damages']);
         $this->assertArrayHasKey('late_returns', $kpis);
-        $response->assertSee('Transaksi pada periode ini');
+        $response->assertSee('Transaksi pada periode ini')
+            ->assertSee(__('ui.report.trend_title'))
+            ->assertSee(route('admin.reports.print'));
     }
 
     public function test_report_exposes_monthly_trend_and_top_assets(): void

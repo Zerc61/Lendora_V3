@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Enums\AssetCondition;
 use App\Enums\AssetStatus;
+use App\Enums\InspectionContext;
+use App\Enums\InspectionFollowUp;
 use App\Enums\InspectionResult;
 use App\Enums\MaintenanceStatus;
 use App\Models\Asset;
@@ -26,6 +28,7 @@ class InspectionService
         ?BookingItem $bookingItem,
         string $result,
         ?string $notes = null,
+        array $options = [],
     ): Inspection {
         if ($inspector->organization_id !== $asset->organization_id) {
             throw new AuthorizationException(__('messages.booking.wrong_organization'));
@@ -40,26 +43,38 @@ class InspectionService
         }
 
         $inspectionResult = InspectionResult::from($result);
+        $context = InspectionContext::tryFrom((string) ($options['context'] ?? '')) ?? InspectionContext::PostReturn;
 
-        return DB::transaction(function () use ($asset, $inspector, $bookingItem, $inspectionResult, $notes): Inspection {
+        return DB::transaction(function () use ($asset, $inspector, $bookingItem, $inspectionResult, $notes, $options, $context): Inspection {
             $asset = Asset::query()->whereKey($asset->id)->lockForUpdate()->firstOrFail();
 
             $inspection = Inspection::create([
                 'booking_item_id' => $bookingItem?->id,
                 'asset_id' => $asset->id,
                 'inspector_id' => $inspector->id,
+                'context' => $context,
                 'result' => $inspectionResult,
+                'checklist' => $options['checklist'] ?? null,
+                'photo_paths' => $options['photo_paths'] ?? null,
+                'condition_score' => isset($options['condition_score']) ? (int) $options['condition_score'] : null,
                 'notes' => $notes,
                 'checked_at' => now(),
+            ]);
+
+            $inspection->update([
+                'code' => sprintf('INS-%d-%04d', now()->year, $inspection->id),
             ]);
 
             $maintenance = null;
 
             if ($inspectionResult === InspectionResult::Ok) {
+                $inspection->update(['follow_up' => InspectionFollowUp::None]);
+
                 if ($asset->status === AssetStatus::Borrowed) {
                     $asset->update([
                         'status' => AssetStatus::Available,
                         'condition_status' => AssetCondition::Good,
+                        'condition_score' => $inspection->condition_score ?? $asset->condition_score,
                     ]);
                 }
             } else {
@@ -78,6 +93,12 @@ class InspectionService
                     'condition_status' => $inspectionResult === InspectionResult::Damaged
                         ? AssetCondition::Damaged
                         : AssetCondition::MinorDamage,
+                    'condition_score' => $inspection->condition_score ?? $asset->condition_score,
+                ]);
+
+                $inspection->update([
+                    'maintenance_id' => $maintenance->id,
+                    'follow_up' => InspectionFollowUp::Maintenance,
                 ]);
 
                 $this->logger->log(
@@ -99,7 +120,7 @@ class InspectionService
                 ['asset_id' => $asset->id, 'result' => $inspectionResult->value],
             );
 
-            return $inspection->fresh(['asset', 'inspector', 'bookingItem']);
+            return $inspection->fresh(['asset', 'inspector', 'bookingItem', 'maintenance']);
         });
     }
 

@@ -165,7 +165,15 @@ class ApprovalQueueTest extends TestCase
             ->assertOk()
             ->assertSee($booking->code)
             ->assertSee('Kamera Uji')
-            ->assertSee('Uji antrean');
+            ->assertSee('Uji antrean')
+            ->assertSee(__('ui.booking.quick_actions'));
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.bookings.approval'))
+            ->assertOk()
+            ->assertSee($booking->code)
+            ->assertSee(__('ui.approval.policy_title'))
+            ->assertSee(__('ui.approval.equipment_list'));
     }
 
     public function test_calendar_lists_booked_ranges_for_unit(): void

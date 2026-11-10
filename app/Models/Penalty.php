@@ -19,6 +19,9 @@ class Penalty extends Model
         'incident_at',
         'inspector_name',
         'damage_description',
+        'case_category',
+        'chronology',
+        'maintenance_id',
         'repair_subtotal',
         'subsidy_percent',
         'subsidy_amount',
@@ -27,8 +30,14 @@ class Penalty extends Model
         'status',
         'installment_months',
         'due_at',
+        'payment_terms_days',
+        'issued_at',
+        'issued_by',
         'paid_at',
         'recovery_step',
+        'photo_paths',
+        'escalated_at',
+        'escalated_by',
         'notes',
         'created_by',
     ];
@@ -45,8 +54,12 @@ class Penalty extends Model
             'status' => PenaltyStatus::class,
             'installment_months' => 'integer',
             'due_at' => 'datetime',
+            'payment_terms_days' => 'integer',
+            'issued_at' => 'datetime',
             'paid_at' => 'datetime',
             'recovery_step' => 'integer',
+            'photo_paths' => 'array',
+            'escalated_at' => 'datetime',
         ];
     }
 
@@ -78,6 +91,26 @@ class Penalty extends Model
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(PenaltyItem::class);
+    }
+
+    public function maintenance(): BelongsTo
+    {
+        return $this->belongsTo(Maintenance::class);
+    }
+
+    public function escalator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'escalated_by');
+    }
+
+    public function issuer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'issued_by');
     }
 
     public function paidAmount(): int
