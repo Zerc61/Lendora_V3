@@ -34,7 +34,17 @@ class SemesterReportTest extends TestCase
             ->assertSee(__('ui.semester_report.title'))
             ->assertSee(__('ui.semester_report.kpi_utilization'))
             ->assertSee(__('ui.semester_report.sign_title'))
-            ->assertSee('SK-LAB-LDR/2026/SMT-GANJIL');
+            ->assertSee('SK-LAB-LDR/2026/SMT-GANJIL')
+            ->assertSee(__('ui.semester_report.rab_title'))
+            ->assertSee(route('admin.reports.semester.export'));
+    }
+
+    public function test_prodi_can_export_semester_report_csv(): void
+    {
+        $this->actingAs($this->prodi)
+            ->get(route('admin.reports.semester.export'))
+            ->assertOk()
+            ->assertDownload('laporan-semester-GANJIL-2026-2026.csv');
     }
 
     public function test_non_prodi_roles_are_forbidden(): void

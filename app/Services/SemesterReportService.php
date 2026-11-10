@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\BookingStatus;
+use App\Models\Asset;
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Maintenance;
@@ -61,6 +62,33 @@ class SemesterReportService
             ->sortByDesc(fn (array $row): float => $row['rejection_rate'])
             ->values();
 
+        $prices = Asset::query()
+            ->where('organization_id', $organizationId)
+            ->whereIn('category_id', $rows->pluck('category.id'))
+            ->whereNotNull('purchase_price')
+            ->where('purchase_price', '>', 0)
+            ->selectRaw('category_id, avg(purchase_price) as avg_price')
+            ->groupBy('category_id')
+            ->pluck('avg_price', 'category_id');
+
+        $procurement = $rows
+            ->filter(fn (array $row): bool => $row['rejected'] > 0 && $row['requests'] > $row['rejected'])
+            ->map(function (array $row) use ($prices): array {
+                $accepted = $row['requests'] - $row['rejected'];
+                $extraUnits = max(1, (int) ceil($row['units'] * $row['rejected'] / $accepted));
+                $average = $prices[$row['category']->id] ?? null;
+                $unitPrice = $average !== null ? (int) round($average / 100_000) * 100_000 : null;
+
+                return [
+                    ...$row,
+                    'extra_units' => $extraUnits,
+                    'unit_price' => $unitPrice,
+                    'subtotal' => $unitPrice !== null ? $unitPrice * $extraUnits : 0,
+                    'priority' => $row['status'] === 'kritis' ? 'urgent' : 'peningkatan',
+                ];
+            })
+            ->values();
+
         $maintenances = Maintenance::query()
             ->whereHas('asset', fn ($query) => $query->where('organization_id', $organizationId))
             ->whereBetween('created_at', [$from, $to])
@@ -74,6 +102,8 @@ class SemesterReportService
 
         return [
             'rows' => $rows,
+            'procurement' => $procurement,
+            'rab_total' => (int) $procurement->sum('subtotal'),
             'kpis' => [
                 'demand_hours' => (int) round($totalDemand),
                 'capacity_hours' => (int) round($totalCapacity),

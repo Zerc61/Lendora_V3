@@ -38,6 +38,34 @@ class ReportController extends Controller
         return view('admin.reports.semester', $this->semester->for($request->user()));
     }
 
+    public function semesterExport(Request $request): StreamedResponse
+    {
+        $report = $this->semester->for($request->user());
+        $filename = 'laporan-semester-'.$report['semester']['term'].'-'.str_replace('/', '-', $report['semester']['year']).'.csv';
+
+        return response()->streamDownload(function () use ($report): void {
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, ['Kategori', 'Unit', 'Jam permintaan', 'Jam kapasitas', 'Pemanfaatan (%)', 'Pengajuan', 'Ditolak', 'Rasio penolakan (%)', 'Status']);
+
+            foreach ($report['rows'] as $row) {
+                fputcsv($handle, [
+                    $row['category']->name,
+                    $row['units'],
+                    $row['demand_hours'],
+                    $row['capacity_hours'],
+                    $row['utilization'],
+                    $row['requests'],
+                    $row['rejected'],
+                    $row['rejection_rate'],
+                    $row['status'],
+                ]);
+            }
+
+            fclose($handle);
+        }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
+    }
+
     public function print(Request $request): View
     {
         [$from, $to] = $this->period($request);

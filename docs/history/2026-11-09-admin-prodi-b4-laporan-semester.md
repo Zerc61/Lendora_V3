@@ -2,15 +2,14 @@
 
 Tanggal: 2026-11-09
 Jenis pekerjaan: service + frontend (tanpa perubahan schema)
-Status: selesai (tanpa generator RAB)
+Status: selesai
 Branch: `feature/operator-operasional`
 
 ## Tujuan
 
 Memberi Admin Prodi rekap semesteran: pemanfaatan jam alat per kategori,
-tingkat penolakan permintaan, dan biaya pemeliharaan, plus blok pengesahan
-dokumen. Bagian "Smart RAB Generator" pada mockup TIDAK dibuat karena tidak ada
-data harga pengadaan maupun aturan kelayakan yang disetujui.
+tingkat penolakan permintaan, biaya pemeliharaan, usulan pengadaan (estimasi
+RAB), ekspor CSV, dan blok pengesahan dokumen.
 
 ## Service
 
@@ -30,6 +29,16 @@ data harga pengadaan maupun aturan kelayakan yang disetujui.
 - Identitas dokumen: `SK-LAB-{ORG}/{tahun}/SMT-{GANJIL|GENAP}`, diturunkan dari
   organisasi dan tanggal mulai semester.
 
+### Estimasi RAB
+
+- Hanya kategori dengan permintaan ditolak dan permintaan diterima > 0.
+- Unit tambahan = `ceil(unit eksisting × ditolak / diterima)`, minimal 1.
+  Artinya kapasitas dinaikkan sampai rasio penolakan hilang.
+- Harga satuan = rata-rata `assets.purchase_price` kategori, dibulatkan ke
+  Rp 100.000 terdekat. Bila tidak ada harga, kolom harga dan subtotal kosong.
+- Prioritas 1 bila status kategori `kritis`, selain itu Prioritas 2.
+- Total RAB = jumlah subtotal yang punya harga.
+
 ## Halaman
 
 `ReportController@semester` → `GET /admin/reports/semester` →
@@ -41,6 +50,9 @@ data harga pengadaan maupun aturan kelayakan yang disetujui.
 - 4 KPI.
 - Tabel analisis per kategori dengan bar pemanfaatan dan badge status.
 - Blok pengesahan: prodi, organisasi, nomor dokumen, waktu pembuatan.
+- Tombol "Ekspor CSV" → `GET /admin/reports/semester/export`.
+- Tabel estimasi RAB dengan dasar usulan, unit tambahan, harga satuan, subtotal,
+  prioritas, dan total.
 - Tanpa tombol tulis; prodi tetap baca-saja.
 
 ## Navigasi, gaya, bahasa
@@ -73,8 +85,8 @@ Diubah:
 
 ```
 php artisan test
-Tests:    273 passed (1164 assertions)
-Duration: 26.01s
+Tests:    274 passed (1175 assertions)
+Duration: 25.89s
 ```
 
 Cek data lokal:
@@ -89,9 +101,9 @@ SK-LAB-LDR/2026/SMT-GANJIL
 
 ## Batasan
 
-- Tidak ada generator RAB, estimasi harga, prioritas pengadaan, atau proyeksi
-  mahasiswa. Semua butuh data harga dan aturan bisnis yang belum disetujui.
-- Tidak ada ekspor PDF/XLS dan kirim ke dekanat. Hanya halaman HTML.
+- RAB adalah estimasi dari harga rata-rata unit eksisting, bukan penawaran
+  vendor. Tidak ada proyeksi mahasiswa atau harga pengadaan nyata.
+- Tidak ada ekspor PDF/XLS dan kirim ke dekanat. Hanya halaman HTML + CSV.
 - Jam permintaan memakai asumsi 12 jam operasional per hari; peminjaman hanya
   menyimpan tanggal, bukan jam.
 - Pemanfaatan total terlihat kecil karena kapasitas dihitung penuh sepanjang

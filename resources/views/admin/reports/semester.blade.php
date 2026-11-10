@@ -9,6 +9,11 @@
         'seimbang' => 'success',
     ];
 
+    $priorityLabels = [
+        'urgent' => __('ui.semester_report.priority_urgent'),
+        'peningkatan' => __('ui.semester_report.priority_peningkatan'),
+    ];
+
     $statusLabels = [
         'kritis' => __('ui.semester_report.status_kritis'),
         'perlu_tambahan' => __('ui.semester_report.status_perlu_tambahan'),
@@ -26,6 +31,13 @@
                 <x-icon name="calendar" :size="14" />
                 {{ $semester['label'] }} · {{ $semester['term'] }} {{ $semester['year'] }}
             </span>
+        </div>
+
+        <div class="ldr-page-head__actions">
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.reports.semester.export') }}">
+                <x-icon name="bar-chart" :size="16" />
+                {{ __('ui.semester_report.export') }}
+            </a>
         </div>
     </div>
 
@@ -123,6 +135,71 @@
                             </tr>
                         @endforeach
                     </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
+
+    <h2 class="ldr-section-title">{{ __('ui.semester_report.rab_title') }}</h2>
+    <p class="ldr-muted ldr-section-hint">{{ __('ui.semester_report.rab_hint') }}</p>
+
+    @if ($procurement->isEmpty())
+        <x-empty-state
+            icon="clipboard-list"
+            :title="__('ui.semester_report.rab_empty_title')"
+            :description="__('ui.semester_report.rab_empty_description')"
+        />
+    @else
+        <div class="ldr-table-card">
+            <div class="ldr-table-wrap">
+                <table class="ldr-table">
+                    <thead>
+                        <tr>
+                            <th>{{ __('ui.semester_report.col_category') }}</th>
+                            <th>{{ __('ui.semester_report.col_reason') }}</th>
+                            <th>{{ __('ui.semester_report.col_extra_units') }}</th>
+                            <th>{{ __('ui.semester_report.col_unit_price') }}</th>
+                            <th>{{ __('ui.semester_report.col_subtotal') }}</th>
+                            <th>{{ __('ui.semester_report.col_priority') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($procurement as $item)
+                            <tr>
+                                <td>
+                                    <span class="ldr-table__name">{{ $item['category']->name }}</span>
+                                    <span class="ldr-table__sub">{{ __('ui.semester_report.reason_detail', ['rejected' => $item['rejected'], 'rate' => $item['rejection_rate']]) }}</span>
+                                </td>
+                                <td>{{ __('ui.semester_report.reason_rule', ['units' => $item['units'], 'accepted' => $item['requests'] - $item['rejected']]) }}</td>
+                                <td>{{ $item['extra_units'] }}</td>
+                                <td>
+                                    @if ($item['unit_price'] !== null)
+                                        Rp {{ number_format($item['unit_price'], 0, ',', '.') }}
+                                    @else
+                                        —
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($item['unit_price'] !== null)
+                                        Rp {{ number_format($item['subtotal'], 0, ',', '.') }}
+                                    @else
+                                        —
+                                    @endif
+                                </td>
+                                <td>
+                                    <span class="ldr-badge ldr-badge--{{ $item['priority'] === 'urgent' ? 'danger' : 'warning' }}">
+                                        {{ $priorityLabels[$item['priority']] ?? $item['priority'] }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4">{{ __('ui.semester_report.rab_total') }}</th>
+                            <th colspan="2">Rp {{ number_format($rab_total, 0, ',', '.') }}</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

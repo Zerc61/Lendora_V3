@@ -83,6 +83,14 @@ class SemesterReportServiceTest extends TestCase
         $this->assertSame(1, $report['kpis']['incidents']);
         $this->assertSame(200_000, $report['kpis']['maintenance_cost']);
         $this->assertSame(1, $report['kpis']['bottlenecks']);
+        $this->assertSame(10_000_000, $report['rab_total']);
+
+        $proposal = $report['procurement']->first();
+
+        $this->assertSame(1, $proposal['extra_units']);
+        $this->assertSame(10_000_000, $proposal['unit_price']);
+        $this->assertSame(10_000_000, $proposal['subtotal']);
+        $this->assertSame('urgent', $proposal['priority']);
 
         $row = $report['rows']->first();
 
