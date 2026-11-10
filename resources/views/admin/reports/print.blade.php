@@ -1,4 +1,4 @@
-@extends('layouts.print')
+@extends(($pdf ?? false) ? 'layouts.pdf' : 'layouts.print')
 
 @section('title', __('ui.report.print_title'))
 
@@ -11,7 +11,9 @@
                 – {{ \Carbon\Carbon::parse($filters['date_to'])->translatedFormat('d M Y') }}
             </p>
         </div>
-        <button type="button" class="ldr-btn ldr-btn--primary" onclick="window.print()">{{ __('ui.report.print') }}</button>
+        @if (! ($pdf ?? false))
+            <button type="button" class="ldr-btn ldr-btn--primary" onclick="window.print()">{{ __('ui.report.print') }}</button>
+        @endif
     </header>
 
     <div class="ldr-grid ldr-grid--4">

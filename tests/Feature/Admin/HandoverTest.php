@@ -206,6 +206,12 @@ class HandoverTest extends TestCase
             ->assertOk()
             ->assertSee($handover->code)
             ->assertSee('Kamera Uji');
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.bookings.receipt', ['booking' => $booking, 'type' => 'pickup']).'?format=pdf')
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertDownload();
     }
 
     public function test_organization_admin_can_view_handovers_but_cannot_record_one(): void

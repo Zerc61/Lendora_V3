@@ -149,6 +149,7 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::get('reports', [AdminReportController::class, 'index'])->name('reports.index');
             Route::get('reports/print', [AdminReportController::class, 'print'])->name('reports.print');
             Route::get('reports/export', [AdminReportController::class, 'export'])->name('reports.export');
+            Route::get('reports/pdf', [AdminReportController::class, 'pdf'])->name('reports.pdf');
         });
 
         Route::middleware('role:operator,organization_admin,admin_prodi,technician')->group(function () {
@@ -178,6 +179,7 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
             Route::get('recommendations', [AdminRecommendationController::class, 'index'])->name('recommendations.index');
             Route::get('reports/semester', [AdminReportController::class, 'semester'])->name('reports.semester');
             Route::get('reports/semester/export', [AdminReportController::class, 'semesterExport'])->name('reports.semester.export');
+            Route::get('reports/semester/pdf', [AdminReportController::class, 'semesterPdf'])->name('reports.semester.pdf');
             Route::get('students', [AdminStudentController::class, 'index'])->name('students.index');
         });
 

@@ -35,9 +35,17 @@
                 <x-icon name="bar-chart" :size="16" />
                 {{ __('ui.report.export') }}
             </a>
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.reports.export', $exportQuery + ['format' => 'xlsx']) }}">
+                <x-icon name="bar-chart" :size="16" />
+                {{ __('ui.common.download_xlsx') }}
+            </a>
             <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.reports.print', $printQuery) }}">
                 <x-icon name="printer" :size="16" />
                 {{ __('ui.report.print') }}
+            </a>
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.reports.pdf', $printQuery) }}">
+                <x-icon name="clipboard-list" :size="16" />
+                {{ __('ui.common.download_pdf') }}
             </a>
         </div>
     </div>

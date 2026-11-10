@@ -167,6 +167,24 @@ class UiRegressionTest extends TestCase
         }
     }
 
+    public function test_borrower_documents_download_as_pdf(): void
+    {
+        $booking = Booking::where('borrower_id', $this->borrower->id)->firstOrFail();
+        $penalty = $this->makePenalty();
+
+        foreach ([
+            route('borrower.bookings.document', ['booking' => $booking, 'type' => 'letter']).'?format=pdf',
+            route('borrower.bookings.return-pass', $booking).'?format=pdf',
+            route('borrower.penalties.document', ['penalty' => $penalty, 'type' => 'bap']).'?format=pdf',
+        ] as $url) {
+            $this->actingAs($this->borrower)
+                ->get($url)
+                ->assertOk()
+                ->assertHeader('content-type', 'application/pdf')
+                ->assertDownload();
+        }
+    }
+
     public function test_payment_detail_page_renders_enum_labels(): void
     {
         $penalty = $this->makePenalty();

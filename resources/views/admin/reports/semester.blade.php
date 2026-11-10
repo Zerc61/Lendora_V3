@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends(($pdf ?? false) ? 'layouts.pdf' : 'layouts.admin')
 
 @section('title', __('ui.semester_report.title'))
 
@@ -37,6 +37,14 @@
             <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.reports.semester.export') }}">
                 <x-icon name="bar-chart" :size="16" />
                 {{ __('ui.semester_report.export') }}
+            </a>
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.reports.semester.export', ['format' => 'xlsx']) }}">
+                <x-icon name="bar-chart" :size="16" />
+                {{ __('ui.common.download_xlsx') }}
+            </a>
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.reports.semester.pdf') }}">
+                <x-icon name="clipboard-list" :size="16" />
+                {{ __('ui.common.download_pdf') }}
             </a>
         </div>
     </div>

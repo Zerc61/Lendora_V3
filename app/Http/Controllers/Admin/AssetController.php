@@ -10,14 +10,19 @@ use App\Http\Requests\UpdateAssetRequest;
 use App\Models\Asset;
 use App\Models\Category;
 use App\Services\AssetService;
+use App\Services\SpreadsheetService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AssetController extends Controller
 {
-    public function __construct(private readonly AssetService $assets) {}
+    public function __construct(
+        private readonly AssetService $assets,
+        private readonly SpreadsheetService $spreadsheet,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -77,7 +82,7 @@ class AssetController extends Controller
         return view('admin.assets.index', compact('assets', 'categories', 'filters', 'summary', 'locations'));
     }
 
-    public function export(Request $request): StreamedResponse
+    public function export(Request $request): StreamedResponse|BinaryFileResponse
     {
         $this->authorize('viewAny', Asset::class);
 
@@ -92,25 +97,33 @@ class AssetController extends Controller
             ->orderBy('code')
             ->get();
 
-        return response()->streamDownload(function () use ($assets): void {
+        $headings = ['Kode', 'Nama', 'Kategori', 'Status', 'Kondisi', 'Lokasi', 'Serial'];
+        $rows = $assets->map(fn (Asset $asset): array => [
+            $asset->code,
+            $asset->name,
+            $asset->category?->name,
+            $asset->status->value,
+            $asset->condition_status?->value,
+            $asset->location,
+            $asset->serial_number,
+        ]);
+        $base = 'daftar-aset-'.now()->format('Ymd');
+
+        if ($request->query('format') === 'xlsx') {
+            return $this->spreadsheet->download($base.'.xlsx', $headings, $rows);
+        }
+
+        return response()->streamDownload(function () use ($headings, $rows): void {
             $handle = fopen('php://output', 'w');
 
-            fputcsv($handle, ['Kode', 'Nama', 'Kategori', 'Status', 'Kondisi', 'Lokasi', 'Serial']);
+            fputcsv($handle, $headings);
 
-            foreach ($assets as $asset) {
-                fputcsv($handle, [
-                    $asset->code,
-                    $asset->name,
-                    $asset->category?->name,
-                    $asset->status->value,
-                    $asset->condition_status?->value,
-                    $asset->location,
-                    $asset->serial_number,
-                ]);
+            foreach ($rows as $row) {
+                fputcsv($handle, $row);
             }
 
             fclose($handle);
-        }, 'daftar-aset-'.now()->format('Ymd').'.csv', ['Content-Type' => 'text/csv; charset=UTF-8']);
+        }, $base.'.csv', ['Content-Type' => 'text/csv; charset=UTF-8']);
     }
 
     public function create(Request $request): View

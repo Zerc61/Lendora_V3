@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
+use App\Services\SpreadsheetService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ActivityLogController extends Controller
 {
+    public function __construct(private readonly SpreadsheetService $spreadsheet) {}
+
     public function index(Request $request): View
     {
         $filters = $this->filters($request);
@@ -31,7 +35,7 @@ class ActivityLogController extends Controller
         return view('admin.activity-logs.index', compact('logs', 'filters', 'actions'));
     }
 
-    public function export(Request $request): StreamedResponse
+    public function export(Request $request): StreamedResponse|BinaryFileResponse
     {
         $filters = $this->filters($request);
         $logs = $this->query($request->user()->organization_id, $filters)
@@ -39,22 +43,30 @@ class ActivityLogController extends Controller
             ->latest('id')
             ->get();
 
-        return response()->streamDownload(function () use ($logs): void {
-            $handle = fopen('php://output', 'w');
-            fputcsv($handle, ['Waktu', 'Pengguna', 'Aksi', 'Deskripsi', 'Alamat IP']);
+        $headings = ['Waktu', 'Pengguna', 'Aksi', 'Deskripsi', 'Alamat IP'];
+        $rows = $logs->map(fn (ActivityLog $log): array => [
+            $log->created_at?->format('Y-m-d H:i:s'),
+            $log->user?->name,
+            $log->action,
+            $log->description,
+            $log->ip_address,
+        ]);
+        $base = 'log-aktivitas-'.now()->format('Ymd-His');
 
-            foreach ($logs as $log) {
-                fputcsv($handle, [
-                    $log->created_at?->format('Y-m-d H:i:s'),
-                    $log->user?->name,
-                    $log->action,
-                    $log->description,
-                    $log->ip_address,
-                ]);
+        if ($request->query('format') === 'xlsx') {
+            return $this->spreadsheet->download($base.'.xlsx', $headings, $rows);
+        }
+
+        return response()->streamDownload(function () use ($headings, $rows): void {
+            $handle = fopen('php://output', 'w');
+            fputcsv($handle, $headings);
+
+            foreach ($rows as $row) {
+                fputcsv($handle, $row);
             }
 
             fclose($handle);
-        }, 'log-aktivitas-'.now()->format('Ymd-His').'.csv', ['Content-Type' => 'text/csv']);
+        }, $base.'.csv', ['Content-Type' => 'text/csv']);
     }
 
     /**

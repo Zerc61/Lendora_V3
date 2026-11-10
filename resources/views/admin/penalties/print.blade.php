@@ -1,4 +1,4 @@
-@extends('layouts.print')
+@extends(($pdf ?? false) ? 'layouts.pdf' : 'layouts.print')
 
 @section('title', $penalty->bap_number)
 
@@ -6,6 +6,7 @@
     <div class="ldr-print-actions">
         <a class="ldr-btn ldr-btn--ghost" href="{{ route('admin.penalties.show', $penalty) }}">{{ __('ui.common.back') }}</a>
         <button type="button" class="ldr-btn ldr-btn--primary" onclick="window.print()">{{ __('ui.common.print') }}</button>
+        <a class="ldr-btn ldr-btn--secondary" href="{{ route('admin.penalties.print', $penalty) }}?format=pdf">{{ __('ui.common.download_pdf') }}</a>
     </div>
 
     <article class="ldr-print-sheet">

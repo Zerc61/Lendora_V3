@@ -1097,6 +1097,8 @@ return [
         'reset' => 'Reset',
         'save' => 'Simpan',
         'cancel' => 'Batal',
+        'download_pdf' => 'Unduh PDF',
+        'download_xlsx' => 'Unduh Excel',
         'edit' => 'Edit',
         'delete' => 'Hapus',
         'back' => 'Kembali',

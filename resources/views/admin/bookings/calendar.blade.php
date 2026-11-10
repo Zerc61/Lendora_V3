@@ -41,6 +41,11 @@
                 {{ __('ui.gantt.export_csv') }}
             </a>
             <a class="ldr-btn ldr-btn--secondary ldr-btn--sm"
+               href="{{ route('admin.bookings.calendar.export', $exportQuery + ['format' => 'xlsx']) }}">
+                <x-icon name="bar-chart" :size="16" />
+                {{ __('ui.common.download_xlsx') }}
+            </a>
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm"
                href="{{ route('admin.bookings.calendar.export', $exportQuery + ['format' => 'ics']) }}">
                 <x-icon name="calendar" :size="16" />
                 {{ __('ui.gantt.export_ics') }}

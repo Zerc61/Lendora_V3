@@ -9,15 +9,18 @@ use App\Http\Requests\StoreHandoverRequest;
 use App\Models\Booking;
 use App\Services\HandoverMediaService;
 use App\Services\HandoverService;
+use App\Services\PdfService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class HandoverController extends Controller
 {
     public function __construct(
         private readonly HandoverService $handovers,
         private readonly HandoverMediaService $media,
+        private readonly PdfService $pdf,
     ) {}
 
     public function index(Request $request): View
@@ -86,7 +89,7 @@ class HandoverController extends Controller
             ->with('status', $message);
     }
 
-    public function receipt(Request $request, Booking $booking, string $type): View
+    public function receipt(Request $request, Booking $booking, string $type): View|Response
     {
         $this->authorize('view', $booking);
 
@@ -98,10 +101,16 @@ class HandoverController extends Controller
             ->latest('happened_at')
             ->firstOrFail();
 
-        return view('admin.bookings.receipt', [
+        $data = [
             'booking' => $booking,
             'handover' => $handover,
             'type' => $handoverType,
-        ]);
+        ];
+
+        if ($request->query('format') === 'pdf') {
+            return $this->pdf->download('admin.bookings.receipt', $data, $booking->code.'-'.$type.'.pdf');
+        }
+
+        return view('admin.bookings.receipt', $data);
     }
 }

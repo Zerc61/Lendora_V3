@@ -15,6 +15,11 @@
                 <x-icon name="arrow-left-right" :size="18" />
                 {{ __('ui.activity_log.export') }}
             </a>
+            <a class="ldr-btn ldr-btn--secondary"
+               href="{{ route('admin.activity-logs.export', array_filter($filters) + ['format' => 'xlsx']) }}">
+                <x-icon name="arrow-left-right" :size="18" />
+                {{ __('ui.common.download_xlsx') }}
+            </a>
         </div>
     </div>
 
