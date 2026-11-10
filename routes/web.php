@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\PenaltyController as AdminPenaltyController;
 use App\Http\Controllers\Admin\PracticumScheduleController as AdminPracticumScheduleController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\RecommendationController as AdminRecommendationController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\SearchController as AdminSearchController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
@@ -163,6 +164,7 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
         Route::middleware('role:admin_prodi')->group(function () {
             Route::get('courses', [AdminCourseController::class, 'index'])->name('courses.index');
             Route::get('practicum', [AdminPracticumScheduleController::class, 'index'])->name('practicum.index');
+            Route::get('recommendations', [AdminRecommendationController::class, 'index'])->name('recommendations.index');
             Route::get('reports/semester', [AdminReportController::class, 'semester'])->name('reports.semester');
             Route::get('reports/semester/export', [AdminReportController::class, 'semesterExport'])->name('reports.semester.export');
             Route::get('students', [AdminStudentController::class, 'index'])->name('students.index');

@@ -80,6 +80,8 @@ class ShellTest extends TestCase
         $response->assertSee(route('admin.practicum.index'));
         $response->assertSee(__('ui.nav.semester_report'));
         $response->assertSee(route('admin.reports.semester'));
+        $response->assertSee(__('ui.nav.recommendations'));
+        $response->assertSee(route('admin.recommendations.index'));
         $response->assertSee(route('admin.students.index'));
         $response->assertSee(route('admin.bookings.approval'));
         $response->assertSee(route('admin.assets.index'));

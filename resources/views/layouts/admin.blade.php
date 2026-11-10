@@ -117,6 +117,7 @@
                 __('ui.sections.reports_documents') => [
                     ['label' => __('ui.nav.semester_report'), 'icon' => 'clipboard-list', 'href' => route('admin.reports.semester'), 'match' => 'admin.reports.semester*', 'roles' => ['admin_prodi']],
                     ['label' => __('ui.nav.reports'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.index', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.recommendations'), 'icon' => 'book-open', 'href' => route('admin.recommendations.index'), 'match' => 'admin.recommendations.*', 'roles' => ['admin_prodi']],
                 ],
             ];
         }
