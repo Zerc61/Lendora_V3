@@ -15,7 +15,21 @@ class DatabaseSeeder extends Seeder
             CategoryAndAssetSeeder::class,
             BorrowerShowcaseSeeder::class,
             SettingSeeder::class,
+            CourseSeeder::class,
+            PickupLocationSeeder::class,
             DemoTransactionSeeder::class,
+            AnnouncementSeeder::class,
+            FaqSeeder::class,
+            DocumentSeeder::class,
+            AssetComponentSeeder::class,
+            AssetQcSeeder::class,
+            AssetBlockSeeder::class,
+            BorrowerFavoriteSeeder::class,
+            BorrowerCertificationSeeder::class,
+            BookingExtensionSeeder::class,
+            PenaltySeeder::class,
+            PaymentSeeder::class,
+            OperatorDemoSeeder::class,
         ]);
     }
 }

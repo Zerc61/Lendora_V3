@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum BookingStatus: string
 {
+    case Draft = 'draft';
     case Pending = 'pending';
     case Approved = 'approved';
     case Active = 'active';

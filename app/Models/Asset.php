@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\AssetAccessLevel;
 use App\Enums\AssetCondition;
+use App\Enums\AssetGrade;
 use App\Enums\AssetStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +27,13 @@ class Asset extends Model
         'specifications',
         'status',
         'condition_status',
+        'grade',
+        'access_level',
+        'condition_score',
+        'is_featured',
+        'manual_path',
+        'rating_average',
+        'rating_count',
         'purchase_date',
         'purchase_price',
         'location',
@@ -36,6 +45,12 @@ class Asset extends Model
         return [
             'status' => AssetStatus::class,
             'condition_status' => AssetCondition::class,
+            'grade' => AssetGrade::class,
+            'access_level' => AssetAccessLevel::class,
+            'condition_score' => 'integer',
+            'is_featured' => 'boolean',
+            'rating_average' => 'decimal:2',
+            'rating_count' => 'integer',
             'purchase_date' => 'date',
             'purchase_price' => 'integer',
             'specifications' => 'array',
@@ -65,5 +80,40 @@ class Asset extends Model
     public function maintenances(): HasMany
     {
         return $this->hasMany(Maintenance::class)->latest();
+    }
+
+    public function components(): HasMany
+    {
+        return $this->hasMany(AssetComponent::class)->orderBy('sort_order');
+    }
+
+    public function qcChecks(): HasMany
+    {
+        return $this->hasMany(AssetQcCheck::class)->latest('checked_at');
+    }
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(AssetDocument::class);
+    }
+
+    public function blocks(): HasMany
+    {
+        return $this->hasMany(AssetBlock::class);
+    }
+
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(AssetFavorite::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(AssetReview::class);
+    }
+
+    public function penalties(): HasMany
+    {
+        return $this->hasMany(Penalty::class);
     }
 }

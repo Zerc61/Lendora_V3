@@ -165,7 +165,15 @@ class ApprovalQueueTest extends TestCase
             ->assertOk()
             ->assertSee($booking->code)
             ->assertSee('Kamera Uji')
-            ->assertSee('Uji antrean');
+            ->assertSee('Uji antrean')
+            ->assertSee(__('ui.booking.quick_actions'));
+
+        $this->actingAs($this->operator)
+            ->get(route('admin.bookings.approval'))
+            ->assertOk()
+            ->assertSee($booking->code)
+            ->assertSee(__('ui.approval.policy_title'))
+            ->assertSee(__('ui.approval.equipment_list'));
     }
 
     public function test_calendar_lists_booked_ranges_for_unit(): void
@@ -193,9 +201,87 @@ class ApprovalQueueTest extends TestCase
             ->assertSee('Tinjau pengajuan');
     }
 
-    private function asset(int $purchasePrice = 1_000_000): Asset
+    public function test_operator_approves_extension_and_extends_due_date(): void
     {
-        return Asset::create([
+        $asset = $this->asset();
+        $booking = $this->pendingBooking($asset);
+        $booking->update([
+            'status' => BookingStatus::Active,
+            'pickup_at' => now(),
+            'due_at' => Carbon::parse('2026-12-04'),
+        ]);
+        $booking->items()->update(['status' => 'picked_up']);
+
+        $extension = $booking->extensions()->create([
+            'requested_by' => $this->borrower->id,
+            'requested_days' => 6,
+            'requested_due_at' => Carbon::parse('2026-12-10'),
+            'reason' => 'Kegiatan tambahan',
+            'status' => 'pending',
+        ]);
+
+        $this->actingAs($this->operator)
+            ->post(route('admin.bookings.extensions.approve', [$booking, $extension]))
+            ->assertRedirect(route('admin.bookings.show', $booking));
+
+        $this->assertSame('approved', $extension->fresh()->status->value);
+        $this->assertSame('2026-12-10', $booking->fresh()->requested_end_date->toDateString());
+    }
+
+    public function test_operator_rejects_extension_and_keeps_due_date(): void
+    {
+        $asset = $this->asset();
+        $booking = $this->pendingBooking($asset);
+        $booking->update([
+            'status' => BookingStatus::Active,
+            'pickup_at' => now(),
+            'due_at' => Carbon::parse('2026-12-04'),
+        ]);
+        $booking->items()->update(['status' => 'picked_up']);
+
+        $extension = $booking->extensions()->create([
+            'requested_by' => $this->borrower->id,
+            'requested_days' => 6,
+            'requested_due_at' => Carbon::parse('2026-12-10'),
+            'reason' => 'Kegiatan tambahan',
+            'status' => 'pending',
+        ]);
+
+        $this->actingAs($this->operator)
+            ->post(route('admin.bookings.extensions.reject', [$booking, $extension]), [
+                'rejection_reason' => 'Jadwal unit sudah penuh',
+            ])
+            ->assertRedirect(route('admin.bookings.show', $booking));
+
+        $this->assertSame('rejected', $extension->fresh()->status->value);
+        $this->assertSame('2026-12-04', $booking->fresh()->due_at->toDateString());
+    }
+
+    public function test_extension_requires_a_rejection_reason(): void
+    {
+        $asset = $this->asset();
+        $booking = $this->pendingBooking($asset);
+        $booking->update(['status' => BookingStatus::Active, 'due_at' => Carbon::parse('2026-12-04')]);
+
+        $extension = $booking->extensions()->create([
+            'requested_by' => $this->borrower->id,
+            'requested_days' => 6,
+            'requested_due_at' => Carbon::parse('2026-12-10'),
+            'reason' => 'Kegiatan tambahan',
+            'status' => 'pending',
+        ]);
+
+        $this->actingAs($this->operator)
+            ->post(route('admin.bookings.extensions.reject', [$booking, $extension]), [
+                'rejection_reason' => '',
+            ])
+            ->assertSessionHasErrors('rejection_reason');
+
+        $this->assertSame('pending', $extension->fresh()->status->value);
+    }
+
+    private function asset(int $purchasePrice = 1_000_000): Asset
+    {        return Asset::create([
             'organization_id' => $this->organization->id,
             'category_id' => $this->category->id,
             'code' => 'LDR-CAM-'.fake()->unique()->numerify('####'),

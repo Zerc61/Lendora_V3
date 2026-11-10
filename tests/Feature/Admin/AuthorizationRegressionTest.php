@@ -60,6 +60,22 @@ class AuthorizationRegressionTest extends TestCase
             ->assertForbidden();
     }
 
+    public function test_operator_cannot_manage_users_or_settings(): void
+    {
+        $operator = User::where('email', 'operator@lendora.test')->firstOrFail();
+
+        $this->actingAs($operator)->get(route('admin.users.index'))->assertForbidden();
+        $this->actingAs($operator)->get(route('admin.settings.edit'))->assertForbidden();
+    }
+
+    public function test_admin_prodi_cannot_open_bap_or_kiosk(): void
+    {
+        $prodi = User::where('email', 'adminprodi@lendora.test')->firstOrFail();
+
+        $this->actingAs($prodi)->get(route('admin.penalties.index'))->assertForbidden();
+        $this->actingAs($prodi)->get(route('admin.kiosk.index'))->assertForbidden();
+    }
+
     public function test_technician_can_open_own_workspace(): void
     {
         $this->actingAs($this->technician)

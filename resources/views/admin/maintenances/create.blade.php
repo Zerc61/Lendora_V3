@@ -41,6 +41,32 @@
                 @error('description') <p class="ldr-field__error">{{ $message }}</p> @enderror
             </div>
 
+            <div class="ldr-hv-form-grid">
+                <div class="ldr-field">
+                    <label class="ldr-label" for="priority">{{ __('ui.maintenance.priority') }}</label>
+                    <select id="priority" class="ldr-input" name="priority">
+                        @foreach (\App\Enums\MaintenancePriority::cases() as $priority)
+                            <option value="{{ $priority->value }}" @selected(old('priority', 'normal') === $priority->value)>
+                                {{ __('ui.maintenance_priority.'.$priority->value) }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('priority') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                </div>
+
+                <div class="ldr-field">
+                    <label class="ldr-label" for="due_at">{{ __('ui.maintenance.due_at') }}</label>
+                    <input id="due_at" class="ldr-input" type="date" name="due_at" value="{{ old('due_at') }}">
+                    @error('due_at') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                </div>
+
+                <div class="ldr-field">
+                    <label class="ldr-label" for="vendor">{{ __('ui.maintenance.assignment') }}</label>
+                    <input id="vendor" class="ldr-input" type="text" name="vendor" value="{{ old('vendor') }}" maxlength="120">
+                    @error('vendor') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                </div>
+            </div>
+
             <div class="ldr-form-actions">
                 <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.common.save') }}</button>
                 <a class="ldr-btn ldr-btn--ghost" href="{{ route('admin.maintenances.index') }}">{{ __('ui.common.cancel') }}</a>

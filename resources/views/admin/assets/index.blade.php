@@ -5,47 +5,48 @@
 @php
     $canManage = auth()->user()->hasRole('organization_admin');
 
-    $selects = [
-        [
-            'name' => 'category_id',
-            'label' => __('ui.asset.fields.category'),
-            'options' => collect($categories)->map(fn (array $category) => [
-                'value' => $category['id'],
-                'label' => str_repeat('— ', $category['depth']).$category['name'],
-            ])->all(),
-        ],
-        [
-            'name' => 'status',
-            'label' => __('ui.asset.fields.status'),
-            'options' => collect(App\Enums\AssetStatus::cases())->map(fn ($status) => [
-                'value' => $status->value,
-                'label' => __('ui.status.'.$status->value),
-            ])->all(),
-        ],
-        [
-            'name' => 'condition_status',
-            'label' => __('ui.asset.fields.condition_status'),
-            'options' => collect(App\Enums\AssetCondition::cases())->map(fn ($condition) => [
-                'value' => $condition->value,
-                'label' => __('ui.condition.'.$condition->value),
-            ])->all(),
-        ],
-    ];
+    $categoryOptions = collect($categories)->map(fn (array $category) => [
+        'value' => $category['id'],
+        'label' => str_repeat('— ', $category['depth']).$category['name'],
+    ])->all();
+
+    $exportQuery = array_filter([
+        'search' => $filters['search'] ?? null,
+        'category_id' => $filters['category_id'] ?? null,
+        'status' => $filters['status'] ?? null,
+        'condition_status' => $filters['condition_status'] ?? null,
+        'location' => $filters['location'] ?? null,
+    ]);
+
+    $activeFilters = array_filter([
+        $filters['search'] ? __('ui.common.search').': '.$filters['search'] : null,
+        $filters['status'] ? __('ui.asset.fields.status').': '.__('ui.status.'.$filters['status']) : null,
+        $filters['condition_status'] ? __('ui.asset.fields.condition_status').': '.__('ui.condition.'.$filters['condition_status']) : null,
+        $filters['location'] ? __('ui.asset.fields.location').': '.$filters['location'] : null,
+    ]);
 @endphp
 
 @section('content')
     <div class="ldr-page-head">
         <div>
+            <span class="ldr-eyebrow">W3 · {{ __('ui.nav.assets') }}</span>
             <h1>{{ __('ui.nav.assets') }}</h1>
             <p class="ldr-muted">{{ __('ui.asset.index_description') }}</p>
         </div>
 
-        @if ($canManage)
-            <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.assets.create') }}">
-                <x-icon name="package" :size="18" />
-                {{ __('ui.asset.add') }}
+        <div class="ldr-page-head__actions">
+            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.assets.export', $exportQuery) }}">
+                <x-icon name="bar-chart" :size="16" />
+                {{ __('ui.asset.export') }}
             </a>
-        @endif
+
+            @if ($canManage)
+                <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.assets.create') }}">
+                    <x-icon name="plus" :size="18" />
+                    {{ __('ui.asset.add') }}
+                </a>
+            @endif
+        </div>
     </div>
 
     <div class="ldr-kpi-grid">
@@ -86,12 +87,79 @@
         </div>
     </div>
 
-    <x-filter-bar
-        :action="route('admin.assets.index')"
-        :filters="$filters"
-        :selects="$selects"
-        :search-placeholder="__('ui.asset.search_placeholder')"
-    />
+    <form method="GET" action="{{ route('admin.assets.index') }}" class="ldr-filter-bar" role="search">
+        <div class="ldr-filter-bar__search">
+            <label class="ldr-sr-only" for="asset-search">{{ __('ui.asset.search_placeholder') }}</label>
+            <x-icon name="search" :size="18" class="ldr-filter-bar__search-icon" />
+            <input id="asset-search"
+                   class="ldr-input"
+                   type="search"
+                   name="search"
+                   value="{{ $filters['search'] ?? '' }}"
+                   placeholder="{{ __('ui.asset.search_placeholder') }}">
+        </div>
+
+        <div class="ldr-filter-bar__select">
+            <label class="ldr-sr-only" for="asset-category">{{ __('ui.asset.fields.category') }}</label>
+            <select id="asset-category" class="ldr-input" name="category_id">
+                <option value="">{{ __('ui.asset.all_categories') }}</option>
+                @foreach ($categoryOptions as $option)
+                    <option value="{{ $option['value'] }}" @selected((int) ($filters['category_id'] ?? 0) === (int) $option['value'])>
+                        {{ $option['label'] }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="ldr-filter-bar__select">
+            <label class="ldr-sr-only" for="asset-status">{{ __('ui.asset.fields.status') }}</label>
+            <select id="asset-status" class="ldr-input" name="status">
+                <option value="">{{ __('ui.common.all') }}</option>
+                @foreach (App\Enums\AssetStatus::cases() as $status)
+                    <option value="{{ $status->value }}" @selected(($filters['status'] ?? null) === $status->value)>
+                        {{ __('ui.status.'.$status->value) }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="ldr-filter-bar__select">
+            <label class="ldr-sr-only" for="asset-condition">{{ __('ui.asset.fields.condition_status') }}</label>
+            <select id="asset-condition" class="ldr-input" name="condition_status">
+                <option value="">{{ __('ui.asset.all_conditions') }}</option>
+                @foreach (App\Enums\AssetCondition::cases() as $condition)
+                    <option value="{{ $condition->value }}" @selected(($filters['condition_status'] ?? null) === $condition->value)>
+                        {{ __('ui.condition.'.$condition->value) }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="ldr-filter-bar__select">
+            <label class="ldr-sr-only" for="asset-location">{{ __('ui.asset.fields.location') }}</label>
+            <select id="asset-location" class="ldr-input" name="location">
+                <option value="">{{ __('ui.asset.all_locations') }}</option>
+                @foreach ($locations as $location)
+                    <option value="{{ $location }}" @selected(($filters['location'] ?? null) === $location)>{{ $location }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="ldr-filter-bar__actions">
+            <button type="submit" class="ldr-btn ldr-btn--secondary ldr-btn--sm">{{ __('ui.common.apply') }}</button>
+            <a class="ldr-btn ldr-btn--ghost ldr-btn--sm" href="{{ route('admin.assets.index') }}">{{ __('ui.common.reset') }}</a>
+        </div>
+    </form>
+
+    @if ($activeFilters !== [])
+        <div class="ldr-filter-chips">
+            <span class="ldr-filter-chips__label">{{ __('ui.asset.active_filters') }}</span>
+            @foreach ($activeFilters as $chip)
+                <span class="ldr-filter-chip">{{ $chip }}</span>
+            @endforeach
+            <a class="ldr-filter-chips__reset" href="{{ route('admin.assets.index') }}">{{ __('ui.asset.reset_filters') }}</a>
+        </div>
+    @endif
 
     @if ($assets->isEmpty())
         <x-empty-state
@@ -106,41 +174,42 @@
     @else
         <div class="ldr-table-card">
             <div class="ldr-table-wrap">
-                <table class="ldr-table">
+                <table class="ldr-table ldr-asset-table">
                     <thead>
                         <tr>
-                            <th>Foto</th>
-                            <th>Kode</th>
-                            <th>Nama</th>
-                            <th>Kategori</th>
-                            <th>Status</th>
-                            <th>Kondisi</th>
-                            <th>Lokasi</th>
-                            @if ($canManage)
-                                <th class="ldr-table__actions-head">Aksi</th>
-                            @endif
+                            <th>{{ __('ui.asset.column_photo') }}</th>
+                            <th>{{ __('ui.asset.fields.name') }}</th>
+                            <th>{{ __('ui.asset.fields.category') }}</th>
+                            <th>{{ __('ui.asset.fields.status') }}</th>
+                            <th>{{ __('ui.asset.fields.condition_status') }}</th>
+                            <th>{{ __('ui.asset.fields.location') }}</th>
+                            <th class="ldr-table__actions-head">{{ __('ui.common.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($assets as $asset)
-                            @php
-                                $photo = $asset->photos->first();
-                            @endphp
+                            @php($photo = $asset->photos->first())
+
                             <tr>
                                 <td>
-                                    <span class="ldr-thumb">
-                                        @if ($photo)
-                                            <img src="{{ Illuminate\Support\Facades\Storage::url($photo->path) }}"
-                                                 alt="{{ $asset->name }}"
-                                                 loading="lazy"
-                                                 width="48"
-                                                 height="48">
-                                        @else
-                                            <x-icon name="camera" :size="20" />
-                                        @endif
-                                    </span>
+                                    <div class="ldr-asset-cell">
+                                        <span class="ldr-thumb">
+                                            @if ($photo)
+                                                <img src="{{ Illuminate\Support\Facades\Storage::url($photo->path) }}"
+                                                     alt="{{ $asset->name }}"
+                                                     loading="lazy"
+                                                     width="48"
+                                                     height="48">
+                                            @else
+                                                <x-icon name="camera" :size="20" />
+                                            @endif
+                                        </span>
+                                        <div>
+                                            <span class="ldr-table__code ldr-mono">{{ $asset->code }}</span>
+                                            <span class="ldr-table__sub">{{ $asset->serial_number ?: '—' }}</span>
+                                        </div>
+                                    </div>
                                 </td>
-                                <td class="ldr-table__code">{{ $asset->code }}</td>
                                 <td>
                                     <span class="ldr-table__name">{{ $asset->name }}</span>
                                     <span class="ldr-table__sub">
@@ -151,15 +220,12 @@
                                 <td><x-status-badge :status="$asset->status->value" /></td>
                                 <td><x-condition-badge :condition="$asset->condition_status->value" /></td>
                                 <td>{{ $asset->location ?: '—' }}</td>
-
-                                @if ($canManage)
-                                    <td>
-                                        <div class="ldr-table__actions">
-                                            <a class="ldr-icon-btn"
-                                               href="{{ route('admin.assets.edit', $asset) }}"
-                                               title="{{ __('ui.common.edit') }}"
-                                               aria-label="{{ __('ui.common.edit') }} {{ $asset->code }}">
-                                                <x-icon name="clipboard-list" :size="18" />
+                                <td>
+                                    <div class="ldr-table__actions">
+                                        @if ($canManage)
+                                            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm"
+                                               href="{{ route('admin.assets.edit', $asset) }}">
+                                                {{ __('ui.common.edit') }}
                                             </a>
 
                                             @if ($asset->status !== App\Enums\AssetStatus::Retired)
@@ -171,9 +237,11 @@
                                                     <x-icon name="x" :size="18" />
                                                 </button>
                                             @endif
-                                        </div>
-                                    </td>
-                                @endif
+                                        @else
+                                            <span class="ldr-muted">—</span>
+                                        @endif
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

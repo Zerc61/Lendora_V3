@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\InspectionContext;
 use App\Enums\InspectionResult;
 use App\Models\BookingItem;
 use Illuminate\Foundation\Http\FormRequest;
@@ -27,8 +28,14 @@ class StoreInspectionRequest extends FormRequest
                 'nullable',
                 Rule::exists('booking_items', 'id'),
             ],
+            'context' => ['nullable', Rule::enum(InspectionContext::class)],
             'result' => ['required', Rule::enum(InspectionResult::class)],
-            'notes' => ['nullable', 'string'],
+            'checklist' => ['nullable', 'array'],
+            'checklist.*' => ['boolean'],
+            'condition_score' => ['nullable', 'integer', 'min:0', 'max:100'],
+            'photos' => ['nullable', 'array', 'max:5'],
+            'photos.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'notes' => ['nullable', 'string', 'max:2000'],
         ];
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FinishMaintenanceRequest;
+use App\Http\Requests\StoreMaintenancePartRequest;
 use App\Http\Requests\StoreMaintenanceRequest;
 use App\Http\Requests\UpdateMaintenanceRequest;
 use App\Models\Asset;
@@ -97,11 +98,42 @@ class MaintenanceController extends Controller
             $request->user(),
             (string) $request->input('description'),
             $technician,
+            [
+                'priority' => $request->input('priority'),
+                'vendor' => $request->input('vendor'),
+                'due_at' => $request->input('due_at'),
+            ],
         );
 
         return redirect()
             ->route('admin.maintenances.index')
             ->with('status', __('messages.maintenance.created'));
+    }
+
+    public function show(Request $request, Maintenance $maintenance): View
+    {
+        $this->assertOrganization($request, $maintenance);
+
+        return view('admin.maintenances.show', [
+            'maintenance' => $maintenance->load([
+                'asset.photos',
+                'assignedTo',
+                'reportedBy',
+                'parts',
+                'inspections',
+                'penalties',
+            ]),
+            'role' => $request->user()->role->slug,
+        ]);
+    }
+
+    public function storePart(StoreMaintenancePartRequest $request, Maintenance $maintenance): RedirectResponse
+    {
+        $this->maintenances->addPart($maintenance, $request->user(), $request->validated());
+
+        return redirect()
+            ->route('admin.maintenances.show', $maintenance)
+            ->with('status', __('messages.maintenance.part_added'));
     }
 
     public function edit(Request $request, Maintenance $maintenance): View

@@ -118,6 +118,118 @@
             </div>
         </div>
 
+        <div class="ldr-field">
+            <label class="ldr-label" for="nim">
+                {{ __('ui.auth.nim') }}
+                <span class="ldr-label__required" aria-hidden="true">*</span>
+            </label>
+
+            <div class="ldr-input-group">
+                <x-icon name="id" :size="18" />
+                <input id="nim"
+                       class="ldr-input @error('nim') ldr-input--error @enderror"
+                       type="text"
+                       name="nim"
+                       value="{{ old('nim') }}"
+                       placeholder="{{ __('ui.auth.nim_placeholder') }}"
+                       required
+                       autocomplete="nim">
+            </div>
+
+            @error('nim')
+                <p class="ldr-field__error">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="ldr-field">
+            <label class="ldr-label" for="study_program">
+                {{ __('ui.auth.study_program') }}
+                <span class="ldr-label__required" aria-hidden="true">*</span>
+            </label>
+
+            <div class="ldr-input-group">
+                <x-icon name="graduation-cap" :size="18" />
+                <input id="study_program"
+                       class="ldr-input @error('study_program') ldr-input--error @enderror"
+                       type="text"
+                       name="study_program"
+                       value="{{ old('study_program') }}"
+                       placeholder="{{ __('ui.auth.study_program_placeholder') }}"
+                       required>
+            </div>
+
+            @error('study_program')
+                <p class="ldr-field__error">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="ldr-field">
+            <label class="ldr-label" for="phone">
+                {{ __('ui.auth.phone') }}
+            </label>
+
+            <div class="ldr-input-group">
+                <x-icon name="phone" :size="18" />
+                <input id="phone"
+                       class="ldr-input @error('phone') ldr-input--error @enderror"
+                       type="tel"
+                       name="phone"
+                       value="{{ old('phone') }}"
+                       placeholder="{{ __('ui.auth.phone_placeholder') }}"
+                       autocomplete="tel">
+            </div>
+
+            @error('phone')
+                <p class="ldr-field__error">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="ldr-field">
+            <label class="ldr-label" for="organization_id">
+                {{ __('ui.auth.organization') }}
+                <span class="ldr-label__required" aria-hidden="true">*</span>
+            </label>
+
+            <div class="ldr-input-group">
+                <select id="organization_id"
+                        class="ldr-select @error('organization_id') ldr-input--error @enderror"
+                        name="organization_id"
+                        required>
+                    <option value="">{{ __('ui.auth.organization_placeholder') }}</option>
+                    @foreach ($organizations as $org)
+                        <option value="{{ $org->id }}">{{ $org->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            @error('organization_id')
+                <p class="ldr-field__error">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="ldr-field ldr-field--checkbox">
+            <input id="whatsapp_opt_in"
+                   name="whatsapp_opt_in"
+                   type="checkbox"
+                   value="1"
+                   {{ old('whatsapp_opt_in') ? 'checked' : '' }}>
+            <label for="whatsapp_opt_in">
+                {{ __('ui.auth.whatsapp_opt_in') }}
+            </label>
+        </div>
+
+        <div class="ldr-field ldr-field--checkbox">
+            <input id="terms"
+                   name="terms"
+                   type="checkbox"
+                   value="1"
+                   required>
+            <label for="terms">
+                {{ __('ui.auth.terms') }}
+                <a href="{{ route('borrower.help') }}">{{ __('ui.auth.terms_link') }}</a>
+            </label>
+        </div>
+
         <button type="submit" class="ldr-btn ldr-btn--primary ldr-btn--block">
             <span>{{ __('ui.auth.submit_register') }}</span>
             <x-icon name="arrow-right" :size="18" />

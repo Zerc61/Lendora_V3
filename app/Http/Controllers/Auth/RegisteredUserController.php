@@ -16,30 +16,35 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
     public function create(): View
     {
-        return view('auth.register');
+        $organizations = \App\Models\Organization::orderBy('name')->get();
+
+        return view('auth.register', compact('organizations'));
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws ValidationException
-     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'nim' => ['required', 'string', 'max:50', 'unique:'.User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'study_program' => ['required', 'string', 'max:100'],
+            'organization_id' => ['required', 'exists:organizations,id'],
+            'whatsapp_opt_in' => ['sometimes', 'boolean'],
+            'terms' => ['required', 'accepted'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
+            'nim' => $request->nim,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'study_program' => $request->study_program,
+            'organization_id' => $request->organization_id,
+            'whatsapp_opt_in' => $request->boolean('whatsapp_opt_in'),
             'password' => Hash::make($request->password),
             'role_id' => Role::where('slug', 'borrower')->firstOrFail()->id,
         ]);

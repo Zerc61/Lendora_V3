@@ -15,6 +15,10 @@
         : $booking->requested_start_date->copy()->locale('id')->translatedFormat('d M Y').'–'.$booking->requested_end_date->copy()->locale('id')->translatedFormat('d M Y');
 
     $borrower = $booking->borrower;
+    $pickupHandover = $booking->handovers->firstWhere('type', \App\Enums\HandoverType::Pickup);
+    $whatsapp = $borrower?->phone
+        ? 'https://wa.me/'.preg_replace('/\D+/', '', str_starts_with($borrower->phone, '0') ? '62'.substr($borrower->phone, 1) : $borrower->phone)
+        : null;
 @endphp
 
 @section('content')
@@ -25,6 +29,11 @@
 
     <section class="ldr-booking-hero">
         <div class="ldr-booking-hero__main">
+            <span class="ldr-booking-hero__period">
+                <x-icon name="calendar" :size="14" />
+                {{ $formatRange }} · {{ __('ui.booking.duration_days', ['count' => $booking->durationInDays()]) }}
+            </span>
+
             <div class="ldr-booking-hero__tags">
                 <span class="ldr-mono ldr-booking-hero__code">{{ $booking->code }}</span>
                 <x-status-badge type="booking" :status="$booking->status->value" />
@@ -58,6 +67,23 @@
                     {{ $booking->purpose }}
                 </span>
             </div>
+        </div>
+
+        <div class="ldr-booking-hero__actions">
+            @if ($pickupHandover)
+                <a class="ldr-btn ldr-btn--secondary"
+                   href="{{ route('admin.bookings.receipt', ['booking' => $booking, 'type' => 'pickup']) }}">
+                    <x-icon name="printer" :size="18" />
+                    {{ __('ui.booking.print_pickup') }}
+                </a>
+            @endif
+
+            @if ($whatsapp)
+                <a class="ldr-btn ldr-btn--secondary" href="{{ $whatsapp }}" target="_blank" rel="noopener">
+                    <x-icon name="mail" :size="18" />
+                    {{ __('ui.booking.contact_borrower') }}
+                </a>
+            @endif
         </div>
 
         @if ($isPending || $canHandover)
@@ -130,14 +156,12 @@
                             <dd>{{ $borrower->study_program }}</dd>
                         </div>
                     @endif
-                    <div>
-                        <dt>{{ __('ui.booking.purpose') }}</dt>
-                        <dd>{{ $booking->purpose }}</dd>
-                    </div>
-                    <div>
-                        <dt>{{ __('ui.booking.notes') }}</dt>
-                        <dd>{{ $booking->notes ?: '—' }}</dd>
-                    </div>
+                    @if ($borrower->phone)
+                        <div>
+                            <dt>{{ __('ui.booking.phone') }}</dt>
+                            <dd>{{ $borrower->phone }}</dd>
+                        </div>
+                    @endif
                     @if ($booking->approved_by)
                         <div>
                             <dt>{{ __('ui.booking.approved_by') }}</dt>
@@ -145,6 +169,18 @@
                         </div>
                     @endif
                 </dl>
+
+                <div class="ldr-quote">
+                    <span class="ldr-quote__label">{{ __('ui.booking.purpose') }}</span>
+                    <p>{{ $booking->purpose ?: '—' }}</p>
+                </div>
+
+                @if ($booking->notes)
+                    <div class="ldr-inspection-notes">
+                        <h3>{{ __('ui.booking.notes') }}</h3>
+                        <p>{{ $booking->notes }}</p>
+                    </div>
+                @endif
             </section>
 
             <section class="ldr-card">
@@ -231,6 +267,46 @@
                 <x-timeline :timeline="$timeline" :status="$booking->status->value" />
             </section>
 
+            @php
+                $pendingExtensions = $booking->extensions->where('status', \App\Enums\BookingExtensionStatus::Pending);
+            @endphp
+
+            @if ($pendingExtensions->isNotEmpty())
+                <section class="ldr-card">
+                    <h2>{{ __('ui.booking.extension') }}</h2>
+
+                    @foreach ($pendingExtensions as $extension)
+                        <dl class="ldr-spec-list">
+                            <div>
+                                <dt>{{ __('ui.booking.due_at') }}</dt>
+                                <dd>{{ $extension->requested_due_at->translatedFormat('d M Y') }}</dd>
+                            </div>
+                            <div>
+                                <dt>{{ __('ui.booking.extension_reason') }}</dt>
+                                <dd>{{ $extension->reason }}</dd>
+                            </div>
+                        </dl>
+
+                        <form method="POST" action="{{ route('admin.bookings.extensions.approve', [$booking, $extension]) }}">
+                            @csrf
+                            <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--primary">
+                                {{ __('ui.booking.approve') }}
+                            </button>
+                        </form>
+
+                        <form method="POST" action="{{ route('admin.bookings.extensions.reject', [$booking, $extension]) }}" class="ldr-field">
+                            @csrf
+                            <label class="ldr-label" for="extension-reason-{{ $extension->id }}">{{ __('ui.booking.reason') }}</label>
+                            <input id="extension-reason-{{ $extension->id }}" name="rejection_reason" class="ldr-input" required minlength="5" maxlength="255">
+                            @error('rejection_reason') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                            <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--danger">
+                                {{ __('ui.booking.reject') }}
+                            </button>
+                        </form>
+                    @endforeach
+                </section>
+            @endif
+
             <section class="ldr-card">
                 <h2>{{ __('ui.booking.handover_history') }}</h2>
 
@@ -253,6 +329,31 @@
                 @empty
                     <p class="ldr-muted">{{ __('ui.booking.handover_empty') }}</p>
                 @endforelse
+            </section>
+
+            <section class="ldr-card">
+                <h2>{{ __('ui.booking.quick_actions') }}</h2>
+
+                <div class="ldr-stack">
+                    <a class="ldr-btn ldr-btn--secondary ldr-btn--block"
+                       href="{{ route('admin.penalties.create', ['booking_id' => $booking->id]) }}">
+                        <x-icon name="alert-circle" :size="16" />
+                        {{ __('ui.booking.report_damage') }}
+                    </a>
+
+                    @if ($booking->status === App\Enums\BookingStatus::Active)
+                        <a class="ldr-btn ldr-btn--ghost ldr-btn--block"
+                           href="{{ route('admin.bookings.handover', ['booking' => $booking, 'type' => 'return']) }}">
+                            <x-icon name="arrow-left-right" :size="16" />
+                            {{ __('ui.handover.return_action') }}
+                        </a>
+                    @endif
+
+                    <a class="ldr-btn ldr-btn--ghost ldr-btn--block" href="{{ route('admin.bookings.approval') }}">
+                        <x-icon name="clipboard-list" :size="16" />
+                        {{ __('ui.booking.back_to_queue') }}
+                    </a>
+                </div>
             </section>
 
             @if ($isPending)

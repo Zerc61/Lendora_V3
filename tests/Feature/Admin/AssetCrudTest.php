@@ -108,7 +108,9 @@ class AssetCrudTest extends TestCase
             ->get(route('admin.assets.index'))
             ->assertOk()
             ->assertSee('Total unit aset')
-            ->assertSee($asset->code);
+            ->assertSee($asset->code)
+            ->assertSee(route('admin.assets.export'))
+            ->assertSee(__('ui.asset.all_locations'));
     }
 
     public function test_org_admin_updates_and_soft_deletes_asset(): void

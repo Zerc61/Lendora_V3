@@ -118,6 +118,10 @@
                     <p>{{ __('ui.profile.tip_body') }}</p>
                 </div>
             </section>
+
+            <x-borrower.compliance-card :score="$compliance['score'] ?? $user->compliance_score" :tier="$compliance['tier'] ?? null" />
+            <x-borrower.quota-card :total="$quota['total_hours'] ?? 25" :used="$quota['used_hours'] ?? 0" :remaining="$quota['remaining_hours'] ?? '—'" />
+            <x-borrower.sanction-card :total="$sanctions['total_penalties'] ?? 0" :amount="$sanctions['total_amount'] ?? 0" />
         </aside>
 
         <form method="POST" action="{{ route('borrower.profile.update') }}" class="ldr-profile-form">
@@ -167,10 +171,28 @@
                                 <dd>{{ $user->study_program }}</dd>
                             </div>
                         @endif
-                        @if ($user->semester)
+                        @if ($user->cohort_year)
                             <div>
-                                <dt>{{ __('ui.profile.semester') }}</dt>
-                                <dd>{{ $user->semester }}</dd>
+                                <dt>{{ __('ui.profile.cohort_year') }}</dt>
+                                <dd>{{ $user->cohort_year }}</dd>
+                            </div>
+                        @endif
+                        @if ($user->study_concentration)
+                            <div>
+                                <dt>{{ __('ui.profile.concentration') }}</dt>
+                                <dd>{{ $user->study_concentration }}</dd>
+                            </div>
+                        @endif
+                        @if ($user->dpa_name)
+                            <div>
+                                <dt>{{ __('ui.profile.dpa') }}</dt>
+                                <dd>{{ $user->dpa_name }}</dd>
+                            </div>
+                        @endif
+                        @if ($user->dpa_nidn)
+                            <div>
+                                <dt>{{ __('ui.profile.dpa_nidn') }}</dt>
+                                <dd>{{ $user->dpa_nidn }}</dd>
                             </div>
                         @endif
                     </dl>

@@ -3,13 +3,17 @@
 namespace App\Services;
 
 use App\Enums\AssetStatus;
+use App\Enums\BookingExtensionStatus;
 use App\Enums\BookingItemStatus;
 use App\Enums\BookingStatus;
 use App\Exceptions\InvalidStatusTransitionException;
 use App\Models\Asset;
 use App\Models\Booking;
+use App\Models\BookingExtension;
+use App\Models\BookingItem;
 use App\Models\Organization;
 use App\Models\User;
+use App\Notifications\BookingAlternativeNotification;
 use App\Notifications\BookingDecisionNotification;
 use App\Notifications\BookingReceivedNotification;
 use Carbon\Carbon;
@@ -237,10 +241,352 @@ class BookingService
     }
 
     /**
+     * @return array<int, array{booking_item_id: int, asset_id: int, code: string, name: string}>
+     */
+    public function suggestAlternative(Booking $booking, User $actor): array
+    {
+        $this->assertStaffForBooking($booking, $actor);
+
+        if (! in_array($booking->status, [BookingStatus::Pending, BookingStatus::Approved], true)) {
+            throw ValidationException::withMessages([
+                'booking' => __('messages.booking.suggest_not_allowed'),
+            ]);
+        }
+
+        $booking->loadMissing('items.asset');
+        $bookingAssetIds = $booking->items->pluck('asset_id')->all();
+        $alternatives = [];
+
+        foreach ($booking->items as $item) {
+            $asset = $item->asset;
+
+            if ($asset === null) {
+                continue;
+            }
+
+            $candidate = Asset::query()
+                ->where('organization_id', $booking->organization_id)
+                ->where('category_id', $asset->category_id)
+                ->where('status', AssetStatus::Available->value)
+                ->whereKeyNot($bookingAssetIds)
+                ->orderBy('code')
+                ->get()
+                ->first(fn (Asset $candidate): bool => $this->availability->isAvailableForRange(
+                    $candidate,
+                    $booking->requested_start_date,
+                    $booking->requested_end_date,
+                ));
+
+            if ($candidate !== null) {
+                $alternatives[] = [
+                    'booking_item_id' => $item->id,
+                    'asset_id' => $candidate->id,
+                    'code' => $candidate->code,
+                    'name' => $candidate->name,
+                ];
+            }
+        }
+
+        if ($alternatives === []) {
+            throw ValidationException::withMessages([
+                'booking' => __('messages.booking.no_alternative'),
+            ]);
+        }
+
+        $this->logger->log(
+            'booking.suggested_alternative',
+            $booking,
+            "Unit alternatif disarankan untuk {$booking->code}.",
+            $actor,
+            ['alternatives' => $alternatives],
+        );
+
+        $booking->borrower->notify(new BookingAlternativeNotification($booking, $alternatives));
+
+        return $alternatives;
+    }
+
+    public function reassignItem(Booking $booking, BookingItem $item, Asset $replacement, User $actor): BookingItem
+    {
+        $this->assertStaffForBooking($booking, $actor);
+
+        if ($item->booking_id !== $booking->id) {
+            throw new AuthorizationException(__('messages.booking.item_mismatch'));
+        }
+
+        if (! in_array($booking->status, [BookingStatus::Pending, BookingStatus::Approved], true)) {
+            throw ValidationException::withMessages([
+                'asset_id' => __('messages.booking.reassign_not_allowed'),
+            ]);
+        }
+
+        return DB::transaction(function () use ($booking, $item, $replacement, $actor): BookingItem {
+            $booking = Booking::query()->whereKey($booking->id)->lockForUpdate()->firstOrFail();
+            $replacement = Asset::query()->whereKey($replacement->id)->lockForUpdate()->firstOrFail();
+            $item = BookingItem::query()->whereKey($item->id)->lockForUpdate()->firstOrFail();
+            $current = Asset::query()->whereKey($item->asset_id)->lockForUpdate()->firstOrFail();
+
+            if ((int) $replacement->organization_id !== (int) $booking->organization_id) {
+                throw ValidationException::withMessages(['asset_id' => __('messages.booking.assets_not_found')]);
+            }
+
+            if ((int) $replacement->category_id !== (int) $current->category_id) {
+                throw ValidationException::withMessages(['asset_id' => __('messages.booking.reassign_category')]);
+            }
+
+            if ((int) $replacement->id === (int) $current->id) {
+                throw ValidationException::withMessages(['asset_id' => __('messages.booking.reassign_same')]);
+            }
+
+            if ($booking->items()->where('asset_id', $replacement->id)->exists()) {
+                throw ValidationException::withMessages(['asset_id' => __('messages.booking.reassign_duplicate')]);
+            }
+
+            $conflict = $this->conflictMessageFor(
+                [$replacement],
+                $booking->requested_start_date,
+                $booking->requested_end_date,
+            );
+
+            if ($conflict !== null) {
+                throw ValidationException::withMessages(['asset_id' => $conflict]);
+            }
+
+            if ($booking->status === BookingStatus::Approved) {
+                $current->update(['status' => AssetStatus::Available]);
+                $replacement->update(['status' => AssetStatus::Reserved]);
+            }
+
+            $item->update(['asset_id' => $replacement->id]);
+
+            $this->logger->log(
+                'booking.reassigned',
+                $booking,
+                "Unit {$current->code} dialihkan ke {$replacement->code} pada {$booking->code}.",
+                $actor,
+                [
+                    'booking_item_id' => $item->id,
+                    'from_asset_id' => $current->id,
+                    'to_asset_id' => $replacement->id,
+                ],
+            );
+
+            return $item->fresh(['asset']);
+        });
+    }
+
+    /**
+     * @param  array<int, int|string>  $assetIds
+     */
+    public function createWalkIn(
+        User $operator,
+        int $borrowerId,
+        array $assetIds,
+        CarbonInterface $start,
+        CarbonInterface $end,
+        string $purpose,
+    ): Booking {
+        if (! in_array($operator->role?->slug, ['operator', 'organization_admin'], true)) {
+            throw new AuthorizationException(__('messages.booking.walk_in_not_allowed'));
+        }
+
+        $borrower = User::query()
+            ->where('organization_id', $operator->organization_id)
+            ->whereKey($borrowerId)
+            ->whereHas('role', fn ($query) => $query->where('slug', 'borrower'))
+            ->firstOrFail();
+
+        if ($borrower->status !== 'active') {
+            throw ValidationException::withMessages([
+                'borrower_id' => __('messages.booking.walk_in_borrower_inactive'),
+            ]);
+        }
+
+        $booking = $this->createRequest($borrower, $assetIds, $start, $end, $purpose);
+
+        $this->logger->log(
+            'booking.walk_in',
+            $booking,
+            "Peminjaman walk-in {$booking->code} dibuat operator untuk {$borrower->name}.",
+            $operator,
+        );
+
+        if ($this->decisionBlockReason($operator, $booking) === null) {
+            try {
+                $booking = $this->approve($booking, $operator);
+            } catch (ValidationException) {
+                // Availability or limit changed between creation and approval.
+            }
+        }
+
+        return $booking->fresh(['items.asset', 'borrower']);
+    }
+
+    private function assertStaffForBooking(Booking $booking, User $actor): void
+    {
+        if ((int) $actor->organization_id !== (int) $booking->organization_id
+            || ! in_array($actor->role?->slug, ['operator', 'organization_admin'], true)
+        ) {
+            throw new AuthorizationException(__('messages.booking.not_allowed'));
+        }
+    }
+
+    public function requestExtension(
+        Booking $booking,
+        User $requester,
+        CarbonInterface $newEnd,
+        ?string $reason = null,
+    ): BookingExtension {
+        if ($requester->id !== $booking->borrower_id) {
+            throw new AuthorizationException(__('messages.booking.extension_not_owner'));
+        }
+
+        if ($booking->status !== BookingStatus::Active) {
+            throw ValidationException::withMessages([
+                'new_end_date' => __('messages.booking.extension_only_active'),
+            ]);
+        }
+
+        $currentEnd = Carbon::parse($booking->due_at ?? $booking->requested_end_date)->startOfDay();
+        $newEnd = Carbon::parse($newEnd)->startOfDay();
+
+        if (! $newEnd->greaterThan($currentEnd)) {
+            throw ValidationException::withMessages([
+                'new_end_date' => __('messages.booking.extension_after_current', [
+                    'date' => $currentEnd->translatedFormat('d M Y'),
+                ]),
+            ]);
+        }
+
+        $hasPending = $booking->extensions()
+            ->where('status', BookingExtensionStatus::Pending->value)
+            ->exists();
+
+        if ($hasPending) {
+            throw ValidationException::withMessages([
+                'new_end_date' => __('messages.booking.extension_pending_exists'),
+            ]);
+        }
+
+        foreach ($booking->items()->with('asset')->get() as $item) {
+            $asset = $item->asset;
+
+            if ($asset !== null && $this->availability
+                ->conflictsFor($asset, $currentEnd, $newEnd, $booking->id)
+                ->exists()) {
+                throw ValidationException::withMessages([
+                    'new_end_date' => __('messages.booking.extension_conflict', [
+                        'asset' => $asset->name,
+                    ]),
+                ]);
+            }
+        }
+
+        return DB::transaction(function () use ($booking, $requester, $currentEnd, $newEnd, $reason): BookingExtension {
+            $extension = $booking->extensions()->create([
+                'requested_by' => $requester->id,
+                'requested_days' => max(1, (int) $currentEnd->diffInDays($newEnd)),
+                'requested_due_at' => $newEnd->copy()->endOfDay(),
+                'reason' => $reason ?: __('messages.booking.extension_default_reason'),
+                'status' => BookingExtensionStatus::Pending,
+            ]);
+
+            $this->logger->log(
+                'booking.extension_requested',
+                $booking,
+                "Pengajuan perpanjangan {$booking->code} sampai {$newEnd->translatedFormat('d M Y')}.",
+                $requester,
+            );
+
+            return $extension;
+        });
+    }
+
+    public function approveExtension(BookingExtension $extension, User $approver): BookingExtension
+    {
+        $this->assertExtensionDecidable($extension, $approver);
+
+        $booking = $extension->booking;
+        $start = Carbon::parse($booking->due_at ?? $booking->requested_end_date)->startOfDay();
+        $newEnd = Carbon::parse($extension->requested_due_at)->startOfDay();
+
+        foreach ($booking->items()->with('asset')->get() as $item) {
+            $asset = $item->asset;
+
+            if ($asset !== null && $this->availability
+                ->conflictsFor($asset, $start, $newEnd, $booking->id)
+                ->exists()) {
+                throw ValidationException::withMessages([
+                    'extension' => __('messages.booking.extension_conflict', ['asset' => $asset->name]),
+                ]);
+            }
+        }
+
+        return DB::transaction(function () use ($extension, $approver, $booking, $newEnd): BookingExtension {
+            $extension->update([
+                'status' => BookingExtensionStatus::Approved,
+                'decided_by' => $approver->id,
+                'decided_at' => now(),
+            ]);
+
+            $booking->update([
+                'requested_end_date' => $newEnd->toDateString(),
+                'due_at' => $newEnd->copy()->endOfDay(),
+            ]);
+
+            $this->logger->log(
+                'booking.extension_approved',
+                $booking,
+                "Perpanjangan {$booking->code} disetujui sampai {$newEnd->translatedFormat('d M Y')}.",
+                $approver,
+            );
+
+            return $extension->fresh();
+        });
+    }
+
+    public function rejectExtension(BookingExtension $extension, User $approver, string $reason): BookingExtension
+    {
+        $this->assertExtensionDecidable($extension, $approver);
+
+        $extension->update([
+            'status' => BookingExtensionStatus::Rejected,
+            'decided_by' => $approver->id,
+            'decided_at' => now(),
+            'rejection_reason' => $reason,
+        ]);
+
+        $this->logger->log(
+            'booking.extension_rejected',
+            $extension->booking,
+            "Perpanjangan {$extension->booking->code} ditolak: {$reason}.",
+            $approver,
+        );
+
+        return $extension->fresh();
+    }
+
+    private function assertExtensionDecidable(BookingExtension $extension, User $approver): void
+    {
+        if (! in_array($approver->role?->slug, ['operator', 'organization_admin'], true)) {
+            throw new AuthorizationException(__('messages.booking.extension_not_allowed'));
+        }
+
+        if ($extension->status !== BookingExtensionStatus::Pending) {
+            throw new InvalidStatusTransitionException(__('messages.booking.extension_not_pending'));
+        }
+
+        if ($extension->booking->status !== BookingStatus::Active) {
+            throw ValidationException::withMessages([
+                'extension' => __('messages.booking.extension_only_active'),
+            ]);
+        }
+    }
+
+    /**
      * @return array<int, array{status: string, actor: string|null, time: \Illuminate\Support\Carbon|null, note: string|null}>
      */
-    public function timelineFor(Booking $booking): array
-    {
+    public function timelineFor(Booking $booking): array    {
         $events = [[
             'status' => BookingStatus::Pending->value,
             'actor' => $booking->borrower?->name,

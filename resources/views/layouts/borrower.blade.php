@@ -47,10 +47,7 @@
         <header class="ldr-portal-header">
             <div class="ldr-portal-header__inner">
                 <a class="ldr-portal-brand" href="{{ route('borrower.home') }}">
-                    <span class="ldr-portal-brand__mark" aria-hidden="true">
-                        <x-icon name="camera" :size="18" />
-                    </span>
-                    <span class="ldr-portal-brand__name">Lendora</span>
+                    <img src="{{ asset('Design/logo/lendora-logo-utama-siklus.svg') }}" alt="Lendora" width="140" height="40">
                     <span class="ldr-portal-brand__scope">{{ __('ui.borrower.portal_label') }}</span>
                 </a>
 
@@ -102,6 +99,12 @@
                                     {{ $borrowerUser->role?->name }}
                                 @endif
                             </span>
+                            @if (isset($borrowerUser->compliance_score))
+                                <span class="ldr-portal-user__compliance">
+                                    <x-icon name="award" :size="12" />
+                                    {{ __('ui.borrower.compliance_score', ['score' => $borrowerUser->compliance_score]) }}
+                                </span>
+                            @endif
                         </span>
                         <span class="ldr-portal-user__avatar" aria-hidden="true">{{ mb_substr($borrowerUser->name, 0, 1) }}</span>
                     </a>
@@ -110,7 +113,9 @@
         </header>
 
         <header class="ldr-appbar">
-            <a class="ldr-appbar__brand" href="{{ route('borrower.home') }}">Lendora</a>
+            <a class="ldr-appbar__brand" href="{{ route('borrower.home') }}" aria-label="Lendora — {{ __('ui.nav.home') }}">
+                <img src="{{ asset('Design/logo/lendora-logo-utama-siklus.svg') }}" alt="" width="140" height="40">
+            </a>
 
             <a class="ldr-appbar__bell"
                href="{{ route('borrower.notifications.index') }}"
@@ -136,12 +141,54 @@
                         @if ($item['key'] === 'notifications' && ($unreadNotifications ?? 0) > 0)
                             <span class="ldr-dot ldr-dot--nav" aria-hidden="true"></span>
                         @endif
+                        @if ($item['key'] === 'bookings' && ($activeBookingCount ?? 0) > 0)
+                            <span class="ldr-dot ldr-dot--nav ldr-dot--count" aria-hidden="true">{{ $activeBookingCount }}</span>
+                        @endif
                     </span>
                     <span>{{ $item['label'] }}</span>
                 </a>
             @endforeach
         </nav>
     </div>
+
+    <a class="ldr-help-fab" href="{{ route('borrower.help') }}" aria-label="{{ __('ui.nav.help') }}">
+        <x-icon name="help-circle" :size="24" />
+    </a>
+
+    <footer class="ldr-footer" role="contentinfo">
+        <div class="ldr-footer__inner">
+            <div class="ldr-footer__brand">
+                <a href="{{ route('borrower.home') }}" class="ldr-footer__logo" aria-label="Lendora">
+                    <img src="{{ asset('Design/logo/lendora-logo-utama-siklus.svg') }}" alt="" width="160" height="45">
+                </a>
+                <p class="ldr-footer__desc">{{ __('ui.footer.brand_desc') }}</p>
+            </div>
+
+            <div class="ldr-footer__column">
+                <h3 class="ldr-footer__heading">{{ __('ui.footer.hours_title') }}</h3>
+                <p class="ldr-footer__text">{{ $operationalHours ?? 'Senin–Jumat 08:00–17:00 WIB' }}</p>
+            </div>
+
+            <div class="ldr-footer__column">
+                <h3 class="ldr-footer__heading">{{ __('ui.footer.affiliation_title') }}</h3>
+                <p class="ldr-footer__text">{{ $orgName ?? 'Unit Kampus' }}</p>
+            </div>
+
+            <div class="ldr-footer__column">
+                <h3 class="ldr-footer__heading">{{ __('ui.footer.contact_title') }}</h3>
+                <p class="ldr-footer__text">
+                    <x-icon name="phone" :size="16" /> {{ $operatorPhone ?? 'Ext. 402' }}<br>
+                    <x-icon name="message-circle" :size="16" /> {{ $operatorWhatsApp ?? '+62 812-3456-7890' }}
+                </p>
+                <a href="{{ route('borrower.help') }}" class="ldr-footer__link">
+                    <x-icon name="help-circle" :size="16" /> {{ __('ui.nav.help') }}
+                </a>
+            </div>
+        </div>
+        <div class="ldr-footer__bottom">
+            <p>&copy; {{ now()->year }} Lendora. {{ __('ui.footer.rights_reserved') }}</p>
+        </div>
+    </footer>
 
     <script src="{{ asset('js/borrower.js') }}" defer></script>
 </body>

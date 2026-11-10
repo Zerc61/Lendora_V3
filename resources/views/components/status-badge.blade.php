@@ -31,12 +31,34 @@
             'done' => 'success',
             'cancelled' => 'neutral',
         ],
+        'penalty' => [
+            'waiting_payment' => 'warning',
+            'partial' => 'info',
+            'installment_requested' => 'violet',
+            'paid' => 'success',
+            'waived' => 'neutral',
+            'overdue' => 'danger',
+        ],
+        'payment' => [
+            'pending' => 'warning',
+            'waiting_verification' => 'info',
+            'verified' => 'success',
+            'rejected' => 'danger',
+        ],
+        'inspection' => [
+            'ok' => 'success',
+            'needs_repair' => 'warning',
+            'damaged' => 'danger',
+        ],
     ];
 
     $prefix = match ($type) {
         'booking' => 'ui.booking_status.',
         'item' => 'ui.item_status.',
         'maintenance' => 'ui.maintenance_status.',
+        'penalty' => 'ui.penalty.status.',
+        'payment' => 'ui.payment.status.',
+        'inspection' => 'ui.inspection_result.',
         default => 'ui.status.',
     };
 

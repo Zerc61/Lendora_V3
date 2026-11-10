@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Enums\AssetCondition;
 use App\Enums\AssetStatus;
+use App\Enums\MaintenancePriority;
 use App\Enums\MaintenanceStatus;
 use App\Exceptions\InvalidMaintenanceTransitionException;
 use App\Models\Asset;
 use App\Models\Maintenance;
+use App\Models\MaintenancePart;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +23,7 @@ class MaintenanceService
         User $reporter,
         string $description,
         ?User $technician = null,
+        array $options = [],
     ): Maintenance {
         if ($reporter->organization_id !== $asset->organization_id) {
             throw new AuthorizationException(__('messages.booking.wrong_organization'));
@@ -30,13 +33,20 @@ class MaintenanceService
             throw new AuthorizationException(__('messages.maintenance.not_allowed'));
         }
 
-        return DB::transaction(function () use ($asset, $reporter, $description, $technician): Maintenance {
+        return DB::transaction(function () use ($asset, $reporter, $description, $technician, $options): Maintenance {
             $maintenance = Maintenance::create([
                 'asset_id' => $asset->id,
                 'reported_by' => $reporter->id,
                 'assigned_to' => $technician?->id,
+                'vendor' => $options['vendor'] ?? null,
                 'status' => MaintenanceStatus::Scheduled,
+                'priority' => MaintenancePriority::tryFrom((string) ($options['priority'] ?? '')) ?? MaintenancePriority::Normal,
                 'description' => $description,
+                'due_at' => $options['due_at'] ?? null,
+            ]);
+
+            $maintenance->update([
+                'code' => sprintf('MTC-%d-%04d', now()->year, $maintenance->id),
             ]);
 
             $asset->update(['status' => AssetStatus::Maintenance]);
@@ -133,6 +143,61 @@ class MaintenanceService
         });
     }
 
+    public function addPart(Maintenance $maintenance, User $actor, array $data): MaintenancePart
+    {
+        $this->assertStaff($maintenance, $actor);
+
+        if (in_array($maintenance->status, [MaintenanceStatus::Done, MaintenanceStatus::Cancelled], true)) {
+            throw InvalidMaintenanceTransitionException::for($maintenance, $maintenance->status);
+        }
+
+        return DB::transaction(function () use ($maintenance, $actor, $data): MaintenancePart {
+            $part = $maintenance->parts()->create([
+                'name' => $data['name'],
+                'part_code' => $data['part_code'] ?? null,
+                'quantity' => max(1, (int) ($data['quantity'] ?? 1)),
+                'unit_cost' => max(0, (int) ($data['unit_cost'] ?? 0)),
+            ]);
+
+            $maintenance->load('parts');
+            $maintenance->update(['cost' => $maintenance->totalCost()]);
+
+            $this->logger->log(
+                'maintenance.part_added',
+                $maintenance,
+                "Suku cadang {$part->name} ditambahkan ke tiket {$maintenance->code}.",
+                $actor,
+                ['part_id' => $part->id, 'subtotal' => $part->subtotal()],
+            );
+
+            return $part;
+        });
+    }
+
+    public function recordProgress(Maintenance $maintenance, User $actor, string $label, bool $done = true): Maintenance
+    {
+        $this->assertStaff($maintenance, $actor);
+
+        $progress = $maintenance->progress ?? [];
+        $progress[] = [
+            'label' => $label,
+            'done' => $done,
+            'at' => now()->toDateTimeString(),
+            'by' => $actor->id,
+        ];
+
+        $maintenance->update(['progress' => $progress]);
+
+        $this->logger->log(
+            'maintenance.progress_updated',
+            $maintenance,
+            "Progres tiket {$maintenance->code}: {$label}.",
+            $actor,
+        );
+
+        return $maintenance->fresh(['asset', 'assignedTo', 'reportedBy', 'parts']);
+    }
+
     public function cancel(Maintenance $maintenance, User $admin): Maintenance
     {
         $this->assertAdmin($maintenance, $admin);
@@ -156,6 +221,15 @@ class MaintenanceService
     private function assertAdmin(Maintenance $maintenance, User $actor): void
     {
         if ($actor->organization_id !== $maintenance->asset->organization_id || ! $actor->hasRole('organization_admin')) {
+            throw new AuthorizationException(__('messages.maintenance.not_allowed'));
+        }
+    }
+
+    private function assertStaff(Maintenance $maintenance, User $actor): void
+    {
+        if ($actor->organization_id !== $maintenance->asset->organization_id
+            || ! in_array($actor->role?->slug, ['operator', 'organization_admin', 'technician'], true)
+        ) {
             throw new AuthorizationException(__('messages.maintenance.not_allowed'));
         }
     }

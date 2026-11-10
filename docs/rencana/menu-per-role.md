@@ -95,16 +95,21 @@ topbar portal tanpa footer. Foto produk nyata dan data demo disediakan oleh
 | 1 | Dashboard | SELESAI | Layout khusus operator (W1), antrean + jatuh tempo hari ini |
 | 2 | Antrean persetujuan | SELESAI | Kartu antrean + ringkasan status (W6); aksi setujui/tolak tetap |
 | 3 | Detail booking | SELESAI | Hero peminjam, kartu unit berfoto, timeline (W7) |
-| 4 | Kalender ketersediaan | Akan dikerjakan | Kalender bulanan tetap; Gantt perlu backend |
-| 5 | Serah terima | SELESAI | Kartu daftar + form kondisi per unit (W8) |
-| 6 | Inspeksi | SELESAI | Ringkasan hasil + tabel inspeksi (W9) |
-| 7 | Maintenance | SELESAI | Ringkasan status/biaya + thumbnail aset (W10) |
-| 8 | Aset (lihat) | SELESAI | Ringkasan status + tabel berfoto, tanpa tombol kelola |
-| 9 | Laporan | SELESAI | KPI berikon, filter, ekspor |
-| 10 | Notifikasi, profil, pencarian | SELESAI | Kartu notifikasi, info akun, tautan aman |
+| 4 | Kalender ketersediaan | SELESAI | Gantt unit × hari, KPI, konflik, ekspor CSV/iCal (O2) |
+| 5 | Serah terima | SELESAI | Checklist, foto, tanda tangan, kode bukti (W8) |
+| 6 | Inspeksi | SELESAI | Konteks, checklist, foto, tiket maintenance otomatis (W9) |
+| 7 | Maintenance | SELESAI | Kode tiket, prioritas, parts, progres, kondisi akhir (W10) |
+| 8 | Aset (lihat) | SELESAI | KPI, filter kategori/status/kondisi/lemari, ekspor CSV (W3) |
+| 9 | Laporan | SELESAI | KPI, grafik utilisasi, tren, top borrower, kerusakan (W12) |
+| 10 | BAP & denda | SELESAI | Nomor BAP, item biaya, foto, cetak, verifikasi pembayaran (O3) |
+| 11 | Kiosk scanner | SELESAI | Lookup booking/NIM/aset, pickup/return, tanda tangan (O1a/O1b) |
+| 12 | Antrean mandiri | SELESAI | Tiket, panggil, selesai, monitor loket (O4) |
+| 13 | Shift & catatan | SELESAI | Shift aktif dari jam + catatan serah shift |
+| 14 | Notifikasi, profil, pencarian | SELESAI | Kartu notifikasi, info akun, tautan aman |
 
 Catatan: pekerjaan 2, 3, 5, 6, 7 tercatat di
-`docs/history/2026-11-08-operasional-operator.md`.
+`docs/history/2026-11-08-operasional-operator.md`. Overhaul operator lengkap
+tercatat di `docs/history/2026-11-09-overhaul-operator.md`.
 
 ### 3. Organization Admin
 
@@ -159,9 +164,6 @@ Catatan: pekerjaan 1–3 tercatat di
 | Menu | Role | Alasan |
 |---|---|---|
 | Pembayaran denda (M11) | borrower | Pembayaran di luar MVP |
-| BAP kerusakan + klaim denda (O3) | operator | Bergantung modul denda |
-| Kiosk scanner (O1) | operator | Butuh perangkat dan endpoint baru |
-| Kiosk antrean (O4) | operator | Butuh endpoint dan nomor antrean |
 | Pusat bantuan/regulasi (B9) | borrower | Bisa statis, tetapi belum disetujui |
 | QR/PDF/perpanjangan (B6) | borrower | Butuh generator dokumen dan aturan baru |
 | Kuota/utilisasi mata kuliah (P3) | admin_prodi | Butuh model prodi dan mata kuliah |

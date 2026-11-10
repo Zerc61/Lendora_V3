@@ -37,7 +37,13 @@ class BookingController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('borrower.bookings.index', compact('bookings', 'tab', 'counts'));
+        $activeBooking = $bookings->firstWhere('status', BookingStatus::Active->value);
+
+        $quota = app(\App\Services\QuotaService::class)->summary($user);
+        $compliance = app(\App\Services\BorrowerScoreService::class)->summary($user);
+        $sanctions = app(\App\Services\PenaltyService::class)->summaryFor($user);
+
+        return view('borrower.bookings.index', compact('bookings', 'tab', 'counts', 'activeBooking', 'quota', 'compliance', 'sanctions'));
     }
 
     public function create(Request $request): View
@@ -50,7 +56,7 @@ class BookingController extends Controller
             ->all();
 
         $assets = Asset::query()
-            ->with('category')
+            ->with(['category', 'photos'])
             ->where('organization_id', $request->user()->organization_id)
             ->whereIn('id', $ids)
             ->get();
@@ -58,6 +64,7 @@ class BookingController extends Controller
         return view('borrower.bookings.create', [
             'assets' => $assets,
             'maxLoanDays' => app(SettingService::class)->maxLoanDays(),
+            'conflict' => null,
         ]);
     }
 
@@ -80,7 +87,7 @@ class BookingController extends Controller
     {
         $this->authorize('view', $booking);
 
-        $booking->load(['items.asset.photos', 'borrower', 'approvedBy']);
+        $booking->load(['items.asset.photos', 'borrower', 'approvedBy', 'extensions']);
 
         return view('borrower.bookings.show', [
             'booking' => $booking,
@@ -97,5 +104,24 @@ class BookingController extends Controller
         return redirect()
             ->route('borrower.bookings.show', $booking)
             ->with('status', __('messages.booking.cancelled'));
+    }
+
+    public function document(Request $request, Booking $booking, string $type): View
+    {
+        $this->authorize('view', $booking);
+
+        return view('borrower.bookings.document', [
+            'booking' => $booking,
+            'type' => $type,
+        ]);
+    }
+
+    public function returnPass(Request $request, Booking $booking): View
+    {
+        $this->authorize('view', $booking);
+
+        $booking->load(['items.asset.photos']);
+
+        return view('borrower.bookings.return-pass', compact('booking'));
     }
 }

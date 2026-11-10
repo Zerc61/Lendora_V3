@@ -59,6 +59,24 @@
 
         $visibleGroups = [];
 
+        if ($role === 'operator') {
+            $groups = [
+                __('ui.sections.operator_counter') => [
+                    ['label' => __('ui.nav.kiosk_scanner'), 'icon' => 'zap', 'href' => route('admin.kiosk.index'), 'match' => 'admin.kiosk.*', 'roles' => ['operator'], 'badge' => 'queue'],
+                    ['label' => __('ui.nav.walk_in'), 'icon' => 'plus', 'href' => route('admin.bookings.walk-in'), 'match' => 'admin.bookings.walk-in*', 'roles' => ['operator']],
+                    ['label' => __('ui.nav.approval_queue'), 'icon' => 'clipboard-list', 'href' => route('admin.bookings.approval'), 'match' => 'admin.bookings.approval', 'roles' => ['operator'], 'badge' => 'approvals'],
+                    ['label' => __('ui.nav.handovers'), 'icon' => 'arrow-left-right', 'href' => route('admin.handovers.index'), 'match' => 'admin.handovers.*', 'roles' => ['operator']],
+                    ['label' => __('ui.nav.inspections'), 'icon' => 'clipboard-check', 'href' => route('admin.inspections.index'), 'match' => 'admin.inspections.*', 'roles' => ['operator']],
+                    ['label' => __('ui.nav.penalties'), 'icon' => 'book-open', 'href' => route('admin.penalties.index'), 'match' => 'admin.penalties.*', 'roles' => ['operator']],
+                ],
+                __('ui.sections.inventory_schedule') => [
+                    ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['operator']],
+                    ['label' => __('ui.nav.maintenances'), 'icon' => 'wrench', 'href' => route('admin.maintenances.index'), 'match' => 'admin.maintenances.*', 'roles' => ['operator']],
+                    ['label' => __('ui.nav.calendar'), 'icon' => 'calendar', 'href' => route('admin.bookings.calendar'), 'match' => 'admin.bookings.calendar', 'roles' => ['operator']],
+                ],
+            ];
+        }
+
         foreach ($groups as $label => $items) {
             $items = array_values(array_filter(
                 $items,
@@ -82,12 +100,28 @@
             </a>
 
             <nav class="ldr-sidebar__nav" aria-label="{{ __('ui.main_navigation') }}">
-                <a class="ldr-sidebar__dashboard {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}"
-                   href="{{ route('admin.dashboard') }}"
-                   @if (request()->routeIs('admin.dashboard')) aria-current="page" @endif>
-                    <x-icon name="home" :size="20" />
-                    <span class="ldr-sidebar__label">{{ __('ui.nav.dashboard') }}</span>
-                </a>
+                @if ($role === 'operator')
+                    <div class="ldr-sidebar__group">
+                        <p class="ldr-sidebar__group-label ldr-sidebar__group-label--static">{{ __('ui.sections.main') }}</p>
+                        <ul class="ldr-sidebar__list">
+                            <li>
+                                <a class="ldr-sidebar__link {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}"
+                                   href="{{ route('admin.dashboard') }}"
+                                   @if (request()->routeIs('admin.dashboard')) aria-current="page" @endif>
+                                    <x-icon name="home" :size="20" />
+                                    <span class="ldr-sidebar__label">{{ __('ui.nav.dashboard_loket') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <a class="ldr-sidebar__dashboard {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}"
+                       href="{{ route('admin.dashboard') }}"
+                       @if (request()->routeIs('admin.dashboard')) aria-current="page" @endif>
+                        <x-icon name="home" :size="20" />
+                        <span class="ldr-sidebar__label">{{ __('ui.nav.dashboard') }}</span>
+                    </a>
+                @endif
 
                 @foreach ($visibleGroups as $label => $items)
                     <div class="ldr-sidebar__group" data-menu-group>
@@ -109,13 +143,18 @@
                                             ? request()->query('status') === 'all'
                                             : request()->query('status') !== 'all';
                                     }
+
+                                    $hasNotice = isset($item['badge']) && (int) ($sidebarCounts[$item['badge']] ?? 0) > 0;
                                 @endphp
                                 <li>
-                                    <a class="ldr-sidebar__link {{ $isActive ? 'is-active' : '' }}"
+                                    <a class="ldr-sidebar__link {{ $isActive ? 'is-active' : '' }} {{ $hasNotice ? 'has-notice' : '' }}"
                                        href="{{ $item['href'] }}"
                                        @if ($isActive) aria-current="page" @endif>
                                         <x-icon :name="$item['icon']" :size="20" />
                                         <span class="ldr-sidebar__label">{{ $item['label'] }}</span>
+                                        @if ($hasNotice)
+                                            <span class="ldr-sidebar__badge">{{ $sidebarCounts[$item['badge']] }}</span>
+                                        @endif
                                     </a>
                                 </li>
                             @endforeach
@@ -164,6 +203,13 @@
                            minlength="2"
                            placeholder="{{ __('ui.search.placeholder') }}">
                 </form>
+
+                @if ($adminShift !== null)
+                    <span class="ldr-admin__shift {{ $adminShift['active'] ? 'is-active' : 'is-idle' }}">
+                        <span class="ldr-admin__shift-dot" aria-hidden="true"></span>
+                        {{ __('ui.dashboard.operator.shift_badge', ['label' => $adminShift['label']]) }}
+                    </span>
+                @endif
 
                 <a class="ldr-icon-btn ldr-admin__bell"
                    href="{{ route('admin.notifications.index') }}"

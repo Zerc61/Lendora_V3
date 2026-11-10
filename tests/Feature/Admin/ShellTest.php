@@ -60,6 +60,7 @@ class ShellTest extends TestCase
         $response->assertSee(route('admin.handovers.index'));
         $response->assertSee(route('admin.inspections.index'));
         $response->assertSee(route('admin.maintenances.index'));
+        $response->assertSee(route('admin.bookings.walk-in'));
     }
 
     public function test_admin_prodi_menu_shows_reports_and_no_user_management(): void
