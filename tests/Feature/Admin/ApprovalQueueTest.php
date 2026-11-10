@@ -120,6 +120,12 @@ class ApprovalQueueTest extends TestCase
             ->assertForbidden();
 
         $this->actingAs($this->prodi)
+            ->post(route('admin.bookings.reject', $long), [
+                'rejection_reason' => 'Tidak berwenang menolak.',
+            ])
+            ->assertForbidden();
+
+        $this->actingAs($this->prodi)
             ->post(route('admin.bookings.approve', $long))
             ->assertRedirect(route('admin.bookings.show', $long));
 
@@ -198,7 +204,20 @@ class ApprovalQueueTest extends TestCase
             ->assertOk()
             ->assertSee('Pengajuan Khusus')
             ->assertSee($long->code)
-            ->assertSee('Tinjau pengajuan');
+            ->assertSee(__('ui.prodi.review'));
+    }
+
+    public function test_prodi_queue_only_lists_special_requests(): void
+    {
+        $short = $this->pendingBooking($this->asset(), duration: 3);
+        $long = $this->pendingBooking($this->asset(), duration: 10);
+
+        $this->actingAs($this->prodi)
+            ->get(route('admin.bookings.approval'))
+            ->assertOk()
+            ->assertSee(__('ui.approval.prodi_title'))
+            ->assertSee($long->code)
+            ->assertDontSee($short->code);
     }
 
     public function test_operator_approves_extension_and_extends_due_date(): void

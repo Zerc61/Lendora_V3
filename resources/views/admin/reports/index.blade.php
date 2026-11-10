@@ -7,6 +7,7 @@
     $to = \Carbon\Carbon::parse($filters['date_to']);
     $periodLabel = $from->translatedFormat('d M Y').' – '.$to->translatedFormat('d M Y');
     $avgDays = $kpis['total_loans'] > 0 ? round($kpis['borrowed_days'] / $kpis['total_loans'], 1) : 0;
+    $isProdi = auth()->user()->role?->slug === 'admin_prodi';
 
     $exportQuery = array_filter($filters);
     $printQuery = array_filter($filters);
@@ -24,8 +25,8 @@
 @section('content')
     <div class="ldr-page-head">
         <div>
-            <span class="ldr-eyebrow">W12 · {{ __('ui.nav.reports') }}</span>
-            <h1>{{ __('ui.report.title') }}</h1>
+            <span class="ldr-eyebrow">{{ $isProdi ? __('ui.prodi.report_eyebrow') : 'W12 · '.__('ui.nav.reports') }}</span>
+            <h1>{{ $isProdi ? __('ui.prodi.report_title') : __('ui.report.title') }}</h1>
             <p class="ldr-muted">{{ $periodLabel }}</p>
         </div>
 

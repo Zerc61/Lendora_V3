@@ -43,6 +43,14 @@ class ApprovalQueueService
         $this->order($query, $filters['sort'] ?? 'nearest', $filters['urgency'] ?? null);
 
         $cards = $query->get()
+            ->when(
+                ($filters['scope'] ?? null) === 'special',
+                fn (Collection $bookings): Collection => $bookings->filter(
+                    fn (Booking $booking): bool => $booking->isLongDuration(
+                        $this->settings->maxLoanDays($organizationId),
+                    ),
+                ),
+            )
             ->map(fn (Booking $booking): array => $this->card($user, $booking))
             ->values();
 

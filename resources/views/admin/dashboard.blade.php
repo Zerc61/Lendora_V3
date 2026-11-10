@@ -23,6 +23,8 @@
             'special' => __('ui.dashboard.prodi.special'),
             'active' => __('ui.dashboard.prodi.active'),
             'returned_this_month' => __('ui.dashboard.prodi.returned_this_month'),
+            'students' => __('ui.dashboard.prodi.students'),
+            'low_compliance' => __('ui.dashboard.prodi.low_compliance'),
         ],
         'technician' => [
             'scheduled' => __('ui.dashboard.technician.scheduled'),
@@ -80,6 +82,8 @@
         'special' => 'shield-check',
         'active' => 'layers',
         'returned_this_month' => 'check-circle',
+        'students' => 'users',
+        'low_compliance' => 'alert-circle',
     ];
 
     $prodiKpiHints = [
@@ -87,6 +91,8 @@
         'special' => __('ui.dashboard.prodi.hint_special'),
         'active' => __('ui.dashboard.prodi.hint_active'),
         'returned_this_month' => __('ui.dashboard.prodi.hint_returned_this_month'),
+        'students' => __('ui.dashboard.prodi.hint_students'),
+        'low_compliance' => __('ui.dashboard.prodi.hint_low_compliance'),
     ];
 
     $kpiIcons = match ($role) {
@@ -425,8 +431,18 @@
     @else
         <div class="ldr-page-head">
             <div>
-                <h1>{{ __('ui.admin.welcome', ['name' => $user->name, 'role' => $user->role->name]) }}</h1>
-                <p class="ldr-muted">{{ __('ui.dashboard.subtitle') }}</p>
+                @if ($role === 'admin_prodi')
+                    <span class="ldr-eyebrow">{{ __('ui.prodi.eyebrow') }}</span>
+                    <h1>{{ __('ui.prodi.title') }}</h1>
+                    <p class="ldr-muted">{{ __('ui.prodi.subtitle') }}</p>
+                    <span class="ldr-prodi-head__meta">
+                        <x-icon name="calendar" :size="14" />
+                        {{ $prodiDashboard['semester']['label'] }}
+                    </span>
+                @else
+                    <h1>{{ __('ui.admin.welcome', ['name' => $user->name, 'role' => $user->role->name]) }}</h1>
+                    <p class="ldr-muted">{{ __('ui.dashboard.subtitle') }}</p>
+                @endif
             </div>
 
             <div class="ldr-page-head__actions">
@@ -488,55 +504,165 @@
             </section>
         @endif
 
-        @if ($role === 'admin_prodi' && $specialQueue->isNotEmpty())
-            <h2 class="ldr-section-title">{{ __('ui.dashboard.special_queue') }}</h2>
-            <p class="ldr-muted ldr-section-hint">{{ __('ui.dashboard.prodi.queue_hint') }}</p>
+        @if ($role === 'admin_prodi')
+            @php
+                $prodi = $prodiDashboard;
+                $maxCategory = max(1, (int) ($prodi['categories']->max('count') ?? 0));
+            @endphp
 
-            <div class="ldr-special-list">
-                @foreach ($specialQueue as $booking)
-                    <article class="ldr-special-card">
-                        <div class="ldr-special-card__head">
-                            <div>
-                                <a class="ldr-mono ldr-special-card__code" href="{{ route('admin.bookings.show', $booking) }}">
-                                    {{ $booking->code }}
-                                </a>
-                                <strong>{{ $booking->borrower?->name ?? '—' }}</strong>
-                                <span class="ldr-muted">
-                                    {{ $booking->borrower?->nim ? 'NIM '.$booking->borrower->nim : '' }}
-                                    @if ($booking->borrower?->study_program)
-                                        · {{ $booking->borrower->study_program }}
+            @if ($prodi['queue']->isNotEmpty())
+                <div class="ldr-alert ldr-alert--warning ldr-prodi-alert" role="status">
+                    <x-icon name="shield-check" :size="18" />
+                    <div>
+                        <strong>{{ __('ui.prodi.queue_title') }}: {{ $prodi['queue']->count() }}</strong>
+                        <p>{{ __('ui.prodi.queue_hint') }}</p>
+                    </div>
+                    <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.bookings.approval') }}">
+                        {{ __('ui.prodi.review') }}
+                        <x-icon name="arrow-right" :size="16" />
+                    </a>
+                </div>
+            @endif
+
+            <div class="ldr-prodi-grid">
+                <div class="ldr-stack">
+                    <h2 class="ldr-section-title ldr-section-title--flush">{{ __('ui.prodi.queue_title') }}</h2>
+                    <p class="ldr-muted ldr-section-hint">{{ __('ui.prodi.queue_hint') }}</p>
+
+                    @if ($prodi['queue']->isEmpty())
+                        <x-empty-state
+                            icon="shield-check"
+                            :title="__('ui.prodi.queue_empty')"
+                            :description="__('ui.dashboard.prodi.queue_hint')"
+                        />
+                    @else
+                        <div class="ldr-special-list">
+                            @foreach ($prodi['queue'] as $card)
+                                @php
+                                    $booking = $card['booking'];
+                                    $borrower = $booking->borrower;
+                                    $assets = $booking->items->map->asset->filter();
+                                @endphp
+
+                                <article class="ldr-special-card ldr-prodi-card">
+                                    <div class="ldr-special-card__head">
+                                        <div>
+                                            <a class="ldr-mono ldr-special-card__code" href="{{ route('admin.bookings.show', $booking) }}">
+                                                {{ $booking->code }}
+                                            </a>
+                                            <strong>{{ $borrower?->name ?? '—' }}</strong>
+                                            <span class="ldr-muted">
+                                                @if ($borrower?->nim) NIM {{ $borrower->nim }} @endif
+                                                @if ($borrower?->study_program) · {{ $borrower->study_program }} @endif
+                                                @if ($borrower?->semester) · {{ __('ui.prodi.semester') }} {{ $borrower->semester }} @endif
+                                            </span>
+                                        </div>
+                                        <span class="ldr-badge ldr-badge--warning">
+                                            {{ __('ui.booking.duration_days', ['count' => $booking->durationInDays()]) }}
+                                        </span>
+                                    </div>
+
+                                    <p class="ldr-special-card__purpose">{{ $booking->purpose }}</p>
+
+                                    <div class="ldr-special-card__facts">
+                                        <span>
+                                            <x-icon name="calendar" :size="15" />
+                                            {{ $booking->requested_start_date?->copy()->locale('id')->translatedFormat('d M Y') }}
+                                            –
+                                            {{ $booking->requested_end_date?->copy()->locale('id')->translatedFormat('d M Y') }}
+                                        </span>
+                                        <span>
+                                            <x-icon name="package" :size="15" />
+                                            {{ __('ui.booking.items_count', ['count' => $booking->items->count()]) }}
+                                        </span>
+                                        <span>
+                                            <x-icon name="clipboard-list" :size="15" />
+                                            {{ __('ui.prodi.value') }}: Rp {{ number_format($card['value'], 0, ',', '.') }}
+                                        </span>
+                                    </div>
+
+                                    @if ($assets->isNotEmpty())
+                                        <p class="ldr-prodi-card__assets">
+                                            {{ $assets->take(2)->pluck('name')->join(', ') }}
+                                            @if ($assets->count() > 2)
+                                                +{{ $assets->count() - 2 }}
+                                            @endif
+                                        </p>
                                     @endif
-                                </span>
+
+                                    @if ($card['block_reason'])
+                                        <p class="ldr-op-block">
+                                            <x-icon name="alert-circle" :size="14" />
+                                            {{ $card['block_reason'] }}
+                                        </p>
+                                    @endif
+
+                                    <div class="ldr-special-card__actions">
+                                        <a class="ldr-btn ldr-btn--ghost ldr-btn--sm" href="{{ route('admin.bookings.show', $booking) }}">
+                                            {{ __('ui.prodi.review') }}
+                                        </a>
+
+                                        <form method="POST" action="{{ route('admin.bookings.approve', $booking) }}">
+                                            @csrf
+                                            <button class="ldr-btn ldr-btn--primary ldr-btn--sm"
+                                                    type="submit"
+                                                    @disabled(! $card['can_decide'])
+                                                    @if (! $card['can_decide']) title="{{ $card['block_reason'] }}" @endif>
+                                                {{ __('ui.prodi.approve') }}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </article>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                <aside class="ldr-prodi-rail">
+                    <section class="ldr-card ldr-prodi-panel">
+                        <div class="ldr-prodi-panel__head">
+                            <span class="ldr-prodi-panel__icon"><x-icon name="shield-check" :size="18" /></span>
+                            <div>
+                                <h2>{{ __('ui.prodi.rule_title') }}</h2>
+                                <p class="ldr-muted">{{ __('ui.dashboard.prodi.queue_hint') }}</p>
                             </div>
-                            <span class="ldr-badge ldr-badge--warning">
-                                {{ __('ui.booking.duration_days', ['count' => $booking->durationInDays()]) }}
-                            </span>
                         </div>
 
-                        <p class="ldr-special-card__purpose">{{ $booking->purpose }}</p>
+                        <ul class="ldr-prodi-rules">
+                            <li>{{ __('ui.prodi.rule_duration', ['days' => $prodi['rules']['max_days']]) }}</li>
+                            <li>{{ __('ui.prodi.rule_value', ['limit' => number_format($prodi['rules']['operator_limit'], 0, ',', '.')]) }}</li>
+                            <li>{{ __('ui.prodi.rule_authority') }}</li>
+                        </ul>
+                    </section>
 
-                        <div class="ldr-special-card__facts">
-                            <span>
-                                <x-icon name="calendar" :size="15" />
-                                {{ $booking->requested_start_date?->copy()->locale('id')->translatedFormat('d M Y') }}
-                                –
-                                {{ $booking->requested_end_date?->copy()->locale('id')->translatedFormat('d M Y') }}
-                            </span>
-                            <span>
-                                <x-icon name="package" :size="15" />
-                                {{ __('ui.booking.items_count', ['count' => $booking->items->count()]) }}
-                            </span>
+                    <section class="ldr-card ldr-prodi-panel">
+                        <div class="ldr-prodi-panel__head">
+                            <span class="ldr-prodi-panel__icon"><x-icon name="layers" :size="18" /></span>
+                            <div>
+                                <h2>{{ __('ui.prodi.category_title') }}</h2>
+                            </div>
                         </div>
 
-                        <div class="ldr-special-card__actions">
-                            <a class="ldr-btn ldr-btn--primary ldr-btn--sm"
-                               href="{{ route('admin.bookings.show', $booking) }}">
-                                {{ __('ui.dashboard.prodi.review') }}
-                                <x-icon name="arrow-right" :size="16" />
-                            </a>
-                        </div>
-                    </article>
-                @endforeach
+                        @if ($prodi['categories']->isEmpty())
+                            <p class="ldr-dash-empty">{{ __('ui.prodi.category_empty') }}</p>
+                        @else
+                            <ul class="ldr-prodi-bars">
+                                @foreach ($prodi['categories'] as $category)
+                                    @php $width = (int) round($category['count'] / $maxCategory * 100); @endphp
+                                    <li class="ldr-prodi-bar">
+                                        <div class="ldr-prodi-bar__head">
+                                            <strong>{{ $category['name'] }}</strong>
+                                            <span>{{ $category['count'] }}</span>
+                                        </div>
+                                        <div class="ldr-prodi-bar__track">
+                                            <span class="ldr-prodi-bar__fill" style="width: {{ $width }}%"></span>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </section>
+                </aside>
             </div>
         @endif
 

@@ -69,7 +69,14 @@ class ShellTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Laporan');
+        $response->assertSee(__('ui.nav.otorisasi_khusus'));
+        $response->assertSee(__('ui.nav.dashboard_prodi'));
+        $response->assertSee(route('admin.bookings.approval'));
+        $response->assertSee(route('admin.assets.index'));
         $response->assertDontSee('Pengguna');
+        $response->assertDontSee('Log Aktivitas');
+        $response->assertDontSee(route('admin.handovers.index'));
+        $response->assertDontSee(route('admin.settings.edit'));
     }
 
     private function user(string $email): User

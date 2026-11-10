@@ -77,6 +77,21 @@
             ];
         }
 
+        if ($role === 'admin_prodi') {
+            $groups = [
+                __('ui.sections.prodi_authorization') => [
+                    ['label' => __('ui.nav.otorisasi_khusus'), 'icon' => 'shield-check', 'href' => route('admin.bookings.approval'), 'match' => 'admin.bookings.approval', 'roles' => ['admin_prodi'], 'badge' => 'special_approvals'],
+                ],
+                __('ui.sections.prodi_monitoring') => [
+                    ['label' => __('ui.nav.assets'), 'icon' => 'package', 'href' => route('admin.assets.index'), 'match' => 'admin.assets.*', 'roles' => ['admin_prodi']],
+                    ['label' => __('ui.nav.categories'), 'icon' => 'layers', 'href' => route('admin.categories.index'), 'match' => 'admin.categories.*', 'roles' => ['admin_prodi']],
+                ],
+                __('ui.sections.reports_documents') => [
+                    ['label' => __('ui.nav.reports'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.*', 'roles' => ['admin_prodi']],
+                ],
+            ];
+        }
+
         foreach ($groups as $label => $items) {
             $items = array_values(array_filter(
                 $items,
@@ -119,7 +134,7 @@
                        href="{{ route('admin.dashboard') }}"
                        @if (request()->routeIs('admin.dashboard')) aria-current="page" @endif>
                         <x-icon name="home" :size="20" />
-                        <span class="ldr-sidebar__label">{{ __('ui.nav.dashboard') }}</span>
+                        <span class="ldr-sidebar__label">{{ $role === 'admin_prodi' ? __('ui.nav.dashboard_prodi') : __('ui.nav.dashboard') }}</span>
                     </a>
                 @endif
 

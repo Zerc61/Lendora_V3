@@ -10,7 +10,7 @@ use App\Models\Asset;
 use App\Models\Booking;
 use App\Models\Maintenance;
 use App\Services\OperatorDashboardService;
-use App\Services\SettingService;
+use App\Services\ProdiDashboardService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -22,10 +22,14 @@ class DashboardController extends Controller
         $role = $user->role->slug;
         $organizationId = $user->organization_id;
 
+        $prodiDashboard = $role === 'admin_prodi'
+            ? app(ProdiDashboardService::class)->for($user)
+            : null;
+
         $kpis = match ($role) {
             'operator' => $this->operatorKpis($organizationId),
             'organization_admin' => $this->adminKpis($organizationId),
-            'admin_prodi' => $this->prodiKpis($organizationId),
+            'admin_prodi' => $prodiDashboard['kpis'],
             'technician' => $this->technicianKpis($user->id),
             default => [],
         };
@@ -40,19 +44,6 @@ class DashboardController extends Controller
                 ->latest()
                 ->limit(10)
                 ->get()
-            : collect();
-
-        $specialQueue = $role === 'admin_prodi'
-            ? Booking::query()
-                ->with(['borrower', 'items.asset'])
-                ->where('organization_id', $organizationId)
-                ->where('status', BookingStatus::Pending->value)
-                ->whereDate('requested_start_date', '>=', now()->toDateString())
-                ->get()
-                ->filter(fn (Booking $booking) => $booking->isLongDuration(
-                    app(SettingService::class)->maxLoanDays($organizationId),
-                ))
-                ->values()
             : collect();
 
         $tasks = $role === 'technician'
@@ -94,7 +85,7 @@ class DashboardController extends Controller
             'role',
             'kpis',
             'recentActivity',
-            'specialQueue',
+            'prodiDashboard',
             'tasks',
             'operatorQueue',
             'operatorDueToday',
@@ -150,33 +141,6 @@ class DashboardController extends Controller
             'utilization' => $total > 0
                 ? round(((int) ($assets['borrowed'] ?? 0) + (int) ($assets['reserved'] ?? 0)) / $total * 100, 1)
                 : 0,
-        ];
-    }
-
-    /**
-     * @return array<string, int>
-     */
-    private function prodiKpis(int $organizationId): array
-    {
-        $maxLoanDays = app(SettingService::class)->maxLoanDays($organizationId);
-
-        $pending = Booking::query()
-            ->where('organization_id', $organizationId)
-            ->where('status', BookingStatus::Pending->value)
-            ->get();
-
-        return [
-            'pending' => $pending->count(),
-            'special' => $pending->filter(fn (Booking $booking) => $booking->isLongDuration($maxLoanDays))->count(),
-            'active' => Booking::query()
-                ->where('organization_id', $organizationId)
-                ->where('status', BookingStatus::Active->value)
-                ->count(),
-            'returned_this_month' => Booking::query()
-                ->where('organization_id', $organizationId)
-                ->where('status', BookingStatus::Returned->value)
-                ->whereBetween('returned_at', [now()->startOfMonth(), now()->endOfMonth()])
-                ->count(),
         ];
     }
 

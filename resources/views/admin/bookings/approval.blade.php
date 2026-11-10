@@ -4,6 +4,7 @@
 
 @php
     $roleSlug = auth()->user()->role->slug;
+    $isProdi = $roleSlug === 'admin_prodi';
     $canRejectRole = in_array($roleSlug, ['operator', 'organization_admin'], true);
     $standby = collect($cards)->flatMap(fn ($card) => $card['alternatives'])->unique('asset_id');
 
@@ -16,9 +17,9 @@
 @section('content')
     <div class="ldr-page-head">
         <div>
-            <span class="ldr-eyebrow">W6 · {{ __('ui.approval.title') }}</span>
-            <h1>{{ __('ui.approval.title') }}</h1>
-            <p class="ldr-muted">{{ __('ui.approval.subtitle') }}</p>
+            <span class="ldr-eyebrow">{{ $isProdi ? __('ui.approval.prodi_eyebrow') : 'W6 · '.__('ui.approval.title') }}</span>
+            <h1>{{ $isProdi ? __('ui.approval.prodi_title') : __('ui.approval.title') }}</h1>
+            <p class="ldr-muted">{{ $isProdi ? __('ui.approval.prodi_subtitle') : __('ui.approval.subtitle') }}</p>
         </div>
 
         @if ($canRejectRole)
@@ -42,11 +43,11 @@
     <div class="ldr-kpi-grid">
         <div class="ldr-kpi ldr-kpi--warning">
             <div class="ldr-kpi__head">
-                <span class="ldr-kpi__label">{{ __('ui.approval.waiting') }}</span>
+                <span class="ldr-kpi__label">{{ $isProdi ? __('ui.approval.prodi_waiting') : __('ui.approval.waiting') }}</span>
                 <span class="ldr-kpi__icon"><x-icon name="clipboard-list" :size="18" /></span>
             </div>
             <span class="ldr-kpi__value">{{ $kpis['waiting'] }}</span>
-            <span class="ldr-kpi__hint">{{ __('ui.booking_status.pending') }}</span>
+            <span class="ldr-kpi__hint">{{ $isProdi ? __('ui.approval.prodi_waiting_hint') : __('ui.booking_status.pending') }}</span>
         </div>
 
         <div class="ldr-kpi ldr-kpi--danger">
@@ -159,7 +160,13 @@
                                     @if ($borrower?->nim) NIM {{ $borrower->nim }} @endif
                                     @if ($borrower?->study_program) · {{ $borrower->study_program }} @endif
                                     @if ($borrower?->semester) · {{ __('ui.profile.semester') }} {{ $borrower->semester }} @endif
+                                    @if ($isProdi && $borrower?->lab_tier) · {{ $borrower->lab_tier }} @endif
                                 </span>
+                                @if ($isProdi)
+                                    <span class="ldr-badge {{ $borrower?->academic_verified_at ? 'ldr-badge--success' : 'ldr-badge--warning' }}">
+                                        {{ $borrower?->academic_verified_at ? __('ui.approval.academic_verified') : __('ui.approval.academic_unverified') }}
+                                    </span>
+                                @endif
                                 <p class="ldr-apv-person__purpose">{{ $booking->purpose ?: __('ui.approval.no_purpose') }}</p>
                             </div>
                         </div>
@@ -285,7 +292,7 @@
                                     @csrf
                                     <button class="ldr-btn ldr-btn--primary ldr-btn--sm" type="submit">
                                         <x-icon name="check-circle" :size="16" />
-                                        {{ __('ui.approval.approve') }}
+                                        {{ $isProdi ? __('ui.prodi.approve') : __('ui.approval.approve') }}
                                     </button>
                                 </form>
                             @endif

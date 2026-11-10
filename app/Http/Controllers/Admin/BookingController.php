@@ -16,7 +16,9 @@ use App\Models\Category;
 use App\Models\User;
 use App\Services\ApprovalQueueService;
 use App\Services\BookingService;
+use App\Services\BorrowerScoreService;
 use App\Services\GanttService;
+use App\Services\SettingService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -109,6 +111,7 @@ class BookingController extends Controller
             'category_id' => $request->integer('category_id') ?: null,
             'urgency' => $request->query('urgency') ?: null,
             'sort' => $request->query('sort') ?: 'nearest',
+            'scope' => $request->user()->hasRole('admin_prodi') ? 'special' : null,
         ];
 
         return view(
@@ -185,11 +188,47 @@ class BookingController extends Controller
 
         $booking->load(['items.asset.photos', 'borrower', 'approvedBy', 'handovers.performedBy', 'extensions']);
 
+        $prodiReview = null;
+
+        if ($request->user()->hasRole('admin_prodi')) {
+            $settings = app(SettingService::class);
+            $maxLoanDays = $settings->maxLoanDays($booking->organization_id);
+            $operatorLimit = $settings->operatorApprovalLimit($booking->organization_id);
+            $value = $booking->totalAssetValue();
+            $reasons = [];
+
+            if ($booking->isLongDuration($maxLoanDays)) {
+                $reasons[] = __('ui.prodi.escalation_duration', [
+                    'days' => $booking->durationInDays(),
+                    'max' => $maxLoanDays,
+                ]);
+            }
+
+            if ($value > $operatorLimit) {
+                $reasons[] = __('ui.prodi.escalation_value', [
+                    'value' => number_format($value, 0, ',', '.'),
+                    'limit' => number_format($operatorLimit, 0, ',', '.'),
+                ]);
+            }
+
+            $prodiReview = [
+                'card' => app(ApprovalQueueService::class)->card($request->user(), $booking),
+                'score' => app(BorrowerScoreService::class)->summary($booking->borrower),
+                'value' => $value,
+                'reasons' => $reasons,
+                'rules' => [
+                    'max_days' => $maxLoanDays,
+                    'operator_limit' => $operatorLimit,
+                ],
+            ];
+        }
+
         return view('admin.bookings.show', [
             'booking' => $booking,
             'timeline' => $this->bookings->timelineFor($booking),
             'canDecide' => $this->bookings->decisionBlockReason($request->user(), $booking) === null,
             'blockReason' => $this->bookings->decisionBlockReason($request->user(), $booking),
+            'prodiReview' => $prodiReview,
         ]);
     }
 

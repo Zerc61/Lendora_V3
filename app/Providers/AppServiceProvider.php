@@ -91,6 +91,18 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
+            if ($user !== null && $role === 'admin_prodi' && Schema::hasTable('bookings')) {
+                $maxLoanDays = app(SettingService::class)->maxLoanDays($user->organization_id);
+
+                $sidebarCounts['special_approvals'] = Booking::query()
+                    ->where('organization_id', $user->organization_id)
+                    ->where('status', BookingStatus::Pending->value)
+                    ->whereDate('requested_start_date', '>=', now()->toDateString())
+                    ->get(['requested_start_date', 'requested_end_date'])
+                    ->filter(fn (Booking $booking): bool => $booking->isLongDuration($maxLoanDays))
+                    ->count();
+            }
+
             $view->with('adminShift', $adminShift);
             $view->with('sidebarCounts', $sidebarCounts);
         });
