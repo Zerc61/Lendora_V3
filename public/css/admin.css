@@ -207,6 +207,7 @@
     flex: none;
     align-items: center;
     gap: var(--ldr-space-3);
+    min-width: 0;
     min-height: 60px;
     padding: 0 var(--ldr-space-6);
     background: var(--ldr-white);
@@ -374,6 +375,7 @@
 .ldr-admin__search {
     position: relative;
     flex: 0 1 260px;
+    min-width: 0;
 }
 
 .ldr-admin__search .ldr-input {
@@ -393,6 +395,7 @@
 .ldr-admin__user {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     gap: var(--ldr-space-2);
     font-size: 14px;
     color: var(--ldr-text-muted);
@@ -571,6 +574,25 @@
         padding-left: 0;
         border-left: 0;
     }
+
+    .ldr-admin__user .ldr-badge,
+    .ldr-admin__shift {
+        display: none;
+    }
+
+    .ldr-admin__title {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ldr-admin__user-name {
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 640px) {
@@ -587,6 +609,7 @@
     flex: 1;
     padding: var(--ldr-space-6);
     overflow-y: auto;
+    min-width: 0;
 }
 
 .ldr-admin__backdrop {
@@ -795,6 +818,7 @@
     border-radius: var(--ldr-radius-card);
     box-shadow: var(--ldr-shadow-sm);
     overflow: hidden;
+    contain: paint;
 }
 
 .ldr-table-wrap {
@@ -4365,6 +4389,13 @@
     background: var(--ldr-white);
     border: 1px solid var(--ldr-border);
     border-radius: var(--ldr-radius-card);
+}
+
+@media screen and (max-width: 640px) {
+    .ldr-print .ldr-card {
+        overflow-x: auto;
+        contain: paint;
+    }
 }
 
 .ldr-print-head {

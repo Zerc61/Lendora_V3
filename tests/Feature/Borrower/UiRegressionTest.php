@@ -292,6 +292,18 @@ class UiRegressionTest extends TestCase
             ->assertSee('data-size="200"', false);
     }
 
+    public function test_return_pass_generates_missing_token(): void
+    {
+        $booking = Booking::where('borrower_id', $this->borrower->id)->firstOrFail();
+        $booking->update(['return_token' => null]);
+
+        $this->actingAs($this->borrower)
+            ->get(route('borrower.bookings.return-pass', $booking))
+            ->assertOk();
+
+        $this->assertNotEmpty($booking->fresh()->return_token);
+    }
+
     public function test_booking_create_page_renders_selected_assets(): void
     {
         $asset = Asset::firstOrFail();

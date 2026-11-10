@@ -108,8 +108,20 @@ class BookingServiceTest extends TestCase
         $this->assertSame('16:00', $approved->due_at->format('H:i'));
         $this->assertSame(AssetStatus::Reserved, $asset->fresh()->status);
         $this->assertSame('approved', $approved->items->first()->status->value);
+        $this->assertNotEmpty($approved->return_token);
 
         Notification::assertSentTo($this->borrower, BookingDecisionNotification::class);
+    }
+
+    public function test_ensure_return_token_fills_missing_token_once(): void
+    {
+        $booking = $this->pendingBooking($this->asset());
+        $this->assertNull($booking->return_token);
+
+        $filled = $this->service()->ensureReturnToken($booking);
+
+        $this->assertNotEmpty($filled->return_token);
+        $this->assertSame($filled->return_token, $this->service()->ensureReturnToken($booking->fresh())->return_token);
     }
 
     public function test_reject_requires_reason_and_keeps_assets_available(): void

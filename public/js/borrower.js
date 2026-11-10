@@ -4,7 +4,6 @@
     initToasts();
     initFavoriteToggle();
     initCopyToken();
-    initDrawerFilter();
     initPenaltyCalculator();
     initQrRender();
     initPaymentToggle();
@@ -165,30 +164,6 @@
                     showToast('Nomor disalin');
                 });
             });
-        });
-    }
-
-    function initDrawerFilter() {
-        var drawer = document.querySelector('[data-filter-drawer]');
-        var openBtn = document.querySelector('[data-filter-open]');
-        var closeBtn = document.querySelector('[data-filter-close]');
-
-        if (!drawer || !openBtn || !closeBtn) {
-            return;
-        }
-
-        openBtn.addEventListener('click', function () {
-            drawer.classList.add('is-open');
-        });
-
-        closeBtn.addEventListener('click', function () {
-            drawer.classList.remove('is-open');
-        });
-
-        document.addEventListener('click', function (event) {
-            if (!drawer.contains(event.target) && !openBtn.contains(event.target)) {
-                drawer.classList.remove('is-open');
-            }
         });
     }
 

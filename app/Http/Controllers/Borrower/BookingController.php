@@ -138,6 +138,7 @@ class BookingController extends Controller
     {
         $this->authorize('view', $booking);
 
+        $booking = $this->bookings->ensureReturnToken($booking);
         $booking->load(['items.asset.photos']);
 
         if ($request->query('format') === 'pdf') {

@@ -22,6 +22,7 @@ use Carbon\CarbonInterface;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class BookingService
@@ -160,6 +161,7 @@ class BookingService
                 'approved_by' => $approver->id,
                 'approved_at' => now(),
                 'due_at' => $booking->requested_end_date->copy()->setTime(16, 0),
+                'return_token' => $booking->return_token ?? $this->newReturnToken(),
             ]);
 
             $booking->items()->update(['status' => BookingItemStatus::Approved]);
@@ -758,6 +760,26 @@ class BookingService
         }
 
         return null;
+    }
+
+    public function ensureReturnToken(Booking $booking): Booking
+    {
+        if ($booking->return_token !== null) {
+            return $booking;
+        }
+
+        $booking->forceFill(['return_token' => $this->newReturnToken()])->save();
+
+        return $booking;
+    }
+
+    private function newReturnToken(): string
+    {
+        do {
+            $token = Str::upper(Str::random(10));
+        } while (Booking::withTrashed()->where('return_token', $token)->exists());
+
+        return $token;
     }
 
     /**
