@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Asset;
 use App\Models\Booking;
+use App\Models\Course;
 use App\Services\BookingService;
 use App\Services\SettingService;
 use Carbon\Carbon;
@@ -23,6 +24,7 @@ class StoreBookingRequest extends FormRequest
             'assets' => ['required', 'array', 'min:1'],
             'assets.*' => ['integer', 'distinct'],
             'purpose' => ['required', 'string', 'max:255'],
+            'course_id' => ['nullable', 'integer'],
             'requested_start_date' => ['required', 'date', 'date_format:Y-m-d'],
             'requested_end_date' => ['required', 'date', 'date_format:Y-m-d', 'after_or_equal:requested_start_date'],
         ];
@@ -50,6 +52,18 @@ class StoreBookingRequest extends FormRequest
 
                 if ($assets->count() !== count($this->input('assets'))) {
                     $validator->errors()->add('assets', __('messages.booking.assets_not_found'));
+
+                    return;
+                }
+
+                $courseId = $this->input('course_id');
+
+                if ($courseId !== null && ! Course::query()
+                    ->where('organization_id', $organizationId)
+                    ->where('is_active', true)
+                    ->whereKey($courseId)
+                    ->exists()) {
+                    $validator->errors()->add('course_id', __('messages.booking.course_invalid'));
 
                     return;
                 }

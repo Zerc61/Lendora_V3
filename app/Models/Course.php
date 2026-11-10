@@ -15,6 +15,7 @@ class Course extends Model
         'lecturer_name',
         'semester',
         'credits',
+        'quota_hours',
         'is_active',
     ];
 
@@ -23,6 +24,7 @@ class Course extends Model
         return [
             'semester' => 'integer',
             'credits' => 'integer',
+            'quota_hours' => 'integer',
             'is_active' => 'boolean',
         ];
     }

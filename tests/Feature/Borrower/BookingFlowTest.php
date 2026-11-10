@@ -7,6 +7,7 @@ use App\Enums\BookingStatus;
 use App\Models\Asset;
 use App\Models\Booking;
 use App\Models\Category;
+use App\Models\Course;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\BookingService;
@@ -68,6 +69,38 @@ class BookingFlowTest extends TestCase
         $this->assertMatchesRegularExpression('/^LDR-BK-2026-\d{4}$/', $booking->code);
         $this->assertCount(1, $booking->items);
         $this->assertSame($asset->id, $booking->items->first()->asset_id);
+    }
+
+    public function test_borrower_can_attach_course_to_request(): void
+    {
+        $asset = $this->asset();
+        $course = $this->course(['quota_hours' => 120]);
+
+        $this->actingAs($this->borrower)->post(route('borrower.bookings.store'), [
+            'assets' => [$asset->id],
+            'purpose' => 'Tugas sinematografi',
+            'requested_start_date' => '2026-12-01',
+            'requested_end_date' => '2026-12-04',
+            'course_id' => $course->id,
+        ])->assertRedirect();
+
+        $this->assertSame($course->id, Booking::firstOrFail()->course_id);
+    }
+
+    public function test_borrower_cannot_attach_inactive_course(): void
+    {
+        $asset = $this->asset();
+        $course = $this->course(['is_active' => false]);
+
+        $this->actingAs($this->borrower)->post(route('borrower.bookings.store'), [
+            'assets' => [$asset->id],
+            'purpose' => 'Tugas sinematografi',
+            'requested_start_date' => '2026-12-01',
+            'requested_end_date' => '2026-12-04',
+            'course_id' => $course->id,
+        ])->assertSessionHasErrors('course_id');
+
+        $this->assertSame(0, Booking::count());
     }
 
     public function test_borrower_cannot_view_or_cancel_another_borrowers_booking(): void
@@ -238,6 +271,21 @@ class BookingFlowTest extends TestCase
         $booking->items()->update(['status' => 'picked_up']);
 
         return $booking;
+    }
+
+    private function course(array $attributes = []): Course
+    {
+        return Course::create([
+            'organization_id' => $this->organization->id,
+            'code' => 'DKV-'.fake()->unique()->numerify('###'),
+            'name' => 'Fotografi Dasar',
+            'lecturer_name' => 'Rina Kusuma, M.Ds.',
+            'semester' => 3,
+            'credits' => 3,
+            'quota_hours' => 120,
+            'is_active' => true,
+            ...$attributes,
+        ]);
     }
 
     private function asset(): Asset

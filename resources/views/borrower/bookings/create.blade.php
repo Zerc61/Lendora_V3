@@ -138,6 +138,22 @@
                         <textarea class="ldr-textarea" name="purpose" id="purpose" rows="4" placeholder="{{ __('ui.booking.purpose_placeholder') }}" required>{{ old('purpose') }}</textarea>
                         @error('purpose') <p class="ldr-field-error">{{ $message }}</p> @enderror
                     </div>
+
+                    @if ($courses->isNotEmpty())
+                        <div class="ldr-field">
+                            <label class="ldr-field__label" for="course_id">{{ __('ui.booking.course') }}</label>
+                            <select class="ldr-input" name="course_id" id="course_id">
+                                <option value="">{{ __('ui.booking.course_none') }}</option>
+                                @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}" @selected((int) old('course_id') === $course->id)>
+                                        {{ $course->code }} · {{ $course->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <p class="ldr-field__hint">{{ __('ui.booking.course_hint') }}</p>
+                            @error('course_id') <p class="ldr-field-error">{{ $message }}</p> @enderror
+                        </div>
+                    @endif
                 </section>
 
                 <div class="ldr-request-mobile-actions">

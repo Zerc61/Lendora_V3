@@ -30,6 +30,7 @@ return [
         'invalid_range' => 'Tanggal selesai harus sama atau setelah tanggal mulai.',
         'duration_exceeded' => 'Durasi peminjaman melebihi batas :days hari.',
         'purpose_required' => 'Tujuan peminjaman wajib diisi.',
+        'course_invalid' => 'Mata kuliah yang dipilih tidak aktif atau bukan milik organisasi Anda.',
         'conflict' => 'Aset :asset bentrok dengan peminjaman :code pada :start–:end. Rentang bebas terdekat: :suggestion.',
         'no_suggestion' => 'tidak ditemukan dalam 90 hari ke depan',
         'asset_unavailable' => 'Aset :asset sedang tidak tersedia (status: :status).',

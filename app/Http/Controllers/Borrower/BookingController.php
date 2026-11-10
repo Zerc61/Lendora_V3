@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Asset;
 use App\Models\Booking;
+use App\Models\Course;
 use App\Services\BookingService;
 use App\Services\SettingService;
 use Carbon\Carbon;
@@ -65,6 +66,11 @@ class BookingController extends Controller
             'assets' => $assets,
             'maxLoanDays' => app(SettingService::class)->maxLoanDays(),
             'conflict' => null,
+            'courses' => Course::query()
+                ->where('organization_id', $request->user()->organization_id)
+                ->where('is_active', true)
+                ->orderBy('code')
+                ->get(),
         ]);
     }
 
@@ -76,6 +82,7 @@ class BookingController extends Controller
             Carbon::parse($request->input('requested_start_date')),
             Carbon::parse($request->input('requested_end_date')),
             (string) $request->input('purpose'),
+            $request->filled('course_id') ? (int) $request->input('course_id') : null,
         );
 
         return redirect()

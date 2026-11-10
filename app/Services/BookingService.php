@@ -11,6 +11,7 @@ use App\Models\Asset;
 use App\Models\Booking;
 use App\Models\BookingExtension;
 use App\Models\BookingItem;
+use App\Models\Course;
 use App\Models\Organization;
 use App\Models\User;
 use App\Notifications\BookingAlternativeNotification;
@@ -40,6 +41,7 @@ class BookingService
         CarbonInterface $start,
         CarbonInterface $end,
         string $purpose,
+        ?int $courseId = null,
     ): Booking {
         $start = Carbon::parse($start)->startOfDay();
         $end = Carbon::parse($end)->startOfDay();
@@ -61,7 +63,9 @@ class BookingService
             ]);
         }
 
-        return DB::transaction(function () use ($borrower, $assetIds, $start, $end, $purpose): Booking {
+        return DB::transaction(function () use ($borrower, $assetIds, $start, $end, $purpose, $courseId): Booking {
+            $courseId = $this->resolveCourseId($borrower, $courseId);
+
             $assets = Asset::query()
                 ->where('organization_id', $borrower->organization_id)
                 ->whereIn('id', $assetIds)
@@ -81,6 +85,7 @@ class BookingService
             $booking = $this->persistBooking($borrower->organization, [
                 'borrower_id' => $borrower->id,
                 'status' => BookingStatus::Pending,
+                'course_id' => $courseId,
                 'purpose' => $purpose,
                 'requested_start_date' => $start->toDateString(),
                 'requested_end_date' => $end->toDateString(),
@@ -105,6 +110,27 @@ class BookingService
 
             return $booking->load('items.asset');
         });
+    }
+
+    private function resolveCourseId(User $borrower, ?int $courseId): ?int
+    {
+        if ($courseId === null) {
+            return null;
+        }
+
+        $course = Course::query()
+            ->where('organization_id', $borrower->organization_id)
+            ->where('is_active', true)
+            ->whereKey($courseId)
+            ->first();
+
+        if ($course === null) {
+            throw ValidationException::withMessages([
+                'course_id' => __('messages.booking.course_invalid'),
+            ]);
+        }
+
+        return $course->id;
     }
 
     public function approve(Booking $booking, User $approver): Booking

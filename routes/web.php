@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ActivityLogController as AdminActivityLogControll
 use App\Http\Controllers\Admin\AssetController as AdminAssetController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HandoverController as AdminHandoverController;
 use App\Http\Controllers\Admin\InspectionController as AdminInspectionController;
@@ -159,6 +160,7 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
         });
 
         Route::middleware('role:admin_prodi')->group(function () {
+            Route::get('courses', [AdminCourseController::class, 'index'])->name('courses.index');
             Route::get('students', [AdminStudentController::class, 'index'])->name('students.index');
         });
 

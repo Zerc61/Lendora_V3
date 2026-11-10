@@ -13,10 +13,10 @@ class CourseSeeder extends Seeder
         $organization = Organization::where('code', 'LDR')->firstOrFail();
 
         $courses = [
-            ['code' => 'DKV-201', 'name' => 'Fotografi Dasar', 'lecturer_name' => 'Rina Kusuma, M.Ds.', 'semester' => 3, 'credits' => 3],
-            ['code' => 'DKV-312', 'name' => 'Sinematografi', 'lecturer_name' => 'Bagas Prasetyo, M.Sn.', 'semester' => 5, 'credits' => 4],
-            ['code' => 'DKV-405', 'name' => 'Produksi Video Korporat', 'lecturer_name' => 'Sinta Maharani, M.Ds.', 'semester' => 7, 'credits' => 3],
-            ['code' => 'DKV-501', 'name' => 'Proyek Akhir', 'lecturer_name' => 'Dr. Hendra Wijaya', 'semester' => 7, 'credits' => 6],
+            ['code' => 'DKV-201', 'name' => 'Fotografi Dasar', 'lecturer_name' => 'Rina Kusuma, M.Ds.', 'semester' => 3, 'credits' => 3, 'quota_hours' => 120],
+            ['code' => 'DKV-312', 'name' => 'Sinematografi', 'lecturer_name' => 'Bagas Prasetyo, M.Sn.', 'semester' => 5, 'credits' => 4, 'quota_hours' => 180],
+            ['code' => 'DKV-405', 'name' => 'Produksi Video Korporat', 'lecturer_name' => 'Sinta Maharani, M.Ds.', 'semester' => 7, 'credits' => 3, 'quota_hours' => 120],
+            ['code' => 'DKV-501', 'name' => 'Proyek Akhir', 'lecturer_name' => 'Dr. Hendra Wijaya', 'semester' => 7, 'credits' => 6, 'quota_hours' => 200],
         ];
 
         foreach ($courses as $course) {
