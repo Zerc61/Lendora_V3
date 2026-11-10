@@ -48,20 +48,20 @@ class CourseQuotaServiceTest extends TestCase
         $summary = app(CourseQuotaService::class)->for($this->prodi);
 
         $this->assertSame(220, $summary['kpis']['total_quota']);
-        $this->assertSame(168, $summary['kpis']['total_used']);
-        $this->assertSame(52, $summary['kpis']['remaining']);
-        $this->assertSame(1, $summary['kpis']['critical']);
+        $this->assertSame(108, $summary['kpis']['total_used']);
+        $this->assertSame(112, $summary['kpis']['remaining']);
+        $this->assertSame(0, $summary['kpis']['critical']);
 
         $rows = $summary['courses']->keyBy(fn (array $row) => $row['course']->code);
 
-        $this->assertSame(72, $rows['DKV-201']['used_hours']);
-        $this->assertSame(48, $rows['DKV-201']['remaining_hours']);
-        $this->assertSame(60.0, $rows['DKV-201']['percent']);
-        $this->assertSame('normal', $rows['DKV-201']['status']);
+        $this->assertSame(48, $rows['DKV-201']['used_hours']);
+        $this->assertSame(72, $rows['DKV-201']['remaining_hours']);
+        $this->assertSame(40.0, $rows['DKV-201']['percent']);
+        $this->assertSame('surplus', $rows['DKV-201']['status']);
 
-        $this->assertSame(96, $rows['DKV-312']['used_hours']);
-        $this->assertSame(96.0, $rows['DKV-312']['percent']);
-        $this->assertSame('kritis', $rows['DKV-312']['status']);
+        $this->assertSame(60, $rows['DKV-312']['used_hours']);
+        $this->assertSame(60.0, $rows['DKV-312']['percent']);
+        $this->assertSame('normal', $rows['DKV-312']['status']);
 
         $this->assertNull($rows['DKV-999']['percent']);
         $this->assertSame('unset', $rows['DKV-999']['status']);
@@ -81,6 +81,26 @@ class CourseQuotaServiceTest extends TestCase
 
         $this->assertSame(0, $summary['kpis']['total_used']);
         $this->assertSame(0, $summary['kpis']['critical']);
+    }
+
+    public function test_same_day_booking_counts_as_one_day(): void
+    {
+        $course = $this->course('DKV-201', 120);
+        $this->booking($course, '2026-09-01', 0);
+
+        $summary = app(CourseQuotaService::class)->for($this->prodi);
+
+        $this->assertSame(12, $summary['kpis']['total_used']);
+    }
+
+    public function test_booking_crossing_semester_boundary_is_clamped_to_period(): void
+    {
+        $course = $this->course('DKV-201', 120);
+        $this->booking($course, '2026-12-30', 10);
+
+        $summary = app(CourseQuotaService::class)->for($this->prodi);
+
+        $this->assertSame(24, $summary['kpis']['total_used']);
     }
 
     private function course(string $code, ?int $quota): Course

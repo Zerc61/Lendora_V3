@@ -89,7 +89,7 @@ class StudentComplianceTest extends TestCase
             ->assertSee('2207412089')
             ->assertSee('Tier D')
             ->assertSee(__('ui.student.sessions', ['count' => 1]))
-            ->assertSee(__('ui.student.days', ['days' => 2]))
+            ->assertSee(__('ui.student.days', ['days' => 3]))
             ->assertSee('Rp 2.500.000')
             ->assertSee(__('ui.student.unpaid', ['count' => 1]))
             ->assertSee(__('ui.user.suspended'));

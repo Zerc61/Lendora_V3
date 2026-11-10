@@ -11,6 +11,11 @@ use Illuminate\Support\Collection;
 
 class CourseQuotaService
 {
+    /**
+     * Jam operasional asumsi per unit per hari. Sama dengan laporan semester.
+     */
+    private const OPERATING_HOURS_PER_DAY = 12;
+
     public function __construct(private readonly SettingService $settings) {}
 
     /**
@@ -30,12 +35,18 @@ class CourseQuotaService
                 BookingStatus::Active->value,
                 BookingStatus::Returned->value,
             ])
-            ->whereBetween('requested_start_date', [$semesterStart, $semesterEnd])
+            ->whereDate('requested_start_date', '<=', $semesterEnd)
+            ->whereDate('requested_end_date', '>=', $semesterStart)
             ->get(['course_id', 'requested_start_date', 'requested_end_date'])
             ->groupBy('course_id')
             ->map(fn (Collection $bookings): array => [
                 'sessions' => $bookings->count(),
-                'hours' => (int) $bookings->sum(fn (Booking $booking): int => $booking->durationInDays() * 24),
+                'hours' => (int) $bookings->sum(
+                    fn (Booking $booking): int => $booking->durationInDaysWithin(
+                        Carbon::parse($semesterStart),
+                        Carbon::parse($semesterEnd),
+                    ) * self::OPERATING_HOURS_PER_DAY,
+                ),
             ]);
 
         $courses = Course::query()

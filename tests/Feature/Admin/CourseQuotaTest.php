@@ -58,8 +58,8 @@ class CourseQuotaTest extends TestCase
             ->assertSee('DKV-312')
             ->assertSee('Sinematografi Uji')
             ->assertSee('Dosen Uji')
-            ->assertSee(__('ui.course_quota.used_of', ['used' => 96, 'quota' => 100]))
-            ->assertSee(__('ui.course_quota.status_kritis'))
+            ->assertSee(__('ui.course_quota.used_of', ['used' => 60, 'quota' => 100]))
+            ->assertSee(__('ui.course_quota.status_normal'))
             ->assertSee(__('ui.course_quota.kpi_total'));
     }
 

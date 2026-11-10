@@ -87,7 +87,7 @@ class ProdiDashboardTest extends TestCase
             ->assertOk()
             ->assertSee(__('ui.prodi.identity_title'))
             ->assertSee(__('ui.prodi.escalation_title'))
-            ->assertSee(__('ui.prodi.escalation_duration', ['days' => 10, 'max' => 7]))
+            ->assertSee(__('ui.prodi.escalation_duration', ['days' => 11, 'max' => 7]))
             ->assertSee('Bpk. Harjo')
             ->assertSee(__('ui.prodi.verified'));
     }

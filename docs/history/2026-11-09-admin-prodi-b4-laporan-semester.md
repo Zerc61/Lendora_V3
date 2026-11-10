@@ -18,7 +18,8 @@ RAB), ekspor CSV, dan blok pengesahan dokumen.
 - Periode dari setting `semester_start`/`semester_end`.
 - Baris per kategori: jumlah unit (aset non-retired), jam permintaan, jam
   kapasitas, pemanfaatan, jumlah pengajuan, jumlah ditolak, rasio penolakan.
-- Jam permintaan = jumlah unit dipinjam × durasi hari × 12 jam operasional.
+- Jam permintaan = jumlah unit dipinjam × durasi hari di dalam periode × 12
+  jam operasional. Peminjaman yang melewati batas semester dipotong ke periode.
 - Jam kapasitas = jumlah unit × 12 jam × jumlah hari periode.
 - Status baris: `kritis` (penolakan ≥ 20% atau pemanfaatan ≥ 80%),
   `perlu_tambahan` (penolakan ≥ 10%), `seimbang` (lainnya).
@@ -106,6 +107,7 @@ SK-LAB-LDR/2026/SMT-GANJIL
 - Tidak ada ekspor PDF/XLS dan kirim ke dekanat. Hanya halaman HTML + CSV.
 - Jam permintaan memakai asumsi 12 jam operasional per hari; peminjaman hanya
   menyimpan tanggal, bukan jam.
+- Durasi inklusif: mulai dan selesai di hari yang sama = 1 hari.
 - Pemanfaatan total terlihat kecil karena kapasitas dihitung penuh sepanjang
   semester (unit × 12 jam × jumlah hari).
 - Verifikasi visual browser belum dilakukan.

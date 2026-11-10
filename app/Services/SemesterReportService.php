@@ -32,7 +32,8 @@ class SemesterReportService
 
         $bookings = Booking::query()
             ->where('organization_id', $organizationId)
-            ->whereBetween('requested_start_date', [$from->toDateString(), $to->toDateString()])
+            ->whereDate('requested_start_date', '<=', $to->toDateString())
+            ->whereDate('requested_end_date', '>=', $from->toDateString())
             ->with(['items.asset'])
             ->get();
 
@@ -57,6 +58,8 @@ class SemesterReportService
                 $rejected,
                 $bookings,
                 $periodDays,
+                $from,
+                $to,
             ))
             ->filter(fn (array $row): bool => $row['units'] > 0 || $row['requests'] > 0)
             ->sortByDesc(fn (array $row): float => $row['rejection_rate'])
@@ -140,11 +143,13 @@ class SemesterReportService
         Collection $rejected,
         Collection $bookings,
         int $periodDays,
+        Carbon $from,
+        Carbon $to,
     ): array {
         $demandHours = $loans->sum(
             fn (Booking $booking): int => $booking->items
                 ->filter(fn ($item): bool => $item->asset?->category_id === $category->id)
-                ->count() * $booking->durationInDays() * self::OPERATING_HOURS_PER_DAY,
+                ->count() * $booking->durationInDaysWithin($from, $to) * self::OPERATING_HOURS_PER_DAY,
         );
 
         $capacityHours = $category->assets_count * self::OPERATING_HOURS_PER_DAY * $periodDays;

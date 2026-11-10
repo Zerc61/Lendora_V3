@@ -53,8 +53,9 @@ per mata kuliah untuk Admin Prodi, sesuai mockup P3.
 - Semester memakai setting `semester_start`/`semester_end`.
 - Pemakaian = booking `approved`, `active`, `returned` yang punya `course_id`
   dan tanggal mulai di dalam semester.
-- Jam terpakai = durasi hari × 24. `bookings` hanya menyimpan tanggal, jadi ini
-  asumsi kapasitas alat per hari penuh.
+- Jam terpakai = durasi hari × 12 jam operasional. `bookings` hanya menyimpan
+  tanggal, jadi ini asumsi jam buka alat per hari. Asumsi sama dengan laporan
+  semester supaya angka konsisten.
 - Status: `kritis` (> 85%), `normal` (50–85%), `surplus` (< 50%),
   `unset` (kuota null).
 - KPI: total kuota, terpakai, sisa, jumlah mata kuliah kritis.

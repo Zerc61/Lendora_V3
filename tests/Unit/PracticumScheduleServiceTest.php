@@ -58,6 +58,18 @@ class PracticumScheduleServiceTest extends TestCase
         $this->assertSame($room->id, $summary['conflicts']->first()['room']->id);
     }
 
+    public function test_every_overlapping_pair_is_detected(): void
+    {
+        $room = $this->room('R-01');
+        $this->schedule($room, 1, '08:00', '12:00');
+        $this->schedule($room, 1, '09:00', '10:00');
+        $this->schedule($room, 1, '09:30', '09:45');
+
+        $summary = app(PracticumScheduleService::class)->for($this->prodi);
+
+        $this->assertSame(3, $summary['kpis']['conflicts']);
+    }
+
     public function test_adjacent_slots_do_not_conflict_and_inactive_are_ignored(): void
     {
         $room = $this->room('R-01');

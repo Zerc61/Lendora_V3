@@ -87,17 +87,16 @@ class PracticumScheduleService
         $sorted = $schedules->sortBy('start_time')->values();
         $conflicts = [];
 
-        for ($i = 0; $i < $sorted->count() - 1; $i++) {
-            $current = $sorted[$i];
-            $next = $sorted[$i + 1];
-
-            if (substr($next->start_time, 0, 5) < substr($current->end_time, 0, 5)) {
-                $conflicts[] = [
-                    'room' => $room,
-                    'day' => $current->day_of_week,
-                    'first' => $current,
-                    'second' => $next,
-                ];
+        foreach ($sorted as $index => $current) {
+            foreach ($sorted->slice($index + 1) as $next) {
+                if (substr($next->start_time, 0, 5) < substr($current->end_time, 0, 5)) {
+                    $conflicts[] = [
+                        'room' => $room,
+                        'day' => $current->day_of_week,
+                        'first' => $current,
+                        'second' => $next,
+                    ];
+                }
             }
         }
 

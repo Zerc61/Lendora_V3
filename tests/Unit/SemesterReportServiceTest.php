@@ -77,7 +77,7 @@ class SemesterReportServiceTest extends TestCase
 
         $report = app(SemesterReportService::class)->for($this->prodi);
 
-        $this->assertSame(120, $report['kpis']['demand_hours']);
+        $this->assertSame(132, $report['kpis']['demand_hours']);
         $this->assertSame(1, $report['kpis']['rejected']);
         $this->assertSame(33.3, $report['kpis']['rejection_rate']);
         $this->assertSame(1, $report['kpis']['incidents']);
@@ -96,7 +96,7 @@ class SemesterReportServiceTest extends TestCase
 
         $this->assertSame('Kamera Cinema', $row['category']->name);
         $this->assertSame(2, $row['units']);
-        $this->assertSame(120, $row['demand_hours']);
+        $this->assertSame(132, $row['demand_hours']);
         $this->assertSame(3, $row['requests']);
         $this->assertSame(1, $row['rejected']);
         $this->assertSame(33.3, $row['rejection_rate']);

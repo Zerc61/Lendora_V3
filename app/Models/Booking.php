@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\BookingActivityType;
 use App\Enums\BookingStatus;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -113,7 +114,25 @@ class Booking extends Model
 
     public function durationInDays(): int
     {
-        return (int) $this->requested_start_date->diffInDays($this->requested_end_date);
+        return max(1, (int) $this->requested_start_date->diffInDays($this->requested_end_date) + 1);
+    }
+
+    public function durationInDaysWithin(CarbonInterface $from, CarbonInterface $to): int
+    {
+        $start = $this->requested_start_date->copy()->startOfDay();
+        $end = $this->requested_end_date->copy()->startOfDay();
+        $from = $from->copy()->startOfDay();
+        $to = $to->copy()->startOfDay();
+
+        if ($start->lt($from)) {
+            $start = $from;
+        }
+
+        if ($end->gt($to)) {
+            $end = $to;
+        }
+
+        return $end->lt($start) ? 0 : (int) $start->diffInDays($end) + 1;
     }
 
     public function totalAssetValue(): int
