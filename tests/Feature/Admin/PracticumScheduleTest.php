@@ -185,6 +185,107 @@ class PracticumScheduleTest extends TestCase
         $this->assertSame(1, PracticumSchedule::count());
     }
 
+    public function test_prodi_creates_room(): void
+    {
+        $this->actingAs($this->prodi)
+            ->post(route('admin.rooms.store'), [
+                'code' => 'R-02',
+                'name' => 'Studio R-02',
+                'capacity' => 25,
+                'notes' => 'Lantai 2',
+            ])
+            ->assertRedirect(route('admin.practicum.index'))
+            ->assertSessionHas('status', __('messages.practicum.room_created'));
+
+        $this->assertDatabaseHas('rooms', [
+            'organization_id' => $this->organization->id,
+            'code' => 'R-02',
+            'capacity' => 25,
+            'is_active' => true,
+        ]);
+    }
+
+    public function test_room_code_must_be_unique_per_organization(): void
+    {
+        $this->room('R-01');
+
+        $this->actingAs($this->prodi)
+            ->post(route('admin.rooms.store'), [
+                'code' => 'R-01',
+                'name' => 'Duplikat',
+            ])
+            ->assertSessionHasErrors('code');
+
+        $this->assertSame(1, Room::count());
+    }
+
+    public function test_prodi_updates_room(): void
+    {
+        $room = $this->room('R-01');
+
+        $this->actingAs($this->prodi)
+            ->put(route('admin.rooms.update', $room), [
+                'code' => 'R-09',
+                'name' => 'Studio Baru',
+                'capacity' => 40,
+                'notes' => 'Renovasi',
+            ])
+            ->assertRedirect(route('admin.practicum.index'));
+
+        $room->refresh();
+
+        $this->assertSame('R-09', $room->code);
+        $this->assertSame('Studio Baru', $room->name);
+        $this->assertSame(40, $room->capacity);
+    }
+
+    public function test_prodi_deletes_empty_room(): void
+    {
+        $room = $this->room('R-01');
+
+        $this->actingAs($this->prodi)
+            ->delete(route('admin.rooms.destroy', $room))
+            ->assertRedirect(route('admin.practicum.index'))
+            ->assertSessionHas('status', __('messages.practicum.room_deleted'));
+
+        $this->assertDatabaseMissing('rooms', ['id' => $room->id]);
+    }
+
+    public function test_room_with_schedule_cannot_be_deleted(): void
+    {
+        $room = $this->room('R-01');
+        $this->schedule($room, '08:00', '11:00');
+
+        $this->actingAs($this->prodi)
+            ->delete(route('admin.rooms.destroy', $room))
+            ->assertSessionHasErrors('room');
+
+        $this->assertDatabaseHas('rooms', ['id' => $room->id]);
+    }
+
+    public function test_room_routes_forbidden_for_non_prodi(): void
+    {
+        $room = $this->room('R-01');
+
+        foreach (['operator@lendora.test', 'admin@lendora.test', 'technician@lendora.test'] as $email) {
+            $actor = User::where('email', $email)->firstOrFail();
+
+            $this->actingAs($actor)
+                ->post(route('admin.rooms.store'), ['code' => 'R-X', 'name' => 'X'])
+                ->assertForbidden();
+
+            $this->actingAs($actor)
+                ->put(route('admin.rooms.update', $room), ['code' => 'R-01', 'name' => 'X'])
+                ->assertForbidden();
+
+            $this->actingAs($actor)
+                ->delete(route('admin.rooms.destroy', $room))
+                ->assertForbidden();
+        }
+
+        $this->assertSame(1, Room::count());
+    }
+
     private function room(string $code): Room
     {
         return Room::create([

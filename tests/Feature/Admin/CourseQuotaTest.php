@@ -171,6 +171,101 @@ class CourseQuotaTest extends TestCase
         $this->assertSame(40, $course->fresh()->quota_hours);
     }
 
+    public function test_prodi_creates_course(): void
+    {
+        $this->actingAs($this->prodi)
+            ->post(route('admin.courses.store'), [
+                'code' => 'DKV-401',
+                'name' => 'Tata Cahaya',
+                'lecturer_name' => 'Dosen Baru',
+                'semester' => 4,
+                'credits' => 3,
+                'quota_hours' => 60,
+            ])
+            ->assertRedirect(route('admin.courses.index'))
+            ->assertSessionHas('status', __('messages.course_quota.created'));
+
+        $this->assertDatabaseHas('courses', [
+            'organization_id' => $this->organization->id,
+            'code' => 'DKV-401',
+            'quota_hours' => 60,
+            'is_active' => true,
+        ]);
+    }
+
+    public function test_create_rejects_duplicate_code_in_same_organization(): void
+    {
+        $this->course('DKV-312', 40);
+
+        $this->actingAs($this->prodi)
+            ->post(route('admin.courses.store'), [
+                'code' => 'DKV-312',
+                'name' => 'Duplikat',
+                'semester' => 1,
+                'credits' => 2,
+            ])
+            ->assertSessionHasErrors('code');
+
+        $this->assertSame(1, Course::count());
+    }
+
+    public function test_prodi_updates_course_data(): void
+    {
+        $course = $this->course('DKV-312', 40);
+
+        $this->actingAs($this->prodi)
+            ->put(route('admin.courses.update', $course), [
+                'code' => 'DKV-999',
+                'name' => 'Nama Baru',
+                'lecturer_name' => 'Dosen Baru',
+                'semester' => 6,
+                'credits' => 4,
+                'quota_hours' => 30,
+            ])
+            ->assertRedirect(route('admin.courses.index'));
+
+        $course->refresh();
+
+        $this->assertSame('DKV-999', $course->code);
+        $this->assertSame('Nama Baru', $course->name);
+        $this->assertSame(30, $course->quota_hours);
+    }
+
+    public function test_prodi_deletes_unused_course(): void
+    {
+        $course = $this->course('DKV-312', 40);
+
+        $this->actingAs($this->prodi)
+            ->delete(route('admin.courses.destroy', $course))
+            ->assertRedirect(route('admin.courses.index'))
+            ->assertSessionHas('status', __('messages.course_quota.deleted'));
+
+        $this->assertDatabaseMissing('courses', ['id' => $course->id]);
+    }
+
+    public function test_course_with_bookings_cannot_be_deleted(): void
+    {
+        $course = $this->course('DKV-312', 40);
+
+        $start = Carbon::parse('2026-09-10');
+        Booking::create([
+            'code' => 'LDR-BK-CRS-0002',
+            'organization_id' => $this->organization->id,
+            'borrower_id' => $this->borrower->id,
+            'course_id' => $course->id,
+            'status' => BookingStatus::Pending,
+            'purpose' => 'Uji hapus mata kuliah',
+            'requested_start_date' => $start,
+            'requested_end_date' => $start->copy()->addDay(),
+        ]);
+
+        $this->actingAs($this->prodi)
+            ->delete(route('admin.courses.destroy', $course))
+            ->assertSessionHasErrors('course');
+
+        $this->assertDatabaseHas('courses', ['id' => $course->id]);
+    }
+
     private function course(string $code, int $quota): Course
     {
         return Course::create([

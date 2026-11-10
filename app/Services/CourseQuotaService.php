@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\BookingStatus;
 use App\Models\Booking;
 use App\Models\Course;
+use App\Models\PracticumSchedule;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -42,6 +43,90 @@ class CourseQuotaService
 
             return $locked;
         });
+    }
+
+    /**
+     * @param  array{code: string, name: string, lecturer_name: ?string, semester: int, credits: int, quota_hours: ?int}  $data
+     */
+    public function createCourse(User $prodi, array $data): Course
+    {
+        $course = Course::create([
+            'organization_id' => $prodi->organization_id,
+            'code' => $data['code'],
+            'name' => $data['name'],
+            'lecturer_name' => $data['lecturer_name'] ?? null,
+            'semester' => $data['semester'],
+            'credits' => $data['credits'],
+            'quota_hours' => $data['quota_hours'] ?? null,
+            'is_active' => true,
+        ]);
+
+        $this->logger->log(
+            'course.created',
+            $course,
+            __('messages.course_quota.created').' '.$course->code,
+            $prodi,
+        );
+
+        return $course;
+    }
+
+    /**
+     * @param  array{code: string, name: string, lecturer_name: ?string, semester: int, credits: int, quota_hours: ?int}  $data
+     */
+    public function updateCourse(User $prodi, Course $course, array $data): Course
+    {
+        $this->assertCourse($prodi, $course);
+
+        return DB::transaction(function () use ($prodi, $course, $data): Course {
+            $locked = Course::query()->lockForUpdate()->findOrFail($course->id);
+            $before = $locked->only(['code', 'name', 'lecturer_name', 'semester', 'credits', 'quota_hours']);
+
+            $locked->update([
+                'code' => $data['code'],
+                'name' => $data['name'],
+                'lecturer_name' => $data['lecturer_name'] ?? null,
+                'semester' => $data['semester'],
+                'credits' => $data['credits'],
+                'quota_hours' => $data['quota_hours'] ?? null,
+            ]);
+
+            $this->logger->log(
+                'course.updated',
+                $locked,
+                __('messages.course_quota.updated').' '.$locked->code,
+                $prodi,
+                ['before' => $before, 'after' => $locked->only(array_keys($before))],
+            );
+
+            return $locked;
+        });
+    }
+
+    public function deleteCourse(User $prodi, Course $course): void
+    {
+        $this->assertCourse($prodi, $course);
+
+        if ($course->bookings()->exists()) {
+            throw ValidationException::withMessages([
+                'course' => __('messages.course_quota.delete_has_bookings'),
+            ]);
+        }
+
+        if (PracticumSchedule::query()->where('course_id', $course->id)->exists()) {
+            throw ValidationException::withMessages([
+                'course' => __('messages.course_quota.delete_has_schedules'),
+            ]);
+        }
+
+        $course->delete();
+
+        $this->logger->log(
+            'course.deleted',
+            $course,
+            __('messages.course_quota.deleted').' '.$course->code,
+            $prodi,
+        );
     }
 
     public function transfer(User $prodi, Course $from, Course $to, int $hours): void

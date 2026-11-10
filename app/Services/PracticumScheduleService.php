@@ -45,6 +45,89 @@ class PracticumScheduleService
     }
 
     /**
+     * @param  array{code: string, name: string, capacity: ?int, notes: ?string}  $data
+     */
+    public function createRoom(User $prodi, array $data): Room
+    {
+        $room = Room::create([
+            'organization_id' => $prodi->organization_id,
+            'code' => $data['code'],
+            'name' => $data['name'],
+            'capacity' => $data['capacity'] ?? null,
+            'notes' => $data['notes'] ?? null,
+            'is_active' => true,
+        ]);
+
+        $this->logger->log(
+            'room.created',
+            $room,
+            __('messages.practicum.room_created').' '.$room->code,
+            $prodi,
+        );
+
+        return $room;
+    }
+
+    /**
+     * @param  array{code: string, name: string, capacity: ?int, notes: ?string}  $data
+     */
+    public function updateRoom(User $prodi, Room $room, array $data): Room
+    {
+        $this->assertRoom($prodi, $room);
+
+        return DB::transaction(function () use ($prodi, $room, $data): Room {
+            $locked = Room::query()->lockForUpdate()->findOrFail($room->id);
+            $before = $locked->only(['code', 'name', 'capacity', 'notes']);
+
+            $locked->update([
+                'code' => $data['code'],
+                'name' => $data['name'],
+                'capacity' => $data['capacity'] ?? null,
+                'notes' => $data['notes'] ?? null,
+            ]);
+
+            $this->logger->log(
+                'room.updated',
+                $locked,
+                __('messages.practicum.room_updated').' '.$locked->code,
+                $prodi,
+                ['before' => $before, 'after' => $locked->only(array_keys($before))],
+            );
+
+            return $locked;
+        });
+    }
+
+    public function deleteRoom(User $prodi, Room $room): void
+    {
+        $this->assertRoom($prodi, $room);
+
+        if (PracticumSchedule::query()->where('room_id', $room->id)->exists()) {
+            throw ValidationException::withMessages([
+                'room' => __('messages.practicum.room_has_schedules'),
+            ]);
+        }
+
+        $room->delete();
+
+        $this->logger->log(
+            'room.deleted',
+            $room,
+            __('messages.practicum.room_deleted').' '.$room->code,
+            $prodi,
+        );
+    }
+
+    private function assertRoom(User $prodi, Room $room): void
+    {
+        if ($room->organization_id !== $prodi->organization_id) {
+            throw ValidationException::withMessages([
+                'room' => __('messages.practicum.wrong_organization'),
+            ]);
+        }
+    }
+
+    /**
      * @param  array{course_id: int, room_id: int, day_of_week: int, start_time: string, end_time: string}  $data
      */
     public function create(User $prodi, array $data): PracticumSchedule

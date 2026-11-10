@@ -102,6 +102,48 @@
                                         Semester {{ $course->semester }} · {{ $course->credits }} SKS ·
                                         {{ __('ui.course_quota.sessions', ['count' => $row['sessions']]) }}
                                     </span>
+
+                                    <details class="ldr-inline-edit">
+                                        <summary>{{ __('ui.common.edit') }}</summary>
+                                        <form method="POST" action="{{ route('admin.courses.update', $course) }}" class="ldr-inline-edit__form">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="code-{{ $course->id }}">{{ __('ui.course_quota.form_code') }}</label>
+                                                <input class="ldr-input" id="code-{{ $course->id }}" name="code" value="{{ $course->code }}" maxlength="32" required>
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="name-{{ $course->id }}">{{ __('ui.course_quota.form_name') }}</label>
+                                                <input class="ldr-input" id="name-{{ $course->id }}" name="name" value="{{ $course->name }}" maxlength="120" required>
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="lecturer-{{ $course->id }}">{{ __('ui.course_quota.form_lecturer') }}</label>
+                                                <input class="ldr-input" id="lecturer-{{ $course->id }}" name="lecturer_name" value="{{ $course->lecturer_name }}" maxlength="120">
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="semester-{{ $course->id }}">{{ __('ui.course_quota.form_semester') }}</label>
+                                                <input class="ldr-input" id="semester-{{ $course->id }}" type="number" name="semester" value="{{ $course->semester }}" min="1" max="14" required>
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="credits-{{ $course->id }}">{{ __('ui.course_quota.form_credits') }}</label>
+                                                <input class="ldr-input" id="credits-{{ $course->id }}" type="number" name="credits" value="{{ $course->credits }}" min="1" max="24" required>
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="quota-edit-{{ $course->id }}">{{ __('ui.course_quota.col_quota') }}</label>
+                                                <input class="ldr-input" id="quota-edit-{{ $course->id }}" type="number" name="quota_hours" value="{{ $course->quota_hours }}" min="1" max="9999" placeholder="{{ __('ui.course_quota.quota_placeholder') }}">
+                                            </div>
+                                            <button type="submit" class="ldr-btn ldr-btn--primary ldr-btn--sm">{{ __('ui.course_quota.edit_submit') }}</button>
+                                        </form>
+                                    </details>
+
+                                    <form method="POST"
+                                          action="{{ route('admin.courses.destroy', $course) }}"
+                                          class="ldr-inline-delete"
+                                          onsubmit="return confirm('{{ __('ui.course_quota.delete_confirm') }}')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">{{ __('ui.common.delete') }}</button>
+                                    </form>
                                 </td>
                                 <td>{{ $course->lecturer_name ?: '—' }}</td>
                                 <td>
@@ -199,6 +241,46 @@
             @error('hours') <p class="ldr-field-error">{{ $message }}</p> @enderror
             @error('to_course_id') <p class="ldr-field-error">{{ $message }}</p> @enderror
             @error('from_course_id') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            @error('course') <p class="ldr-field-error">{{ $message }}</p> @enderror
         </section>
     @endif
+
+    <section class="ldr-card ldr-course-create">
+        <h2 class="ldr-section-title">{{ __('ui.course_quota.form_title') }}</h2>
+        <p class="ldr-muted ldr-section-hint">{{ __('ui.course_quota.form_hint') }}</p>
+
+        <form method="POST" action="{{ route('admin.courses.store') }}" class="ldr-course-create__form">
+            @csrf
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="new-code">{{ __('ui.course_quota.form_code') }}</label>
+                <input class="ldr-input" id="new-code" name="code" value="{{ old('code') }}" maxlength="32" required>
+                @error('code') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="new-name">{{ __('ui.course_quota.form_name') }}</label>
+                <input class="ldr-input" id="new-name" name="name" value="{{ old('name') }}" maxlength="120" required>
+                @error('name') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="new-lecturer">{{ __('ui.course_quota.form_lecturer') }}</label>
+                <input class="ldr-input" id="new-lecturer" name="lecturer_name" value="{{ old('lecturer_name') }}" maxlength="120">
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="new-semester">{{ __('ui.course_quota.form_semester') }}</label>
+                <input class="ldr-input" id="new-semester" type="number" name="semester" value="{{ old('semester', 1) }}" min="1" max="14" required>
+                @error('semester') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="new-credits">{{ __('ui.course_quota.form_credits') }}</label>
+                <input class="ldr-input" id="new-credits" type="number" name="credits" value="{{ old('credits', 3) }}" min="1" max="24" required>
+                @error('credits') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="new-quota">{{ __('ui.course_quota.col_quota') }}</label>
+                <input class="ldr-input" id="new-quota" type="number" name="quota_hours" value="{{ old('quota_hours') }}" min="1" max="9999" placeholder="{{ __('ui.course_quota.quota_placeholder') }}">
+                @error('quota_hours') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+            <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.course_quota.form_submit') }}</button>
+        </form>
+    </section>
 @endsection

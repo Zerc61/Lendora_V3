@@ -26,6 +26,12 @@ return [
         'transfer_same' => 'Mata kuliah asal dan tujuan harus berbeda.',
         'transfer_insufficient' => 'Kuota mata kuliah asal tidak cukup untuk dipindahkan.',
         'wrong_organization' => 'Mata kuliah bukan milik organisasi Anda.',
+        'created' => 'Mata kuliah ditambahkan.',
+        'deleted' => 'Mata kuliah dihapus.',
+        'code_unique' => 'Kode mata kuliah sudah dipakai pada organisasi ini.',
+        'delete_has_bookings' => 'Mata kuliah tidak bisa dihapus karena sudah dipakai pada peminjaman.',
+        'delete_has_schedules' => 'Mata kuliah tidak bisa dihapus karena masih punya jadwal praktikum.',
+        'form_hint' => 'Isi data mata kuliah. Kuota jam boleh dikosongkan dulu.',
     ],
 
     'practicum' => [
@@ -35,6 +41,11 @@ return [
         'course_invalid' => 'Mata kuliah tidak aktif atau bukan milik organisasi Anda.',
         'room_invalid' => 'Ruang tidak aktif atau bukan milik organisasi Anda.',
         'wrong_organization' => 'Jadwal bukan milik organisasi Anda.',
+        'room_created' => 'Ruang ditambahkan.',
+        'room_updated' => 'Ruang diperbarui.',
+        'room_deleted' => 'Ruang dihapus.',
+        'room_code_unique' => 'Kode ruang sudah dipakai pada organisasi ini.',
+        'room_has_schedules' => 'Ruang tidak bisa dihapus karena masih punya jadwal.',
     ],
 
     'booking' => [

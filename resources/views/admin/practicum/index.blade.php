@@ -185,6 +185,40 @@
                                             · {{ __('ui.practicum.room_capacity', ['count' => $room->capacity]) }}
                                         @endif
                                     </span>
+
+                                    <details class="ldr-inline-edit">
+                                        <summary>{{ __('ui.common.edit') }}</summary>
+                                        <form method="POST" action="{{ route('admin.rooms.update', $room) }}" class="ldr-inline-edit__form">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="room-code-{{ $room->id }}">{{ __('ui.practicum.room_form_code') }}</label>
+                                                <input class="ldr-input" id="room-code-{{ $room->id }}" name="code" value="{{ $room->code }}" maxlength="32" required>
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="room-name-{{ $room->id }}">{{ __('ui.practicum.room_form_name') }}</label>
+                                                <input class="ldr-input" id="room-name-{{ $room->id }}" name="name" value="{{ $room->name }}" maxlength="120" required>
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="room-capacity-{{ $room->id }}">{{ __('ui.practicum.room_form_capacity') }}</label>
+                                                <input class="ldr-input" id="room-capacity-{{ $room->id }}" type="number" name="capacity" value="{{ $room->capacity }}" min="1" max="500">
+                                            </div>
+                                            <div class="ldr-field">
+                                                <label class="ldr-field__label" for="room-notes-{{ $room->id }}">{{ __('ui.practicum.room_form_notes') }}</label>
+                                                <input class="ldr-input" id="room-notes-{{ $room->id }}" name="notes" value="{{ $room->notes }}" maxlength="255">
+                                            </div>
+                                            <button type="submit" class="ldr-btn ldr-btn--primary ldr-btn--sm">{{ __('ui.practicum.room_edit_submit') }}</button>
+                                        </form>
+                                    </details>
+
+                                    <form method="POST"
+                                          action="{{ route('admin.rooms.destroy', $room) }}"
+                                          class="ldr-inline-delete"
+                                          onsubmit="return confirm('{{ __('ui.practicum.room_delete_confirm') }}')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">{{ __('ui.common.delete') }}</button>
+                                    </form>
                                 </th>
 
                                 @foreach ($days as $day => $label)
@@ -231,4 +265,34 @@
             <span class="ldr-badge ldr-badge--danger">{{ __('ui.practicum.legend_conflict') }}</span>
         </p>
     @endif
+
+    <section class="ldr-card ldr-room-create">
+        <h2 class="ldr-section-title">{{ __('ui.practicum.room_form_title') }}</h2>
+        <p class="ldr-muted ldr-section-hint">{{ __('ui.practicum.room_form_hint') }}</p>
+
+        <form method="POST" action="{{ route('admin.rooms.store') }}" class="ldr-room-create__form">
+            @csrf
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="room-code">{{ __('ui.practicum.room_form_code') }}</label>
+                <input class="ldr-input" id="room-code" name="code" value="{{ old('code') }}" maxlength="32" required>
+                @error('code') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="room-name">{{ __('ui.practicum.room_form_name') }}</label>
+                <input class="ldr-input" id="room-name" name="name" value="{{ old('name') }}" maxlength="120" required>
+                @error('name') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="room-capacity">{{ __('ui.practicum.room_form_capacity') }}</label>
+                <input class="ldr-input" id="room-capacity" type="number" name="capacity" value="{{ old('capacity') }}" min="1" max="500">
+            </div>
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="room-notes">{{ __('ui.practicum.room_form_notes') }}</label>
+                <input class="ldr-input" id="room-notes" name="notes" value="{{ old('notes') }}" maxlength="255">
+            </div>
+            <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.practicum.room_form_submit') }}</button>
+        </form>
+        @error('room') <p class="ldr-field-error">{{ $message }}</p> @enderror
+    </section>
+
 @endsection

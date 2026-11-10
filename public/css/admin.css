@@ -5801,3 +5801,73 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+/* Admin Prodi — inline edit data master */
+.ldr-inline-edit {
+    margin-top: 6px;
+}
+
+.ldr-inline-edit > summary {
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--ldr-primary-strong, #EA580C);
+    list-style: none;
+}
+
+.ldr-inline-edit > summary::-webkit-details-marker {
+    display: none;
+}
+
+.ldr-inline-edit > summary::before {
+    content: "✎ ";
+}
+
+.ldr-inline-edit__form {
+    display: grid;
+    gap: var(--ldr-space-2);
+    margin-top: var(--ldr-space-2);
+    padding: var(--ldr-space-3);
+    border: 1px solid var(--ldr-border, #E5E7EB);
+    border-radius: var(--ldr-radius-md, 8px);
+    background: var(--ldr-surface, #F5F5F5);
+    min-width: 220px;
+}
+
+.ldr-inline-delete {
+    margin-top: 4px;
+}
+
+.ldr-inline-delete button {
+    border: 0;
+    background: none;
+    padding: 0;
+    font-size: 11px;
+    color: var(--ldr-danger, #DC2626);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.ldr-course-create,
+.ldr-room-create {
+    margin-top: var(--ldr-space-4);
+    padding: var(--ldr-space-4);
+}
+
+.ldr-course-create__form,
+.ldr-room-create__form {
+    display: grid;
+    gap: var(--ldr-space-3);
+    margin-top: var(--ldr-space-3);
+}
+
+@media (min-width: 900px) {
+    .ldr-course-create__form {
+        grid-template-columns: repeat(6, 1fr) auto;
+        align-items: start;
+    }
+
+    .ldr-room-create__form {
+        grid-template-columns: repeat(4, 1fr) auto;
+        align-items: start;
+    }
+}

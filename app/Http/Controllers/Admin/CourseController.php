@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\TransferCourseQuotaRequest;
 use App\Http\Requests\UpdateCourseQuotaRequest;
+use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Services\CourseQuotaService;
 use Illuminate\Http\RedirectResponse;
@@ -31,6 +33,33 @@ class CourseController extends Controller
             ->with('status', __('messages.course_quota.updated'));
     }
 
+    public function store(StoreCourseRequest $request): RedirectResponse
+    {
+        $this->quota->createCourse($request->user(), $this->payload($request->validated()));
+
+        return redirect()
+            ->route('admin.courses.index')
+            ->with('status', __('messages.course_quota.created'));
+    }
+
+    public function update(UpdateCourseRequest $request, Course $course): RedirectResponse
+    {
+        $this->quota->updateCourse($request->user(), $course, $this->payload($request->validated()));
+
+        return redirect()
+            ->route('admin.courses.index')
+            ->with('status', __('messages.course_quota.updated'));
+    }
+
+    public function destroy(Request $request, Course $course): RedirectResponse
+    {
+        $this->quota->deleteCourse($request->user(), $course);
+
+        return redirect()
+            ->route('admin.courses.index')
+            ->with('status', __('messages.course_quota.deleted'));
+    }
+
     public function transfer(TransferCourseQuotaRequest $request): RedirectResponse
     {
         $this->quota->transfer(
@@ -43,5 +72,21 @@ class CourseController extends Controller
         return redirect()
             ->route('admin.courses.index')
             ->with('status', __('messages.course_quota.transferred'));
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array{code: string, name: string, lecturer_name: ?string, semester: int, credits: int, quota_hours: ?int}
+     */
+    private function payload(array $data): array
+    {
+        return [
+            'code' => (string) $data['code'],
+            'name' => (string) $data['name'],
+            'lecturer_name' => isset($data['lecturer_name']) ? (string) $data['lecturer_name'] : null,
+            'semester' => (int) $data['semester'],
+            'credits' => (int) $data['credits'],
+            'quota_hours' => isset($data['quota_hours']) ? (int) $data['quota_hours'] : null,
+        ];
     }
 }
