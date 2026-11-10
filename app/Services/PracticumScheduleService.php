@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use App\Models\Course;
 use App\Models\PracticumSchedule;
 use App\Models\Room;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class PracticumScheduleService
 {
@@ -17,7 +20,101 @@ class PracticumScheduleService
 
     private const OPERATING_DAYS = 5;
 
-    public function __construct(private readonly SettingService $settings) {}
+    public function __construct(
+        private readonly SettingService $settings,
+        private readonly ActivityLogger $logger,
+    ) {}
+
+    /**
+     * @return array{courses: Collection<int, Course>, rooms: Collection<int, Room>}
+     */
+    public function options(User $prodi): array
+    {
+        return [
+            'courses' => Course::query()
+                ->where('organization_id', $prodi->organization_id)
+                ->where('is_active', true)
+                ->orderBy('code')
+                ->get(),
+            'rooms' => Room::query()
+                ->where('organization_id', $prodi->organization_id)
+                ->where('is_active', true)
+                ->orderBy('code')
+                ->get(),
+        ];
+    }
+
+    /**
+     * @param  array{course_id: int, room_id: int, day_of_week: int, start_time: string, end_time: string}  $data
+     */
+    public function create(User $prodi, array $data): PracticumSchedule
+    {
+        return DB::transaction(function () use ($prodi, $data): PracticumSchedule {
+            Room::query()
+                ->where('organization_id', $prodi->organization_id)
+                ->whereKey($data['room_id'])
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            $clash = PracticumSchedule::query()
+                ->with('course')
+                ->where('room_id', $data['room_id'])
+                ->where('day_of_week', $data['day_of_week'])
+                ->where('is_active', true)
+                ->where('start_time', '<', $data['end_time'].':00')
+                ->where('end_time', '>', $data['start_time'].':00')
+                ->first();
+
+            if ($clash !== null) {
+                throw ValidationException::withMessages([
+                    'start_time' => __('messages.practicum.conflict', [
+                        'course' => $clash->course?->code ?? '—',
+                        'start' => substr($clash->start_time, 0, 5),
+                        'end' => substr($clash->end_time, 0, 5),
+                    ]),
+                ]);
+            }
+
+            $schedule = PracticumSchedule::create([
+                'organization_id' => $prodi->organization_id,
+                'course_id' => $data['course_id'],
+                'room_id' => $data['room_id'],
+                'day_of_week' => $data['day_of_week'],
+                'start_time' => $data['start_time'].':00',
+                'end_time' => $data['end_time'].':00',
+                'is_active' => true,
+            ]);
+
+            $this->logger->log(
+                'practicum.created',
+                $schedule,
+                __('messages.practicum.created'),
+                $prodi,
+                $data,
+            );
+
+            return $schedule;
+        });
+    }
+
+    public function remove(User $prodi, PracticumSchedule $schedule): void
+    {
+        if ($schedule->organization_id !== $prodi->organization_id) {
+            throw ValidationException::withMessages([
+                'schedule' => __('messages.practicum.wrong_organization'),
+            ]);
+        }
+
+        $schedule->delete();
+
+        $this->logger->log(
+            'practicum.deleted',
+            $schedule,
+            __('messages.practicum.deleted'),
+            $prodi,
+            ['course_id' => $schedule->course_id, 'room_id' => $schedule->room_id],
+        );
+    }
 
     /**
      * @return array<string, mixed>

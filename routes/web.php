@@ -163,7 +163,11 @@ Route::middleware(['auth', 'active', 'role:operator,organization_admin,admin_pro
 
         Route::middleware('role:admin_prodi')->group(function () {
             Route::get('courses', [AdminCourseController::class, 'index'])->name('courses.index');
+            Route::put('courses/{course}/quota', [AdminCourseController::class, 'updateQuota'])->name('courses.quota.update');
+            Route::post('courses/transfer', [AdminCourseController::class, 'transfer'])->name('courses.transfer');
             Route::get('practicum', [AdminPracticumScheduleController::class, 'index'])->name('practicum.index');
+            Route::post('practicum', [AdminPracticumScheduleController::class, 'store'])->name('practicum.store');
+            Route::delete('practicum/{schedule}', [AdminPracticumScheduleController::class, 'destroy'])->name('practicum.destroy');
             Route::get('recommendations', [AdminRecommendationController::class, 'index'])->name('recommendations.index');
             Route::get('reports/semester', [AdminReportController::class, 'semester'])->name('reports.semester');
             Route::get('reports/semester/export', [AdminReportController::class, 'semesterExport'])->name('reports.semester.export');

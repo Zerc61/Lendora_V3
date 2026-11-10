@@ -79,6 +79,112 @@ class PracticumScheduleTest extends TestCase
         }
     }
 
+    public function test_prodi_plots_new_schedule(): void
+    {
+        $room = $this->room('R-01');
+
+        $this->actingAs($this->prodi)
+            ->post(route('admin.practicum.store'), [
+                'course_id' => $this->course->id,
+                'room_id' => $room->id,
+                'day_of_week' => 2,
+                'start_time' => '09:00',
+                'end_time' => '11:00',
+            ])
+            ->assertRedirect(route('admin.practicum.index'))
+            ->assertSessionHas('status', __('messages.practicum.created'));
+
+        $this->assertDatabaseHas('practicum_schedules', [
+            'course_id' => $this->course->id,
+            'room_id' => $room->id,
+            'day_of_week' => 2,
+            'start_time' => '09:00:00',
+            'end_time' => '11:00:00',
+        ]);
+    }
+
+    public function test_plot_rejects_overlapping_slot(): void
+    {
+        $room = $this->room('R-01');
+        $this->schedule($room, '08:00', '11:00');
+
+        $this->actingAs($this->prodi)
+            ->post(route('admin.practicum.store'), [
+                'course_id' => $this->course->id,
+                'room_id' => $room->id,
+                'day_of_week' => 1,
+                'start_time' => '10:00',
+                'end_time' => '12:00',
+            ])
+            ->assertSessionHasErrors('start_time');
+
+        $this->assertSame(1, PracticumSchedule::count());
+    }
+
+    public function test_plot_rejects_room_from_another_organization(): void
+    {
+        $other = Organization::create(['name' => 'Org Lain', 'code' => 'OTH']);
+
+        $foreignRoom = Room::create([
+            'organization_id' => $other->id,
+            'code' => 'R-X',
+            'name' => 'Studio Asing',
+            'capacity' => 10,
+            'is_active' => true,
+        ]);
+
+        $this->actingAs($this->prodi)
+            ->post(route('admin.practicum.store'), [
+                'course_id' => $this->course->id,
+                'room_id' => $foreignRoom->id,
+                'day_of_week' => 1,
+                'start_time' => '08:00',
+                'end_time' => '10:00',
+            ])
+            ->assertSessionHasErrors('room_id');
+
+        $this->assertSame(0, PracticumSchedule::count());
+    }
+
+    public function test_prodi_deletes_schedule(): void
+    {
+        $room = $this->room('R-01');
+        $schedule = $this->schedule($room, '08:00', '11:00');
+
+        $this->actingAs($this->prodi)
+            ->delete(route('admin.practicum.destroy', $schedule))
+            ->assertRedirect(route('admin.practicum.index'))
+            ->assertSessionHas('status', __('messages.practicum.deleted'));
+
+        $this->assertDatabaseMissing('practicum_schedules', ['id' => $schedule->id]);
+    }
+
+    public function test_write_routes_forbidden_for_non_prodi(): void
+    {
+        $room = $this->room('R-01');
+        $schedule = $this->schedule($room, '08:00', '11:00');
+
+        foreach (['operator@lendora.test', 'admin@lendora.test', 'technician@lendora.test'] as $email) {
+            $actor = User::where('email', $email)->firstOrFail();
+
+            $this->actingAs($actor)
+                ->post(route('admin.practicum.store'), [
+                    'course_id' => $this->course->id,
+                    'room_id' => $room->id,
+                    'day_of_week' => 2,
+                    'start_time' => '09:00',
+                    'end_time' => '10:00',
+                ])
+                ->assertForbidden();
+
+            $this->actingAs($actor)
+                ->delete(route('admin.practicum.destroy', $schedule))
+                ->assertForbidden();
+        }
+
+        $this->assertSame(1, PracticumSchedule::count());
+    }
+
     private function room(string $code): Room
     {
         return Room::create([

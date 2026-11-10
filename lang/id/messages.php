@@ -20,6 +20,23 @@ return [
         'deleted' => 'Kategori berhasil dihapus.',
         'delete_blocked' => 'Kategori tidak dapat dihapus karena masih memiliki subkategori atau aset.',
     ],
+    'course_quota' => [
+        'updated' => 'Kuota mata kuliah diperbarui.',
+        'transferred' => 'Kuota dipindahkan antar-mata kuliah.',
+        'transfer_same' => 'Mata kuliah asal dan tujuan harus berbeda.',
+        'transfer_insufficient' => 'Kuota mata kuliah asal tidak cukup untuk dipindahkan.',
+        'wrong_organization' => 'Mata kuliah bukan milik organisasi Anda.',
+    ],
+
+    'practicum' => [
+        'created' => 'Jadwal praktikum ditambahkan.',
+        'deleted' => 'Jadwal praktikum dihapus.',
+        'conflict' => 'Slot bertabrakan dengan :course pukul :start–:end di ruang yang sama.',
+        'course_invalid' => 'Mata kuliah tidak aktif atau bukan milik organisasi Anda.',
+        'room_invalid' => 'Ruang tidak aktif atau bukan milik organisasi Anda.',
+        'wrong_organization' => 'Jadwal bukan milik organisasi Anda.',
+    ],
+
     'booking' => [
         'created' => 'Pengajuan peminjaman berhasil dikirim.',
         'approved' => 'Pengajuan peminjaman disetujui.',

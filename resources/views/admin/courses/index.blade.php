@@ -86,6 +86,7 @@
                             <th>{{ __('ui.course_quota.col_usage') }}</th>
                             <th>{{ __('ui.course_quota.col_remaining') }}</th>
                             <th>{{ __('ui.course_quota.col_status') }}</th>
+                            <th>{{ __('ui.course_quota.col_quota') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,11 +129,76 @@
                                         {{ $statusLabels[$row['status']] ?? $row['status'] }}
                                     </span>
                                 </td>
+                                <td>
+                                    <form method="POST"
+                                          action="{{ route('admin.courses.quota.update', $course) }}"
+                                          class="ldr-quota-form">
+                                        @csrf
+                                        @method('PUT')
+                                        <label class="ldr-sr-only" for="quota-{{ $course->id }}">{{ __('ui.course_quota.col_quota') }}</label>
+                                        <input class="ldr-input ldr-input--sm"
+                                               id="quota-{{ $course->id }}"
+                                               type="number"
+                                               name="quota_hours"
+                                               min="1"
+                                               max="9999"
+                                               value="{{ $course->quota_hours }}"
+                                               placeholder="{{ __('ui.course_quota.quota_placeholder') }}">
+                                        <button type="submit" class="ldr-btn ldr-btn--secondary ldr-btn--sm">
+                                            {{ __('ui.common.save') }}
+                                        </button>
+                                    </form>
+                                    @error('quota_hours') <p class="ldr-field-error">{{ $message }}</p> @enderror
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        <section class="ldr-card ldr-quota-transfer">
+            <h2 class="ldr-section-title">{{ __('ui.course_quota.transfer_title') }}</h2>
+            <p class="ldr-muted ldr-section-hint">{{ __('ui.course_quota.transfer_hint') }}</p>
+
+            <form method="POST" action="{{ route('admin.courses.transfer') }}" class="ldr-quota-transfer__form">
+                @csrf
+                <div class="ldr-field">
+                    <label class="ldr-field__label" for="from_course_id">{{ __('ui.course_quota.transfer_from') }}</label>
+                    <select class="ldr-input" name="from_course_id" id="from_course_id" required>
+                        <option value="">{{ __('ui.course_quota.transfer_choose') }}</option>
+                        @foreach ($courses as $row)
+                            <option value="{{ $row['course']->id }}" @selected((int) old('from_course_id') === $row['course']->id)>
+                                {{ $row['course']->code }} · {{ $row['course']->name }}
+                                ({{ $row['course']->quota_hours ?? 0 }} {{ __('ui.course_quota.hours_unit') }})
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="ldr-field">
+                    <label class="ldr-field__label" for="to_course_id">{{ __('ui.course_quota.transfer_to') }}</label>
+                    <select class="ldr-input" name="to_course_id" id="to_course_id" required>
+                        <option value="">{{ __('ui.course_quota.transfer_choose') }}</option>
+                        @foreach ($courses as $row)
+                            <option value="{{ $row['course']->id }}" @selected((int) old('to_course_id') === $row['course']->id)>
+                                {{ $row['course']->code }} · {{ $row['course']->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="ldr-field">
+                    <label class="ldr-field__label" for="hours">{{ __('ui.course_quota.transfer_hours') }}</label>
+                    <input class="ldr-input" type="number" name="hours" id="hours" min="1" max="9999"
+                           value="{{ old('hours') }}" required>
+                </div>
+
+                <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.course_quota.transfer_submit') }}</button>
+            </form>
+
+            @error('hours') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            @error('to_course_id') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            @error('from_course_id') <p class="ldr-field-error">{{ $message }}</p> @enderror
+        </section>
     @endif
 @endsection

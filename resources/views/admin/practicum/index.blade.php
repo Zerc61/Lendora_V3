@@ -33,6 +33,65 @@
         </div>
     </div>
 
+    <section class="ldr-card ldr-practicum-plot">
+        <h2 class="ldr-section-title">{{ __('ui.practicum.plot_title') }}</h2>
+        <p class="ldr-muted ldr-section-hint">{{ __('ui.practicum.plot_hint') }}</p>
+
+        <form method="POST" action="{{ route('admin.practicum.store') }}" class="ldr-practicum-plot__form">
+            @csrf
+
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="plot-course">{{ __('ui.course_quota.col_course') }}</label>
+                <select class="ldr-input" name="course_id" id="plot-course" required>
+                    <option value="">{{ __('ui.practicum.plot_choose') }}</option>
+                    @foreach ($courses as $course)
+                        <option value="{{ $course->id }}" @selected((int) old('course_id') === $course->id)>
+                            {{ $course->code }} · {{ $course->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('course_id') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="plot-room">{{ __('ui.practicum.col_room') }}</label>
+                <select class="ldr-input" name="room_id" id="plot-room" required>
+                    <option value="">{{ __('ui.practicum.plot_choose') }}</option>
+                    @foreach ($rooms as $room)
+                        <option value="{{ $room->id }}" @selected((int) old('room_id') === $room->id)>
+                            {{ $room->code }} · {{ $room->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('room_id') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="plot-day">{{ __('ui.practicum.plot_day') }}</label>
+                <select class="ldr-input" name="day_of_week" id="plot-day" required>
+                    @foreach ($days as $value => $label)
+                        <option value="{{ $value }}" @selected((int) old('day_of_week') === $value)>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @error('day_of_week') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="plot-start">{{ __('ui.practicum.plot_start') }}</label>
+                <input class="ldr-input" type="time" name="start_time" id="plot-start" value="{{ old('start_time') }}" required>
+                @error('start_time') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="ldr-field">
+                <label class="ldr-field__label" for="plot-end">{{ __('ui.practicum.plot_end') }}</label>
+                <input class="ldr-input" type="time" name="end_time" id="plot-end" value="{{ old('end_time') }}" required>
+                @error('end_time') <p class="ldr-field-error">{{ $message }}</p> @enderror
+            </div>
+
+            <button type="submit" class="ldr-btn ldr-btn--primary">{{ __('ui.practicum.plot_submit') }}</button>
+        </form>
+    </section>
+
     @if ($conflicts->isNotEmpty())
         <div class="ldr-alert ldr-alert--danger" role="status">
             <x-icon name="alert-circle" :size="18" />
@@ -145,6 +204,15 @@
                                                 <span class="ldr-practicum-slot__meta">
                                                     {{ $slot->course?->lecturer_name ?: '—' }}
                                                 </span>
+                                                <form method="POST"
+                                                      action="{{ route('admin.practicum.destroy', $slot) }}"
+                                                      onsubmit="return confirm('{{ __('ui.practicum.delete_confirm') }}')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="ldr-practicum-slot__remove">
+                                                        {{ __('ui.common.delete') }}
+                                                    </button>
+                                                </form>
                                             </div>
                                         @empty
                                             <span class="ldr-muted ldr-practicum-empty">{{ __('ui.practicum.room_empty') }}</span>

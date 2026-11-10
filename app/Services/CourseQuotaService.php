@@ -8,6 +8,8 @@ use App\Models\Course;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class CourseQuotaService
 {
@@ -16,7 +18,75 @@ class CourseQuotaService
      */
     private const OPERATING_HOURS_PER_DAY = 12;
 
-    public function __construct(private readonly SettingService $settings) {}
+    public function __construct(
+        private readonly SettingService $settings,
+        private readonly ActivityLogger $logger,
+    ) {}
+
+    public function updateQuota(User $prodi, Course $course, ?int $hours): Course
+    {
+        $this->assertCourse($prodi, $course);
+
+        return DB::transaction(function () use ($prodi, $course, $hours): Course {
+            $locked = Course::query()->lockForUpdate()->findOrFail($course->id);
+            $before = $locked->quota_hours;
+            $locked->update(['quota_hours' => $hours]);
+
+            $this->logger->log(
+                'course_quota.updated',
+                $locked,
+                __('messages.course_quota.updated').' '.$locked->code,
+                $prodi,
+                ['before' => $before, 'after' => $hours],
+            );
+
+            return $locked;
+        });
+    }
+
+    public function transfer(User $prodi, Course $from, Course $to, int $hours): void
+    {
+        $this->assertCourse($prodi, $from);
+        $this->assertCourse($prodi, $to);
+
+        DB::transaction(function () use ($prodi, $from, $to, $hours): void {
+            $courses = Course::query()
+                ->whereIn('id', [$from->id, $to->id])
+                ->orderBy('id')
+                ->lockForUpdate()
+                ->get()
+                ->keyBy('id');
+
+            $source = $courses[$from->id];
+            $target = $courses[$to->id];
+
+            if ($source->quota_hours === null || $source->quota_hours < $hours) {
+                throw ValidationException::withMessages([
+                    'hours' => __('messages.course_quota.transfer_insufficient'),
+                ]);
+            }
+
+            $source->update(['quota_hours' => $source->quota_hours - $hours]);
+            $target->update(['quota_hours' => (int) $target->quota_hours + $hours]);
+
+            $this->logger->log(
+                'course_quota.transferred',
+                $target,
+                __('messages.course_quota.transferred').' '.$source->code.' → '.$target->code,
+                $prodi,
+                ['from' => $source->code, 'to' => $target->code, 'hours' => $hours],
+            );
+        });
+    }
+
+    private function assertCourse(User $prodi, Course $course): void
+    {
+        if ($course->organization_id !== $prodi->organization_id) {
+            throw ValidationException::withMessages([
+                'course_id' => __('messages.course_quota.wrong_organization'),
+            ]);
+        }
+    }
 
     /**
      * @return array<string, mixed>
