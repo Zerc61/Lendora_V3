@@ -96,8 +96,8 @@
                 __('ui.sections.organization') => [
                     ['label' => __('ui.nav.users_roles'), 'icon' => 'users', 'href' => route('admin.users.index'), 'match' => 'admin.users.*', 'roles' => ['organization_admin']],
                     ['label' => __('ui.nav.reports_analytics'), 'icon' => 'bar-chart', 'href' => route('admin.reports.index'), 'match' => 'admin.reports.*', 'roles' => ['organization_admin']],
-                    ['label' => __('ui.nav.settings'), 'icon' => 'settings', 'href' => route('admin.settings.edit'), 'match' => 'admin.settings.*', 'roles' => ['organization_admin']],
                     ['label' => __('ui.nav.activity_logs'), 'icon' => 'activity', 'href' => route('admin.activity-logs.index'), 'match' => 'admin.activity-logs.*', 'roles' => ['organization_admin']],
+                    ['label' => __('ui.nav.settings'), 'icon' => 'settings', 'href' => route('admin.settings.edit'), 'match' => 'admin.settings.*', 'roles' => ['organization_admin']],
                 ],
             ];
         }

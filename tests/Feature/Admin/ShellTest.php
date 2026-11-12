@@ -28,6 +28,7 @@ class ShellTest extends TestCase
         $response->assertSee('css/lendora.css');
         $response->assertSee('css/admin.css');
         $response->assertSeeInOrder(['Inventaris', 'Peminjaman', 'Operasional', 'Organisasi']);
+        $response->assertSeeInOrder(['Pengguna & Role', 'Laporan & Analitik', 'Log Aktivitas', 'Pengaturan']);
         $response->assertSee('Log Aktivitas');
         $response->assertSee('Pengguna & Role');
         $response->assertSee('Laporan & Analitik');
