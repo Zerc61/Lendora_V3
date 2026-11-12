@@ -639,6 +639,13 @@ textarea.ldr-input {
     color: var(--ldr-text-muted);
 }
 
+.ldr-error__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ldr-space-2);
+}
+
 @media (max-width: 480px) {
     .ldr-auth__card {
         padding: var(--ldr-space-5);
