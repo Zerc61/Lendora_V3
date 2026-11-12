@@ -177,6 +177,15 @@ class BookingServiceTest extends TestCase
         $this->service()->approve($booking, $this->admin);
     }
 
+    public function test_approving_already_approved_booking_throws(): void
+    {
+        $booking = $this->service()->approve($this->pendingBooking($this->asset()), $this->operator);
+
+        $this->expectException(InvalidStatusTransitionException::class);
+
+        $this->service()->approve($booking, $this->admin);
+    }
+
     public function test_operator_cannot_approve_above_value_limit(): void
     {
         $asset = $this->asset(purchasePrice: 6_000_000);

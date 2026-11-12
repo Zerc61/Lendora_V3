@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('booking_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('booking_id')->constrained('bookings')->cascadeOnDelete();
-            $table->foreignId('asset_id')->constrained('assets')->restrictOnDelete()->index();
+            $table->foreignId('asset_id')->constrained('assets')->restrictOnDelete();
             $table->string('status', 20)->default('pending')->index();
             $table->string('condition_out', 255)->nullable();
             $table->string('condition_in', 255)->nullable();

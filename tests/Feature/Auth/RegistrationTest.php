@@ -35,7 +35,7 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'phone' => '081234567890',
             'study_program' => 'Teknik Elektronika',
-            'organization_id' => 1,
+            'organization_id' => Organization::query()->firstOrFail()->id,
             'whatsapp_opt_in' => true,
             'terms' => true,
             'password' => 'password',
