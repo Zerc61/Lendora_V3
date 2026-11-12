@@ -76,6 +76,32 @@ class AuthorizationRegressionTest extends TestCase
         $this->actingAs($prodi)->get(route('admin.kiosk.index'))->assertForbidden();
     }
 
+    public function test_admin_prodi_does_not_see_actions_it_cannot_perform(): void
+    {
+        $prodi = User::where('email', 'adminprodi@lendora.test')->firstOrFail();
+        $booking = Booking::create([
+            'code' => 'LDR-BK-TEST-0002',
+            'organization_id' => $this->organization->id,
+            'borrower_id' => $this->borrower->id,
+            'status' => BookingStatus::Pending,
+            'purpose' => 'Uji tautan terlarang',
+            'requested_start_date' => Carbon::parse('2026-12-01'),
+            'requested_end_date' => Carbon::parse('2026-12-03'),
+        ]);
+
+        $this->actingAs($prodi)->get(route('admin.assets.index'))
+            ->assertOk()
+            ->assertDontSee(route('admin.assets.export', absolute: false), false);
+
+        $this->actingAs($prodi)->get(route('admin.bookings.index'))
+            ->assertOk()
+            ->assertDontSee(route('admin.bookings.calendar', absolute: false), false);
+
+        $this->actingAs($prodi)->get(route('admin.bookings.show', $booking))
+            ->assertOk()
+            ->assertDontSee(route('admin.penalties.create', ['booking_id' => $booking->id], absolute: false), false);
+    }
+
     public function test_technician_can_open_own_workspace(): void
     {
         $this->actingAs($this->technician)

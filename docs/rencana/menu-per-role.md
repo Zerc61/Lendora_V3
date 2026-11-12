@@ -56,7 +56,7 @@ Keterangan: `L` = lihat saja, `CRUD` = kelola penuh, `—` = tidak tampil.
 | Maintenance | `admin.maintenances.*` | buat | CRUD | — | kerjakan |
 | Pengguna & role | `admin.users.*` | — | CRUD | — | — |
 | Laporan | `admin.reports.*` | L | L | L | — |
-| Pengaturan organisasi | `admin.settings.*` | L | CRUD | — | — |
+| Pengaturan organisasi | `admin.settings.*` | — | CRUD | — | — |
 | Log aktivitas | `admin.activity-logs.*` | — | ya | — | — |
 | Notifikasi staf | `admin.notifications.index` | ya | ya | ya | ya |
 | Profil staf | `admin.profile.edit` | ya | ya | ya | ya |

@@ -75,21 +75,21 @@
                                     @endforeach
                                 </div>
                             </div>
-
-                            <div class="ldr-booking-card__actions">
-                                @if ($booking->status === \App\Enums\BookingStatus::Pending)
-                                    <form method="POST" action="{{ route('borrower.bookings.cancel', $booking) }}" class="ldr-form-inline">
-                                        @csrf
-                                        @method('POST')
-                                        <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--danger">{{ __('ui.booking.cancel_pending') }}</button>
-                                    </form>
-                                @elseif ($booking->status === \App\Enums\BookingStatus::Active)
-                                    <a href="{{ route('borrower.bookings.extension.form', $booking) }}" class="ldr-btn ldr-btn--sm ldr-btn--primary">
-                                        {{ __('ui.booking.extension') }}
-                                    </a>
-                                @endif
-                            </div>
                         </a>
+
+                        <div class="ldr-booking-card__actions">
+                            @if ($booking->status === \App\Enums\BookingStatus::Pending)
+                                <form method="POST" action="{{ route('borrower.bookings.cancel', $booking) }}" class="ldr-form-inline">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--danger">{{ __('ui.booking.cancel_pending') }}</button>
+                                </form>
+                            @elseif ($booking->status === \App\Enums\BookingStatus::Active)
+                                <a href="{{ route('borrower.bookings.extension.form', $booking) }}" class="ldr-btn ldr-btn--sm ldr-btn--primary">
+                                    {{ __('ui.booking.extension') }}
+                                </a>
+                            @endif
+                        </div>
                     </article>
                 @endforeach
             </div>

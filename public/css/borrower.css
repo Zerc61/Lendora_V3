@@ -4117,6 +4117,7 @@
 .ldr-mono,
 .ldr-asset-code,
 .ldr-loan-code {
+    margin: 0;
     font-family: var(--ldr-font-mono);
     font-size: 12px;
     font-variant-numeric: tabular-nums;

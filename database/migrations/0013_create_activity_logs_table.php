@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete()->index();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('action', 100)->index();
             $table->string('subject_type', 191)->nullable();
             $table->unsignedBigInteger('subject_id')->nullable();

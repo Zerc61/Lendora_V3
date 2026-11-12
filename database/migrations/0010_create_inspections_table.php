@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('booking_item_id')->nullable()->constrained('booking_items')->nullOnDelete();
-            $table->foreignId('asset_id')->constrained('assets')->restrictOnDelete()->index();
+            $table->foreignId('asset_id')->constrained('assets')->restrictOnDelete();
             $table->foreignId('inspector_id')->constrained('users')->restrictOnDelete();
             $table->string('result', 20);
             $table->text('notes')->nullable();

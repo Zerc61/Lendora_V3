@@ -150,6 +150,9 @@ class BookingService
                 ->lockForUpdate()
                 ->get();
 
+            $booking->refresh();
+            $this->assertTransition($booking, BookingStatus::Approved);
+
             $conflict = $this->conflictMessageFor($assets, $booking->requested_start_date, $booking->requested_end_date);
 
             if ($conflict !== null) {
@@ -717,10 +720,6 @@ class BookingService
 
     private function assertTransition(Booking $booking, BookingStatus $to): void
     {
-        if ($booking->status === $to) {
-            return;
-        }
-
         $allowed = match ($booking->status) {
             BookingStatus::Pending => [BookingStatus::Approved, BookingStatus::Rejected, BookingStatus::Cancelled],
             BookingStatus::Approved => [BookingStatus::Active, BookingStatus::Cancelled],

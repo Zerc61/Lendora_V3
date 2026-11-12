@@ -35,4 +35,32 @@ class SuspendedUserTest extends TestCase
 
         $this->actingAs($user)->get('/admin')->assertForbidden();
     }
+
+    public function test_suspended_user_cannot_log_in(): void
+    {
+        $user = User::where('email', 'borrower1@lendora.test')->firstOrFail();
+        $user->update(['status' => 'suspended']);
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertGuest();
+        $response->assertSessionHasErrors('email');
+        $this->assertSame(__('messages.suspended'), session('errors')->first('email'));
+    }
+
+    public function test_suspended_user_sees_logout_instead_of_home_link(): void
+    {
+        $user = User::where('email', 'borrower1@lendora.test')->firstOrFail();
+        $user->update(['status' => 'suspended']);
+
+        $response = $this->actingAs($user)->get('/borrower');
+
+        $response->assertForbidden();
+        $response->assertSee(__('messages.suspended'));
+        $response->assertSee(route('logout', absolute: false), false);
+        $response->assertDontSee(__('ui.error.back_home'));
+    }
 }

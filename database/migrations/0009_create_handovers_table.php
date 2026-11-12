@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('handovers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('booking_id')->constrained('bookings')->restrictOnDelete()->index();
+            $table->foreignId('booking_id')->constrained('bookings')->restrictOnDelete();
             $table->string('type', 20);
             $table->foreignId('performed_by')->constrained('users')->restrictOnDelete();
             $table->timestamp('happened_at');

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('asset_id')->constrained('assets')->restrictOnDelete()->index();
+            $table->foreignId('asset_id')->constrained('assets')->restrictOnDelete();
             $table->foreignId('reported_by')->constrained('users')->restrictOnDelete();
             $table->foreignId('assigned_to')->nullable()->constrained('users')->nullOnDelete();
             $table->string('status', 20)->default('scheduled')->index();

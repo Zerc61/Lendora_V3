@@ -50,6 +50,14 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        if (Auth::user()?->status !== 'active') {
+            Auth::guard('web')->logout();
+
+            throw ValidationException::withMessages([
+                'email' => trans('messages.suspended'),
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 

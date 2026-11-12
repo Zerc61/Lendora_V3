@@ -35,14 +35,16 @@
         </div>
 
         <div class="ldr-page-head__actions">
-            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.assets.export', $exportQuery) }}">
-                <x-icon name="bar-chart" :size="16" />
-                {{ __('ui.asset.export') }}
-            </a>
-            <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.assets.export', $exportQuery + ['format' => 'xlsx']) }}">
-                <x-icon name="bar-chart" :size="16" />
-                {{ __('ui.common.download_xlsx') }}
-            </a>
+            @if (in_array(auth()->user()->role->slug, ['operator', 'organization_admin'], true))
+                <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.assets.export', $exportQuery) }}">
+                    <x-icon name="bar-chart" :size="16" />
+                    {{ __('ui.asset.export') }}
+                </a>
+                <a class="ldr-btn ldr-btn--secondary ldr-btn--sm" href="{{ route('admin.assets.export', $exportQuery + ['format' => 'xlsx']) }}">
+                    <x-icon name="bar-chart" :size="16" />
+                    {{ __('ui.common.download_xlsx') }}
+                </a>
+            @endif
 
             @if ($canManage)
                 <a class="ldr-btn ldr-btn--primary" href="{{ route('admin.assets.create') }}">

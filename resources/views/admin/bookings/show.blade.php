@@ -70,7 +70,7 @@
         </div>
 
         <div class="ldr-booking-hero__actions">
-            @if ($pickupHandover)
+            @if ($pickupHandover && in_array($roleSlug, ['operator', 'organization_admin'], true))
                 <a class="ldr-btn ldr-btn--secondary"
                    href="{{ route('admin.bookings.receipt', ['booking' => $booking, 'type' => 'pickup']) }}">
                     <x-icon name="printer" :size="18" />
@@ -375,22 +375,24 @@
                             </div>
                         </dl>
 
-                        <form method="POST" action="{{ route('admin.bookings.extensions.approve', [$booking, $extension]) }}">
-                            @csrf
-                            <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--primary">
-                                {{ __('ui.booking.approve') }}
-                            </button>
-                        </form>
+                        @if (in_array($roleSlug, ['operator', 'organization_admin'], true))
+                            <form method="POST" action="{{ route('admin.bookings.extensions.approve', [$booking, $extension]) }}">
+                                @csrf
+                                <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--primary">
+                                    {{ __('ui.booking.approve') }}
+                                </button>
+                            </form>
 
-                        <form method="POST" action="{{ route('admin.bookings.extensions.reject', [$booking, $extension]) }}" class="ldr-field">
-                            @csrf
-                            <label class="ldr-label" for="extension-reason-{{ $extension->id }}">{{ __('ui.booking.reason') }}</label>
-                            <input id="extension-reason-{{ $extension->id }}" name="rejection_reason" class="ldr-input" required minlength="5" maxlength="255">
-                            @error('rejection_reason') <p class="ldr-field__error">{{ $message }}</p> @enderror
-                            <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--danger">
-                                {{ __('ui.booking.reject') }}
-                            </button>
-                        </form>
+                            <form method="POST" action="{{ route('admin.bookings.extensions.reject', [$booking, $extension]) }}" class="ldr-field">
+                                @csrf
+                                <label class="ldr-label" for="extension-reason-{{ $extension->id }}">{{ __('ui.booking.reason') }}</label>
+                                <input id="extension-reason-{{ $extension->id }}" name="rejection_reason" class="ldr-input" required minlength="5" maxlength="255">
+                                @error('rejection_reason') <p class="ldr-field__error">{{ $message }}</p> @enderror
+                                <button type="submit" class="ldr-btn ldr-btn--sm ldr-btn--danger">
+                                    {{ __('ui.booking.reject') }}
+                                </button>
+                            </form>
+                        @endif
                     @endforeach
                 </section>
             @endif
@@ -423,11 +425,13 @@
                 <h2>{{ __('ui.booking.quick_actions') }}</h2>
 
                 <div class="ldr-stack">
-                    <a class="ldr-btn ldr-btn--secondary ldr-btn--block"
-                       href="{{ route('admin.penalties.create', ['booking_id' => $booking->id]) }}">
-                        <x-icon name="alert-circle" :size="16" />
-                        {{ __('ui.booking.report_damage') }}
-                    </a>
+                    @if ($roleSlug !== 'admin_prodi')
+                        <a class="ldr-btn ldr-btn--secondary ldr-btn--block"
+                           href="{{ route('admin.penalties.create', ['booking_id' => $booking->id]) }}">
+                            <x-icon name="alert-circle" :size="16" />
+                            {{ __('ui.booking.report_damage') }}
+                        </a>
+                    @endif
 
                     @if ($roleSlug === 'operator' && $booking->status === App\Enums\BookingStatus::Active)
                         <a class="ldr-btn ldr-btn--ghost ldr-btn--block"
